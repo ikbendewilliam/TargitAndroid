@@ -52,7 +52,7 @@ public class MainActivityFragment extends Fragment implements BluetoothConnectio
         button_leds_flash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_FLASH);
+                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_FLASH_FAST);
             }
         });
         button_leds_off.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +73,6 @@ public class MainActivityFragment extends Fragment implements BluetoothConnectio
 
     @Override
     public void finishConnecting(BluetoothDevice device) {
-        mBluetoothConnection.sendMessageToDevice(device.getName(), Constants.COMMAND_LED_FLASH);
+        mBluetoothConnection.sendMessageToDevice(device.getName(), Constants.COMMAND_LED_FLASH_SLOW);
     }
 }
