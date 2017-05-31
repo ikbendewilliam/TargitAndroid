@@ -34,18 +34,25 @@ public class MainActivityFragment extends Fragment implements BluetoothConnectio
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         toolbarProgressCircle = (ProgressBar) getActivity().findViewById(R.id.toolbar_progress_circle);
-        toolbarProgressCircle.setVisibility(View.VISIBLE);
+//        toolbarProgressCircle.setVisibility(View.VISIBLE);
         mBluetoothConnection = new BluetoothConnection(getActivity(), this);
 
         connectDevices();
 
         Button button_leds_on = (Button)view.findViewById(R.id.button_leds_on);
+        Button button_leds_flash = (Button)view.findViewById(R.id.button_leds_flash);
         Button button_leds_off = (Button)view.findViewById(R.id.button_leds_off);
 
         button_leds_on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_ON);
+            }
+        });
+        button_leds_flash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_FLASH);
             }
         });
         button_leds_off.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +73,6 @@ public class MainActivityFragment extends Fragment implements BluetoothConnectio
 
     @Override
     public void finishConnecting(BluetoothDevice device) {
-        mBluetoothConnection.sendMessageToDevice(device.getName(), Constants.COMMAND_LED_ON);
+        mBluetoothConnection.sendMessageToDevice(device.getName(), Constants.COMMAND_LED_FLASH);
     }
 }

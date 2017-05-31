@@ -14,6 +14,11 @@
         android:layout_height="wrap_content"
         android:text="leds on"/>
     <Button
+        android:id="@+id/button_leds_flash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="leds flash"/>
+    <Button
         android:id="@+id/button_leds_off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

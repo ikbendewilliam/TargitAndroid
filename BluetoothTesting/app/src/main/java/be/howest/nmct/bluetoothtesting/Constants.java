@@ -26,5 +26,6 @@ public abstract class Constants {
     // commands for communitcation with arduino
     static final String COMMAND_END = ";";
     static final String COMMAND_LED_ON = "LedOn";
+    static final String COMMAND_LED_FLASH = "LedFlash";
     static final String COMMAND_LED_OFF = "LedOff";
 }
