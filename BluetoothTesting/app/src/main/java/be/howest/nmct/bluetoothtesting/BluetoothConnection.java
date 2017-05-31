@@ -20,16 +20,16 @@ import me.aflak.bluetooth.Bluetooth;
 class BluetoothConnection {
     private List<Bluetooth> mBluetooth;
     private Activity mActivity;
-    private OnFinishConnectingListener mListener;
+    private OnConnectionListener mListener;
 
-    BluetoothConnection(Activity activity, OnFinishConnectingListener onFinishConnectingListener) {
+    BluetoothConnection(Activity activity, OnConnectionListener onConnectionListener) {
         mBluetooth = new ArrayList<>();
 
         Bluetooth bluetooth = new Bluetooth(activity);
         bluetooth.enableBluetooth();
         mActivity = activity;
 
-        mListener = onFinishConnectingListener;
+        mListener = onConnectionListener;
     }
 
     void addConnection(final String deviceName) {
@@ -48,6 +48,7 @@ class BluetoothConnection {
 
             @Override
             public void onMessage(String message) {
+                mListener.incomingMessage(deviceName, message);
                 Log.i(Constants.TAG_MESSAGE, "connection " + deviceName + " - onMessage: " + message);
             }
 
@@ -105,7 +106,8 @@ class BluetoothConnection {
         return false;
     }
 
-    interface OnFinishConnectingListener {
+    interface OnConnectionListener {
+        void incomingMessage(String deviceName, String message);
         void finishConnecting(BluetoothDevice device);
     }
 }

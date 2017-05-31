@@ -14,10 +14,20 @@
         android:layout_height="wrap_content"
         android:text="leds on"/>
     <Button
-        android:id="@+id/button_leds_flash"
+        android:id="@+id/button_leds_flash_slow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="leds flash"/>
+        android:text="leds flash slow"/>
+    <Button
+        android:id="@+id/button_leds_flash_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="leds flash medium"/>
+    <Button
+        android:id="@+id/button_leds_flash_fast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="leds flash fast"/>
     <Button
         android:id="@+id/button_leds_off"
         android:layout_width="match_parent"
