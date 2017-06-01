@@ -9,10 +9,10 @@ import java.util.UUID;
  */
 
 public abstract class Constants {
-    static final String TAG = "Android - Arduino";
-    static final String TAG_MESSAGE = "Arduino Connection";
+    public static final String TAG = "Android - Arduino";
+    public static final String TAG_MESSAGE = "Arduino Connection";
 
-    static final String[] DEVICE_NAMES = {
+    public static final String[] DEVICE_NAMES = {
             "TARGIT-01",
             "TARGIT-02",
             "TARGIT-03",
@@ -21,13 +21,17 @@ public abstract class Constants {
     };
 
     //    UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
-    static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-03805f9b34fb");
+    public static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-03805f9b34fb");
 
     // commands for communitcation with arduino
-    static final String COMMAND_END = ";";
-    static final String COMMAND_LED_ON = "LedOn";
-    static final String COMMAND_LED_FLASH_SLOW = "LedFlash(500)";
-    static final String COMMAND_LED_FLASH_MEDIUM = "LedFlash(250)";
-    static final String COMMAND_LED_FLASH_FAST = "LedFlash(100)";
-    static final String COMMAND_LED_OFF = "LedOff";
+    public static final String COMMAND_END = ";";
+    public static final String COMMAND_LED_ON = "LedOn";
+    public static final String COMMAND_LED_FLASH_SLOW = "LedFlash(500)";
+    public static final String COMMAND_LED_FLASH_MEDIUM = "LedFlash(250)";
+    public static final String COMMAND_LED_FLASH_FAST = "LedFlash(100)";
+    public static final String COMMAND_LED_OFF = "LedOff";
+
+    // commands incoming from arduino
+    public static final String COMMAND_INCOMING_BUTTON_PRESSED = "BtnPressed";
+    public static final String COMMAND_INCOMING_BUTTON_RELEASED = "BtnReleased";
 }

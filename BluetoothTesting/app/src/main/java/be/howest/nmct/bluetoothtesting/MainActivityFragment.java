@@ -1,8 +1,10 @@
 package be.howest.nmct.bluetoothtesting;
 
 import android.app.Fragment;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
@@ -14,12 +16,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.LogRecord;
 
 import be.howest.nmct.bluetoothtesting.Constants;
+import be.howest.nmct.bluetoothtesting.models.ArduinoButton;
 import me.aflak.bluetooth.Bluetooth;
 
 /**
@@ -27,7 +33,8 @@ import me.aflak.bluetooth.Bluetooth;
 public class MainActivityFragment extends Fragment implements BluetoothConnection.OnConnectionListener {
     BluetoothConnection mBluetoothConnection;
     ProgressBar toolbarProgressCircle;
-    private int mButtonPressed = 0;
+    private List<ArduinoButton> arduinoButtons = new ArrayList<>();
+//    private int[] mButtonPressed = 0;
 
     public MainActivityFragment() {
     }
@@ -80,18 +87,66 @@ public class MainActivityFragment extends Fragment implements BluetoothConnectio
             }
         });
 
+//        TextView textview_connected_devices = (TextView) view.findViewById(R.id.textview_connected_devices);
+//        textview_connected_devices.setText("#Connected devices: " + mBluetoothConnection.getConnectedDevices().size());
+
+        callAsynchronousTask(view);
+
         return view;
     }
 
     private void connectDevices() {
         for (String deviceName : Constants.DEVICE_NAMES) {
             mBluetoothConnection.addConnection(deviceName);
+            arduinoButtons.add(new ArduinoButton(deviceName));
         }
+    }
+
+    public void callAsynchronousTask(final View view) {
+        final Handler handler = new Handler();
+        Timer timer = new Timer();
+        TimerTask checkButtons = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        int pressed = 0;
+                        for (ArduinoButton arduinoButton : arduinoButtons) {
+                            pressed += arduinoButton.getPressedCount();
+                        }
+                        TextView textview_connected_devices = (TextView) view.findViewById(R.id.textview_connected_devices);
+                        TextView textview_clicked_buttons = (TextView) view.findViewById(R.id.textview_clicked_buttons);
+
+                        textview_connected_devices.setText("#Connected devices: " + mBluetoothConnection.getConnectedDevices().size());
+                        textview_clicked_buttons.setText("#clicked buttons: " + pressed);
+                    }
+                });
+            }
+        };
+//        TimerTask checkUnconnectedDevices = new TimerTask() {
+//            @Override
+//            public void run() {
+//                handler.post(new Runnable() {
+//                    public void run() {
+//                        TextView textview_connected_devices = (TextView) view.findViewById(R.id.textview_connected_devices);
+//                        textview_connected_devices.setText("#Connected devices: " + mBluetoothConnection.getConnectedDevices().size());
+//
+//                        //mBluetoothConnection.retryConnections(Constants.DEVICE_NAMES);
+//                    }
+//                });
+//            }
+//        };
+        timer.schedule(checkButtons, 0, 100);
+//        timer.schedule(checkUnconnectedDevices, 5000, 3000);
     }
 
     @Override
     public void incomingMessage(String deviceName, String message) {
-        mButtonPressed++;
+        for (ArduinoButton arduinoButton : arduinoButtons) {
+            if (arduinoButton.getDeviceName().equals(deviceName)) {
+                arduinoButton.incomingMessage(message);
+            }
+        }
     }
 
     @Override

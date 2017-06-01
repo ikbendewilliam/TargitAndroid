@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.aflak.bluetooth.Bluetooth;
@@ -104,6 +105,34 @@ class BluetoothConnection {
             }
         }
         return false;
+    }
+
+    List<BluetoothDevice> getConnectedDevices() {
+        List<BluetoothDevice> bluetoothDeviceList = new ArrayList<>();
+        for (Bluetooth bluetooth : mBluetooth) {
+            if (bluetooth.isConnected()) {
+                bluetoothDeviceList.add(bluetooth.getDevice());
+            }
+        }
+        return bluetoothDeviceList;
+    }
+
+    public void retryConnections(String[] deviceNames) {
+        List<String> toConnect = Arrays.asList(deviceNames);
+
+        for (Bluetooth bluetooth : mBluetooth) {
+            if (bluetooth.isConnected())
+                toConnect.remove(bluetooth.getDevice().getName());
+        }
+
+        int i = 0;
+        for (Bluetooth bluetooth : mBluetooth) {
+            if (!bluetooth.isConnected())
+            {
+                bluetooth.connectToName(toConnect.get(i));
+                i++;
+            }
+        }
     }
 
     interface OnConnectionListener {
