@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
                 showInfoGameModeActivity(InfoGameModeActivity.EXTRA_GAMEMODE_MEMORIT);
             }
         });
-        findViewById(R.id.image_highscore).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_highscore).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showActivity(HighscoreActivity.class);

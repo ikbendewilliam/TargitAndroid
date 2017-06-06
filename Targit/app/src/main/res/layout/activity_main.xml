@@ -46,11 +46,10 @@
         android:layout_height="wrap_content"
         android:text="@string/info_memorit"/>
 
-    <ImageView
-        android:id="@+id/image_highscore"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button_highscore"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/title_activity_highscore"
-        android:src="@android:drawable/btn_star_big_on" />
+        android:text="@string/title_activity_highscore" />
 
 </LinearLayout>
