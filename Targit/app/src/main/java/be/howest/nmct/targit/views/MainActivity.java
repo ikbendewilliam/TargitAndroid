@@ -1,6 +1,7 @@
 package be.howest.nmct.targit.views;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,10 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import be.howest.nmct.targit.R;
+import be.howest.nmct.targit.bluetooth.BluetoothConnection;
+import be.howest.nmct.targit.bluetooth.Constants;
+import be.howest.nmct.targit.models.ArduinoButton;
 import be.howest.nmct.targit.views.infogamemode.InfoGameModeActivity;
 import be.howest.nmct.targit.views.settings.SettingsActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BluetoothConnection.OnConnectionListener {
+    private BluetoothConnection mBluetoothConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 showActivity(HighscoreActivity.class);
             }
         });
+
+        mBluetoothConnection = BluetoothConnection.initiate(this, this);
+        connectDevices();
+    }
+
+    private void connectDevices() {
+        for (String deviceName : Constants.DEVICE_NAMES) {
+            mBluetoothConnection.addConnection(deviceName, this);
+        }
     }
 
     @Override
@@ -78,8 +92,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void showInfoGameModeActivity(String gameMode)
-    {
+    void showInfoGameModeActivity(String gameMode) {
         Intent intent = new Intent(this, InfoGameModeActivity.class);
         intent.putExtra(InfoGameModeActivity.EXTRA_GAMEMODE, gameMode);
         startActivity(intent);
@@ -88,5 +101,15 @@ public class MainActivity extends AppCompatActivity {
     void showActivity(Class activity) {
         Intent intent = new Intent(this, activity);
         startActivity(intent);
+    }
+
+    @Override
+    public void incomingMessage(String deviceName, String message) {
+
+    }
+
+    @Override
+    public void finishConnecting(BluetoothDevice device) {
+
     }
 }

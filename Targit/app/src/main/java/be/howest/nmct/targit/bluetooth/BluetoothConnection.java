@@ -22,11 +22,10 @@ import me.aflak.bluetooth.Bluetooth;
 public class BluetoothConnection {
     private static BluetoothConnection thisBluetoothConnection;
     private static List<Bluetooth> mBluetooth;
-    private static OnConnectionListener mConnectionListener;
-    private static OnMessageListener mMessageListener;
+    private static OnConnectionListener mListener;
 
-    private BluetoothConnection(Activity activity, OnConnectionListener onConnectionListener) {
-        registerConnectionListener(onConnectionListener);
+    public BluetoothConnection(Activity activity, OnConnectionListener onConnectionListener) {
+        registerListener(onConnectionListener);
         mBluetooth = new ArrayList<>();
         Bluetooth bluetooth = new Bluetooth(activity);
         bluetooth.enableBluetooth();
@@ -38,43 +37,23 @@ public class BluetoothConnection {
         return thisBluetoothConnection;
     }
 
-    public void registerConnectionListener(OnConnectionListener onConnectionListener) {
-        if (mConnectionListener != null)
-            unregisterConnectionListener();
+    public void registerListener(OnConnectionListener onConnectionListener) {
+        if (mListener != null)
+            unregisterListener();
 
-        mConnectionListener = onConnectionListener;
-        registerListener();
-    }
-
-    public void unregisterConnectionListener() {
-        mConnectionListener = null;
-        unregisterMessageListener();
-    }
-
-    public void registerMessageListener(OnMessageListener onMessageListener) {
-        if (mMessageListener != null)
-            unregisterMessageListener();
-
-        mMessageListener = onMessageListener;
-        registerListener();
-    }
-
-    public void unregisterMessageListener() {
-        mMessageListener = null;
-        unregisterMessageListener();
-    }
-
-    private void registerListener() {
+        mListener = onConnectionListener;
         if (mBluetooth != null) {
             for (Bluetooth bluetooth : mBluetooth) {
                 if (bluetooth.isConnected()) {
-                    bluetooth.setCommunicationCallback(getCommunicationCallback(bluetooth.getDevice().getName(), mConnectionListener, mMessageListener));
+                    bluetooth.setCommunicationCallback(getCommunicationCallback(bluetooth.getDevice().getName(), onConnectionListener));
                 }
             }
         }
     }
 
-    private void unregisterListener() {
+    public void unregisterListener() {
+        mListener = null;
+
         if (mBluetooth != null) {
             for (Bluetooth bluetooth : mBluetooth) {
                 if (bluetooth.isConnected()) {
@@ -90,7 +69,7 @@ public class BluetoothConnection {
 
     public void addConnection(final String deviceName, Activity activity) {
         Bluetooth bluetooth = new Bluetooth(activity);
-        bluetooth.setCommunicationCallback(getCommunicationCallback(deviceName, mConnectionListener, null));
+        bluetooth.setCommunicationCallback(getCommunicationCallback(deviceName, mListener));
 
         Log.i(Constants.TAG, "attempting connection to " + deviceName);
         bluetooth.connectToName(deviceName);
@@ -98,13 +77,11 @@ public class BluetoothConnection {
         mBluetooth.add(bluetooth);
     }
 
-    private Bluetooth.CommunicationCallback getCommunicationCallback(final String deviceName, final OnConnectionListener connectionListener, final OnMessageListener messageListener) {
+    private Bluetooth.CommunicationCallback getCommunicationCallback(final String deviceName, final OnConnectionListener listener) {
         return new Bluetooth.CommunicationCallback() {
             @Override
             public void onConnect(BluetoothDevice device) {
                 Log.i(Constants.TAG_MESSAGE, "connection " + deviceName + " - onConnect: " + device.getName());
-                if (connectionListener != null)
-                    connectionListener.finishConnecting(device);
             }
 
             @Override
@@ -114,9 +91,8 @@ public class BluetoothConnection {
 
             @Override
             public void onMessage(String message) {
+                listener.incomingMessage(deviceName, message);
                 Log.i(Constants.TAG_MESSAGE, "connection " + deviceName + " - onMessage: " + message);
-                if (messageListener != null)
-                    messageListener.incomingMessage(deviceName, message);
             }
 
             @Override
@@ -196,11 +172,9 @@ public class BluetoothConnection {
     }
 
     public interface OnConnectionListener {
-        void finishConnecting(BluetoothDevice device);
-    }
-
-    public interface OnMessageListener {
         void incomingMessage(String deviceName, String message);
+
+        void finishConnecting(BluetoothDevice device);
     }
 }
 

@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void showFragment(Fragment newFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.framelayout_in_info_game_modeactivity, newFragment);
+        transaction.replace(R.id.framelayout_in_settingsactivity, newFragment);
         transaction.commit();
     }
 
