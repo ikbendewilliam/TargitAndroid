@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Targit</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_highscore">HighscoreActivity</string>
+    <string name="title_activity_info_game_mode">InfoGameModeActivity</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="info_memorit">Memorit</string>
+    <string name="info_zenit">zenit</string>
+    <string name="info_smashit">smashit</string>
 </resources>
