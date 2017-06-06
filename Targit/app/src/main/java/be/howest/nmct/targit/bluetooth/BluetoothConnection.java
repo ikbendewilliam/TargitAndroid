@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import be.howest.nmct.targit.bluetooth.Constants;
+import be.howest.nmct.targit.models.ArduinoButton;
 import me.aflak.bluetooth.Bluetooth;
 
 /**
@@ -22,10 +23,11 @@ import me.aflak.bluetooth.Bluetooth;
 public class BluetoothConnection {
     private static BluetoothConnection thisBluetoothConnection;
     private static List<Bluetooth> mBluetooth;
+    private static List<ArduinoButton> mArduinoButtons = new ArrayList<>();
     private static OnConnectionListener mListener;
 
     public BluetoothConnection(Activity activity, OnConnectionListener onConnectionListener) {
-        registerListener(onConnectionListener);
+//        registerListener(onConnectionListener);
         mBluetooth = new ArrayList<>();
         Bluetooth bluetooth = new Bluetooth(activity);
         bluetooth.enableBluetooth();
@@ -37,19 +39,19 @@ public class BluetoothConnection {
         return thisBluetoothConnection;
     }
 
-    public void registerListener(OnConnectionListener onConnectionListener) {
-        if (mListener != null)
-            unregisterListener();
-
-        mListener = onConnectionListener;
-        if (mBluetooth != null) {
-            for (Bluetooth bluetooth : mBluetooth) {
-                if (bluetooth.isConnected()) {
-                    bluetooth.setCommunicationCallback(getCommunicationCallback(bluetooth.getDevice().getName(), onConnectionListener));
-                }
-            }
-        }
-    }
+//    public void registerListener(OnConnectionListener onConnectionListener) {
+//        if (mListener != null)
+//            unregisterListener();
+//
+//        mListener = onConnectionListener;
+//        if (mBluetooth != null) {
+//            for (Bluetooth bluetooth : mBluetooth) {
+//                if (bluetooth.isConnected()) {
+//                    bluetooth.setCommunicationCallback(getCommunicationCallback(bluetooth.getDevice().getName(), onConnectionListener));
+//                }
+//            }
+//        }
+//    }
 
     public void unregisterListener() {
         mListener = null;
@@ -67,52 +69,58 @@ public class BluetoothConnection {
         return thisBluetoothConnection;
     }
 
-    public void addConnection(final String deviceName, Activity activity) {
+    public void addConnection(final ArduinoButton arduinoButton, Activity activity) {
         Bluetooth bluetooth = new Bluetooth(activity);
-        bluetooth.setCommunicationCallback(getCommunicationCallback(deviceName, mListener));
+        bluetooth.setCommunicationCallback(getCommunicationCallback(arduinoButton));
 
-        Log.i(Constants.TAG, "attempting connection to " + deviceName);
-        bluetooth.connectToName(deviceName);
+        Log.i(Constants.TAG, "attempting connection to " + arduinoButton.getDeviceName());
+        bluetooth.connectToName(arduinoButton.getDeviceName());
 
         mBluetooth.add(bluetooth);
+        mArduinoButtons.add(arduinoButton);
     }
 
-    private Bluetooth.CommunicationCallback getCommunicationCallback(final String deviceName, final OnConnectionListener listener) {
+    private Bluetooth.CommunicationCallback getCommunicationCallback(final ArduinoButton arduinoButton) {
         return new Bluetooth.CommunicationCallback() {
             @Override
             public void onConnect(BluetoothDevice device) {
-                Log.i(Constants.TAG_MESSAGE, "connection " + deviceName + " - onConnect: " + device.getName());
+                arduinoButton.setConnected(true);
+                Log.i(Constants.TAG_MESSAGE, "connection " + arduinoButton.getDeviceName() + " - onConnect: " + device.getName());
             }
 
             @Override
             public void onDisconnect(BluetoothDevice device, String message) {
-                Log.i(Constants.TAG_MESSAGE, "connection " + deviceName + " - onDisconnect: " + device.getName() + "\nMessage: " + message);
+                arduinoButton.setConnected(false);
+                Log.i(Constants.TAG_MESSAGE, "connection " + arduinoButton.getDeviceName() + " - onDisconnect: " + device.getName() + "\nMessage: " + message);
             }
 
             @Override
             public void onMessage(String message) {
-                listener.incomingMessage(deviceName, message);
-                Log.i(Constants.TAG_MESSAGE, "connection " + deviceName + " - onMessage: " + message);
+                arduinoButton.setConnected(true);
+                arduinoButton.incomingMessage(message);
+                Log.i(Constants.TAG_MESSAGE, "connection " + arduinoButton.getDeviceName() + " - onMessage: " + message);
             }
 
             @Override
             public void onError(String message) {
-                Log.e(Constants.TAG_MESSAGE, "connection " + deviceName + " - onError: " + message);
+                arduinoButton.setConnected(false);
+                Log.e(Constants.TAG_MESSAGE, "connection " + arduinoButton.getDeviceName() + " - onError: " + message);
             }
 
             @Override
             public void onConnectError(BluetoothDevice device, String message) {
-                Log.e(Constants.TAG_MESSAGE, "connection " + deviceName + " - onConnectError: " + message);
+                arduinoButton.setConnected(false);
+                Log.e(Constants.TAG_MESSAGE, "connection " + arduinoButton.getDeviceName() + " - onConnectError: " + message);
             }
         };
     }
 
-    public void removeConnection(String deviceName) {
-        for (Bluetooth bluetooth : mBluetooth) {
-            if (bluetooth.getDevice().getName().equals(deviceName))
-                mBluetooth.remove(bluetooth);
-        }
-    }
+//    public void removeConnection(String deviceName) {
+//        for (Bluetooth bluetooth : mBluetooth) {
+//            if (bluetooth.getDevice().getName().equals(deviceName))
+//                mBluetooth.remove(bluetooth);
+//        }
+//    }
 
     public void sendMessageToDevice(String deviceName, String message) {
         for (Bluetooth bluetooth : mBluetooth) {
@@ -154,26 +162,33 @@ public class BluetoothConnection {
         return bluetoothDeviceList;
     }
 
-    public void retryConnections(String[] deviceNames) {
-        List<String> toConnect = Arrays.asList(deviceNames);
+    public List<ArduinoButton> getArduinoButtons() {
+        return mArduinoButtons;
+    }
 
-        for (Bluetooth bluetooth : mBluetooth) {
-            if (bluetooth.isConnected())
-                toConnect.remove(bluetooth.getDevice().getName());
-        }
-
+    public int getConnectedDevicesSize() {
         int i = 0;
         for (Bluetooth bluetooth : mBluetooth) {
-            if (!bluetooth.isConnected()) {
-                bluetooth.connectToName(toConnect.get(i));
+            if (bluetooth.isConnected()) {
                 i++;
             }
+        }
+        return i;
+    }
+
+    public void retryConnections() {
+        int i = 0;
+        for (ArduinoButton arduinoButton : mArduinoButtons) {
+            if (!(arduinoButton.isConnected() || arduinoButton.isConnecting())) {
+                mBluetooth.get(i).connectToName(arduinoButton.getDeviceName());
+                Log.i(Constants.TAG, "attempting connection to " + arduinoButton.getDeviceName());
+            }
+            i++;
         }
     }
 
     public interface OnConnectionListener {
         void incomingMessage(String deviceName, String message);
-
         void finishConnecting(BluetoothDevice device);
     }
 }

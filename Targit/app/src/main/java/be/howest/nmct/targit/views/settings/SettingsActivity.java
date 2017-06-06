@@ -10,9 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import be.howest.nmct.targit.R;
+import java.util.List;
 
-public class SettingsActivity extends AppCompatActivity {
+import be.howest.nmct.targit.R;
+import be.howest.nmct.targit.models.ArduinoButton;
+
+public class SettingsActivity extends AppCompatActivity implements StatusFragment.OnStatusFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +35,10 @@ public class SettingsActivity extends AppCompatActivity {
     void showActivity(Class activity) {
         Intent intent = new Intent(this, activity);
         startActivity(intent);
+    }
+
+    @Override
+    public void onListFragmentInteraction() {
+
     }
 }

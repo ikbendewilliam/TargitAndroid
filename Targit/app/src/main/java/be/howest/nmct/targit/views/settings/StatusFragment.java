@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +21,20 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import be.howest.nmct.targit.R;
+import be.howest.nmct.targit.adapters.MyArduinoButtonRecyclerViewAdapter;
 import be.howest.nmct.targit.bluetooth.BluetoothConnection;
+import be.howest.nmct.targit.bluetooth.BluetoothConnection.OnConnectionListener;
 import be.howest.nmct.targit.bluetooth.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
 
 
-public class StatusFragment extends Fragment implements BluetoothConnection.OnConnectionListener {
+public class StatusFragment extends Fragment implements OnConnectionListener {
     private BluetoothConnection mBluetoothConnection;
-    private List<ArduinoButton> arduinoButtons = new ArrayList<>();
+    private OnStatusFragmentInteractionListener mListener;
+    private MyArduinoButtonRecyclerViewAdapter myArduinoButtonRecyclerViewAdapter;
+    private int mConnected = 0;
+    private int mPressed = 0;
+    List<ArduinoButton> mArduinoButtons = new ArrayList<>();
 
     public StatusFragment() {
         // Required empty public constructor
@@ -38,10 +47,21 @@ public class StatusFragment extends Fragment implements BluetoothConnection.OnCo
         View view = inflater.inflate(R.layout.fragment_status, container, false);
 
         mBluetoothConnection = BluetoothConnection.getBluetoothConnection();
-        mBluetoothConnection.registerListener(this);
+//        mBluetoothConnection.registerListener(this);
+        mArduinoButtons =  mBluetoothConnection.getArduinoButtons();
 
-        for (String deviceName : Constants.DEVICE_NAMES)
-            arduinoButtons.add(new ArduinoButton(deviceName));
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.settings_status_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        myArduinoButtonRecyclerViewAdapter = new MyArduinoButtonRecyclerViewAdapter(mArduinoButtons, mListener);
+        recyclerView.setAdapter(myArduinoButtonRecyclerViewAdapter);
+
+        view.findViewById(R.id.settings_status_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBluetoothConnection.retryConnections();
+            }
+        });
 
         updateUIAsync(view);
 
@@ -57,14 +77,29 @@ public class StatusFragment extends Fragment implements BluetoothConnection.OnCo
                 handler.post(new Runnable() {
                     public void run() {
                         int pressed = 0;
-                        for (ArduinoButton arduinoButton : arduinoButtons) {
+                        int connected = 0;
+                        for (ArduinoButton arduinoButton : mArduinoButtons)
+                        {
                             pressed += arduinoButton.getPressedCount();
+                            if (arduinoButton.isConnected())
+                                connected++;
                         }
+
                         TextView textview_connected_devices = (TextView) view.findViewById(R.id.settings_status_number);
                         TextView textview_clicked_buttons = (TextView) view.findViewById(R.id.settings_status_pressed);
 
-                        textview_connected_devices.setText("#Connected devices: " + mBluetoothConnection.getConnectedDevices().size());
+                        textview_connected_devices.setText("#Connected devices: " + connected);
                         textview_clicked_buttons.setText("#clicked buttons: " + pressed);
+
+                        if (mConnected != connected) {
+                            for (ArduinoButton arduinoButton : mArduinoButtons)
+                                arduinoButton.setConnected(mBluetoothConnection.isDeviceConnected(arduinoButton.getDeviceName()));
+                            myArduinoButtonRecyclerViewAdapter.notifyDataSetChanged();
+                        } else if (mPressed != pressed)
+                            myArduinoButtonRecyclerViewAdapter.notifyDataSetChanged();
+
+                        mConnected = connected;
+                        mPressed = pressed;
                     }
                 });
             }
@@ -74,15 +109,32 @@ public class StatusFragment extends Fragment implements BluetoothConnection.OnCo
 
     @Override
     public void incomingMessage(String deviceName, String message) {
-        for (ArduinoButton arduinoButton : arduinoButtons) {
-            if (arduinoButton.getDeviceName().equals(deviceName)) {
-                arduinoButton.incomingMessage(message);
-            }
-        }
+
     }
 
     @Override
     public void finishConnecting(BluetoothDevice device) {
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnStatusFragmentInteractionListener) {
+            mListener = (OnStatusFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnStatusFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnStatusFragmentInteractionListener {
+        void onListFragmentInteraction();
     }
 }

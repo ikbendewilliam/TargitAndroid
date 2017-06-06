@@ -8,8 +8,10 @@ import be.howest.nmct.targit.bluetooth.Constants;
 
 public class ArduinoButton {
     private String deviceName;
-    private boolean isPressed = false;
     private int pressedCount = 0;
+    private boolean isPressed = false;
+    private boolean isConnected = false;
+    private boolean isConnecting = true;
 
     public ArduinoButton(String deviceName) {
         this.deviceName = deviceName;
@@ -35,5 +37,27 @@ public class ArduinoButton {
 
     public String getDeviceName() {
         return deviceName;
+    }
+
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    public void setConnected(boolean connected) {
+        isConnecting = false;
+        isConnected = connected;
+    }
+
+    public boolean isConnecting() {
+        return isConnecting;
+    }
+
+    public void setConnecting(boolean connecting) {
+        isConnecting = connecting;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o != null && (deviceName.equals(o)) && (o.getClass() == String.class || o.getClass() == ArduinoButton.class);
     }
 }

@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
 
     private void connectDevices() {
         for (String deviceName : Constants.DEVICE_NAMES) {
-            mBluetoothConnection.addConnection(deviceName, this);
+            mBluetoothConnection.addConnection(new ArduinoButton(deviceName), this);
         }
     }
 
