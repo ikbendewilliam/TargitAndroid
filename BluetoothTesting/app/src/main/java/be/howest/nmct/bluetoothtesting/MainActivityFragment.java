@@ -34,7 +34,7 @@ import me.aflak.bluetooth.Bluetooth;
 public class MainActivityFragment extends Fragment implements BluetoothConnection.OnConnectionListener {
     ProgressBar toolbarProgressCircle;
     private List<ArduinoButton> arduinoButtons = new ArrayList<>();
-    private BluetoothConnection mBluetoothConnection;
+        private BluetoothConnection mBluetoothConnection;
 
     public MainActivityFragment() {
     }

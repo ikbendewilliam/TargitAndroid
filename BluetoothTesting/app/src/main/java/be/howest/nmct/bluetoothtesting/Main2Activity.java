@@ -79,6 +79,9 @@ public class Main2Activity extends AppCompatActivity implements BluetoothConnect
             }
         });
 
+        for (String deviceName : Constants.DEVICE_NAMES) {
+            arduinoButtons.add(new ArduinoButton(deviceName));
+        }
         callAsynchronousTask();
     }
 

@@ -81,7 +81,6 @@ class BluetoothConnection {
             @Override
             public void onConnect(BluetoothDevice device) {
                 Log.i(Constants.TAG_MESSAGE, "connection " + deviceName + " - onConnect: " + device.getName());
-                listener.finishConnecting(device);
             }
 
             @Override
