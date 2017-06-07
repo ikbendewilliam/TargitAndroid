@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
         });
 
         mBluetoothConnection = BluetoothConnection.initiate(this, this);
-        connectDevices();
+        if (mBluetoothConnection.getConnectedDevicesSize() == 0)
+            connectDevices();
     }
 
     private void connectDevices() {

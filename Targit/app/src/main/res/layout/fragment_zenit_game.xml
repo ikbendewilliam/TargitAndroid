@@ -2,12 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.ingame.ZenitGameFragment">
+    tools:context=".views.ingame.ZenitGameFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/ingame_textview_timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/info_zenit" />
+
+    <TextView
+        android:id="@+id/ingame_textview_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info_zenit" />
+
+    <Button
+        android:id="@+id/ingame_button_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stop"/>
 
 </LinearLayout>

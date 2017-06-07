@@ -12,6 +12,8 @@ import android.view.View;
 import be.howest.nmct.targit.R;
 
 public class HighscoreActivity extends AppCompatActivity {
+    public static String EXTRA_SCORE = "score";
+    public static String EXTRA_CATEGORY = "category";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +21,13 @@ public class HighscoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_highscore);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        showActivity(MainActivity.class);
     }
 
-    void showActivity(Activity activity)
+    void showActivity(Class activity)
     {
-        Intent intent = new Intent(this, activity.getClass());
+        Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
 }

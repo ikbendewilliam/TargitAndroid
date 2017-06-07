@@ -4,86 +4,144 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.List;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import be.howest.nmct.targit.R;
+import be.howest.nmct.targit.bluetooth.BluetoothConnection;
+import be.howest.nmct.targit.bluetooth.Constants;
+import be.howest.nmct.targit.models.ArduinoButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ZenitGameFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ZenitGameFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import static android.content.Context.BLUETOOTH_SERVICE;
+import static be.howest.nmct.targit.views.ingame.GameActivity.STEP_TIME;
+
 public class ZenitGameFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private String mDuration;
+    private int mMaxFrame;
+    private int frameCounter = 0;
+    private int mPressedOnFrame = 0;
+    private int mScore = 0;
+    private ArduinoButton mLidButton = null;
+    Timer mTimer = new Timer();
+    List<ArduinoButton> mArduinoButtons;
+    BluetoothConnection mBluetoothConnection;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private OnZenitGameListener mListener;
 
     public ZenitGameFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ZenitGameFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ZenitGameFragment newInstance(String param1, String param2) {
+    public static ZenitGameFragment newInstance(String duration, int maxTime) {
         ZenitGameFragment fragment = new ZenitGameFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.mDuration = duration;
+        fragment.mMaxFrame = (maxTime + 3) * 1000 / STEP_TIME;
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_zenit_game, container, false);
+        View view = inflater.inflate(R.layout.fragment_zenit_game, container, false);
+
+        view.findViewById(R.id.ingame_button_stop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopGame();
+            }
+        });
+
+        mBluetoothConnection = BluetoothConnection.getBluetoothConnection();
+        mArduinoButtons = mBluetoothConnection.getArduinoButtons();
+        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+
+        startGameSteps(view);
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void stopGame() {
+        if (mListener != null)
+            mListener.stopGame(GameActivity.EXTRA_GAME_ZENIT, mScore, mDuration);
+        Log.i(Constants.TAG, "stopGame: " + GameActivity.EXTRA_GAME_ZENIT + " dur: " + mDuration);
+        mTimer.cancel();
+    }
+
+    public void startGameSteps(final View view) {
+        final Handler handler = new Handler();
+        TimerTask gamestep = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        gameStep(frameCounter++, view);
+                    }
+                });
+            }
+        };
+        mTimer.schedule(gamestep, 0, (long)STEP_TIME);
+    }
+
+    private void gameStep(int frame, View view) {
+        if (frame * STEP_TIME > 3000) // after 3 seconds
+        {
+            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd over: " + ((mMaxFrame - frame) * STEP_TIME / 1000));
+
+            if (mPressedOnFrame + 2 < frame && mLidButton == null) {
+                Random random = new Random();
+                do {
+                    mLidButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                }
+                while (!mLidButton.isEnabled() || !mLidButton.isConnected() || mLidButton.isPressed());
+                mBluetoothConnection.sendMessageToDevice(mLidButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
+                Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLidButton.getDeviceName());
+            } else if (mLidButton != null) {
+                if (mLidButton.isPressed() && mLidButton.isConnected() && mLidButton.isEnabled()) {
+                    mLidButton = null;
+                    mScore++;
+                    mPressedOnFrame = frame;
+                    ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
+                    mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+                }
+            }
+
+            if (frame >= mMaxFrame)
+                stopGame();
+        } else
+            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
+        if (context instanceof OnZenitGameListener) {
+            mListener = (OnZenitGameListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnZenitGameListener");
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        startGameSteps(getView());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mTimer.cancel();
     }
 
     @Override
@@ -92,18 +150,7 @@ public class ZenitGameFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    public interface OnZenitGameListener {
+        void stopGame(String gameMode, int score, String category);
     }
 }
