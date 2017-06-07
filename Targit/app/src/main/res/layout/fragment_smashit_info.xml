@@ -1,13 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.infogamemode.SmashitInfoFragment">
+    tools:context=".views.infogamemode.SmashitInfoFragment"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/info_smashit" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/smashit_info_button_play_easy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simpel" />
+
+    <Button
+        android:id="@+id/smashit_info_button_play_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cva" />
+
+    <Button
+        android:id="@+id/smashit_info_button_play_hard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="moeilijk lol" />
+
+</LinearLayout>

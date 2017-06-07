@@ -96,9 +96,11 @@ public class BluetoothConnection {
 
             @Override
             public void onMessage(String message) {
-                arduinoButton.setConnected(true);
-                arduinoButton.incomingMessage(message);
-                Log.i(Constants.TAG_MESSAGE, "connection " + arduinoButton.getDeviceName() + " - onMessage: " + message);
+                if (arduinoButton.isEnabled()) {
+                    arduinoButton.setConnected(true);
+                    arduinoButton.incomingMessage(message);
+                    Log.i(Constants.TAG_MESSAGE, "connection " + arduinoButton.getDeviceName() + " - onMessage: " + message);
+                }
             }
 
             @Override
@@ -123,6 +125,10 @@ public class BluetoothConnection {
 //    }
 
     public void sendMessageToDevice(String deviceName, String message) {
+        for (ArduinoButton arduinoButton : mArduinoButtons) {
+            if (arduinoButton.getDeviceName().equals(deviceName))
+                if (!arduinoButton.isEnabled()) return;
+        }
         for (Bluetooth bluetooth : mBluetooth) {
             if (bluetooth.isConnected()) {
                 if (bluetooth.getDevice().getName().equals(deviceName)) {
@@ -134,32 +140,26 @@ public class BluetoothConnection {
     }
 
     public void sendMessageToAll(String message) {
-        for (Bluetooth bluetooth : mBluetooth) {
-            if (bluetooth.isConnected()) {
-                bluetooth.send(message + Constants.COMMAND_END);
-                Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + bluetooth.getDevice().getName() + ": " + message);
+        for (ArduinoButton arduinoButton : mArduinoButtons) {
+            if (arduinoButton.isConnected() && arduinoButton.isEnabled()) {
+                for (Bluetooth bluetooth : mBluetooth) {
+                    if (bluetooth.isConnected()) {
+                        if (bluetooth.getDevice().getName().equals(arduinoButton.getDeviceName())) {
+                            bluetooth.send(message + Constants.COMMAND_END);
+                            Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + bluetooth.getDevice().getName() + ": " + message);
+                        }
+                    }
+                }
             }
         }
     }
 
     public boolean isDeviceConnected(String deviceName) {
-        for (Bluetooth bluetooth : mBluetooth) {
-            if (bluetooth.isConnected()) {
-                if (bluetooth.getDevice().getName().equals(deviceName))
-                    return true;
-            }
+        for (ArduinoButton arduinoButton : mArduinoButtons) {
+            if (arduinoButton.getDeviceName().equals(deviceName))
+                return arduinoButton.isConnected() && arduinoButton.isEnabled();
         }
         return false;
-    }
-
-    public List<BluetoothDevice> getConnectedDevices() {
-        List<BluetoothDevice> bluetoothDeviceList = new ArrayList<>();
-        for (Bluetooth bluetooth : mBluetooth) {
-            if (bluetooth.isConnected()) {
-                bluetoothDeviceList.add(bluetooth.getDevice());
-            }
-        }
-        return bluetoothDeviceList;
     }
 
     public List<ArduinoButton> getArduinoButtons() {
@@ -189,6 +189,7 @@ public class BluetoothConnection {
 
     public interface OnConnectionListener {
         void incomingMessage(String deviceName, String message);
+
         void finishConnecting(BluetoothDevice device);
     }
 }

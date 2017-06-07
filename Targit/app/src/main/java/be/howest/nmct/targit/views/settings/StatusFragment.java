@@ -34,6 +34,7 @@ public class StatusFragment extends Fragment implements OnConnectionListener {
     private MyArduinoButtonRecyclerViewAdapter myArduinoButtonRecyclerViewAdapter;
     private int mConnected = 0;
     private int mPressed = 0;
+    private boolean mButtonPressed = false;
     List<ArduinoButton> mArduinoButtons = new ArrayList<>();
 
     public StatusFragment() {
@@ -78,11 +79,14 @@ public class StatusFragment extends Fragment implements OnConnectionListener {
                     public void run() {
                         int pressed = 0;
                         int connected = 0;
+                        boolean buttonPressed = false;
                         for (ArduinoButton arduinoButton : mArduinoButtons)
                         {
                             pressed += arduinoButton.getPressedCount();
                             if (arduinoButton.isConnected())
                                 connected++;
+                            if (arduinoButton.isPressed())
+                                buttonPressed = true;
                         }
 
                         TextView textview_connected_devices = (TextView) view.findViewById(R.id.settings_status_number);
@@ -95,16 +99,18 @@ public class StatusFragment extends Fragment implements OnConnectionListener {
                             for (ArduinoButton arduinoButton : mArduinoButtons)
                                 arduinoButton.setConnected(mBluetoothConnection.isDeviceConnected(arduinoButton.getDeviceName()));
                             myArduinoButtonRecyclerViewAdapter.notifyDataSetChanged();
-                        } else if (mPressed != pressed)
+                            mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_FLASH_SLOW);
+                        } else if (mPressed != pressed || buttonPressed != mButtonPressed)
                             myArduinoButtonRecyclerViewAdapter.notifyDataSetChanged();
 
                         mConnected = connected;
                         mPressed = pressed;
+                        mButtonPressed = buttonPressed;
                     }
                 });
             }
         };
-        timer.schedule(checkButtons, 0, 100);
+        timer.schedule(checkButtons, 0, 50);
     }
 
     @Override

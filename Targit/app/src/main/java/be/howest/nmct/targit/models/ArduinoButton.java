@@ -12,18 +12,21 @@ public class ArduinoButton {
     private boolean isPressed = false;
     private boolean isConnected = false;
     private boolean isConnecting = true;
+    private boolean isEnabled = true;
 
     public ArduinoButton(String deviceName) {
         this.deviceName = deviceName;
     }
 
     public void incomingMessage(String message) {
-        if (message.contains(Constants.COMMAND_INCOMING_BUTTON_PRESSED)) {
-            if (!isPressed)
-                pressedCount++;
-            isPressed = true;
-        } else if (message.contains(Constants.COMMAND_INCOMING_BUTTON_RELEASED)) {
-            isPressed = false;
+        if (isEnabled) {
+            if (message.contains(Constants.COMMAND_INCOMING_BUTTON_PRESSED)) {
+                if (!isPressed)
+                    pressedCount++;
+                isPressed = true;
+            } else if (message.contains(Constants.COMMAND_INCOMING_BUTTON_RELEASED)) {
+                isPressed = false;
+            }
         }
     }
 
@@ -59,5 +62,14 @@ public class ArduinoButton {
     @Override
     public boolean equals(Object o) {
         return o != null && (deviceName.equals(o)) && (o.getClass() == String.class || o.getClass() == ArduinoButton.class);
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isPressed = false;
+        isEnabled = enabled;
     }
 }

@@ -13,11 +13,12 @@ import android.view.View;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.views.MainActivity;
+import be.howest.nmct.targit.views.ingame.GameActivity;
 
 public class InfoGameModeActivity extends AppCompatActivity
-        implements SmashitInfoFragment.OnFragmentInteractionListener,
-        ZenitInfoFragment.OnFragmentInteractionListener,
-        MemoritInfoFragment.OnFragmentInteractionListener {
+        implements SmashitInfoFragment.OnSmashitInfoListener,
+        ZenitInfoFragment.OnZenitInfoListener,
+        MemoritInfoFragment.OnMemoritInfoListener {
     public static String EXTRA_GAMEMODE = "gameMode";
     public static String EXTRA_GAMEMODE_SMASHIT = "smashit";
     public static String EXTRA_GAMEMODE_ZENIT = "zenit";
@@ -56,8 +57,31 @@ public class InfoGameModeActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
+    void showGameActivity(String gameMode) {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameActivity.EXTRA_GAME, gameMode);
+        startActivity(intent);
+    }
 
+    void showGameActivity(String gameMode, String extraName, String extraValue) {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra(GameActivity.EXTRA_GAME, gameMode);
+        intent.putExtra(extraName, extraValue);
+        startActivity(intent);
+    }
+
+    @Override
+    public void playMemorit() {
+        showGameActivity(GameActivity.EXTRA_GAME_MEMORIT);
+    }
+
+    @Override
+    public void playZenit(String cmdDuration) {
+        showGameActivity(GameActivity.EXTRA_GAME_ZENIT, GameActivity.EXTRA_DURATION, cmdDuration);
+    }
+
+    @Override
+    public void playSmashit(String cmdDifficulty) {
+        showGameActivity(GameActivity.EXTRA_GAME_SMASHIT, GameActivity.EXTRA_DIFFICULTY, cmdDifficulty);
     }
 }
