@@ -23,7 +23,7 @@ public class SmashitInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_memorit_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_smashit_info, container, false);
 
         view.findViewById(R.id.smashit_info_button_play_easy).setOnClickListener(new View.OnClickListener() {
             @Override
