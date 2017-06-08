@@ -30,6 +30,7 @@ public class SmashitGameFragment extends Fragment {
     private int frameCounter = 0;
     private int mPressedOnFrame = 0;
     private int mScore = 0;
+    private int mLives = 3;
     private ArduinoButton mLidButton = null;
     Timer mTimer = new Timer();
     List<ArduinoButton> mArduinoButtons;
@@ -80,6 +81,7 @@ public class SmashitGameFragment extends Fragment {
 
         startGameSteps(view);
         ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
+        ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
 
         return view;
     }
@@ -133,7 +135,13 @@ public class SmashitGameFragment extends Fragment {
                 }
             }
 
-            if (mWaitFrames + mPressedOnFrame < frame)
+            if (mWaitFrames + mPressedOnFrame < frame) {
+                mLives--;
+                mLidButton = null;
+                mPressedOnFrame = frame;
+                ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
+            }
+            if (mLives <= 0)
                 stopGame();
 
         } else

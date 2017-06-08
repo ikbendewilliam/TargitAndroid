@@ -17,6 +17,12 @@
         android:layout_height="wrap_content"
         android:text="@string/info_zenit" />
 
+    <TextView
+        android:id="@+id/ingame_textview_lives"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info_zenit" />
+
     <Button
         android:id="@+id/ingame_button_stop"
         android:layout_width="match_parent"
