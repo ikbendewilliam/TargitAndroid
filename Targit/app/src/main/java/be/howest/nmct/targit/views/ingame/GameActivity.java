@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -49,14 +50,15 @@ public class GameActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (getIntent().hasExtra(EXTRA_GAME)) {
-            String gameMode = getIntent().getStringExtra(EXTRA_GAME);
+        Intent intent = getIntent();
+        if (intent.hasExtra(EXTRA_GAME)) {
+            String gameMode = intent.getStringExtra(EXTRA_GAME);
 
             if (gameMode == null) {
                 showActivity(MainActivity.class);
             } else if (gameMode.equals(EXTRA_GAME_SMASHIT)) {
-                if (getIntent().hasExtra(EXTRA_DIFFICULTY)) {
-                    String difficulty = getIntent().getStringExtra(EXTRA_DIFFICULTY);
+                if (intent.hasExtra(EXTRA_DIFFICULTY)) {
+                    String difficulty = intent.getStringExtra(EXTRA_DIFFICULTY);
                     if (difficulty == null) {
                         showActivity(MainActivity.class);
                     } else {
@@ -64,8 +66,8 @@ public class GameActivity extends AppCompatActivity
                     }
                 }
             } else if (gameMode.equals(EXTRA_GAME_ZENIT)) {
-                if (getIntent().hasExtra(EXTRA_DURATION)) {
-                    String duration = getIntent().getStringExtra(EXTRA_DURATION);
+                if (intent.hasExtra(EXTRA_DURATION)) {
+                    String duration = intent.getStringExtra(EXTRA_DURATION);
                     if (duration == null) {
                         showActivity(MainActivity.class);
                     } else if (duration.equals(EXTRA_DURATION_SHORT)) {
@@ -95,18 +97,18 @@ public class GameActivity extends AppCompatActivity
 
     void showHighscoreActivity(String gameMode, int score) {
         Intent intent = new Intent(this, HighscoreActivity.class);
-        intent.putExtra(GameActivity.EXTRA_GAME, gameMode);
+        intent.putExtra(HighscoreActivity.EXTRA_GAME, gameMode);
         intent.putExtra(HighscoreActivity.EXTRA_SCORE, score);
         startActivity(intent);
     }
 
     void showHighscoreActivity(String gameMode, int score, String category) {
-//        Intent intent = new Intent(this, GameActivity.class);
-//        intent.putExtra(GameActivity.EXTRA_GAME, gameMode);
-//        intent.putExtra(HighscoreActivity.EXTRA_SCORE, score);
-//        intent.putExtra(HighscoreActivity.EXTRA_CATEGORY, category);
-//        startActivity(intent);
-        showActivity(HighscoreActivity.class);
+        Intent intent = new Intent(this, HighscoreActivity.class);
+        intent.putExtra(HighscoreActivity.EXTRA_GAME, gameMode);
+        intent.putExtra(HighscoreActivity.EXTRA_SCORE, score);
+        intent.putExtra(HighscoreActivity.EXTRA_CATEGORY, category);
+        startActivity(intent);
+        //Log.i(Constants.TAG, "showHighscoreActivity: " + intent.getExtras().toString());
     }
 
     @Override

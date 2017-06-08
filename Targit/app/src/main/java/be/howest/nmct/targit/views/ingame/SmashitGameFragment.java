@@ -4,14 +4,43 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import be.howest.nmct.targit.R;
+import be.howest.nmct.targit.bluetooth.BluetoothConnection;
+import be.howest.nmct.targit.bluetooth.Constants;
+import be.howest.nmct.targit.models.ArduinoButton;
+
+import static be.howest.nmct.targit.views.ingame.GameActivity.STEP_TIME;
 
 public class SmashitGameFragment extends Fragment {
     String mDifficulty;
+    private int mWaitFrames;
+    private int frameCounter = 0;
+    private int mPressedOnFrame = 0;
+    private int mScore = 0;
+    private ArduinoButton mLidButton = null;
+    Timer mTimer = new Timer();
+    List<ArduinoButton> mArduinoButtons;
+    BluetoothConnection mBluetoothConnection;
+
+    public static int TIME_TO_PRESS_MAX_EASY = 10000;
+    public static int TIME_TO_PRESS_MAX_MEDIUM = 7000;
+    public static int TIME_TO_PRESS_MAX_HARD = 3000;
+    public static int TIME_TO_PRESS_MIN_EASY = 3000;
+    public static int TIME_TO_PRESS_MIN_MEDIUM = 2000;
+    public static int TIME_TO_PRESS_MIN_HARD = 1000;
 
     private OnSmashitGameListener mListener;
 
@@ -38,8 +67,77 @@ public class SmashitGameFragment extends Fragment {
                     mListener.stopGame(GameActivity.EXTRA_GAME_SMASHIT, 0, mDifficulty);
             }
         });
+        if (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_EASY))
+            mWaitFrames = TIME_TO_PRESS_MAX_EASY / STEP_TIME;
+        else if (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_MEDIUM))
+            mWaitFrames = TIME_TO_PRESS_MAX_MEDIUM / STEP_TIME;
+        else if (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_HARD))
+            mWaitFrames = TIME_TO_PRESS_MAX_HARD / STEP_TIME;
+
+        mBluetoothConnection = BluetoothConnection.getBluetoothConnection();
+        mArduinoButtons = mBluetoothConnection.getArduinoButtons();
+        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+
+        startGameSteps(view);
+        ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
 
         return view;
+    }
+
+    private void stopGame() {
+        if (mListener != null)
+            mListener.stopGame(GameActivity.EXTRA_GAME_SMASHIT, mScore, mDifficulty);
+        mTimer.cancel();
+    }
+
+    public void startGameSteps(final View view) {
+        final Handler handler = new Handler();
+        TimerTask gamestep = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        gameStep(frameCounter++, view);
+                    }
+                });
+            }
+        };
+        mTimer.schedule(gamestep, 0, (long) STEP_TIME);
+    }
+
+    private void gameStep(int frame, View view) {
+        if (frame * STEP_TIME > 3000) // after 3 seconds
+        {
+            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000));
+
+            if (mPressedOnFrame + 2 < frame && mLidButton == null) {
+                Random random = new Random();
+                do {
+                    mLidButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                }
+                while (!mLidButton.isEnabled() || !mLidButton.isConnected() || mLidButton.isPressed());
+                mBluetoothConnection.sendMessageToDevice(mLidButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
+                Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLidButton.getDeviceName());
+            } else if (mLidButton != null) {
+                if (mLidButton.isPressed() && mLidButton.isConnected() && mLidButton.isEnabled()) {
+                    mLidButton = null;
+                    mScore++;
+                    mPressedOnFrame = frame;
+                    if ((mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_EASY) && mWaitFrames > TIME_TO_PRESS_MIN_EASY / STEP_TIME)
+                            || (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_MEDIUM) && mWaitFrames > TIME_TO_PRESS_MIN_MEDIUM / STEP_TIME)
+                            || (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_HARD) && mWaitFrames > TIME_TO_PRESS_MIN_HARD / STEP_TIME))
+                        mWaitFrames--;
+
+                    ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
+                    mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+                }
+            }
+
+            if (mWaitFrames + mPressedOnFrame < frame)
+                stopGame();
+
+        } else
+            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
     }
 
     @Override
@@ -51,6 +149,18 @@ public class SmashitGameFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnSmashitGameListener");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        startGameSteps(getView());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mTimer.cancel();
     }
 
     @Override

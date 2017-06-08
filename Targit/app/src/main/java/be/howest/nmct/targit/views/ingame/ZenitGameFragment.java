@@ -66,6 +66,7 @@ public class ZenitGameFragment extends Fragment {
         mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
 
         startGameSteps(view);
+        ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
 
         return view;
     }
@@ -73,7 +74,6 @@ public class ZenitGameFragment extends Fragment {
     private void stopGame() {
         if (mListener != null)
             mListener.stopGame(GameActivity.EXTRA_GAME_ZENIT, mScore, mDuration);
-        Log.i(Constants.TAG, "stopGame: " + GameActivity.EXTRA_GAME_ZENIT + " dur: " + mDuration);
         mTimer.cancel();
     }
 

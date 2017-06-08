@@ -5,11 +5,17 @@
     tools:context=".views.ingame.SmashitGameFragment"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/ingame_textview_timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/info_smashit" />
+        android:text="@string/info_zenit" />
+
+    <TextView
+        android:id="@+id/ingame_textview_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info_zenit" />
 
     <Button
         android:id="@+id/ingame_button_stop"
