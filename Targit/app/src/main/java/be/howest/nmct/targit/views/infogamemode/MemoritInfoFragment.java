@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import be.howest.nmct.targit.R;
+import be.howest.nmct.targit.views.ingame.GameActivity;
 
 public class MemoritInfoFragment extends Fragment {
 
@@ -17,17 +18,32 @@ public class MemoritInfoFragment extends Fragment {
     public MemoritInfoFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_memorit_info, container, false);
 
-        view.findViewById(R.id.memorit_info_play).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.memorit_info_button_play_easy).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playMemorit();
+                    mListener.playMemorit(GameActivity.EXTRA_LIVES_MANY);
+            }
+        });
+        view.findViewById(R.id.memorit_info_button_play_medium).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null)
+                    mListener.playMemorit(GameActivity.EXTRA_LIVES_MEDIUM);
+            }
+        });
+        view.findViewById(R.id.memorit_info_button_play_hard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null)
+                    mListener.playMemorit(GameActivity.EXTRA_LIVES_FEW);
             }
         });
 
@@ -52,6 +68,6 @@ public class MemoritInfoFragment extends Fragment {
     }
 
     public interface OnMemoritInfoListener {
-        void playMemorit();
+        void playMemorit(int cmdLives);
     }
 }

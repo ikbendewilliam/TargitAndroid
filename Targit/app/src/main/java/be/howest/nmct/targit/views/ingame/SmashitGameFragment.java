@@ -36,8 +36,8 @@ public class SmashitGameFragment extends Fragment {
     List<ArduinoButton> mArduinoButtons;
     BluetoothConnection mBluetoothConnection;
 
-    public static int TIME_TO_PRESS_MAX_EASY = 10000;
-    public static int TIME_TO_PRESS_MAX_MEDIUM = 7000;
+    public static int TIME_TO_PRESS_MAX_EASY = 8000;
+    public static int TIME_TO_PRESS_MAX_MEDIUM = 6000;
     public static int TIME_TO_PRESS_MAX_HARD = 3000;
     public static int TIME_TO_PRESS_MIN_EASY = 3000;
     public static int TIME_TO_PRESS_MIN_MEDIUM = 2000;
@@ -65,7 +65,7 @@ public class SmashitGameFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.stopGame(GameActivity.EXTRA_GAME_SMASHIT, 0, mDifficulty);
+                    mListener.stopGame(GameActivity.EXTRA_GAME_SMASHIT, 0, mDifficulty.toString());
             }
         });
         if (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_EASY))
@@ -112,15 +112,22 @@ public class SmashitGameFragment extends Fragment {
         {
             ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000));
 
-            if (mPressedOnFrame + 2 < frame && mLidButton == null) {
+            if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLidButton == null) {
                 Random random = new Random();
                 do {
                     mLidButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
                 }
                 while (!mLidButton.isEnabled() || !mLidButton.isConnected() || mLidButton.isPressed());
+
+                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
                 mBluetoothConnection.sendMessageToDevice(mLidButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
-                Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLidButton.getDeviceName());
+                //Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLidButton.getDeviceName());
             } else if (mLidButton != null) {
+                for (ArduinoButton arduinoButton : mArduinoButtons) {
+                    if (arduinoButton.isPressed() && arduinoButton.isConnected() && arduinoButton.isEnabled() && arduinoButton.equals(mLidButton))
+                        loseLive(frame, view);
+                }
+
                 if (mLidButton.isPressed() && mLidButton.isConnected() && mLidButton.isEnabled()) {
                     mLidButton = null;
                     mScore++;
@@ -136,16 +143,20 @@ public class SmashitGameFragment extends Fragment {
             }
 
             if (mWaitFrames + mPressedOnFrame < frame) {
-                mLives--;
-                mLidButton = null;
-                mPressedOnFrame = frame;
-                ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
+                loseLive(frame, view);
             }
-            if (mLives <= 0)
-                stopGame();
 
         } else
             ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
+    }
+
+    private void loseLive(int frame, View view) {
+        mLives--;
+        mLidButton = null;
+        mPressedOnFrame = frame;
+        ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
+        if (mLives <= 0)
+            stopGame();
     }
 
     @Override

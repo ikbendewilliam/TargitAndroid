@@ -25,7 +25,7 @@ import static android.content.Context.BLUETOOTH_SERVICE;
 import static be.howest.nmct.targit.views.ingame.GameActivity.STEP_TIME;
 
 public class ZenitGameFragment extends Fragment {
-    private String mDuration;
+    private int mDuration;
     private int mMaxFrame;
     private int frameCounter = 0;
     private int mPressedOnFrame = 0;
@@ -41,10 +41,10 @@ public class ZenitGameFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ZenitGameFragment newInstance(String duration, int maxTime) {
+    public static ZenitGameFragment newInstance(int duration) {
         ZenitGameFragment fragment = new ZenitGameFragment();
         fragment.mDuration = duration;
-        fragment.mMaxFrame = (maxTime + 3) * 1000 / STEP_TIME;
+        fragment.mMaxFrame = (duration + 3) * 1000 / STEP_TIME;
         return fragment;
     }
 
@@ -73,7 +73,7 @@ public class ZenitGameFragment extends Fragment {
 
     private void stopGame() {
         if (mListener != null)
-            mListener.stopGame(GameActivity.EXTRA_GAME_ZENIT, mScore, mDuration);
+            mListener.stopGame(GameActivity.EXTRA_GAME_ZENIT, mScore, "" + mDuration);
         mTimer.cancel();
     }
 
@@ -103,8 +103,9 @@ public class ZenitGameFragment extends Fragment {
                     mLidButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
                 }
                 while (!mLidButton.isEnabled() || !mLidButton.isConnected() || mLidButton.isPressed());
+
                 mBluetoothConnection.sendMessageToDevice(mLidButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
-                Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLidButton.getDeviceName());
+                //Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLidButton.getDeviceName());
             } else if (mLidButton != null) {
                 if (mLidButton.isPressed() && mLidButton.isConnected() && mLidButton.isEnabled()) {
                     mLidButton = null;
