@@ -5,8 +5,20 @@
     tools:context=".views.ingame.MemoritGameFragment"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/ingame_textview_timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info_memorit" />
+
+    <TextView
+        android:id="@+id/ingame_textview_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info_memorit" />
+
+    <TextView
+        android:id="@+id/ingame_textview_lives"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/info_memorit" />

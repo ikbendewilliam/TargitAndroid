@@ -133,7 +133,8 @@ public class BluetoothConnection {
             if (bluetooth.isConnected()) {
                 if (bluetooth.getDevice().getName().equals(deviceName)) {
                     bluetooth.send(message + Constants.COMMAND_END);
-//                    Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + deviceName + ": " + message);
+                    bluetooth.send(message + Constants.COMMAND_END); // Do it twice, just to be sure
+                    //Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + deviceName + ": " + message);
                 }
             }
         }
@@ -146,7 +147,8 @@ public class BluetoothConnection {
                     if (bluetooth.isConnected()) {
                         if (bluetooth.getDevice().getName().equals(arduinoButton.getDeviceName())) {
                             bluetooth.send(message + Constants.COMMAND_END);
-                            Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + bluetooth.getDevice().getName() + ": " + message);
+                            bluetooth.send(message + Constants.COMMAND_END); // Do it twice, just to be sure
+                            //Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + bluetooth.getDevice().getName() + ": " + message);
                         }
                     }
                 }

@@ -45,7 +45,7 @@ public class GameActivity extends AppCompatActivity
     public static int EXTRA_LIVES_MANY = 5;
     public static int EXTRA_LIVES_MEDIUM = 3;
     public static int EXTRA_LIVES_FEW = 1;
-    public static int STEP_TIME = 100;
+    public static int STEP_TIME = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

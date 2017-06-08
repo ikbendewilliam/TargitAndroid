@@ -30,10 +30,10 @@ public class ZenitGameFragment extends Fragment {
     private int frameCounter = 0;
     private int mPressedOnFrame = 0;
     private int mScore = 0;
-    private ArduinoButton mLidButton = null;
-    Timer mTimer = new Timer();
-    List<ArduinoButton> mArduinoButtons;
-    BluetoothConnection mBluetoothConnection;
+    private ArduinoButton mLitButton = null;
+    private Timer mTimer = new Timer();
+    private List<ArduinoButton> mArduinoButtons;
+    private BluetoothConnection mBluetoothConnection;
 
     private OnZenitGameListener mListener;
 
@@ -98,18 +98,18 @@ public class ZenitGameFragment extends Fragment {
         {
             ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd over: " + ((mMaxFrame - frame) * STEP_TIME / 1000));
 
-            if (mPressedOnFrame + 2 < frame && mLidButton == null) {
+            if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLitButton == null) {
                 Random random = new Random();
                 do {
-                    mLidButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                    mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
                 }
-                while (!mLidButton.isEnabled() || !mLidButton.isConnected() || mLidButton.isPressed());
+                while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mLitButton.isPressed());
 
-                mBluetoothConnection.sendMessageToDevice(mLidButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
-                //Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLidButton.getDeviceName());
-            } else if (mLidButton != null) {
-                if (mLidButton.isPressed() && mLidButton.isConnected() && mLidButton.isEnabled()) {
-                    mLidButton = null;
+                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
+                //Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLitButton.getDeviceName());
+            } else if (mLitButton != null) {
+                if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
+                    mLitButton = null;
                     mScore++;
                     mPressedOnFrame = frame;
                     ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
