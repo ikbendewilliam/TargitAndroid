@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="639.987" height="6.95cm">
+    <defs>
+        <filter id="a" width="18186" height="5482" x="-393" y="-1021" filterUnits="userSpaceOnUse">
+            <feOffset dy="2" in="SourceAlpha"/>
+            <feGaussianBlur result="blurOut" stdDeviation="1.414"/>
+            <feFlood flood-color="#000" result="floodOut"/>
+            <feComposite in="floodOut" in2="blurOut" operator="atop"/>
+            <feComponentTransfer>
+                <feFuncA slope=".24" type="linear"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <g filter="url(#a)">
+        <path fill="#7F4300" fill-rule="evenodd" d="M421.911 137.595l-2.991.24-12.833-136.43 2.99-.241 12.834 136.431zM57.016 141.937l-2.986-.28L64.981 5.062l2.986.28-10.951 136.595z"/>
+        <path fill="#005B7F" fill-rule="evenodd" d="M6.123 111.487l470.443 14.155-3.693 66.87L2.432 178.357l3.691-66.87z"/>
+        <text x="15" y="170" fill="#FEFEFE" font-family="Berlin Sans FB Demi" font-size="36" font-weight="bold">
+            Kies je game mode
+        </text>
+    </g>
+</svg>
