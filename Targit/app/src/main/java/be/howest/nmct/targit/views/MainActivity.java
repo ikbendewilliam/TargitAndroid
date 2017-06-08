@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
                 showActivity(SettingsActivity.class);
             }
         });
+        /*
         findViewById(R.id.button_info_smashit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
                 showActivity(HighscoreActivity.class);
             }
         });
+        */
 
         mBluetoothConnection = BluetoothConnection.initiate(this, this);
         try{
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
         }catch(Exception ex){
             System.out.println(ex);
         }
+
 
         //set activity to full screen
         findViewById(R.id.activity_main_top_view).setSystemUiVisibility(

@@ -12,9 +12,14 @@
     <color name="colorZenit">#7db038</color>
     <color name="colorZenitsecondary">#426316</color>
 
-    <color name="colorText">fefefe</color>
+    <color name="colorText">#fefefe</color>
 
-    <color name="colorMoeilijk">c92d1d</color>
-    <color name="colorMakkelijk">7db038</color>
-    <color name="colorMatig">cb6b00</color>
+    <color name="colorMoeilijk">#c92d1d</color>
+    <color name="colorMakkelijk">#7db038</color>
+    <color name="colorMatig">#cb6b00</color>
+
+
+    <color name="colorPrimary">#1498cb</color>
+    <color name="colorPrimaryDark">#005b7f</color>
+    <color name="colorAccent">#FF4081</color>
 </resources>
