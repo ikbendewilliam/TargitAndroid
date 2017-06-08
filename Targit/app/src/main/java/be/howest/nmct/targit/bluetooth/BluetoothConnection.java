@@ -70,14 +70,18 @@ public class BluetoothConnection {
     }
 
     public void addConnection(final ArduinoButton arduinoButton, Activity activity) {
-        Bluetooth bluetooth = new Bluetooth(activity);
-        bluetooth.setCommunicationCallback(getCommunicationCallback(arduinoButton));
+        try {
+            Bluetooth bluetooth = new Bluetooth(activity);
+            bluetooth.setCommunicationCallback(getCommunicationCallback(arduinoButton));
 
-        Log.i(Constants.TAG, "attempting connection to " + arduinoButton.getDeviceName());
-        bluetooth.connectToName(arduinoButton.getDeviceName());
+            Log.i(Constants.TAG, "attempting connection to " + arduinoButton.getDeviceName());
+            bluetooth.connectToName(arduinoButton.getDeviceName());
 
-        mBluetooth.add(bluetooth);
-        mArduinoButtons.add(arduinoButton);
+            mBluetooth.add(bluetooth);
+            mArduinoButtons.add(arduinoButton);
+        } catch (Exception e) {
+            Log.e(Constants.TAG_MESSAGE, "addConnection: " + e);
+        }
     }
 
     private Bluetooth.CommunicationCallback getCommunicationCallback(final ArduinoButton arduinoButton) {
