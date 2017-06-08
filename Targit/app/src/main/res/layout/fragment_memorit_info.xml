@@ -11,9 +11,21 @@
         android:text="@string/info_memorit" />
 
     <Button
-        android:id="@+id/memorit_info_play"
+        android:id="@+id/memorit_info_button_play_easy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="play memorit"/>
+        android:text="5 levekes" />
+
+    <Button
+        android:id="@+id/memorit_info_button_play_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3 levekes" />
+
+    <Button
+        android:id="@+id/memorit_info_button_play_hard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUDDEN DEATH" />
 
 </LinearLayout>

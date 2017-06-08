@@ -25,15 +25,15 @@ import static android.content.Context.BLUETOOTH_SERVICE;
 import static be.howest.nmct.targit.views.ingame.GameActivity.STEP_TIME;
 
 public class ZenitGameFragment extends Fragment {
-    private String mDuration;
+    private int mDuration;
     private int mMaxFrame;
     private int frameCounter = 0;
     private int mPressedOnFrame = 0;
     private int mScore = 0;
-    private ArduinoButton mLidButton = null;
-    Timer mTimer = new Timer();
-    List<ArduinoButton> mArduinoButtons;
-    BluetoothConnection mBluetoothConnection;
+    private ArduinoButton mLitButton = null;
+    private Timer mTimer = new Timer();
+    private List<ArduinoButton> mArduinoButtons;
+    private BluetoothConnection mBluetoothConnection;
 
     private OnZenitGameListener mListener;
 
@@ -41,10 +41,10 @@ public class ZenitGameFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ZenitGameFragment newInstance(String duration, int maxTime) {
+    public static ZenitGameFragment newInstance(int duration) {
         ZenitGameFragment fragment = new ZenitGameFragment();
         fragment.mDuration = duration;
-        fragment.mMaxFrame = (maxTime + 3) * 1000 / STEP_TIME;
+        fragment.mMaxFrame = (duration + 3) * 1000 / STEP_TIME;
         return fragment;
     }
 
@@ -73,8 +73,9 @@ public class ZenitGameFragment extends Fragment {
 
     private void stopGame() {
         if (mListener != null)
-            mListener.stopGame(GameActivity.EXTRA_GAME_ZENIT, mScore, mDuration);
+            mListener.stopGame(GameActivity.EXTRA_GAME_ZENIT, mScore, "" + mDuration);
         mTimer.cancel();
+        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
     }
 
     public void startGameSteps(final View view) {
@@ -97,17 +98,18 @@ public class ZenitGameFragment extends Fragment {
         {
             ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd over: " + ((mMaxFrame - frame) * STEP_TIME / 1000));
 
-            if (mPressedOnFrame + 2 < frame && mLidButton == null) {
+            if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLitButton == null) {
                 Random random = new Random();
                 do {
-                    mLidButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                    mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
                 }
-                while (!mLidButton.isEnabled() || !mLidButton.isConnected() || mLidButton.isPressed());
-                mBluetoothConnection.sendMessageToDevice(mLidButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
-                Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLidButton.getDeviceName());
-            } else if (mLidButton != null) {
-                if (mLidButton.isPressed() && mLidButton.isConnected() && mLidButton.isEnabled()) {
-                    mLidButton = null;
+                while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mLitButton.isPressed());
+
+                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
+                //Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLitButton.getDeviceName());
+            } else if (mLitButton != null) {
+                if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
+                    mLitButton = null;
                     mScore++;
                     mPressedOnFrame = frame;
                     ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);

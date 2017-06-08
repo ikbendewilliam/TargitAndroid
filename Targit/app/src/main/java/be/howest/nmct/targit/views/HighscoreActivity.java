@@ -38,21 +38,16 @@ public class HighscoreActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        Log.i(Constants.TAG, "got " + intent.getExtras());
-        Log.i(Constants.TAG, "need " + EXTRA_GAME + " and " + EXTRA_SCORE);
-        Log.i(Constants.TAG, "result " + intent.hasExtra(EXTRA_GAME) + " and " + intent.hasExtra(EXTRA_SCORE));
+//        Log.i(Constants.TAG, "got " + intent.getExtras());
+//        Log.i(Constants.TAG, "need " + EXTRA_GAME + " and " + EXTRA_SCORE);
+//        Log.i(Constants.TAG, "result " + intent.hasExtra(EXTRA_GAME) + " and " + intent.hasExtra(EXTRA_SCORE));
 
-        if (intent.hasExtra(EXTRA_GAME) && intent.hasExtra(EXTRA_SCORE)) {
+        if (intent.hasExtra(EXTRA_GAME) && intent.hasExtra(EXTRA_SCORE) && intent.hasExtra(EXTRA_CATEGORY)) {
             String gameMode = intent.getStringExtra(EXTRA_GAME);
             int gameScore = intent.getIntExtra(EXTRA_SCORE, 0);
-            Log.i(Constants.TAG, "score: " + gameScore);
-            if (intent.hasExtra(EXTRA_CATEGORY)) {
-                String category = intent.getStringExtra(EXTRA_CATEGORY);
-                ((TextView) (findViewById(R.id.highscore_textview_score))).setText("score: " + gameScore + " in " + gameMode + " " + category);
-                Log.i(Constants.TAG, "score: " + gameScore + " in " + gameMode + " " + category);
-            } else {
-                ((TextView) (findViewById(R.id.highscore_textview_score))).setText("score: " + gameScore + " in " + gameMode);
-            }
+            String category = intent.getStringExtra(EXTRA_CATEGORY);
+            ((TextView) (findViewById(R.id.highscore_textview_score))).setText("score: " + gameScore + " in " + gameMode + " " + category);
+//                Log.i(Constants.TAG, "score: " + gameScore + " in " + gameMode + " " + category);
         }
     }
 

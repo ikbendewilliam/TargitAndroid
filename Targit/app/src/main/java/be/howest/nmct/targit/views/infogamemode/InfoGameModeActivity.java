@@ -57,9 +57,10 @@ public class InfoGameModeActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    void showGameActivity(String gameMode) {
+    void showGameActivity(String gameMode, String extraName, int extraValue) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(GameActivity.EXTRA_GAME, gameMode);
+        intent.putExtra(extraName, extraValue);
         startActivity(intent);
     }
 
@@ -71,12 +72,12 @@ public class InfoGameModeActivity extends AppCompatActivity
     }
 
     @Override
-    public void playMemorit() {
-        showGameActivity(GameActivity.EXTRA_GAME_MEMORIT);
+    public void playMemorit(int cmdLives) {
+        showGameActivity(GameActivity.EXTRA_GAME_MEMORIT, GameActivity.EXTRA_LIVES, cmdLives);
     }
 
     @Override
-    public void playZenit(String cmdDuration) {
+    public void playZenit(int cmdDuration) {
         showGameActivity(GameActivity.EXTRA_GAME_ZENIT, GameActivity.EXTRA_DURATION, cmdDuration);
     }
 

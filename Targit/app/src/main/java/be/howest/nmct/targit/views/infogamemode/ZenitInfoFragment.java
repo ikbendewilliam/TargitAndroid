@@ -68,6 +68,6 @@ public class ZenitInfoFragment extends Fragment {
     }
 
     public interface OnZenitInfoListener {
-        void playZenit(String cmdDuration);
+        void playZenit(int cmdDuration);
     }
 }

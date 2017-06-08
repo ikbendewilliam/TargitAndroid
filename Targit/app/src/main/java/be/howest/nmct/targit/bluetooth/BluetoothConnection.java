@@ -70,14 +70,18 @@ public class BluetoothConnection {
     }
 
     public void addConnection(final ArduinoButton arduinoButton, Activity activity) {
-        Bluetooth bluetooth = new Bluetooth(activity);
-        bluetooth.setCommunicationCallback(getCommunicationCallback(arduinoButton));
+        try {
+            Bluetooth bluetooth = new Bluetooth(activity);
+            bluetooth.setCommunicationCallback(getCommunicationCallback(arduinoButton));
 
-        Log.i(Constants.TAG, "attempting connection to " + arduinoButton.getDeviceName());
-        bluetooth.connectToName(arduinoButton.getDeviceName());
+            Log.i(Constants.TAG, "attempting connection to " + arduinoButton.getDeviceName());
+            bluetooth.connectToName(arduinoButton.getDeviceName());
 
-        mBluetooth.add(bluetooth);
-        mArduinoButtons.add(arduinoButton);
+            mBluetooth.add(bluetooth);
+            mArduinoButtons.add(arduinoButton);
+        } catch (Exception e) {
+            Log.e(Constants.TAG_MESSAGE, "addConnection: " + e);
+        }
     }
 
     private Bluetooth.CommunicationCallback getCommunicationCallback(final ArduinoButton arduinoButton) {
@@ -133,7 +137,8 @@ public class BluetoothConnection {
             if (bluetooth.isConnected()) {
                 if (bluetooth.getDevice().getName().equals(deviceName)) {
                     bluetooth.send(message + Constants.COMMAND_END);
-//                    Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + deviceName + ": " + message);
+                    bluetooth.send(message + Constants.COMMAND_END); // Do it twice, just to be sure
+                    //Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + deviceName + ": " + message);
                 }
             }
         }
@@ -146,7 +151,8 @@ public class BluetoothConnection {
                     if (bluetooth.isConnected()) {
                         if (bluetooth.getDevice().getName().equals(arduinoButton.getDeviceName())) {
                             bluetooth.send(message + Constants.COMMAND_END);
-                            Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + bluetooth.getDevice().getName() + ": " + message);
+                            bluetooth.send(message + Constants.COMMAND_END); // Do it twice, just to be sure
+                            //Log.i(Constants.TAG_MESSAGE, "sendMessageToDevice: " + bluetooth.getDevice().getName() + ": " + message);
                         }
                     }
                 }

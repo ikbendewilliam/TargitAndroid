@@ -38,10 +38,14 @@ public class GameActivity extends AppCompatActivity
     public static String EXTRA_DIFFICULTY_MEDIUM = "medium";
     public static String EXTRA_DIFFICULTY_HARD = "hard";
     public static String EXTRA_DURATION = "duration";
-    public static String EXTRA_DURATION_SHORT = "short";
-    public static String EXTRA_DURATION_MEDIUM = "normal";
-    public static String EXTRA_DURATION_LONG = "long";
-    public static int STEP_TIME = 100;
+    public static int EXTRA_DURATION_SHORT = 30;
+    public static int EXTRA_DURATION_MEDIUM = 60;
+    public static int EXTRA_DURATION_LONG = 90;
+    public static String EXTRA_LIVES = "lives";
+    public static int EXTRA_LIVES_MANY = 5;
+    public static int EXTRA_LIVES_MEDIUM = 3;
+    public static int EXTRA_LIVES_FEW = 1;
+    public static int STEP_TIME = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,6 @@ public class GameActivity extends AppCompatActivity
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_GAME)) {
             String gameMode = intent.getStringExtra(EXTRA_GAME);
-
             if (gameMode == null) {
                 showActivity(MainActivity.class);
             } else if (gameMode.equals(EXTRA_GAME_SMASHIT)) {
@@ -67,24 +70,20 @@ public class GameActivity extends AppCompatActivity
                 }
             } else if (gameMode.equals(EXTRA_GAME_ZENIT)) {
                 if (intent.hasExtra(EXTRA_DURATION)) {
-                    String duration = intent.getStringExtra(EXTRA_DURATION);
-                    if (duration == null) {
-                        showActivity(MainActivity.class);
-                    } else if (duration.equals(EXTRA_DURATION_SHORT)) {
-                        showFragment(ZenitGameFragment.newInstance(duration, 30));
-                    } else if (duration.equals(EXTRA_DURATION_MEDIUM)) {
-                        showFragment(ZenitGameFragment.newInstance(duration, 60));
-                    } else if (duration.equals(EXTRA_DURATION_LONG)) {
-                        showFragment(ZenitGameFragment.newInstance(duration, 90));
-                    }
+                    int duration = intent.getIntExtra(EXTRA_DURATION, EXTRA_DURATION_SHORT);
+                    showFragment(ZenitGameFragment.newInstance(duration));
                 }
             } else if (gameMode.equals(EXTRA_GAME_MEMORIT)) {
-                showFragment(new MemoritGameFragment());
+                if (intent.hasExtra(EXTRA_LIVES)) {
+                    int lives = intent.getIntExtra(EXTRA_LIVES, EXTRA_LIVES_MANY);
+                    showFragment(MemoritGameFragment.newInstance(lives));
+                }
             }
         }
     }
 
     private void showFragment(Fragment newFragment) {
+        //Log.i(Constants.TAG, "showFragment: " + newFragment.toString());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout_in_gameactivity, newFragment);
         transaction.commit();
@@ -95,13 +94,6 @@ public class GameActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    void showHighscoreActivity(String gameMode, int score) {
-        Intent intent = new Intent(this, HighscoreActivity.class);
-        intent.putExtra(HighscoreActivity.EXTRA_GAME, gameMode);
-        intent.putExtra(HighscoreActivity.EXTRA_SCORE, score);
-        startActivity(intent);
-    }
-
     void showHighscoreActivity(String gameMode, int score, String category) {
         Intent intent = new Intent(this, HighscoreActivity.class);
         intent.putExtra(HighscoreActivity.EXTRA_GAME, gameMode);
@@ -109,11 +101,6 @@ public class GameActivity extends AppCompatActivity
         intent.putExtra(HighscoreActivity.EXTRA_CATEGORY, category);
         startActivity(intent);
         //Log.i(Constants.TAG, "showHighscoreActivity: " + intent.getExtras().toString());
-    }
-
-    @Override
-    public void stopGame(String gameMode, int score) {
-        showHighscoreActivity(gameMode, score);
     }
 
     @Override
