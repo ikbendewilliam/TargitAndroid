@@ -75,6 +75,7 @@ public class ZenitGameFragment extends Fragment {
         if (mListener != null)
             mListener.stopGame(GameActivity.EXTRA_GAME_ZENIT, mScore, "" + mDuration);
         mTimer.cancel();
+        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
     }
 
     public void startGameSteps(final View view) {

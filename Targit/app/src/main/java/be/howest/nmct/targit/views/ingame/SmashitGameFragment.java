@@ -90,6 +90,7 @@ public class SmashitGameFragment extends Fragment {
         if (mListener != null)
             mListener.stopGame(GameActivity.EXTRA_GAME_SMASHIT, mScore, mDifficulty);
         mTimer.cancel();
+        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
     }
 
     public void startGameSteps(final View view) {
