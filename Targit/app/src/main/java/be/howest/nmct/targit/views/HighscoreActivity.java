@@ -27,8 +27,7 @@ public class HighscoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         findViewById(R.id.highscore_button_to_mainactivity).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +35,16 @@ public class HighscoreActivity extends AppCompatActivity {
                 showActivity(MainActivity.class);
             }
         });
+
+        //set activity to full screen
+        findViewById(R.id.activity_highscore_top_view).setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+
 
         Intent intent = getIntent();
 //        Log.i(Constants.TAG, "got " + intent.getExtras());
@@ -49,6 +58,22 @@ public class HighscoreActivity extends AppCompatActivity {
             ((TextView) (findViewById(R.id.highscore_textview_score))).setText("score: " + gameScore + " in " + gameMode + " " + category);
 //                Log.i(Constants.TAG, "score: " + gameScore + " in " + gameMode + " " + category);
         }
+    }
+
+    //handles full screen autohiding
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            findViewById(R.id.activity_highscore_top_view).setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+
+
     }
 
     void showActivity(Class activity) {

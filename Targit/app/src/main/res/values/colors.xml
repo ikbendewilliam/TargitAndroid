@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorMain">#005b7f</color>
+    <color name="colorBackground">#079396</color>
+
+    <color name="colorMemorit">#cb6b00</color>
+    <color name="colorMemoritSecondary">#7f4300</color>
+
+    <color name="colorSmashit">#1498cb</color>
+    <color name="colorSmashitSecondary">#005b7f</color>
+
+    <color name="colorZenit">#7db038</color>
+    <color name="colorZenitsecondary">#426316</color>
+
+    <color name="colorText">fefefe</color>
+
+    <color name="colorMoeilijk">c92d1d</color>
+    <color name="colorMakkelijk">7db038</color>
+    <color name="colorMatig">cb6b00</color>
 </resources>
