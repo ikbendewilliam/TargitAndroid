@@ -13,6 +13,14 @@ public class HighscoreEntry {
         this.score = score;
     }
 
+    public HighscoreEntry(String fromString) {
+        if (!fromString.contains(";"))
+            throw new RuntimeException("fromString must contain a ';'");
+        int lastIndex = fromString.lastIndexOf(";");
+        nickname = fromString.substring(0, lastIndex);
+        score = Integer.parseInt(fromString.substring(lastIndex + 1, fromString.length()));
+    }
+
     public int getScore() {
         return score;
     }
@@ -27,5 +35,10 @@ public class HighscoreEntry {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    @Override
+    public String toString() {
+        return nickname + ";" + score;
     }
 }
