@@ -3,9 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.infogamemode.SmashitInfoFragment"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
         <!--<TextView-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->
@@ -28,5 +27,69 @@
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:text="moeilijk lol" />-->
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="218dp"
+            android:layout_height="221dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="74dp"
+            android:src="@drawable/smash_it" />
+
+        <ImageView
+            android:layout_width="268dp"
+            android:layout_height="161.5dp"
+            android:background="@color/colorSmashit"
+            android:layout_marginBottom="87dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="316.1dp"
+            android:layout_height="126.3dp"
+            android:src="@drawable/titel_smashit_info"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:id="@+id/imageViewMakkelijk"
+            android:layout_width="206.7dp"
+            android:layout_height="62.7dp"
+            android:background="@color/colorMakkelijk"
+            android:layout_marginTop="300dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/imageViewMatig"
+            android:layout_width="206.7dp"
+            android:layout_height="62.7dp"
+            android:layout_marginTop="23.3dp"
+            android:layout_below="@+id/imageViewMakkelijk"
+            android:layout_alignStart="@+id/imageViewMakkelijk"
+            android:background="@color/colorMatig" />
+
+        <ImageView
+            android:id="@+id/imageViewMoeilijk"
+            android:layout_width="206.7dp"
+            android:layout_height="62.7dp"
+            android:layout_marginTop="23.3dp"
+            android:layout_below="@+id/imageViewMatig"
+            android:layout_alignStart="@+id/imageViewMakkelijk"
+            android:adjustViewBounds="true"
+            android:background="@color/colorMoeilijk" />
+    </RelativeLayout>
+
 
 </LinearLayout>
