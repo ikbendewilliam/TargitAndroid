@@ -6,27 +6,27 @@
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/info_smashit" />
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/info_smashit" />-->
 
-    <Button
-        android:id="@+id/smashit_info_button_play_easy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Simpel" />
+        <!--<Button-->
+            <!--android:id="@+id/smashit_info_button_play_easy"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Simpel" />-->
 
-    <Button
-        android:id="@+id/smashit_info_button_play_medium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cva" />
+        <!--<Button-->
+            <!--android:id="@+id/smashit_info_button_play_medium"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Cva" />-->
 
-    <Button
-        android:id="@+id/smashit_info_button_play_hard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="moeilijk lol" />
+        <!--<Button-->
+            <!--android:id="@+id/smashit_info_button_play_hard"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="moeilijk lol" />-->
 
 </LinearLayout>
