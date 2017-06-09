@@ -1,4 +1,4 @@
-package be.howest.nmct.targit.views;
+package be.howest.nmct.targit.views.highscore;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.bluetooth.Constants;
+import be.howest.nmct.targit.views.MainActivity;
 import be.howest.nmct.targit.views.ingame.MemoritGameFragment;
 import be.howest.nmct.targit.views.ingame.SmashitGameFragment;
 import be.howest.nmct.targit.views.ingame.ZenitGameFragment;

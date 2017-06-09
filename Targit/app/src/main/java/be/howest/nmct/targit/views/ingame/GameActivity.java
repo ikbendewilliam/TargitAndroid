@@ -4,26 +4,12 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import be.howest.nmct.targit.R;
-import be.howest.nmct.targit.bluetooth.Constants;
-import be.howest.nmct.targit.models.ArduinoButton;
-import be.howest.nmct.targit.views.HighscoreActivity;
+import be.howest.nmct.targit.views.highscore.HighscoreActivity;
 import be.howest.nmct.targit.views.MainActivity;
-import be.howest.nmct.targit.views.infogamemode.MemoritInfoFragment;
-import be.howest.nmct.targit.views.infogamemode.SmashitInfoFragment;
-import be.howest.nmct.targit.views.infogamemode.ZenitInfoFragment;
 
 public class GameActivity extends AppCompatActivity
         implements ZenitGameFragment.OnZenitGameListener,
