@@ -1,11 +1,8 @@
 package be.howest.nmct.targit.views;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,6 +13,7 @@ import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.bluetooth.BluetoothConnection;
 import be.howest.nmct.targit.bluetooth.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
+import be.howest.nmct.targit.views.highscore.HighscoreActivity;
 import be.howest.nmct.targit.views.infogamemode.InfoGameModeActivity;
 import be.howest.nmct.targit.views.settings.SettingsActivity;
 
