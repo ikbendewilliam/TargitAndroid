@@ -122,7 +122,11 @@ public class MemoritGameFragment extends Fragment {
                 mLitButton = null;
                 mLastFrameLit = frame;
                 mUserinput = false;
-            } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 200 && mIterator < mSequence.size() && !mUserinput) {
+            } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 1000 && mIterator == 0 && !mUserinput) {
+                mLastFrameLit = frame;
+                mLitButton = mSequence.get(mIterator);
+                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_ON);
+            } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 200 && mIterator != 0 && mIterator < mSequence.size() && !mUserinput) {
                 mLastFrameLit = frame;
                 mLitButton = mSequence.get(mIterator);
                 mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_ON);
@@ -131,7 +135,7 @@ public class MemoritGameFragment extends Fragment {
                 mUserinput = true;
                 mIterator = 0;
                 mLitButton = mSequence.get(mIterator);
-            } else if (mLitButton != null && (frame - mLastFrameLit) * STEP_TIME > 1000 && mIterator < mSequence.size() && !mUserinput) {
+            } else if (mLitButton != null && (frame - mLastFrameLit) * STEP_TIME > 1500 && mIterator < mSequence.size() && !mUserinput) {
                 mLastFrameLit = frame;
                 mLitButton = null;
                 mIterator++;
