@@ -2,6 +2,7 @@ package be.howest.nmct.targit.adapters;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +31,13 @@ public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighs
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_status_bluetooth_item, parent, false);
+                .inflate(R.layout.fragment_highscore_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mPlace.setText("" + position);
+        holder.mPlace.setText("" + (position + 1));
         holder.mName.setText(mValues.get(position).getNickname());
         holder.mScore.setText("" + mValues.get(position).getScore());
     }
