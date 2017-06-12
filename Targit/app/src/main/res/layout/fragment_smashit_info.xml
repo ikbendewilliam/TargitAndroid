@@ -1,7 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.infogamemode.SmashitInfoFragment"
     android:orientation="horizontal"
     android:background="@color/colorBackground">
@@ -30,10 +31,13 @@
             <!--android:text="moeilijk lol" />-->
 
     <LinearLayout
+        android:id="@+id/smashit_info_left"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="50%">
 
 
         <ImageView
@@ -56,54 +60,70 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#ffffff"
+        android:elevation="2dp"
+        android:layout_toEndOf="@id/smashit_info_left"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_heightPercent="90%"/>
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="#ffffff"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentStart="true"/>
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="50%"
+        android:layout_toEndOf="@id/smashit_info_left">
+
 
         <ImageView
-            android:layout_width="316.1dp"
-            android:layout_height="126.3dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/titel_smashit_info"
-            android:layout_centerHorizontal="true"/>
+            app:layout_heightPercent="24%"/>
+
 
         <Button
             android:id="@+id/smashit_info_button_play_easy"
-            android:layout_width="206.7dp"
-            android:layout_height="62.7dp"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:layout_above="@+id/smashit_info_button_play_medium"
+            android:layout_alignStart="@+id/smashit_info_button_play_hard"
             android:layout_marginTop="23.3dp"
             android:background="@color/colorMakkelijk"
-            android:layout_above="@+id/smashit_info_button_play_medium"
-            android:layout_alignStart="@+id/smashit_info_button_play_hard"/>
+            android:text="TRAAG"
+            android:textColor="@color/colorWhite"
+            android:textSize="40sp"/>
 
         <Button
             android:id="@+id/smashit_info_button_play_medium"
-            android:layout_width="206.7dp"
-            android:layout_height="62.7dp"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:layout_above="@+id/smashit_info_button_play_hard"
+            android:layout_alignStart="@+id/smashit_info_button_play_hard"
             android:layout_marginTop="23.3dp"
             android:background="@color/colorMatig"
-            android:layout_above="@+id/smashit_info_button_play_hard"
-            android:layout_alignStart="@+id/smashit_info_button_play_hard"/>
+            android:text="MATiG"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="40sp"/>
 
         <Button
             android:id="@+id/smashit_info_button_play_hard"
-            android:layout_width="206.7dp"
-            android:layout_height="62.7dp"
-            android:adjustViewBounds="true"
-            android:layout_marginTop="23.3dp"
-            android:background="@color/colorMoeilijk"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"/>
-    </RelativeLayout>
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="23.3dp"
+            android:adjustViewBounds="true"
+            android:background="@color/colorMoeilijk"
+            android:text="SNEL"
+            android:textColor="@color/colorWhite"
+            android:textSize="40sp" />
+    </android.support.percent.PercentRelativeLayout>
 
-
-</LinearLayout>
+</android.support.percent.PercentRelativeLayout>
