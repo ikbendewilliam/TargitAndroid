@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">BluetoothTesting</string>
+    <string name="action_settings">Settings</string>
+    <string name="leds_on">leds on</string>
+    <string name="leds_flash_slow">leds flash slow</string>
+    <string name="leds_flash_medium">leds flash medium</string>
+    <string name="leds_flash_fast">leds flash fast</string>
+    <string name="leds_off">leds off</string>
+    <string name="connected_devices">#Connected devices:</string>
+    <string name="clicked_buttons">#clicked buttons:</string>
+    <string name="change_to_main2">change to main2</string>
+    <string name="change_to_main">change to main</string>
+</resources>
