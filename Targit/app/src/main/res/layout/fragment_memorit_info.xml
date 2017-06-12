@@ -1,31 +1,138 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.infogamemode.MemoritInfoFragment"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:background="@color/colorBackground">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/info_memorit" />
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/info_memorit" />-->
 
-    <Button
-        android:id="@+id/memorit_info_button_play_easy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="5 levekes" />
+    <!--<Button-->
+    <!--android:id="@+id/memorit_info_button_play_easy"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="5 levekes" />-->
 
-    <Button
-        android:id="@+id/memorit_info_button_play_medium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="3 levekes" />
+    <!--<Button-->
+    <!--android:id="@+id/memorit_info_button_play_medium"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="3 levekes" />-->
 
-    <Button
-        android:id="@+id/memorit_info_button_play_hard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SUDDEN DEATH" />
+    <!--<Button-->
+    <!--android:id="@+id/memorit_info_button_play_hard"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="SUDDEN DEATH" />-->
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/memorit_info_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="50%">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/memor_it"
+            android:layout_weight="1"/>
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorMemorit"
+
+            android:layout_margin="20dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="#ffffff"
+        android:elevation="2dp"
+        android:layout_toEndOf="@id/memorit_info_left"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_heightPercent="90%"/>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="50%"
+        android:layout_toEndOf="@id/memorit_info_left">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/titel_memorit_info"
+            app:layout_heightPercent="24%"
+            android:layout_marginTop="-10dp"/>
+
+
+        <Button
+            android:id="@+id/memorit_info_button_play_easy"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="60%"
+            app:layout_heightPercent="14%"
+            android:layout_above="@+id/memorit_info_button_play_medium"
+            android:layout_alignStart="@+id/memorit_info_button_play_hard"
+            android:layout_marginTop="23.3dp"
+            android:background="@color/colorMakkelijk"
+            android:text="5 levens"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"/>
+
+        <Button
+            android:id="@+id/memorit_info_button_play_medium"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="60%"
+            app:layout_heightPercent="14%"
+            android:layout_above="@+id/memorit_info_button_play_hard"
+            android:layout_alignStart="@+id/memorit_info_button_play_hard"
+            android:layout_marginTop="23.3dp"
+            android:background="@color/colorMatig"
+            android:text="3 levens"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"/>
+
+        <Button
+            android:id="@+id/memorit_info_button_play_hard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="60%"
+            app:layout_heightPercent="14%"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="23.3dp"
+            android:adjustViewBounds="true"
+            android:background="@color/colorMoeilijk"
+            android:text="1 leven"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp" />
+    </android.support.percent.PercentRelativeLayout>
+
+</android.support.percent.PercentRelativeLayout>
