@@ -73,7 +73,7 @@
             android:src="@drawable/ic_hart_memorit"
             app:layout_heightPercent="35%"
             app:layout_widthPercent="30%"
-            android:ba="@id/fragment_memorit_game_imageview_heart2"/>
+            android:layout_toStartOf="@id/fragment_memorit_game_imageview_heart2"/>
 
         <ImageView
             android:id="@+id/fragment_memorit_game_imageview_heart3"
