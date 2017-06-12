@@ -41,10 +41,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorSmashitSecondary"
+        android:background="@color/colorSmashit"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="400dp"
-        android:layout_marginLeft="300dp"></RelativeLayout>
+        android:layout_marginStart="300dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_score_circle"
+            android:text="27"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-60dp"
+            android:elevation="2dp"
+            />
+
+    </RelativeLayout>
 
     </RelativeLayout>
