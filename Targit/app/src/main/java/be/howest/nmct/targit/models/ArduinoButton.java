@@ -1,10 +1,6 @@
 package be.howest.nmct.targit.models;
 
-import be.howest.nmct.targit.bluetooth.Constants;
-
-/**
- * Created by ikben on 02/06/2017.
- */
+import be.howest.nmct.targit.Constants;
 
 public class ArduinoButton {
     private String deviceName;
