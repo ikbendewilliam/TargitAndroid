@@ -42,6 +42,7 @@
 
 
 
+
     <android.support.percent.PercentRelativeLayout
         android:id="@+id/fragment_smashit_game_relativelayout_frame"
         android:layout_width="0dp"
@@ -163,6 +164,7 @@
             />
 
     </android.support.percent.PercentRelativeLayout>
+
 
 
 
