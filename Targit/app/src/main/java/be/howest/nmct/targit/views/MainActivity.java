@@ -14,6 +14,7 @@ import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.bluetooth.BluetoothConnection;
 import be.howest.nmct.targit.bluetooth.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
+import be.howest.nmct.targit.views.highscore.HighscoreActivity;
 import be.howest.nmct.targit.views.infogamemode.InfoGameModeActivity;
 import be.howest.nmct.targit.views.settings.SettingsActivity;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
-        findViewById(R.id.image_settings).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.activity_main_imageview_settings).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showActivity(SettingsActivity.class);
@@ -47,32 +48,32 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
         TextView txtHighscores = (TextView)findViewById(R.id.activity_main_button_highscore);
         txtHighscores.setTypeface(font);
 
-        /*
-        findViewById(R.id.button_info_smashit).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.activity_main_imageview_smashit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInfoGameModeActivity(InfoGameModeActivity.EXTRA_GAMEMODE_SMASHIT);
             }
         });
-        findViewById(R.id.button_info_zenit).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.activity_main_imageview_zenit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInfoGameModeActivity(InfoGameModeActivity.EXTRA_GAMEMODE_ZENIT);
             }
         });
-        findViewById(R.id.button_info_memorit).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.activity_main_imageview_memorit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInfoGameModeActivity(InfoGameModeActivity.EXTRA_GAMEMODE_MEMORIT);
             }
         });
-        findViewById(R.id.button_highscore).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.activity_main_button_highscore).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showActivity(HighscoreActivity.class);
             }
         });
-        */
+
 
         mBluetoothConnection = BluetoothConnection.initiate(this, this);
         try{

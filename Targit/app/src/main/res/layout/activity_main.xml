@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main_top_view"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,77 +9,125 @@
     tools:context="be.howest.nmct.targit.views.MainActivity">
 
 
+
     <ImageView
         android:layout_gravity="center"
         android:id="@+id/activity_main_imageview_title"
         android:layout_centerHorizontal="true"
-        android:layout_width="474dp"
-        android:layout_height="186dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="30%"
+        app:layout_widthPercent="90%"
         android:layout_marginTop="-10dp"
         android:src="@drawable/titel_gamemode"/>
+
     <ImageView
-        android:id="@+id/image_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/activity_main_imageview_settings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        app:layout_heightPercent="4%"
+        app:layout_widthPercent="4%"
         android:layout_alignParentRight="true"
         android:contentDescription="@string/action_settings"
         android:src="@drawable/cogwheel" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <!--<LinearLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_below="@id/activity_main_imageview_title"-->
+        <!--android:layout_height="0dp"-->
+        <!--app:layout_heightPercent="50%"-->
+        <!--app:layout_widthPercent="100%"-->
+        <!--android:id="@+id/activity_main_linearlayout"-->
+        <!--android:layout_centerHorizontal="true">-->
+
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/activity_main_relativelayout_buttons"
         android:layout_below="@id/activity_main_imageview_title"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_main_linearlayout"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
 
-
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="50%"
+        app:layout_widthPercent="100%"
+        >
 
         <ImageView
             android:id="@+id/activity_main_imageview_smashit"
-            android:layout_width="350dp"
-            android:layout_height="354dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            app:layout_heightPercent="84%"
+            app:layout_widthPercent="30%"
             android:contentDescription="@string/action_settings"
             android:src="@drawable/smash_it"
+            android:layout_alignParentBottom="true"
             android:baselineAlignBottom="true"/>
 
         <ImageView
             android:id="@+id/activity_main_imageview_zenit"
-            android:layout_width="320dp"
-            android:layout_height="324dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="77%"
+            app:layout_widthPercent="30%"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/activity_main_imageview_smashit"
             android:contentDescription="@string/action_settings"
-            android:baselineAlignBottom="true"
             android:src="@drawable/zen_it_knop" />
-
         <ImageView
             android:id="@+id/activity_main_imageview_memorit"
-            android:layout_width="320dp"
-            android:layout_height="418dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            app:layout_heightPercent="120%"
+            app:layout_widthPercent="30%"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/activity_main_imageview_zenit"
             android:contentDescription="@string/action_settings"
-            android:baselineAlignBottom="true"
             android:src="@drawable/memor_it" />
 
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/activity_main_button_highscore"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity_main_linearlayout"
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+    <!--</LinearLayout>-->
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/activity_main_relativelayout_highscore"
+        android:layout_below="@id/activity_main_relativelayout_buttons"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:background="@color/colorMain"
-        android:text="@string/title_activity_highscore"
-        android:textAllCaps="false"
-        android:textColor="@color/colorText"
-        android:textSize="24sp" />
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="50%"
+        app:layout_widthPercent="100%">
+
+        <Button
+            android:id="@+id/activity_main_button_highscore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="24%"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+
+
+            android:background="@color/colorMain"
+            android:text="@string/title_activity_highscore"
+            android:textAllCaps="false"
+            android:textColor="@color/colorText"
+            android:textSize="24sp" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+
 
 
 
@@ -107,4 +155,4 @@
 
         -->
 
-</RelativeLayout>
+</android.support.percent.PercentRelativeLayout>
