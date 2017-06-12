@@ -1,59 +1,33 @@
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context=".views.ingame.SmashitGameFragment"-->
-    <!--android:orientation="vertical">-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--tools:context=".views.ingame.SmashitGameFragment"--><!--android:orientation="vertical">-->
 
-    <!--<TextView-->
-        <!--android:id="@+id/ingame_textview_timer"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/info_smashit" />-->
+<!--<TextView--><!--android:id="@+id/ingame_textview_timer"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="@string/info_smashit" />-->
 
-    <!--<TextView-->
-        <!--android:id="@+id/ingame_textview_score"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/info_smashit" />-->
+<!--<TextView--><!--android:id="@+id/ingame_textview_score"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="@string/info_smashit" />-->
 
-    <!--<TextView-->
-        <!--android:id="@+id/ingame_textview_lives"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/info_smashit" />-->
+<!--<TextView--><!--android:id="@+id/ingame_textview_lives"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="@string/info_smashit" />-->
 
-    <!--<Button-->
-        <!--android:id="@+id/ingame_button_stop"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="stop"/>-->
+<!--<Button--><!--android:id="@+id/ingame_button_stop"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="stop"/>-->
 
 <!--</LinearLayout>-->
 
 <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.ingame.SmashitGameFragment"
-    android:background="@color/colorBackground">
-
-
-
+    android:background="@color/colorBackground"
+    tools:context=".views.ingame.SmashitGameFragment">
 
 
     <android.support.percent.PercentRelativeLayout
         android:id="@+id/fragment_smashit_game_relativelayout_frame"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent="50%"
-        app:layout_widthPercent="80%"
-        android:background="@color/colorSmashit"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
-
-
+        android:background="@color/colorSmashit"
+        app:layout_heightPercent="50%"
+        app:layout_widthPercent="80%">
 
 
         <ImageView
@@ -65,16 +39,17 @@
             android:src="@drawable/ic_hart"
             app:layout_heightPercent="35%"
             app:layout_widthPercent="30%" />
+
         <ImageView
             android:id="@+id/fragment_smashit_game_imageview_heart1"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/fragment_smashit_game_imageview_heart2"
             android:elevation="4dp"
             android:src="@drawable/ic_hart"
             app:layout_heightPercent="35%"
-            app:layout_widthPercent="30%"
-           android:layout_toStartOf="@id/fragment_smashit_game_imageview_heart2"/>
+            app:layout_widthPercent="30%" />
 
         <ImageView
             android:id="@+id/fragment_smashit_game_imageview_heart3"
@@ -89,83 +64,85 @@
 
 
     </android.support.percent.PercentRelativeLayout>
+
     <android.support.percent.PercentRelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_heightPercent="27%"
-        app:layout_widthPercent="30%"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        >
+        android:layout_marginTop="50dp"
+        app:layout_heightPercent="27%"
+        app:layout_widthPercent="30%">
+
         <ImageView
-            android:src="@drawable/ellipse_1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ImageView>
+            android:layout_height="match_parent"
+            android:src="@drawable/ellipse_1" />
+
         <TextView
             android:id="@+id/fragment_smashit_game_textview_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="21"
-            android:textSize="52sp"
             android:textColor="@color/colorText"
-            android:layout_centerInParent="true"/>
+            android:textSize="52sp" />
 
     </android.support.percent.PercentRelativeLayout>
 
     <!--<View-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:background="@drawable/circle"-->
-        <!--android:visibility="visible"-->
-        <!--android:lay="@id/fragment_smashit_game_relativelayout_frame"-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:background="@drawable/circle"-->
+    <!--android:visibility="visible"-->
+    <!--android:lay="@id/fragment_smashit_game_relativelayout_frame"-->
 
 
-        <!--android:layout_centerHorizontal="true"/>-->
+    <!--android:layout_centerHorizontal="true"/>-->
 
     <android.support.percent.PercentRelativeLayout
         android:id="@+id/fragment_smashit_game_relativelayout_timer"
-        android:background="@color/colorSmashit"
         android:layout_width="wrap_content"
-        android:paddingEnd="15dp"
-        android:paddingStart="15dp"
-        android:layout_below="@+id/fragment_smashit_game_relativelayout_frame"
+        android:layout_height="wrap_content"
         android:layout_alignEnd="@id/fragment_smashit_game_relativelayout_frame"
-        android:layout_height="wrap_content">
+        android:layout_below="@+id/fragment_smashit_game_relativelayout_frame"
+        android:background="@color/colorSmashit"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
+
         <TextView
+            android:id="@+id/fragment_smashit_game_textview_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="45sp"
+            android:text="01:20"
             android:textColor="@color/colorText"
-            android:text="01:20"/>
+            android:textSize="45sp" />
     </android.support.percent.PercentRelativeLayout>
+
     <android.support.percent.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent="100%"
-        app:layout_widthPercent="100%"
         android:layout_below="@id/fragment_smashit_game_relativelayout_frame"
-        >
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="100%">
+
         <Button
             android:id="@+id/fragment_smashit_game_button_stop"
-            android:text="stop"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="40%"
-            app:layout_widthPercent="20%"
             android:layout_centerInParent="true"
             android:layout_marginTop="30dp"
             android:background="@color/colorStop"
+            android:paddingEnd="40dp"
+            android:paddingStart="40dp"
+            android:text="stop"
             android:textColor="@color/colorText"
             android:textSize="32sp"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp"
+            app:layout_heightPercent="40%"
+            app:layout_widthPercent="20%"
 
             />
 
     </android.support.percent.PercentRelativeLayout>
-
-
 
 
 </android.support.percent.PercentRelativeLayout>

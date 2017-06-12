@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class MemoritGameFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_memorit_game, container, false);
 
         // Set the stop button to stop the game
-        view.findViewById(R.id.ingame_button_stop).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.fragment_memorit_game_button_stop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopGame();
@@ -74,10 +75,41 @@ public class MemoritGameFragment extends Fragment {
 
         startGameSteps(view); // configure the routine
         // initiate the textfields
-        ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
-        ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
+        ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_score)).setText("punten: " + mScore);
+        showLives(view);
 
+        if (mLives <= 3) {
+            view.findViewById(R.id.fragment_memorit_game_imageview_heart4).setVisibility(View.INVISIBLE);
+            view.findViewById(R.id.fragment_memorit_game_imageview_heart5).setVisibility(View.INVISIBLE);
+            if (mLives == 1) {
+                view.findViewById(R.id.fragment_memorit_game_imageview_heart2).setVisibility(View.INVISIBLE);
+                view.findViewById(R.id.fragment_memorit_game_imageview_heart3).setVisibility(View.INVISIBLE);
+            }
+        }
         return view;
+    }
+
+    private void showLives(View view) {
+        if (mLives >= 1)
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
+        else
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
+        if (mLives >= 2)
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_memorit);
+        else
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_leeg);
+        if (mLives >= 3)
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_memorit);
+        else
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_leeg);
+        if (mLives >= 4)
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_memorit);
+        else
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_leeg);
+        if (mLives >= 5)
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart5)).setImageResource(R.drawable.ic_hart_memorit);
+        else
+            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart5)).setImageResource(R.drawable.ic_hart_leeg);
     }
 
     // End the game
@@ -110,13 +142,13 @@ public class MemoritGameFragment extends Fragment {
     private void gameStep(int frame, View view) {
         if (frame * STEP_TIME > 3000) // after 3 seconds
         {
-            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000 - 3));
+            ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000 - 3));
 
             if (mIterator >= mSequence.size() && mUserinput) {
                 // If user has pressed all buttons or hasn't started yet
                 if (mSequence.size() > 0) { // not a new game
                     mScore++;
-                    ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
+                    ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_score)).setText("punten: " + mScore);
                 }
 
                 // Get a new random button that is different from the previous one
@@ -184,7 +216,7 @@ public class MemoritGameFragment extends Fragment {
                 }
             }
         } else
-            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
+            ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
     }
 
     // Lose a life
@@ -196,7 +228,7 @@ public class MemoritGameFragment extends Fragment {
         mLitButton = null; // no button is lit
         mLastFrameLit = frame; // set the lastframelit to this frame
         mUserinput = false; // Start the show sequence
-        ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
+        showLives(view);
         if (mLives <= 0)
             stopGame(); // Stop the game when run out of lives
         mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
