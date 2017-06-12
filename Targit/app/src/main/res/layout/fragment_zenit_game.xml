@@ -1,26 +1,88 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.ingame.ZenitGameFragment"
-    android:orientation="vertical">
+    android:background="@color/colorBackground"
+    tools:context=".views.ingame.SmashitGameFragment">
 
-    <TextView
-        android:id="@+id/ingame_textview_timer"
-        android:layout_width="match_parent"
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_zenit_game_relativelayout_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/colorZenit"
+        app:layout_heightPercent="50%"
+        app:layout_widthPercent="80%">
+
+        <TextView
+            android:id="@+id/fragment_zenit_game_textview_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="00:34"
+            android:textColor="@color/colorText"
+            android:textSize="62sp" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--score-->
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/info_zenit" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        app:layout_heightPercent="27%"
+        app:layout_widthPercent="30%" />
 
-    <TextView
-        android:id="@+id/ingame_textview_score"
-        android:layout_width="match_parent"
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/fragment_zenit_game_relativelayout_frame"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="100%">
+
+        <Button
+            android:id="@+id/fragment_zenit_game_button_stop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorStop"
+            android:paddingEnd="40dp"
+            android:paddingStart="40dp"
+            android:text="stop"
+            android:textColor="@color/colorText"
+            android:textSize="32sp"
+            app:layout_heightPercent="40%"
+            app:layout_widthPercent="20%" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/info_zenit" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        app:layout_heightPercent="27%"
+        app:layout_widthPercent="30%">
 
-    <Button
-        android:id="@+id/ingame_button_stop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="stop"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/zenit_ellipse" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/fragment_zenit_game_textview_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="21"
+            android:textColor="@color/colorText"
+            android:textSize="52sp" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+</android.support.percent.PercentRelativeLayout>

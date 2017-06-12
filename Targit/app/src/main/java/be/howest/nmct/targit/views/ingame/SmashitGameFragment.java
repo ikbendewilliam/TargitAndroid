@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -65,7 +66,7 @@ public class SmashitGameFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_smashit_game, container, false);
 
         // Set the stop button to stop the game
-        view.findViewById(R.id.ingame_button_stop).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.fragment_smashit_game_button_stop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopGame();
@@ -86,10 +87,26 @@ public class SmashitGameFragment extends Fragment {
 
         startGameSteps(view); // configure the routine
         // initiate the textfields
-        ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
-        ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
+        ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_score)).setText("punten: " + mScore);
+        showLives(view);
 
         return view;
+    }
+
+
+    private void showLives(View view) {
+        if (mLives >= 1)
+            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart);
+        else
+            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
+        if (mLives >= 2)
+            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart);
+        else
+            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_leeg);
+        if (mLives >= 3)
+            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart);
+        else
+            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_leeg);
     }
 
     // End the game
@@ -122,7 +139,7 @@ public class SmashitGameFragment extends Fragment {
     private void gameStep(int frame, View view) {
         if (frame * STEP_TIME > 3000) // after 3 seconds
         {
-            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000));
+            ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000));
 
             if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLitButton == null) {
                 // wait 200ms and no button is lit
@@ -154,7 +171,7 @@ public class SmashitGameFragment extends Fragment {
                             || (mDifficulty.equals(EXTRA_DIFFICULTY_HARD) && mWaitFrames > TIME_TO_PRESS_MIN_HARD / STEP_TIME))
                         mWaitFrames--; // decrement waitFrames
 
-                    ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
+                    ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_score)).setText("punten: " + mScore);
                     mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
                 }
                 for (ArduinoButton arduinoButton : mArduinoButtons) {
@@ -175,7 +192,7 @@ public class SmashitGameFragment extends Fragment {
             }
 
         } else
-            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
+            ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
     }
 
     // Lose a life
@@ -185,7 +202,7 @@ public class SmashitGameFragment extends Fragment {
         mLives--;
         mLitButton = null;
         mPressedOnFrame = frame;
-        ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
+        showLives(view);
         if (mLives <= 0)
             stopGame(); // Stop the game when run out of lives
         mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off

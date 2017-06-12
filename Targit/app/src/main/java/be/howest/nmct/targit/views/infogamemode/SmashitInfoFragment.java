@@ -1,11 +1,14 @@
 package be.howest.nmct.targit.views.infogamemode;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import be.howest.nmct.targit.R;
 
@@ -51,6 +54,14 @@ public class SmashitInfoFragment extends Fragment {
                     mListener.playSmashit(EXTRA_DIFFICULTY_HARD);
             }
         });
+
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
+        Button btnSnel = (Button)view.findViewById(R.id.smashit_info_button_play_hard);
+        btnSnel.setTypeface(font);
+        Button btnMatig = (Button)view.findViewById(R.id.smashit_info_button_play_medium);
+        btnMatig.setTypeface(font);
+        Button btnTraag = (Button)view.findViewById(R.id.smashit_info_button_play_easy);
+        btnTraag.setTypeface(font);
 
         return view;
     }

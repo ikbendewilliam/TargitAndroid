@@ -1,32 +1,171 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--tools:context=".views.ingame.memoritGameFragment"--><!--android:orientation="vertical">-->
+
+<!--<TextView--><!--android:id="@+id/ingame_textview_timer"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="@string/info_memorit" />-->
+
+<!--<TextView--><!--android:id="@+id/ingame_textview_score"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="@string/info_memorit" />-->
+
+<!--<TextView--><!--android:id="@+id/ingame_textview_lives"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="@string/info_memorit" />-->
+
+<!--<Button--><!--android:id="@+id/ingame_button_stop"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="stop"/>-->
+
+<!--</LinearLayout>-->
+
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.ingame.MemoritGameFragment"
-    android:orientation="vertical">
+    android:background="@color/colorBackground"
+    tools:context=".views.ingame.MemoritGameFragment">
 
-    <TextView
-        android:id="@+id/ingame_textview_timer"
-        android:layout_width="match_parent"
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_memorit_game_relativelayout_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/colorMemorit"
+        app:layout_heightPercent="50%"
+        app:layout_widthPercent="80%">
+
+
+        <ImageView
+            android:id="@+id/fragment_memorit_game_imageview_heart1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:elevation="10dp"
+            android:src="@drawable/ic_hart_memorit"
+            app:layout_heightPercent="35%"
+            app:layout_widthPercent="20%" />
+
+        <ImageView
+            android:id="@+id/fragment_memorit_game_imageview_heart2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/fragment_memorit_game_imageview_heart1"
+            android:elevation="4dp"
+            android:src="@drawable/ic_hart_memorit"
+            app:layout_heightPercent="35%"
+            app:layout_widthPercent="20%" />
+
+        <ImageView
+            android:id="@+id/fragment_memorit_game_imageview_heart3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/fragment_memorit_game_imageview_heart1"
+            android:elevation="4dp"
+            android:src="@drawable/ic_hart_memorit"
+            app:layout_heightPercent="35%"
+            app:layout_widthPercent="20%" />
+
+        <ImageView
+            android:id="@+id/fragment_memorit_game_imageview_heart4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/fragment_memorit_game_imageview_heart2"
+            android:elevation="4dp"
+            android:src="@drawable/ic_hart_memorit"
+            app:layout_heightPercent="35%"
+            app:layout_widthPercent="20%" />
+
+        <ImageView
+            android:id="@+id/fragment_memorit_game_imageview_heart5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/fragment_memorit_game_imageview_heart3"
+            android:elevation="4dp"
+            android:src="@drawable/ic_hart_memorit"
+            app:layout_heightPercent="35%"
+            app:layout_widthPercent="20%" />
+
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/info_memorit" />
+        android:layout_marginTop="48dp"
+        app:layout_heightPercent="27%"
+        app:layout_widthPercent="30%"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
-    <TextView
-        android:id="@+id/ingame_textview_score"
-        android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/memorit_ellipse" />
+
+        <TextView
+            android:id="@+id/fragment_memorit_game_textview_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="21"
+            android:textColor="@color/colorText"
+            android:textSize="52sp" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--<View-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:background="@drawable/circle"-->
+    <!--android:visibility="visible"-->
+    <!--android:lay="@id/fragment_memorit_game_relativelayout_frame"-->
+
+
+    <!--android:layout_centerHorizontal="true"/>-->
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_memorit_game_relativelayout_timer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/info_memorit" />
+        android:layout_alignEnd="@id/fragment_memorit_game_relativelayout_frame"
+        android:layout_below="@+id/fragment_memorit_game_relativelayout_frame"
+        android:background="@color/colorMemorit"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
 
-    <TextView
-        android:id="@+id/ingame_textview_lives"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/info_memorit" />
+        <TextView
+            android:id="@+id/fragment_memorit_game_textview_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01:20"
+            android:textColor="@color/colorText"
+            android:textSize="45sp" />
+    </android.support.percent.PercentRelativeLayout>
 
-    <Button
-        android:id="@+id/ingame_button_stop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="stop"/>
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/fragment_memorit_game_relativelayout_frame"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="100%">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/fragment_memorit_game_button_stop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorStop"
+            android:paddingEnd="40dp"
+            android:paddingStart="40dp"
+            android:text="stop"
+            android:textColor="@color/colorText"
+            android:textSize="32sp"
+            app:layout_heightPercent="40%"
+            app:layout_widthPercent="20%"
+
+            />
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+</android.support.percent.PercentRelativeLayout>
