@@ -23,6 +23,7 @@ import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES;
 
+// The activity that shows the info about the gameMode
 public class InfoGameModeActivity extends AppCompatActivity
         implements SmashitInfoFragment.OnSmashitInfoListener,
         ZenitInfoFragment.OnZenitInfoListener,
@@ -35,32 +36,42 @@ public class InfoGameModeActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // See if there is specified what to show
         if (getIntent().hasExtra(EXTRA_GAMEMODE)) {
             String gameMode = getIntent().getStringExtra(EXTRA_GAMEMODE);
 
             if (gameMode == null) {
+                // If the gamemode is empty, return to MainActivity
                 showActivity(MainActivity.class);
             } else if (gameMode.equals(EXTRA_GAMEMODE_SMASHIT)) {
-                showFragment(new SmashitInfoFragment());
+                showFragment(new SmashitInfoFragment()); // Show smashit's info
             } else if (gameMode.equals(EXTRA_GAMEMODE_ZENIT)) {
-                showFragment(new ZenitInfoFragment());
+                showFragment(new ZenitInfoFragment()); // Show zenit's info
             } else if (gameMode.equals(EXTRA_GAMEMODE_MEMORIT)) {
-                showFragment(new MemoritInfoFragment());
+                showFragment(new MemoritInfoFragment()); // Show memorit's info
             }
         }
     }
 
+    // show a fragment
+    // @param newFragment: the fragment to show
     private void showFragment(Fragment newFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout_in_info_game_modeactivity, newFragment);
         transaction.commit();
     }
 
+    // Change to an activity
+    // @param activity: the class of the activity you want to show
     void showActivity(Class activity) {
         Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
 
+    // show the gameActivity
+    // @param gameMode: the gameMode to play (as defined in Constants)
+    // @param extraName: the name of the other parameter (as defined in Constants)
+    // @param extraValue: the value of the other parameter (as defined in Constants)
     void showGameActivity(String gameMode, String extraName, int extraValue) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(EXTRA_GAME, gameMode);
@@ -68,6 +79,10 @@ public class InfoGameModeActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    // show the gameActivity
+    // @param gameMode: the gameMode to play (as defined in Constants)
+    // @param extraName: the name of the other parameter (as defined in Constants)
+    // @param extraValue: the value of the other parameter (as defined in Constants)
     void showGameActivity(String gameMode, String extraName, String extraValue) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(EXTRA_GAME, gameMode);

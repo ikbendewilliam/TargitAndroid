@@ -23,6 +23,7 @@ import static be.howest.nmct.targit.Constants.EXTRA_LIVES;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
 import static be.howest.nmct.targit.Constants.EXTRA_SCORE;
 
+// The activity that plays the game
 public class GameActivity extends AppCompatActivity
         implements ZenitGameFragment.OnZenitGameListener,
         MemoritGameFragment.OnMemoritGameListener,
@@ -35,34 +36,44 @@ public class GameActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // get the intent
         Intent intent = getIntent();
+        // If this intent is sent from info_game
         if (intent.hasExtra(EXTRA_GAME)) {
             String gameMode = intent.getStringExtra(EXTRA_GAME);
+            // get the mode from the intent
             if (gameMode == null) {
+                // If the gamemode is empty, return to MainActivity
                 showActivity(MainActivity.class);
             } else if (gameMode.equals(EXTRA_GAME_SMASHIT)) {
+                // Game mode Smashit
                 if (intent.hasExtra(EXTRA_DIFFICULTY)) {
                     String difficulty = intent.getStringExtra(EXTRA_DIFFICULTY);
                     if (difficulty == null) {
                         showActivity(MainActivity.class);
                     } else {
+                        // Start the game on the given difficulty
                         showFragment(SmashitGameFragment.newInstance(difficulty));
                     }
                 }
             } else if (gameMode.equals(EXTRA_GAME_ZENIT)) {
                 if (intent.hasExtra(EXTRA_DURATION)) {
                     int duration = intent.getIntExtra(EXTRA_DURATION, EXTRA_DURATION_SHORT);
+                    // Start the game with the given duration
                     showFragment(ZenitGameFragment.newInstance(duration));
                 }
             } else if (gameMode.equals(EXTRA_GAME_MEMORIT)) {
                 if (intent.hasExtra(EXTRA_LIVES)) {
                     int lives = intent.getIntExtra(EXTRA_LIVES, EXTRA_LIVES_MANY);
+                    // Start the game with the given lives
                     showFragment(MemoritGameFragment.newInstance(lives));
                 }
             }
         }
     }
 
+    // show a fragment
+    // @param newFragment: the fragment to show
     private void showFragment(Fragment newFragment) {
         //Log.i(Constants.TAG, "showFragment: " + newFragment.toString());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -70,11 +81,16 @@ public class GameActivity extends AppCompatActivity
         transaction.commit();
     }
 
+    // Change to an activity
+    // @param activity: the class of the activity you want to show
     void showActivity(Class activity) {
         Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
 
+    // @param gameMode: the mode that was played
+    // @param score: the achieved score
+    // @param category: The played category
     void showHighscoreActivity(String gameMode, int score, String category) {
         Intent intent = new Intent(this, HighscoreActivity.class);
         intent.putExtra(EXTRA_GAME, gameMode);
@@ -84,6 +100,10 @@ public class GameActivity extends AppCompatActivity
         //Log.i(Constants.TAG, "showHighscoreActivity: " + intent.getExtras().toString());
     }
 
+    // When the game is stopped
+    // @param gameMode: the mode that was played
+    // @param score: the achieved score
+    // @param category: The played category
     @Override
     public void stopGame(String gameMode, int score, String category) {
         showHighscoreActivity(gameMode, score, category);

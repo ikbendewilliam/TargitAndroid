@@ -13,10 +13,12 @@ import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MEDIUM;
 
+// The information shown for memorit
 public class MemoritInfoFragment extends Fragment {
 
-    private OnMemoritInfoListener mListener;
+    private OnMemoritInfoListener mListener; // A listener to start the game
 
+    // Required empty public constructor
     public MemoritInfoFragment() {
         // Required empty public constructor
     }
@@ -27,6 +29,7 @@ public class MemoritInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_memorit_info, container, false);
 
+        // Put listeners on every button that start the game
         view.findViewById(R.id.memorit_info_button_play_easy).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +55,7 @@ public class MemoritInfoFragment extends Fragment {
         return view;
     }
 
+    // A standard implementation when using a listener
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -69,6 +73,7 @@ public class MemoritInfoFragment extends Fragment {
         mListener = null;
     }
 
+    // The listener defined
     public interface OnMemoritInfoListener {
         void playMemorit(int cmdLives);
     }
