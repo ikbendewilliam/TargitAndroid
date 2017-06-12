@@ -71,6 +71,12 @@ public class ArduinoButton {
         return isConnecting;
     }
 
+    // @param connected: true if this device is connected
+    public void setConnecting(boolean connecting) {
+        // This means that the connecting-phase is done
+        isConnecting = connecting;
+    }
+
     // @return boolean: true if this device is currently enabled
     public boolean isEnabled() {
         return isEnabled;

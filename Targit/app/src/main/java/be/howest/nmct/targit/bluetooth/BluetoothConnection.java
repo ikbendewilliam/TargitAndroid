@@ -246,6 +246,8 @@ public class BluetoothConnection {
         for (ArduinoButton arduinoButton : mArduinoButtons) {
             // if this device is not connected and not connecting
             if (!(arduinoButton.isConnected() || arduinoButton.isConnecting())) {
+                // Start to connect to this device
+                arduinoButton.setConnecting(true);
                 // get the connection to connect to this device
                 mBluetooth.get(connection).connectToName(arduinoButton.getDeviceName());
                 // Log that we are attempting a new connection

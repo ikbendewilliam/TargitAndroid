@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Set the buttons to do their function
         findViewById(R.id.image_settings).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,13 +63,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Initialize bt connection
         mBluetoothConnection = BluetoothConnection.initiate(this);
-        if (mBluetoothConnection.getConnectedDevicesSize() == 0)
-            connectDevices();
+        if (mBluetoothConnection.getArduinoButtons().size() == 0) {
+            // if there are no devices yet
+            connectDevices(); // Connect to the devices
+        }
     }
 
     private void connectDevices() {
         for (String deviceName : Constants.DEVICE_NAMES) {
+            // Create an ArduinoButton for each devicename found in Constants
             mBluetoothConnection.addConnection(new ArduinoButton(deviceName), this);
         }
     }
@@ -87,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }

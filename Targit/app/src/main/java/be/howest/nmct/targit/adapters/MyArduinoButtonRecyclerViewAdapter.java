@@ -17,6 +17,9 @@ import be.howest.nmct.targit.models.ArduinoButton;
 
 import java.util.List;
 
+import static be.howest.nmct.targit.Constants.COMMAND_LED_FLASH_SLOW;
+import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
+
 // Class that fills recycleview in settings -> status (StatusFragment)
 public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyArduinoButtonRecyclerViewAdapter.ViewHolder> {
 
@@ -67,10 +70,8 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
                     mValues.get(holder.getAdapterPosition()).setEnabled(true);
                     // Get the BluetoothConnection manager
                     BluetoothConnection bluetoothConnection = BluetoothConnection.getBluetoothConnection();
-                    // Get the deviceName
-                    String deviceName = mValues.get(holder.getAdapterPosition()).getDeviceName();
-                    // Let this device  flash slowly
-                    bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_FLASH_SLOW);
+                    bluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all devices off so they flash in sync
+                    bluetoothConnection.sendMessageToAll(COMMAND_LED_FLASH_SLOW); // flash all leds
                 } else {
                     // Get the BluetoothConnection manager
                     BluetoothConnection bluetoothConnection = BluetoothConnection.getBluetoothConnection();

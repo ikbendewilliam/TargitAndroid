@@ -26,6 +26,8 @@ public class SettingsActivity extends AppCompatActivity{
         showFragment(new StatusFragment());
     }
 
+    // show a fragment
+    // @param newFragment: the fragment to show
     private void showFragment(Fragment newFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout_in_settingsactivity, newFragment);

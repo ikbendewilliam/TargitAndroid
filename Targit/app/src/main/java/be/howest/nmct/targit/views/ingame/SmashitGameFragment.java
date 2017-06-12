@@ -19,6 +19,7 @@ import be.howest.nmct.targit.bluetooth.BluetoothConnection;
 import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
 
+import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_EASY;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_HARD;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_MEDIUM;
@@ -32,27 +33,28 @@ import static be.howest.nmct.targit.Constants.TIME_TO_PRESS_MIN_MEDIUM;
 import static be.howest.nmct.targit.Constants.TIME_TO_PRESS_MIN_HARD;
 
 public class SmashitGameFragment extends Fragment {
-    String mDifficulty;
-    private int mWaitFrames;
+    String mDifficulty; // The difficulty
+    private int mWaitFrames; // How many frames the game should wait
     private int mFrameCounter = 0; // A counter to keep count the frames
-    private int mPressedOnFrame = 0;
-    private int mScore = 0;
-    private int mLives = 3;
-    private ArduinoButton mLitButton = null;
-    private ArduinoButton mPreviousLitButton = null;
-    private Timer mTimer = new Timer();
-    private List<ArduinoButton> mArduinoButtons;
-    private BluetoothConnection mBluetoothConnection;
+    private int mPressedOnFrame = 0; // When the button was pressed
+    private int mScore = 0; // The current score
+    private int mLives = 3; // The lives the player has left
+    private ArduinoButton mLitButton = null; // Current lit button
+    private ArduinoButton mPreviousLitButton = null; // The last lit button
+    private Timer mTimer = new Timer(); // The game timer
+    private List<ArduinoButton> mArduinoButtons; // All devices
+    private BluetoothConnection mBluetoothConnection; // The bt connection
 
-    private OnSmashitGameListener mListener;
+    private OnSmashitGameListener mListener; // Listener to stop the game
 
     public SmashitGameFragment() {
         // Required empty public constructor
     }
 
+    // Create an instance of this fragment
     public static SmashitGameFragment newInstance(String difficulty) {
         SmashitGameFragment fragment = new SmashitGameFragment();
-        fragment.mDifficulty = difficulty;
+        fragment.mDifficulty = difficulty; // Set the difficulty
         return fragment;
     }
 
@@ -62,13 +64,15 @@ public class SmashitGameFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_smashit_game, container, false);
 
+        // Set the stop button to stop the game
         view.findViewById(R.id.ingame_button_stop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mListener != null)
-                    mListener.stopGame(EXTRA_GAME_SMASHIT, 0, mDifficulty.toString());
+                stopGame();
             }
         });
+
+        // Set the time to press depending on the difficulty
         if (mDifficulty.equals(EXTRA_DIFFICULTY_EASY))
             mWaitFrames = TIME_TO_PRESS_MAX_EASY / STEP_TIME;
         else if (mDifficulty.equals(EXTRA_DIFFICULTY_MEDIUM))
@@ -76,24 +80,28 @@ public class SmashitGameFragment extends Fragment {
         else if (mDifficulty.equals(EXTRA_DIFFICULTY_HARD))
             mWaitFrames = TIME_TO_PRESS_MAX_HARD / STEP_TIME;
 
-        mBluetoothConnection = BluetoothConnection.getBluetoothConnection();
-        mArduinoButtons = mBluetoothConnection.getArduinoButtons();
-        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+        mBluetoothConnection = BluetoothConnection.getBluetoothConnection(); // Get the connection
+        mArduinoButtons = mBluetoothConnection.getArduinoButtons(); // get the devices
+        mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
 
-        startGameSteps(view);
+        startGameSteps(view); // configure the routine
+        // initiate the textfields
         ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
         ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
 
         return view;
     }
 
+    // End the game
     private void stopGame() {
         if (mListener != null)
-            mListener.stopGame(EXTRA_GAME_SMASHIT, mScore, mDifficulty);
-        mTimer.cancel();
-        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+            mListener.stopGame(EXTRA_GAME_SMASHIT, mScore, mDifficulty); // Send the highscore
+        mTimer.cancel(); // Stop the actual game
+        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
     }
 
+    // Initiate the routine
+    // this method create a loop for the method gameStep to run every STEP_TIME ms
     public void startGameSteps(final View view) {
         mTimer.cancel();
         mTimer = new Timer();
@@ -117,41 +125,52 @@ public class SmashitGameFragment extends Fragment {
             ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000));
 
             if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLitButton == null) {
+                // wait 200ms and no button is lit
+                // Get a new random button that is different from the previous one
                 int i = 0;
                 Random random = new Random();
                 do {
                     mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
-                    if (i++ > 100)
-                        break; // BREAK OUT OF LOOP
+                    if (i++ > 100) {
+                        stopGame();
+                        break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                    }
                 }
                 while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mPreviousLitButton == mLitButton);
+                // Get a new random button that is different from the previous one
 
-                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
-                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
-                //Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLitButton.getDeviceName());
+                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
+                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST); // Flash the button to press
             } else if (mLitButton != null) {
+                // If a button is lit
                 if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
-                    mPreviousLitButton = mLitButton;
-                    mLitButton = null;
-                    mScore++;
-                    mPressedOnFrame = frame;
+                    // If this button is pressed
+                    mPreviousLitButton = mLitButton; // set the previous button
+                    mLitButton = null; // unset the lit button
+                    mScore++; // increment score
+                    mPressedOnFrame = frame; // This frame it is pressed
                     if ((mDifficulty.equals(EXTRA_DIFFICULTY_EASY) && mWaitFrames > TIME_TO_PRESS_MIN_EASY / STEP_TIME)
                             || (mDifficulty.equals(EXTRA_DIFFICULTY_MEDIUM) && mWaitFrames > TIME_TO_PRESS_MIN_MEDIUM / STEP_TIME)
                             || (mDifficulty.equals(EXTRA_DIFFICULTY_HARD) && mWaitFrames > TIME_TO_PRESS_MIN_HARD / STEP_TIME))
-                        mWaitFrames--;
+                        mWaitFrames--; // decrement waitFrames
 
                     ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
-                    mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+                    mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
                 }
                 for (ArduinoButton arduinoButton : mArduinoButtons) {
+                    // Loop all buttons
                     if (mLitButton != null) {
-                        if (arduinoButton.isPressed() && arduinoButton.isConnected() && arduinoButton.isEnabled() && !arduinoButton.getDeviceName().equals(mLitButton.getDeviceName()))
+                        // If a button is lit
+                        if (arduinoButton.isPressed() && arduinoButton.isConnected() && arduinoButton.isEnabled() && !arduinoButton.getDeviceName().equals(mLitButton.getDeviceName())) {
+                            // if a wrong button is pressed
                             loseLive(frame, view);
+                        }
                     }
                 }
             }
 
             if (mWaitFrames + mPressedOnFrame < frame) {
+                // If you are to late to press the next button
                 loseLive(frame, view);
             }
 
@@ -159,13 +178,17 @@ public class SmashitGameFragment extends Fragment {
             ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
     }
 
+    // Lose a life
+    // @param frame: the current frame
+    // @param view: the current view
     private void loseLive(int frame, View view) {
         mLives--;
         mLitButton = null;
         mPressedOnFrame = frame;
         ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
         if (mLives <= 0)
-            stopGame();
+            stopGame(); // Stop the game when run out of lives
+        mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
     }
 
     @Override
