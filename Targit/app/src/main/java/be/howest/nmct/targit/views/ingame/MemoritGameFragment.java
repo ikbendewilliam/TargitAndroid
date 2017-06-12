@@ -1,7 +1,6 @@
 package be.howest.nmct.targit.views.ingame;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -18,11 +17,11 @@ import java.util.TimerTask;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.bluetooth.BluetoothConnection;
-import be.howest.nmct.targit.bluetooth.Constants;
+import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
-import be.howest.nmct.targit.views.infogamemode.MemoritInfoFragment;
 
-import static be.howest.nmct.targit.views.ingame.GameActivity.STEP_TIME;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
+import static be.howest.nmct.targit.Constants.STEP_TIME;
 
 public class MemoritGameFragment extends Fragment {
     private int mLastFrameLit = 0;
@@ -61,8 +60,7 @@ public class MemoritGameFragment extends Fragment {
         view.findViewById(R.id.ingame_button_stop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mListener != null)
-                    mListener.stopGame(GameActivity.EXTRA_GAME_MEMORIT, 0, "" + mCategory);
+                stopGame();
             }
         });
 
@@ -80,7 +78,7 @@ public class MemoritGameFragment extends Fragment {
 
     private void stopGame() {
         if (mListener != null)
-            mListener.stopGame(GameActivity.EXTRA_GAME_MEMORIT, mScore, "" + mCategory);
+            mListener.stopGame(EXTRA_GAME_MEMORIT, mScore, "" + mCategory);
         mTimer.cancel();
         mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
     }

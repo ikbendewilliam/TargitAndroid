@@ -1,7 +1,6 @@
 package be.howest.nmct.targit.views.infogamemode;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import be.howest.nmct.targit.R;
-import be.howest.nmct.targit.views.ingame.GameActivity;
+
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_EASY;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_HARD;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_MEDIUM;
 
 public class SmashitInfoFragment extends Fragment {
 
@@ -29,21 +31,21 @@ public class SmashitInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playSmashit(GameActivity.EXTRA_DIFFICULTY_EASY);
+                    mListener.playSmashit(EXTRA_DIFFICULTY_EASY);
             }
         });
         view.findViewById(R.id.smashit_info_button_play_medium).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playSmashit(GameActivity.EXTRA_DIFFICULTY_MEDIUM);
+                    mListener.playSmashit(EXTRA_DIFFICULTY_MEDIUM);
             }
         });
         view.findViewById(R.id.smashit_info_button_play_hard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playSmashit(GameActivity.EXTRA_DIFFICULTY_HARD);
+                    mListener.playSmashit(EXTRA_DIFFICULTY_HARD);
             }
         });
 

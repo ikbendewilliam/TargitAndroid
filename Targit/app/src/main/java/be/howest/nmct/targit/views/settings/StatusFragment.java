@@ -1,15 +1,10 @@
 package be.howest.nmct.targit.views.settings;
 
-import android.bluetooth.BluetoothDevice;
-import android.content.Context;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +18,12 @@ import java.util.TimerTask;
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.adapters.MyArduinoButtonRecyclerViewAdapter;
 import be.howest.nmct.targit.bluetooth.BluetoothConnection;
-import be.howest.nmct.targit.bluetooth.BluetoothConnection.OnConnectionListener;
-import be.howest.nmct.targit.bluetooth.Constants;
+import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
 
 
-public class StatusFragment extends Fragment implements OnConnectionListener {
+public class StatusFragment extends Fragment {
     private BluetoothConnection mBluetoothConnection;
-    private OnStatusFragmentInteractionListener mListener;
     private MyArduinoButtonRecyclerViewAdapter myArduinoButtonRecyclerViewAdapter;
     private int mConnected = 0;
     private int mPressed = 0;
@@ -54,7 +47,7 @@ public class StatusFragment extends Fragment implements OnConnectionListener {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.settings_status_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        myArduinoButtonRecyclerViewAdapter = new MyArduinoButtonRecyclerViewAdapter(mArduinoButtons, mListener);
+        myArduinoButtonRecyclerViewAdapter = new MyArduinoButtonRecyclerViewAdapter(mArduinoButtons);
         recyclerView.setAdapter(myArduinoButtonRecyclerViewAdapter);
 
         view.findViewById(R.id.settings_status_search).setOnClickListener(new View.OnClickListener() {
@@ -111,36 +104,5 @@ public class StatusFragment extends Fragment implements OnConnectionListener {
             }
         };
         timer.schedule(checkButtons, 0, 50);
-    }
-
-    @Override
-    public void incomingMessage(String deviceName, String message) {
-
-    }
-
-    @Override
-    public void finishConnecting(BluetoothDevice device) {
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnStatusFragmentInteractionListener) {
-            mListener = (OnStatusFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnStatusFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnStatusFragmentInteractionListener {
-        void onListFragmentInteraction();
     }
 }

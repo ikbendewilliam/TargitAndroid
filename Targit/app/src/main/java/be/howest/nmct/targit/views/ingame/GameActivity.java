@@ -11,27 +11,22 @@ import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.views.highscore.HighscoreActivity;
 import be.howest.nmct.targit.views.MainActivity;
 
+import static be.howest.nmct.targit.Constants.EXTRA_CATEGORY;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_SHORT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
+import static be.howest.nmct.targit.Constants.EXTRA_SCORE;
+
 public class GameActivity extends AppCompatActivity
         implements ZenitGameFragment.OnZenitGameListener,
         MemoritGameFragment.OnMemoritGameListener,
         SmashitGameFragment.OnSmashitGameListener {
-    public static String EXTRA_GAME = "gameMode";
-    public static String EXTRA_GAME_SMASHIT = "smashit";
-    public static String EXTRA_GAME_ZENIT = "zenit";
-    public static String EXTRA_GAME_MEMORIT = "memorit";
-    public static String EXTRA_DIFFICULTY = "difficulty";
-    public static String EXTRA_DIFFICULTY_EASY = "easy";
-    public static String EXTRA_DIFFICULTY_MEDIUM = "medium";
-    public static String EXTRA_DIFFICULTY_HARD = "hard";
-    public static String EXTRA_DURATION = "duration";
-    public static int EXTRA_DURATION_SHORT = 30;
-    public static int EXTRA_DURATION_MEDIUM = 60;
-    public static int EXTRA_DURATION_LONG = 90;
-    public static String EXTRA_LIVES = "lives";
-    public static int EXTRA_LIVES_MANY = 5;
-    public static int EXTRA_LIVES_MEDIUM = 3;
-    public static int EXTRA_LIVES_FEW = 1;
-    public static int STEP_TIME = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +77,9 @@ public class GameActivity extends AppCompatActivity
 
     void showHighscoreActivity(String gameMode, int score, String category) {
         Intent intent = new Intent(this, HighscoreActivity.class);
-        intent.putExtra(HighscoreActivity.EXTRA_GAME, gameMode);
-        intent.putExtra(HighscoreActivity.EXTRA_SCORE, score);
-        intent.putExtra(HighscoreActivity.EXTRA_CATEGORY, category);
+        intent.putExtra(EXTRA_GAME, gameMode);
+        intent.putExtra(EXTRA_SCORE, score);
+        intent.putExtra(EXTRA_CATEGORY, category);
         startActivity(intent);
         //Log.i(Constants.TAG, "showHighscoreActivity: " + intent.getExtras().toString());
     }

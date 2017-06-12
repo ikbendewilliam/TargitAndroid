@@ -1,7 +1,6 @@
 package be.howest.nmct.targit.views.infogamemode;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import be.howest.nmct.targit.R;
-import be.howest.nmct.targit.views.ingame.GameActivity;
+
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_LONG;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_MEDIUM;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_SHORT;
 
 public class ZenitInfoFragment extends Fragment {
 
@@ -29,21 +31,21 @@ public class ZenitInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playZenit(GameActivity.EXTRA_DURATION_SHORT);
+                    mListener.playZenit(EXTRA_DURATION_SHORT);
             }
         });
         view.findViewById(R.id.zenit_info_button_play_medium).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playZenit(GameActivity.EXTRA_DURATION_MEDIUM);
+                    mListener.playZenit(EXTRA_DURATION_MEDIUM);
             }
         });
         view.findViewById(R.id.zenit_info_button_play_long).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playZenit(GameActivity.EXTRA_DURATION_LONG);
+                    mListener.playZenit(EXTRA_DURATION_LONG);
             }
         });
 

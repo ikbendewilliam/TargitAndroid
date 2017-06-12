@@ -1,7 +1,6 @@
 package be.howest.nmct.targit.views.infogamemode;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import be.howest.nmct.targit.R;
-import be.howest.nmct.targit.views.ingame.GameActivity;
+
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MEDIUM;
 
 public class MemoritInfoFragment extends Fragment {
 
@@ -29,21 +31,21 @@ public class MemoritInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playMemorit(GameActivity.EXTRA_LIVES_MANY);
+                    mListener.playMemorit(EXTRA_LIVES_MANY);
             }
         });
         view.findViewById(R.id.memorit_info_button_play_medium).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playMemorit(GameActivity.EXTRA_LIVES_MEDIUM);
+                    mListener.playMemorit(EXTRA_LIVES_MEDIUM);
             }
         });
         view.findViewById(R.id.memorit_info_button_play_hard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playMemorit(GameActivity.EXTRA_LIVES_FEW);
+                    mListener.playMemorit(EXTRA_LIVES_FEW);
             }
         });
 

@@ -1,32 +1,25 @@
 package be.howest.nmct.targit.views.highscore;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import be.howest.nmct.targit.R;
-import be.howest.nmct.targit.bluetooth.Constants;
 import be.howest.nmct.targit.models.HighscoreEntry;
 import be.howest.nmct.targit.views.MainActivity;
-import be.howest.nmct.targit.views.ingame.GameActivity;
-import be.howest.nmct.targit.views.ingame.MemoritGameFragment;
-import be.howest.nmct.targit.views.ingame.SmashitGameFragment;
-import be.howest.nmct.targit.views.ingame.ZenitGameFragment;
+
+import static be.howest.nmct.targit.Constants.EXTRA_CATEGORY;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
+import static be.howest.nmct.targit.Constants.EXTRA_SCORE;
 
 public class HighscoreActivity extends AppCompatActivity {
-    public static String EXTRA_GAME = "gameMode";
-    public static String EXTRA_SCORE = "score";
-    public static String EXTRA_CATEGORY = "category";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +48,7 @@ public class HighscoreActivity extends AppCompatActivity {
 //                Log.i(Constants.TAG, "score: " + gameScore + " in " + gameMode + " " + category);
             showFragment(HighscoreFragment.newInstance(gameMode, category, new HighscoreEntry("new Player", gameScore)));
         } else {
-            showFragment(HighscoreFragment.newInstance(GameActivity.EXTRA_GAME_MEMORIT, GameActivity.EXTRA_LIVES_FEW, null));
+            showFragment(HighscoreFragment.newInstance(EXTRA_GAME_MEMORIT, EXTRA_LIVES_FEW, null));
         }
 
     }

@@ -1,11 +1,9 @@
 package be.howest.nmct.targit.views.ingame;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +16,12 @@ import java.util.TimerTask;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.bluetooth.BluetoothConnection;
-import be.howest.nmct.targit.bluetooth.Constants;
+import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
 
-import static android.content.Context.BLUETOOTH_SERVICE;
-import static be.howest.nmct.targit.views.ingame.GameActivity.STEP_TIME;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
+import static be.howest.nmct.targit.Constants.STEP_TIME;
+
 
 public class ZenitGameFragment extends Fragment {
     private int mDuration;
@@ -73,7 +72,7 @@ public class ZenitGameFragment extends Fragment {
 
     private void stopGame() {
         if (mListener != null)
-            mListener.stopGame(GameActivity.EXTRA_GAME_ZENIT, mScore, "" + mDuration);
+            mListener.stopGame(EXTRA_GAME_ZENIT, mScore, "" + mDuration);
         mTimer.cancel();
         mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
     }

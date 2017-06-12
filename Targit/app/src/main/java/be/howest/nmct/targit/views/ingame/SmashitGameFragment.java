@@ -1,28 +1,35 @@
 package be.howest.nmct.targit.views.ingame;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.bluetooth.BluetoothConnection;
-import be.howest.nmct.targit.bluetooth.Constants;
+import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
 
-import static be.howest.nmct.targit.views.ingame.GameActivity.STEP_TIME;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_EASY;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_HARD;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_MEDIUM;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
+import static be.howest.nmct.targit.Constants.STEP_TIME;
+import static be.howest.nmct.targit.Constants.TIME_TO_PRESS_MAX_EASY;
+import static be.howest.nmct.targit.Constants.TIME_TO_PRESS_MAX_MEDIUM;
+import static be.howest.nmct.targit.Constants.TIME_TO_PRESS_MAX_HARD;
+import static be.howest.nmct.targit.Constants.TIME_TO_PRESS_MIN_EASY;
+import static be.howest.nmct.targit.Constants.TIME_TO_PRESS_MIN_MEDIUM;
+import static be.howest.nmct.targit.Constants.TIME_TO_PRESS_MIN_HARD;
 
 public class SmashitGameFragment extends Fragment {
     String mDifficulty;
@@ -35,13 +42,6 @@ public class SmashitGameFragment extends Fragment {
     private Timer mTimer = new Timer();
     private List<ArduinoButton> mArduinoButtons;
     private BluetoothConnection mBluetoothConnection;
-
-    public static int TIME_TO_PRESS_MAX_EASY = 8000;
-    public static int TIME_TO_PRESS_MAX_MEDIUM = 6000;
-    public static int TIME_TO_PRESS_MAX_HARD = 3000;
-    public static int TIME_TO_PRESS_MIN_EASY = 3000;
-    public static int TIME_TO_PRESS_MIN_MEDIUM = 2000;
-    public static int TIME_TO_PRESS_MIN_HARD = 1000;
 
     private OnSmashitGameListener mListener;
 
@@ -65,14 +65,14 @@ public class SmashitGameFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.stopGame(GameActivity.EXTRA_GAME_SMASHIT, 0, mDifficulty.toString());
+                    mListener.stopGame(EXTRA_GAME_SMASHIT, 0, mDifficulty.toString());
             }
         });
-        if (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_EASY))
+        if (mDifficulty.equals(EXTRA_DIFFICULTY_EASY))
             mWaitFrames = TIME_TO_PRESS_MAX_EASY / STEP_TIME;
-        else if (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_MEDIUM))
+        else if (mDifficulty.equals(EXTRA_DIFFICULTY_MEDIUM))
             mWaitFrames = TIME_TO_PRESS_MAX_MEDIUM / STEP_TIME;
-        else if (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_HARD))
+        else if (mDifficulty.equals(EXTRA_DIFFICULTY_HARD))
             mWaitFrames = TIME_TO_PRESS_MAX_HARD / STEP_TIME;
 
         mBluetoothConnection = BluetoothConnection.getBluetoothConnection();
@@ -88,7 +88,7 @@ public class SmashitGameFragment extends Fragment {
 
     private void stopGame() {
         if (mListener != null)
-            mListener.stopGame(GameActivity.EXTRA_GAME_SMASHIT, mScore, mDifficulty);
+            mListener.stopGame(EXTRA_GAME_SMASHIT, mScore, mDifficulty);
         mTimer.cancel();
         mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
     }
@@ -128,9 +128,9 @@ public class SmashitGameFragment extends Fragment {
                     mLitButton = null;
                     mScore++;
                     mPressedOnFrame = frame;
-                    if ((mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_EASY) && mWaitFrames > TIME_TO_PRESS_MIN_EASY / STEP_TIME)
-                            || (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_MEDIUM) && mWaitFrames > TIME_TO_PRESS_MIN_MEDIUM / STEP_TIME)
-                            || (mDifficulty.equals(GameActivity.EXTRA_DIFFICULTY_HARD) && mWaitFrames > TIME_TO_PRESS_MIN_HARD / STEP_TIME))
+                    if ((mDifficulty.equals(EXTRA_DIFFICULTY_EASY) && mWaitFrames > TIME_TO_PRESS_MIN_EASY / STEP_TIME)
+                            || (mDifficulty.equals(EXTRA_DIFFICULTY_MEDIUM) && mWaitFrames > TIME_TO_PRESS_MIN_MEDIUM / STEP_TIME)
+                            || (mDifficulty.equals(EXTRA_DIFFICULTY_HARD) && mWaitFrames > TIME_TO_PRESS_MIN_HARD / STEP_TIME))
                         mWaitFrames--;
 
                     ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
