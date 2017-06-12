@@ -1,32 +1,50 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context=".views.ingame.SmashitGameFragment"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/ingame_textview_timer"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/info_smashit" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/ingame_textview_score"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/info_smashit" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/ingame_textview_lives"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/info_smashit" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/ingame_button_stop"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="stop"/>-->
+
+<!--</LinearLayout>-->
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.ingame.SmashitGameFragment"
-    android:orientation="vertical">
+    android:background="@color/colorBackground">
 
-    <TextView
-        android:id="@+id/ingame_textview_timer"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/info_smashit" />
+        android:layout_height="match_parent"
+        android:background="@color/colorSmashitSecondary"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="300dp"></RelativeLayout>
 
-    <TextView
-        android:id="@+id/ingame_textview_score"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/info_smashit" />
-
-    <TextView
-        android:id="@+id/ingame_textview_lives"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/info_smashit" />
-
-    <Button
-        android:id="@+id/ingame_button_stop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="stop"/>
-
-</LinearLayout>
+    </RelativeLayout>
