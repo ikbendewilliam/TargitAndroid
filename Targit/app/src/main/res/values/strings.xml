@@ -5,7 +5,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_highscore">HighscoreActivity</string>
+    <string name="title_activity_highscore">HiGHSCORES</string>
     <string name="title_activity_info_game_mode">InfoGameModeActivity</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="info_memorit">Memorit</string>
