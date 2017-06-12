@@ -1,17 +1,14 @@
 package be.howest.nmct.targit.views;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.bluetooth.BluetoothConnection;
@@ -44,6 +41,12 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
                 showActivity(SettingsActivity.class);
             }
         });
+
+        //instellen font highscores
+        Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
+        TextView txtHighscores = (TextView)findViewById(R.id.activity_main_button_highscore);
+        txtHighscores.setTypeface(font);
+
         /*
         findViewById(R.id.button_info_smashit).setOnClickListener(new View.OnClickListener() {
             @Override
