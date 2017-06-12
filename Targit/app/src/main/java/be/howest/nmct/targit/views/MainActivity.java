@@ -43,36 +43,36 @@ public class MainActivity extends AppCompatActivity implements BluetoothConnecti
         });
 
         //instellen font highscores
-        Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
-        TextView txtHighscores = (TextView)findViewById(R.id.activity_main_button_highscore);
-        txtHighscores.setTypeface(font);
+//        Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
+//        TextView txtHighscores = (TextView)findViewById(R.id.activity_main_button_highscore);
+//        txtHighscores.setTypeface(font);
 
-        /*
-        findViewById(R.id.button_info_smashit).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.activity_main_imageview_smashit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInfoGameModeActivity(InfoGameModeActivity.EXTRA_GAMEMODE_SMASHIT);
             }
         });
-        findViewById(R.id.button_info_zenit).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.activity_main_imageview_zenit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInfoGameModeActivity(InfoGameModeActivity.EXTRA_GAMEMODE_ZENIT);
             }
         });
-        findViewById(R.id.button_info_memorit).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.activity_main_imageview_memorit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInfoGameModeActivity(InfoGameModeActivity.EXTRA_GAMEMODE_MEMORIT);
             }
         });
-        findViewById(R.id.button_highscore).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showActivity(HighscoreActivity.class);
-            }
-        });
-        */
+//        findViewById(R.id.button_highscore).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showActivity(HighscoreActivity.class);
+//            }
+//        });
+
 
         mBluetoothConnection = BluetoothConnection.initiate(this, this);
         try{
