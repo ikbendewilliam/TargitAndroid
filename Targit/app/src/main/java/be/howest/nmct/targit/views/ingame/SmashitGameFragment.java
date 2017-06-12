@@ -34,11 +34,12 @@ import static be.howest.nmct.targit.Constants.TIME_TO_PRESS_MIN_HARD;
 public class SmashitGameFragment extends Fragment {
     String mDifficulty;
     private int mWaitFrames;
-    private int frameCounter = 0;
+    private int mFrameCounter = 0; // A counter to keep count the frames
     private int mPressedOnFrame = 0;
     private int mScore = 0;
     private int mLives = 3;
     private ArduinoButton mLitButton = null;
+    private ArduinoButton mPreviousLitButton = null;
     private Timer mTimer = new Timer();
     private List<ArduinoButton> mArduinoButtons;
     private BluetoothConnection mBluetoothConnection;
@@ -94,18 +95,20 @@ public class SmashitGameFragment extends Fragment {
     }
 
     public void startGameSteps(final View view) {
+        mTimer.cancel();
+        mTimer = new Timer();
         final Handler handler = new Handler();
         TimerTask gamestep = new TimerTask() {
             @Override
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        gameStep(frameCounter++, view);
+                        gameStep(mFrameCounter++, view);
                     }
                 });
             }
         };
-        mTimer.schedule(gamestep, 0, (long) STEP_TIME);
+        mTimer.scheduleAtFixedRate(gamestep, (long) STEP_TIME, (long) STEP_TIME);
     }
 
     private void gameStep(int frame, View view) {
@@ -114,17 +117,21 @@ public class SmashitGameFragment extends Fragment {
             ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000));
 
             if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLitButton == null) {
+                int i = 0;
                 Random random = new Random();
                 do {
                     mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                    if (i++ > 100)
+                        break; // BREAK OUT OF LOOP
                 }
-                while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mLitButton.isPressed());
+                while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mPreviousLitButton == mLitButton);
 
                 mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
                 mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST);
                 //Log.i(Constants.TAG_MESSAGE, "gameStep: turn on " + mLitButton.getDeviceName());
             } else if (mLitButton != null) {
                 if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
+                    mPreviousLitButton = mLitButton;
                     mLitButton = null;
                     mScore++;
                     mPressedOnFrame = frame;

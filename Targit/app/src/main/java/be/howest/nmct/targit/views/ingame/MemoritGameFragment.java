@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,25 +21,27 @@ import be.howest.nmct.targit.bluetooth.BluetoothConnection;
 import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
 
+import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
+import static be.howest.nmct.targit.Constants.COMMAND_LED_ON;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.STEP_TIME;
 
 public class MemoritGameFragment extends Fragment {
-    private int mLastFrameLit = 0;
-    private int mFrameCounter = 0;
-    private int mScore = 0;
-    private int mCategory;
-    private int mLives;
-    private int mIterator = 0;
-    private boolean mUserinput = true;
-    private boolean mIsPressed = false;
-    private ArduinoButton mLitButton = null;
-    private Timer mTimer = new Timer();
-    private List<ArduinoButton> mArduinoButtons;
-    private BluetoothConnection mBluetoothConnection;
-    private List<ArduinoButton> mSequence = new ArrayList<>();
+    private int mLastFrameLit = 0; // The frame when the last device lit up
+    private int mFrameCounter = 0; // A counter to keep count the frames
+    private int mScore = 0; // The current score
+    private int mCategory; // The played category
+    private int mLives; // Current lives
+    private int mIterator = 0; // An iterator to keep track of which button to press/which device to lit up
+    private boolean mUserinput = true; // If it is the user its turn
+    private boolean mIsPressed = false; // If a button is being pressed
+    private ArduinoButton mLitButton = null; // Which button to lit
+    private Timer mTimer = new Timer(); // A timer to execute the game
+    private List<ArduinoButton> mArduinoButtons; // A list of the devices
+    private BluetoothConnection mBluetoothConnection; // the connection with bt
+    private List<ArduinoButton> mSequence = new ArrayList<>(); // The given sequence
 
-    private OnMemoritGameListener mListener;
+    private OnMemoritGameListener mListener; // A listener to stop the game
 
     public MemoritGameFragment() {
         // Required empty public constructor
@@ -57,6 +60,7 @@ public class MemoritGameFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_memorit_game, container, false);
 
+        // Set the stop button to stop the game
         view.findViewById(R.id.ingame_button_stop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,26 +68,31 @@ public class MemoritGameFragment extends Fragment {
             }
         });
 
-        mBluetoothConnection = BluetoothConnection.getBluetoothConnection();
-        mArduinoButtons = mBluetoothConnection.getArduinoButtons();
-        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+        mBluetoothConnection = BluetoothConnection.getBluetoothConnection(); // Get the connection
+        mArduinoButtons = mBluetoothConnection.getArduinoButtons(); // get the devices
+        mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
 
-        startGameSteps(view);
+        startGameSteps(view); // configure the routine
+        // initiate the textfields
         ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
         ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
 
         return view;
     }
 
-
+    // End the game
     private void stopGame() {
         if (mListener != null)
-            mListener.stopGame(EXTRA_GAME_MEMORIT, mScore, "" + mCategory);
-        mTimer.cancel();
-        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+            mListener.stopGame(EXTRA_GAME_MEMORIT, mScore, "" + mCategory); // Send the highscore
+        mTimer.cancel(); // Stop the actual game
+        mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // Turn all leds off
     }
 
+    // Initiate the routine
+    // this method create a loop for the method gameStep to run every STEP_TIME ms
     public void startGameSteps(final View view) {
+        mTimer.cancel();
+        mTimer = new Timer();
         final Handler handler = new Handler();
         TimerTask gamestep = new TimerTask() {
             @Override
@@ -95,79 +104,102 @@ public class MemoritGameFragment extends Fragment {
                 });
             }
         };
-        mTimer.schedule(gamestep, 0, (long) STEP_TIME);
+        mTimer.scheduleAtFixedRate(gamestep, (long) STEP_TIME, (long) STEP_TIME);
     }
 
     private void gameStep(int frame, View view) {
         if (frame * STEP_TIME > 3000) // after 3 seconds
         {
-            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000));
+            ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000 - 3));
 
             if (mIterator >= mSequence.size() && mUserinput) {
-                if (mSequence.size() > 0) {
+                // If user has pressed all buttons or hasn't started yet
+                if (mSequence.size() > 0) { // not a new game
                     mScore++;
                     ((TextView) view.findViewById(R.id.ingame_textview_score)).setText("punten: " + mScore);
                 }
 
+                // Get a new random button that is different from the previous one
+                ArduinoButton arduinoButton;
+                int i = 0;
                 Random random = new Random();
                 do {
-                    mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                    arduinoButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                    if (i++ > 100) {
+                        stopGame();
+                        break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                    }
                 }
-                while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mLitButton.isPressed());
+                while (!arduinoButton.isEnabled() || !arduinoButton.isConnected() || arduinoButton == mLitButton);
+                // Get a new random button that is different from the previous one
 
-                mSequence.add(mLitButton);
-                mIterator = 0;
-                mLitButton = null;
-                mLastFrameLit = frame;
-                mUserinput = false;
+                mSequence.add(arduinoButton); // Add this to the sequence
+                mIterator = 0; // reset iterator
+                mLitButton = null; // Set the lit button to null (no button is now lit)
+                mLastFrameLit = frame; // set the lastframelit to this frame
+                mUserinput = false; // Start the automated "show"
             } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 1000 && mIterator == 0 && !mUserinput) {
-                mLastFrameLit = frame;
-                mLitButton = mSequence.get(mIterator);
-                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_ON);
+                // if no button is lit, and a second has passed, the iterator is 0 and the user isn't pressing buttons
+                mLastFrameLit = frame; // set the lastframelit to this frame
+                mLitButton = mSequence.get(mIterator); // set the lit button to the first one
+                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), COMMAND_LED_ON); // Turn the led on this device on
             } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 200 && mIterator != 0 && mIterator < mSequence.size() && !mUserinput) {
-                mLastFrameLit = frame;
-                mLitButton = mSequence.get(mIterator);
-                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_ON);
+                // if no button is lit, and a 200 ms has passed, the iterator is not the max and the user isn't pressing buttons
+                mLastFrameLit = frame; // set the lastframelit to this frame
+                mLitButton = mSequence.get(mIterator); // set the lit button to the next one
+                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), COMMAND_LED_ON); // Turn the led on this device on
             } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 200 && mIterator >= mSequence.size() && !mUserinput) {
-                mLastFrameLit = frame;
-                mUserinput = true;
-                mIterator = 0;
-                mLitButton = mSequence.get(mIterator);
+                // if no button is lit, and a 200 ms has passed, the iterator is or is bigger than the max and the user isn't pressing buttons
+                mLastFrameLit = frame; // set the lastframelit to this frame
+                mUserinput = true; // Start the users play
+                mIterator = 0; // reset iterator
+                mLitButton = mSequence.get(mIterator); // Wait for the user to press the first button
             } else if (mLitButton != null && (frame - mLastFrameLit) * STEP_TIME > 1500 && mIterator < mSequence.size() && !mUserinput) {
-                mLastFrameLit = frame;
-                mLitButton = null;
-                mIterator++;
-                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+                // if a button is lit, and 1.5sec has passed, the iterator is not the max and the user isn't pressing buttons
+                mLastFrameLit = frame; // set the lastframelit to this frame
+                mLitButton = null; // No button is lit > mLitButton = null
+                mIterator++; // increment iterator
+                mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // Turn all leds off
             } else if (mUserinput && mIterator < mSequence.size()) {
-                mLitButton = mSequence.get(mIterator);
+                // If it's the users turn and he hasn't pressed all buttons
+                mLitButton = mSequence.get(mIterator); // set the to check button
 
                 if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
-                    mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_ON);
-                    mIsPressed = true;
+                    // If this button is pressed and can be pressed
+                    mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), COMMAND_LED_ON); // Turn this button on
+                    mIsPressed = true; // Remember that it is pressed
                 } else if (mIsPressed && !mLitButton.isPressed()) {
-                    mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
-                    mIterator++;
-                    mIsPressed = false;
+                    // If the button is released
+                    mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
+                    mIterator++; // increment the iterator
+                    mIsPressed = false; // the button isn't pressed anymore
                 }
 
                 for (ArduinoButton arduinoButton : mArduinoButtons) {
-                    if (arduinoButton.isPressed() && arduinoButton.isConnected() && arduinoButton.isEnabled() && !arduinoButton.getDeviceName().equals(mLitButton.getDeviceName()))
-                        loseLive(frame, view);
+                    // loop through all buttons
+                    if (arduinoButton.isPressed() && arduinoButton.isConnected() && arduinoButton.isEnabled() && !arduinoButton.getDeviceName().equals(mLitButton.getDeviceName())) {
+                        // Check to see if the wrong button is pressed
+                        loseLife(frame, view); // Lose a life and restart the sequance show
+                    }
                 }
             }
         } else
             ((TextView) view.findViewById(R.id.ingame_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
     }
 
-    private void loseLive(int frame, View view) {
-        mLives--;
-        mIterator = 0;
-        mLitButton = null;
-        mLastFrameLit = frame;
-        mUserinput = false;
+    // Lose a life
+    // @param frame: the current frame
+    // @param view: the current view
+    private void loseLife(int frame, View view) {
+        mLives--; // decrement a life
+        mIterator = 0; // reset iterator
+        mLitButton = null; // no button is lit
+        mLastFrameLit = frame; // set the lastframelit to this frame
+        mUserinput = false; // Start the show sequence
         ((TextView) view.findViewById(R.id.ingame_textview_lives)).setText("levens: " + mLives);
         if (mLives <= 0)
-            stopGame();
+            stopGame(); // Stop the game when run out of lives
+        mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
     }
 
     @Override
@@ -179,18 +211,6 @@ public class MemoritGameFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnMemoritGameListener");
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        startGameSteps(getView());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mTimer.cancel();
     }
 
     @Override
