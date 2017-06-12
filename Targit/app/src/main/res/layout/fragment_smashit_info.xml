@@ -83,25 +83,30 @@
             android:layout_height="0dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/titel_smashit_info"
-            app:layout_heightPercent="24%"/>
+            app:layout_heightPercent="24%"
+            android:layout_marginTop="-10dp"/>
 
 
         <Button
             android:id="@+id/smashit_info_button_play_easy"
-            android:layout_width="250dp"
-            android:layout_height="80dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="60%"
+            app:layout_heightPercent="14%"
             android:layout_above="@+id/smashit_info_button_play_medium"
             android:layout_alignStart="@+id/smashit_info_button_play_hard"
             android:layout_marginTop="23.3dp"
             android:background="@color/colorMakkelijk"
             android:text="TRAAG"
             android:textColor="@color/colorWhite"
-            android:textSize="40sp"/>
+            android:textSize="30sp"/>
 
         <Button
             android:id="@+id/smashit_info_button_play_medium"
-            android:layout_width="250dp"
-            android:layout_height="80dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="60%"
+            app:layout_heightPercent="14%"
             android:layout_above="@+id/smashit_info_button_play_hard"
             android:layout_alignStart="@+id/smashit_info_button_play_hard"
             android:layout_marginTop="23.3dp"
@@ -109,12 +114,14 @@
             android:text="MATiG"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
-            android:textSize="40sp"/>
+            android:textSize="30sp"/>
 
         <Button
             android:id="@+id/smashit_info_button_play_hard"
-            android:layout_width="250dp"
-            android:layout_height="80dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="60%"
+            app:layout_heightPercent="14%"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp"
@@ -123,7 +130,7 @@
             android:background="@color/colorMoeilijk"
             android:text="SNEL"
             android:textColor="@color/colorWhite"
-            android:textSize="40sp" />
+            android:textSize="30sp" />
     </android.support.percent.PercentRelativeLayout>
 
 </android.support.percent.PercentRelativeLayout>
