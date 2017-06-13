@@ -89,7 +89,7 @@ public class StatusFragment extends Fragment {
                                 buttonPressed = true;
                         }
 
-                        if (mConnected != connected || mPressed != pressed || buttonPressed != mButtonPressed) {
+                        if (mConnected != connected || mConnecting != connecting || mPressed != pressed || buttonPressed != mButtonPressed) {
                             // If changes occur, update the ui
                             TextView textview_connected_devices = (TextView) view.findViewById(R.id.settings_status_number);
                             TextView textview_clicked_buttons = (TextView) view.findViewById(R.id.settings_status_pressed);

@@ -70,7 +70,7 @@ public class ZenitGameFragment extends Fragment {
 
         startGameSteps(view); // configure the routine
         // initiate the textfield
-        ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_score)).setText("punten: " + mScore);
+        ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_score)).setText("" + mScore);
 
         return view;
     }
@@ -105,7 +105,16 @@ public class ZenitGameFragment extends Fragment {
     private void gameStep(int frame, View view) {
         if (frame * STEP_TIME > 3000) // after 3 seconds
         {
-            ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText("tijd over: " + ((mMaxFrame - frame) * STEP_TIME / 1000));
+            String time;
+            if (((mMaxFrame - frame) * STEP_TIME / 1000) / 60 < 10)
+                time = "0" + ((mMaxFrame - frame) * STEP_TIME / 1000) / 60;
+            else
+                time = "" + ((mMaxFrame - frame) * STEP_TIME / 1000) / 60;
+            if (((mMaxFrame - frame) * STEP_TIME / 1000 - 3) % 60 < 10)
+                time += ":0" + ((mMaxFrame - frame) * STEP_TIME / 1000) % 60;
+            else
+                time += ":" + ((mMaxFrame - frame) * STEP_TIME / 1000) % 60;
+            ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText(time);
 
             if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLitButton == null) {
                 // wait 200ms and no button is lit
@@ -132,7 +141,7 @@ public class ZenitGameFragment extends Fragment {
                     mLitButton = null; // unset the lit button
                     mScore++; // increment score
                     mPressedOnFrame = frame; // This frame it is pressed
-                    ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_score)).setText("punten: " + mScore);
+                    ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_score)).setText("" + mScore);
                     mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
                 }
             }
@@ -142,7 +151,7 @@ public class ZenitGameFragment extends Fragment {
                 stopGame();
             }
         } else
-            ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
+            ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
     }
 
     @Override

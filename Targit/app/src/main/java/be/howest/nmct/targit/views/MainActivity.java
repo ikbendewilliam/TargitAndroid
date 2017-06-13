@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
         // Set the buttons to do their function
-//        findViewById(R.id.image_settings).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showActivity(SettingsActivity.class);
-//            }
-//        });
+        findViewById(R.id.activity_main_imageview_settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showActivity(SettingsActivity.class);
+            }
+        });
 
         //instellen font highscores
 //        Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");

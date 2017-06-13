@@ -129,15 +129,15 @@ public class HighscoreFragment extends Fragment {
             mHighscoreEntries.add(mNewEntry);
         } else {
             // if the list is full, replace the last entry
-            mHighscoreEntries.set(10, mNewEntry);
+            mHighscoreEntries.set(9, mNewEntry);
         }
         // Go through the list, starting at the almost last place
         for (int i = mHighscoreEntries.size() - 2; i >= 0; i--) {
             // Check if this score is less than the new
             if (mHighscoreEntries.get(i).getScore() < mNewEntry.getScore()) {
                 // Swap the scores
-                HighscoreEntry temp = mHighscoreEntries.get(i - 1);
-                mHighscoreEntries.set(i - 1, mHighscoreEntries.get(i));
+                HighscoreEntry temp = mHighscoreEntries.get(i + 1);
+                mHighscoreEntries.set(i + 1, mHighscoreEntries.get(i));
                 mHighscoreEntries.set(i, temp);
             }
         }
