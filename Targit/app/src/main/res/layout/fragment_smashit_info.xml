@@ -52,7 +52,7 @@
                 android:src="@drawable/ic_back_white"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
-                android:background="@color/colorBackground"/>
+                android:background="@null"/>
 
             <ImageView
                 android:id="@+id/imageView"

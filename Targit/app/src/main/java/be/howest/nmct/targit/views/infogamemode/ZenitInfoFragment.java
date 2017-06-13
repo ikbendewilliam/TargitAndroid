@@ -55,6 +55,8 @@ public class ZenitInfoFragment extends Fragment {
             }
         });
 
+
+        //instellen fonts
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         Button btnSnel = (Button)view.findViewById(R.id.zenit_info_button_play_long);
         btnSnel.setTypeface(font);
