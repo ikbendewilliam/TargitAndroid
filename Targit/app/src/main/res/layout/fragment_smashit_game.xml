@@ -73,8 +73,7 @@
             android:elevation="4dp"
             android:src="@drawable/ic_hart"
             app:layout_heightPercent="35%"
-            app:layout_widthPercent="30%"
-           android:ba="@id/fragment_smashit_game_imageview_heart2"/>
+            app:layout_widthPercent="30%" />
 
         <ImageView
             android:id="@+id/fragment_smashit_game_imageview_heart3"
