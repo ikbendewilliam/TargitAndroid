@@ -11,12 +11,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import be.howest.nmct.targit.R;
-import be.howest.nmct.targit.views.ingame.GameActivity;
 
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_EASY;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_HARD;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_MEDIUM;
+
+// The information shown for smashit
 public class SmashitInfoFragment extends Fragment {
 
-    private OnSmashitInfoListener mListener;
+    private OnSmashitInfoListener mListener; // A listener to start the game
 
+    // Required empty public constructor
     public SmashitInfoFragment() {
         // Required empty public constructor
     }
@@ -27,25 +32,26 @@ public class SmashitInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_smashit_info, container, false);
 
+        // Put listeners on every button that start the game
         view.findViewById(R.id.smashit_info_button_play_easy).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playSmashit(GameActivity.EXTRA_DIFFICULTY_EASY);
+                    mListener.playSmashit(EXTRA_DIFFICULTY_EASY);
             }
         });
         view.findViewById(R.id.smashit_info_button_play_medium).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playSmashit(GameActivity.EXTRA_DIFFICULTY_MEDIUM);
+                    mListener.playSmashit(EXTRA_DIFFICULTY_MEDIUM);
             }
         });
         view.findViewById(R.id.smashit_info_button_play_hard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playSmashit(GameActivity.EXTRA_DIFFICULTY_HARD);
+                    mListener.playSmashit(EXTRA_DIFFICULTY_HARD);
             }
         });
 
@@ -60,6 +66,7 @@ public class SmashitInfoFragment extends Fragment {
         return view;
     }
 
+    // A standard implementation when using a listener
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -77,6 +84,7 @@ public class SmashitInfoFragment extends Fragment {
         mListener = null;
     }
 
+    // The listener defined
     public interface OnSmashitInfoListener {
         void playSmashit(String cmdDifficulty);
     }

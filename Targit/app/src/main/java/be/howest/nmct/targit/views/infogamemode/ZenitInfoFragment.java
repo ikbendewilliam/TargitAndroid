@@ -11,12 +11,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import be.howest.nmct.targit.R;
-import be.howest.nmct.targit.views.ingame.GameActivity;
 
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_LONG;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_MEDIUM;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_SHORT;
+
+// The information shown for zenit
 public class ZenitInfoFragment extends Fragment {
 
-    private OnZenitInfoListener mListener;
+    private OnZenitInfoListener mListener; // A listener to start the game
 
+    // Required empty public constructor
     public ZenitInfoFragment() {
         // Required empty public constructor
     }
@@ -27,25 +32,26 @@ public class ZenitInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_zenit_info, container, false);
 
+        // Put listeners on every button that start the game
         view.findViewById(R.id.zenit_info_button_play_short).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playZenit(GameActivity.EXTRA_DURATION_SHORT);
+                    mListener.playZenit(EXTRA_DURATION_SHORT);
             }
         });
         view.findViewById(R.id.zenit_info_button_play_medium).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playZenit(GameActivity.EXTRA_DURATION_MEDIUM);
+                    mListener.playZenit(EXTRA_DURATION_MEDIUM);
             }
         });
         view.findViewById(R.id.zenit_info_button_play_long).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.playZenit(GameActivity.EXTRA_DURATION_LONG);
+                    mListener.playZenit(EXTRA_DURATION_LONG);
             }
         });
 
@@ -60,6 +66,7 @@ public class ZenitInfoFragment extends Fragment {
         return view;
     }
 
+    // A standard implementation when using a listener
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -77,6 +84,7 @@ public class ZenitInfoFragment extends Fragment {
         mListener = null;
     }
 
+    // The listener defined
     public interface OnZenitInfoListener {
         void playZenit(int cmdDuration);
     }

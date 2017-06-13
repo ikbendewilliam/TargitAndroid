@@ -21,4 +21,10 @@
         android:layout_height="wrap_content"
         android:text="Hoofdmenu"/>
 
+    <FrameLayout
+        android:id="@+id/framelayout_in_highscoreactivity"
+        android:layout_width="match_parent"
+        android:layout_height="508dp"/>
+
+
 </LinearLayout>

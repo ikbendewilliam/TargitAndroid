@@ -3,10 +3,7 @@ package be.howest.nmct.targit.views.infogamemode;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,14 +12,23 @@ import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.views.MainActivity;
 import be.howest.nmct.targit.views.ingame.GameActivity;
 
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME;
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE;
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_MEMORIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_SMASHIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_ZENIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES;
+
+// The activity that shows the info about the gameMode
 public class InfoGameModeActivity extends AppCompatActivity
         implements SmashitInfoFragment.OnSmashitInfoListener,
         ZenitInfoFragment.OnZenitInfoListener,
         MemoritInfoFragment.OnMemoritInfoListener {
-    public static String EXTRA_GAMEMODE = "gameMode";
-    public static String EXTRA_GAMEMODE_SMASHIT = "smashit";
-    public static String EXTRA_GAMEMODE_ZENIT = "zenit";
-    public static String EXTRA_GAMEMODE_MEMORIT = "memorit";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +44,19 @@ public class InfoGameModeActivity extends AppCompatActivity
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
+        // See if there is specified what to show
         if (getIntent().hasExtra(EXTRA_GAMEMODE)) {
             String gameMode = getIntent().getStringExtra(EXTRA_GAMEMODE);
 
             if (gameMode == null) {
+                // If the gamemode is empty, return to MainActivity
                 showActivity(MainActivity.class);
             } else if (gameMode.equals(EXTRA_GAMEMODE_SMASHIT)) {
-                showFragment(new SmashitInfoFragment());
+                showFragment(new SmashitInfoFragment()); // Show smashit's info
             } else if (gameMode.equals(EXTRA_GAMEMODE_ZENIT)) {
-                showFragment(new ZenitInfoFragment());
+                showFragment(new ZenitInfoFragment()); // Show zenit's info
             } else if (gameMode.equals(EXTRA_GAMEMODE_MEMORIT)) {
-                showFragment(new MemoritInfoFragment());
+                showFragment(new MemoritInfoFragment()); // Show memorit's info
             }
         }
     }
@@ -69,43 +77,55 @@ public class InfoGameModeActivity extends AppCompatActivity
     }
 
 
+    // show a fragment
+    // @param newFragment: the fragment to show
     private void showFragment(Fragment newFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout_in_info_game_modeactivity, newFragment);
         transaction.commit();
     }
 
+    // Change to an activity
+    // @param activity: the class of the activity you want to show
     void showActivity(Class activity) {
         Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
 
+    // show the gameActivity
+    // @param gameMode: the gameMode to play (as defined in Constants)
+    // @param extraName: the name of the other parameter (as defined in Constants)
+    // @param extraValue: the value of the other parameter (as defined in Constants)
     void showGameActivity(String gameMode, String extraName, int extraValue) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(GameActivity.EXTRA_GAME, gameMode);
+        intent.putExtra(EXTRA_GAME, gameMode);
         intent.putExtra(extraName, extraValue);
         startActivity(intent);
     }
 
+    // show the gameActivity
+    // @param gameMode: the gameMode to play (as defined in Constants)
+    // @param extraName: the name of the other parameter (as defined in Constants)
+    // @param extraValue: the value of the other parameter (as defined in Constants)
     void showGameActivity(String gameMode, String extraName, String extraValue) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(GameActivity.EXTRA_GAME, gameMode);
+        intent.putExtra(EXTRA_GAME, gameMode);
         intent.putExtra(extraName, extraValue);
         startActivity(intent);
     }
 
     @Override
     public void playMemorit(int cmdLives) {
-        showGameActivity(GameActivity.EXTRA_GAME_MEMORIT, GameActivity.EXTRA_LIVES, cmdLives);
+        showGameActivity(EXTRA_GAME_MEMORIT, EXTRA_LIVES, cmdLives);
     }
 
     @Override
     public void playZenit(int cmdDuration) {
-        showGameActivity(GameActivity.EXTRA_GAME_ZENIT, GameActivity.EXTRA_DURATION, cmdDuration);
+        showGameActivity(EXTRA_GAME_ZENIT, EXTRA_DURATION, cmdDuration);
     }
 
     @Override
     public void playSmashit(String cmdDifficulty) {
-        showGameActivity(GameActivity.EXTRA_GAME_SMASHIT, GameActivity.EXTRA_DIFFICULTY, cmdDifficulty);
+        showGameActivity(EXTRA_GAME_SMASHIT, EXTRA_DIFFICULTY, cmdDifficulty);
     }
 }

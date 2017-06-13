@@ -15,7 +15,7 @@ import java.util.List;
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.models.ArduinoButton;
 
-public class SettingsActivity extends AppCompatActivity implements StatusFragment.OnStatusFragmentInteractionListener{
+public class SettingsActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +47,11 @@ public class SettingsActivity extends AppCompatActivity implements StatusFragmen
 
     }
 
+    // show a fragment
+    // @param newFragment: the fragment to show
     private void showFragment(Fragment newFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout_in_settingsactivity, newFragment);
         transaction.commit();
-    }
-
-    void showActivity(Class activity) {
-        Intent intent = new Intent(this, activity);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onListFragmentInteraction() {
-
     }
 }
