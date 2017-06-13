@@ -110,7 +110,7 @@ public class ZenitGameFragment extends Fragment {
                 time = "0" + ((mMaxFrame - frame) * STEP_TIME / 1000) / 60;
             else
                 time = "" + ((mMaxFrame - frame) * STEP_TIME / 1000) / 60;
-            if (((mMaxFrame - frame) * STEP_TIME / 1000 - 3) % 60 < 10)
+            if (((mMaxFrame - frame) * STEP_TIME / 1000) % 60 < 10)
                 time += ":0" + ((mMaxFrame - frame) * STEP_TIME / 1000) % 60;
             else
                 time += ":" + ((mMaxFrame - frame) * STEP_TIME / 1000) % 60;
