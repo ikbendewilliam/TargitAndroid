@@ -40,23 +40,153 @@
         app:layout_widthPercent="50%">
 
 
-        <ImageView
-            android:id="@+id/imageView"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:src="@drawable/smash_it" />
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/smashit_info_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back_white"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:background="@color/colorBackground"/>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/smash_it" />
+        </RelativeLayout>
 
 
-        <ImageView
-            android:id="@+id/imageView2"
+
+        <RelativeLayout
+            android:id="@+id/smashit_info_tekst_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
 
-            android:layout_margin="20dp"
+            android:layout_margin="30dp"
             android:layout_weight="1"
-            android:background="@color/colorSmashit" />
+            android:background="@color/colorSmashit"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/smashit_info_tekst_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="•"
+                android:textSize="27sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginEnd="20dp"
+                android:layout_alignParentTop="true"/>
+
+            <TextView
+                android:id="@+id/smashit_info_tekst_levens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Levens:"
+                android:textSize="27sp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@id/smashit_info_tekst_dot"/>
+            <View
+                android:id="@+id/smashit_info_hearth_1"
+                android:layout_width="41dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/ic_hart"
+                android:layout_toEndOf="@+id/smashit_info_tekst_levens" />
+            <View
+                android:id="@+id/smashit_info_hearth_2"
+                android:layout_width="41dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/ic_hart"
+                android:layout_toEndOf="@+id/smashit_info_hearth_1" />
+            <View
+                android:layout_width="41dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_hart"
+                android:layout_toEndOf="@+id/smashit_info_hearth_2" />
+
+            <TextView
+                android:id="@+id/smashit_info_tekst_dot_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="•"
+                android:textSize="27sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/smashit_info_tekst_levens"/>
+
+            <TextView
+                android:id="@+id/smashit_info_tekst_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Druk op de opgelichte knop."
+                android:textSize="27sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/smashit_info_tekst_levens"
+                android:layout_toEndOf="@id/smashit_info_tekst_dot_1"/>
+
+            <TextView
+                android:id="@+id/smashit_info_tekst_dot_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="•"
+                android:textSize="27sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/smashit_info_tekst_1"/>
+
+            <TextView
+                android:id="@+id/smashit_info_tekst_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Je verliest een leven wanneer je op een niet opgelichte knop drukt of als je te laat op de opgelichte knop drukt."
+                android:textSize="27sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/smashit_info_tekst_1"
+                android:layout_toEndOf="@id/smashit_info_tekst_dot_2"/>
+
+            <TextView
+                android:id="@+id/smashit_info_tekst_dot_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="•"
+                android:textSize="27sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/smashit_info_tekst_2"/>
+
+            <TextView
+                android:id="@+id/smashit_info_tekst_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Je krijgt 1 punt als je op de opgelichte knop drukt."
+                android:textSize="27sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/smashit_info_tekst_2"
+                android:layout_toEndOf="@id/smashit_info_tekst_dot_3"/>
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -91,8 +221,8 @@
             android:id="@+id/smashit_info_button_play_easy"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_widthPercent="60%"
-            app:layout_heightPercent="14%"
+            app:layout_widthPercent="53%"
+            app:layout_heightPercent="12%"
             android:layout_above="@+id/smashit_info_button_play_medium"
             android:layout_alignStart="@+id/smashit_info_button_play_hard"
             android:layout_marginTop="23.3dp"
@@ -105,8 +235,8 @@
             android:id="@+id/smashit_info_button_play_medium"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_widthPercent="60%"
-            app:layout_heightPercent="14%"
+            app:layout_widthPercent="53%"
+            app:layout_heightPercent="12%"
             android:layout_above="@+id/smashit_info_button_play_hard"
             android:layout_alignStart="@+id/smashit_info_button_play_hard"
             android:layout_marginTop="23.3dp"
@@ -120,8 +250,8 @@
             android:id="@+id/smashit_info_button_play_hard"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_widthPercent="60%"
-            app:layout_heightPercent="14%"
+            app:layout_widthPercent="53%"
+            app:layout_heightPercent="12%"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp"

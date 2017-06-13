@@ -13,6 +13,6 @@
     <FrameLayout
         android:id="@+id/framelayout_in_settingsactivity"
         android:layout_width="match_parent"
-        android:layout_height="508dp"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
