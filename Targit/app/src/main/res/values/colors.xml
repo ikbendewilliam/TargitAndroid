@@ -2,6 +2,7 @@
 <resources>
     <color name="colorMain">#005b7f</color>
     <color name="colorBackground">#079396</color>
+    <color name="colorBackgroundLight">#54c4c7</color>
 
     <color name="colorMemorit">#cb6b00</color>
     <color name="colorMemoritSecondary">#7f4300</color>
