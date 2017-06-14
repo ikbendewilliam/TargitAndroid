@@ -75,7 +75,7 @@ public class MemoritGameFragment extends Fragment {
 
         startGameSteps(view); // configure the routine
         // initiate the textfields
-        ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_score)).setText("punten: " + mScore);
+        ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_score)).setText("" + mScore);
         showLives(view);
 
         if (mLives <= 3) {
@@ -142,13 +142,22 @@ public class MemoritGameFragment extends Fragment {
     private void gameStep(int frame, View view) {
         if (frame * STEP_TIME > 3000) // after 3 seconds
         {
-            ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("tijd bezig: " + (frame * STEP_TIME / 1000 - 3));
+            String time;
+                if ((frame * STEP_TIME / 1000 - 3) / 60 < 10)
+                time = "0" + (frame * STEP_TIME / 1000 - 3) / 60;
+            else
+                time = "" + (frame * STEP_TIME / 1000 - 3) / 60;
+            if ((frame * STEP_TIME / 1000 - 3) % 60 < 10)
+                time += ":0" + (frame * STEP_TIME / 1000 - 3) % 60;
+            else
+                time += ":" + (frame * STEP_TIME / 1000 - 3) % 60;
+            ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText(time);
 
             if (mIterator >= mSequence.size() && mUserinput) {
                 // If user has pressed all buttons or hasn't started yet
                 if (mSequence.size() > 0) { // not a new game
                     mScore++;
-                    ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_score)).setText("punten: " + mScore);
+                    ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_score)).setText("" + mScore);
                 }
 
                 // Get a new random button that is different from the previous one
@@ -216,7 +225,7 @@ public class MemoritGameFragment extends Fragment {
                 }
             }
         } else
-            ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("het spel start in: " + (3 - frame * STEP_TIME / 1000));
+            ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000) % 60);
     }
 
     // Lose a life
