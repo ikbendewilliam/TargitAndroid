@@ -55,7 +55,7 @@
                 android:layout_height="0dp"
                 android:background="@color/colorZenit"
 
-                android:layout_margin="20dp"
+                android:layout_margin="30dp"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -91,8 +91,8 @@
                 android:id="@+id/zenit_info_button_play_short"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="60%"
-                app:layout_heightPercent="14%"
+                app:layout_widthPercent="53%"
+                app:layout_heightPercent="12%"
                 android:layout_above="@+id/zenit_info_button_play_medium"
                 android:layout_alignStart="@+id/zenit_info_button_play_long"
                 android:layout_marginTop="23.3dp"
@@ -106,8 +106,8 @@
                 android:id="@+id/zenit_info_button_play_medium"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="60%"
-                app:layout_heightPercent="14%"
+                app:layout_widthPercent="53%"
+                app:layout_heightPercent="12%"
                 android:layout_above="@+id/zenit_info_button_play_long"
                 android:layout_alignStart="@+id/zenit_info_button_play_long"
                 android:layout_marginTop="23.3dp"
@@ -121,8 +121,8 @@
                 android:id="@+id/zenit_info_button_play_long"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_widthPercent="60%"
-                app:layout_heightPercent="14%"
+                app:layout_widthPercent="53%"
+                app:layout_heightPercent="12%"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="50dp"

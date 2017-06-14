@@ -1,5 +1,6 @@
 package be.howest.nmct.targit.views.settings;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -61,6 +62,14 @@ public class StatusFragment extends Fragment {
             }
         });
 
+        // Set the help button to open helpfragment
+        view.findViewById(R.id.settings_status_search_help).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragment(new HelpFragment());
+            }
+        });
+
         updateUIAsync(view); // Start updating the list
 
         return view;
@@ -114,5 +123,13 @@ public class StatusFragment extends Fragment {
             }
         };
         timer.schedule(checkButtons, 0, 50);
+    }
+
+    // show a fragment
+    // @param newFragment: the fragment to show
+    private void showFragment(Fragment newFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.framelayout_in_settingsactivity, newFragment);
+        transaction.commit();
     }
 }

@@ -33,4 +33,10 @@
         android:layout_height="wrap_content"
         android:text="Zoek knoppen"/>
 
+    <Button
+        android:id="@+id/settings_status_search_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Help"/>
+
 </LinearLayout>
