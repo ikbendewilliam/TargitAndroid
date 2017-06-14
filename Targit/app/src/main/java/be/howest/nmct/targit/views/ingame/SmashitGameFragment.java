@@ -207,8 +207,10 @@ public class SmashitGameFragment extends Fragment {
                 loseLive(frame, view);
             }
 
-        } else
+        } else {
+            mPressedOnFrame = frame;
             ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
+        }
     }
 
     // Lose a life

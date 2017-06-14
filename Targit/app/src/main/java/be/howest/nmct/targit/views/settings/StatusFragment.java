@@ -105,12 +105,6 @@ public class StatusFragment extends Fragment {
                         }
 
                         if (mConnected != connected || mConnecting != connecting || mPressed != pressed || buttonPressed != mButtonPressed) {
-                            // If changes occur, update the ui
-//                            TextView textview_connected_devices = (TextView) view.findViewById(R.id.settings_status_number);
-//                            TextView textview_clicked_buttons = (TextView) view.findViewById(R.id.settings_status_pressed);
-//                            textview_connected_devices.setText("#Connected devices: " + connected);
-//                            textview_clicked_buttons.setText("#clicked buttons: " + pressed);
-
                             if (mConnected != connected) {
                                 for (ArduinoButton arduinoButton : mArduinoButtons)
                                     arduinoButton.setConnected(mBluetoothConnection.isDeviceConnected(arduinoButton.getDeviceName()));
