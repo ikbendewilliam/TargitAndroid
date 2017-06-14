@@ -1,6 +1,7 @@
 package be.howest.nmct.targit.views.ingame;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -35,6 +36,7 @@ public class ZenitGameFragment extends Fragment {
     private Timer mTimer = new Timer(); // The game clock
     private List<ArduinoButton> mArduinoButtons; // All devices
     private BluetoothConnection mBluetoothConnection; // bt connection
+    private MediaPlayer pointPlayer;
 
     private OnZenitGameListener mListener; // Listener to stop the game
 
@@ -63,10 +65,11 @@ public class ZenitGameFragment extends Fragment {
             }
         });
 
-
         mBluetoothConnection = BluetoothConnection.getBluetoothConnection(); // Get the connection
         mArduinoButtons = mBluetoothConnection.getArduinoButtons(); // get the devices
         mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
+
+        pointPlayer = MediaPlayer.create(getContext(), R.raw.point); // Set the point sound
 
         startGameSteps(view); // configure the routine
         // initiate the textfield
@@ -140,6 +143,7 @@ public class ZenitGameFragment extends Fragment {
                     mPreviousLitButton = mLitButton; // set the previous button
                     mLitButton = null; // unset the lit button
                     mScore++; // increment score
+                    pointPlayer.start(); // Play the sound
                     mPressedOnFrame = frame; // This frame it is pressed
                     ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_score)).setText("" + mScore);
                     mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off

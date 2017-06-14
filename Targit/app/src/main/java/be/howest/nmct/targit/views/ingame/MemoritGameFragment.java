@@ -1,6 +1,7 @@
 package be.howest.nmct.targit.views.ingame;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -41,6 +42,8 @@ public class MemoritGameFragment extends Fragment {
     private List<ArduinoButton> mArduinoButtons; // A list of the devices
     private BluetoothConnection mBluetoothConnection; // the connection with bt
     private List<ArduinoButton> mSequence = new ArrayList<>(); // The given sequence
+    private MediaPlayer pointPlayer;
+    private MediaPlayer failPlayer;
 
     private OnMemoritGameListener mListener; // A listener to stop the game
 
@@ -72,6 +75,9 @@ public class MemoritGameFragment extends Fragment {
         mBluetoothConnection = BluetoothConnection.getBluetoothConnection(); // Get the connection
         mArduinoButtons = mBluetoothConnection.getArduinoButtons(); // get the devices
         mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
+
+        pointPlayer = MediaPlayer.create(getContext(), R.raw.point); // Set the point sound
+        failPlayer = MediaPlayer.create(getContext(), R.raw.fail); // Set the fail sound
 
         startGameSteps(view); // configure the routine
         // initiate the textfields
@@ -143,7 +149,7 @@ public class MemoritGameFragment extends Fragment {
         if (frame * STEP_TIME > 3000) // after 3 seconds
         {
             String time;
-                if ((frame * STEP_TIME / 1000 - 3) / 60 < 10)
+            if ((frame * STEP_TIME / 1000 - 3) / 60 < 10)
                 time = "0" + (frame * STEP_TIME / 1000 - 3) / 60;
             else
                 time = "" + (frame * STEP_TIME / 1000 - 3) / 60;
@@ -155,11 +161,6 @@ public class MemoritGameFragment extends Fragment {
 
             if (mIterator >= mSequence.size() && mUserinput) {
                 // If user has pressed all buttons or hasn't started yet
-                if (mSequence.size() > 0) { // not a new game
-                    mScore++;
-                    ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_score)).setText("" + mScore);
-                }
-
                 // Get a new random button that is different from the previous one
                 ArduinoButton arduinoButton;
                 int i = 0;
@@ -205,8 +206,11 @@ public class MemoritGameFragment extends Fragment {
                 // If it's the users turn and he hasn't pressed all buttons
                 mLitButton = mSequence.get(mIterator); // set the to check button
 
-                if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
-                    // If this button is pressed and can be pressed
+                if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled() && !mIsPressed) {
+                    // If this correct button is pressed and can be pressed
+                    mScore++;
+                    pointPlayer.start(); // Play the sound
+                    ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_score)).setText("" + mScore);
                     mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), COMMAND_LED_ON); // Turn this button on
                     mIsPressed = true; // Remember that it is pressed
                 } else if (mIsPressed && !mLitButton.isPressed()) {
@@ -240,6 +244,9 @@ public class MemoritGameFragment extends Fragment {
         showLives(view);
         if (mLives <= 0)
             stopGame(); // Stop the game when run out of lives
+        else {
+            failPlayer.start();  // Play the sound
+        }
         mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
     }
 
