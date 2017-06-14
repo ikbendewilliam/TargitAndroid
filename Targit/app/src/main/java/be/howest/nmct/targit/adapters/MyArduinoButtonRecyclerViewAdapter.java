@@ -118,14 +118,17 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
                 // Get the deviceName
                 String deviceName = mValues.get(holder.getAdapterPosition() - 1).getDeviceName();
 
-                switch(event.getAction()) {
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         // Let this device turn on
                         bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_ON);
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
-                        // Let this device turn off
-                        bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_OFF);
+                        // Let this device falsh again or turn off
+                        if (mValues.get(holder.getAdapterPosition() - 1).isEnabled())
+                            bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_FLASH_SLOW);
+                        else
+                            bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_OFF);
                         return true; // if you want to handle the touch event
                 }
                 return false;
