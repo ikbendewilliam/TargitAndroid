@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 //        Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
 //        TextView txtHighscores = (TextView)findViewById(R.id.activity_main_button_highscore);
 //        txtHighscores.setTypeface(font);
-
 
         findViewById(R.id.activity_main_imageview_smashit).setOnClickListener(new View.OnClickListener() {
             @Override
