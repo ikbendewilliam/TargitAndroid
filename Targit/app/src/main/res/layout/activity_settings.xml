@@ -6,9 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.settings.SettingsActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/pattern_repeat">
 
-
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorBackground"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <FrameLayout
         android:id="@+id/framelayout_in_settingsactivity"
