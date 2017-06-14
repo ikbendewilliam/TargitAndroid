@@ -2,6 +2,7 @@
 <resources>
     <color name="colorMain">#005b7f</color>
     <color name="colorBackground">#079396</color>
+    <color name="colorBackgroundLight">#54c4c7</color>
 
     <color name="colorMemorit">#cb6b00</color>
     <color name="colorMemoritSecondary">#7f4300</color>
@@ -19,9 +20,10 @@
     <color name="colorMatig">#cb6b00</color>
 
     <color name="colorWhite">#ffffff</color>
+    <color name="colorWhiteSecondary">#c1dcdd</color>
     <color name="colorStop">#045556</color>
 
     <color name="colorPrimary">#1498cb</color>
     <color name="colorPrimaryDark">#005b7f</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#005b7f</color>
 </resources>

@@ -6,13 +6,15 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/arduinobutton_connected"
+    <TextView
         android:layout_width="80dp"
-        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:text="Status"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        app:srcCompat="@drawable/ic_status_connected"
-        android:layout_gravity="center_vertical"/>
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textAlignment="center"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/arduinobutton_name"
@@ -23,6 +25,7 @@
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="20sp"
+        android:text="Knoppen"
         android:layout_gravity="center_vertical"/>
 
     <!--<TextView-->
@@ -33,14 +36,5 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_margin="@dimen/text_margin"-->
         <!--android:textAppearance="?attr/textAppearanceListItem" />-->
-
-    <Switch
-        android:id="@+id/arduinobutton_enabled"
-        android:gravity="end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:layout_gravity="center_vertical"
-        />
 </LinearLayout>
 
