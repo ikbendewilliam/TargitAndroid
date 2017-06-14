@@ -55,6 +55,7 @@ public class MemoritInfoFragment extends Fragment {
             }
         });
 
+        //instellen fonts
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         Button btnSnel = (Button)view.findViewById(R.id.memorit_info_button_play_hard);
         btnSnel.setTypeface(font);
