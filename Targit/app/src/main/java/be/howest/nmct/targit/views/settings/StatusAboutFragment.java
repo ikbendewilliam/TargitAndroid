@@ -57,6 +57,8 @@ public class StatusAboutFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("Status buttons"));
         tabLayout.addTab(tabLayout.newTab().setText("About"));
 
+
+
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) v.findViewById(R.id.settingsPager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager(), fragments);
@@ -64,6 +66,24 @@ public class StatusAboutFragment extends Fragment {
 
         // linken  van tabs met viewpager
         mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        //set on tab pressed
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         return v;
     }
