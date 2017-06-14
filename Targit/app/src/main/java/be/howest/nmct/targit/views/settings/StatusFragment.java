@@ -4,6 +4,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,7 +50,12 @@ public class StatusFragment extends Fragment {
         mArduinoButtons = mBluetoothConnection.getArduinoButtons(); // get all devices
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.settings_status_recyclerview); // Retrieve the list
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext())); // Set the manager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()); //create layoutmanager
+        recyclerView.setLayoutManager(layoutManager); // Set the manager
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+        layoutManager.getOrientation()); //create a divider between rows
+        recyclerView.addItemDecoration(dividerItemDecoration); //set the divider
 
         myArduinoButtonRecyclerViewAdapter = new MyArduinoButtonRecyclerViewAdapter(mArduinoButtons); // create new adapter
         recyclerView.setAdapter(myArduinoButtonRecyclerViewAdapter); // set the adapter
@@ -62,7 +68,7 @@ public class StatusFragment extends Fragment {
             }
         });
 
-        // Set the help button to open helpfragment
+        // Set the help fab to open helpfragment
         view.findViewById(R.id.settings_status_search_help).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,10 +106,10 @@ public class StatusFragment extends Fragment {
 
                         if (mConnected != connected || mConnecting != connecting || mPressed != pressed || buttonPressed != mButtonPressed) {
                             // If changes occur, update the ui
-                            TextView textview_connected_devices = (TextView) view.findViewById(R.id.settings_status_number);
-                            TextView textview_clicked_buttons = (TextView) view.findViewById(R.id.settings_status_pressed);
-                            textview_connected_devices.setText("#Connected devices: " + connected);
-                            textview_clicked_buttons.setText("#clicked buttons: " + pressed);
+//                            TextView textview_connected_devices = (TextView) view.findViewById(R.id.settings_status_number);
+//                            TextView textview_clicked_buttons = (TextView) view.findViewById(R.id.settings_status_pressed);
+//                            textview_connected_devices.setText("#Connected devices: " + connected);
+//                            textview_clicked_buttons.setText("#clicked buttons: " + pressed);
 
                             if (mConnected != connected) {
                                 for (ArduinoButton arduinoButton : mArduinoButtons)
