@@ -94,7 +94,7 @@ public class MemoritInfoFragment extends Fragment {
         txt3.setTypeface(font);
 
         //set autoscale font size
-        long textSize = Math.round(TEXT_SIZE * getResources().getDisplayMetrics().density);
+        long textSize = Math.round(TEXT_SIZE * getResources().getDisplayMetrics().densityDpi);
         txtDot.setTextSize(textSize);
         txtDot1.setTextSize(textSize);
         txtDot2.setTextSize(textSize);

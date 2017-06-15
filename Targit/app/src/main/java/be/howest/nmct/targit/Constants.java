@@ -80,5 +80,5 @@ public abstract class Constants {
     public static final String EXTRA_HELP_IMAGE = "helpimage";
 
     // Textsize
-    public static final double TEXT_SIZE = 12.6;
+    public static final double TEXT_SIZE = 0.075;
 }

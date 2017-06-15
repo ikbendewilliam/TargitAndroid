@@ -95,7 +95,7 @@ public class ZenitInfoFragment extends Fragment {
         txt3.setTypeface(font);
 
         //instellen autosize textfields
-        long textSize = Math.round(TEXT_SIZE * getResources().getDisplayMetrics().density);
+        long textSize = Math.round(TEXT_SIZE * getResources().getDisplayMetrics().densityDpi);
         txtDot.setTextSize(textSize);
         txtDot1.setTextSize(textSize);
         txtDot2.setTextSize(textSize);
