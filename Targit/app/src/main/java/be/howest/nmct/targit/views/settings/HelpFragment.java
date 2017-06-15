@@ -20,19 +20,6 @@ import be.howest.nmct.targit.R;
 
 public class HelpFragment extends Fragment {
 
-    private List<Fragment> stappen;
-
-    /**
-     * The pager widget, which handles animation and allows swiping horizontally to access previous
-     * and next wizard steps.
-     */
-    private ViewPager mPager;
-
-    /**
-     * The pager adapter, which provides the pages to the view pager widget.
-     */
-    private PagerAdapter mPagerAdapter;
-
     public HelpFragment() {
         // Required empty public constructor
     }
@@ -45,16 +32,23 @@ public class HelpFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_help, container, false);
 
         //aanmaken van de fragments voor elke help stap
-        stappen = new ArrayList<Fragment>();
-        stappen.add(HelpStapFragment.newInstance("Ga naar instellingen", R.drawable.help_stap_1));
-        stappen.add(HelpStapFragment.newInstance("Zet Bluetooth aan", R.drawable.help_stap_2));
-        stappen.add(HelpStapFragment.newInstance("Koppel de Bluetooth apparaten\n" +
+        List<Fragment> mFragmentList = new ArrayList<Fragment>();
+        mFragmentList.add(HelpStapFragment.newInstance("Ga naar instellingen", R.drawable.help_stap_1));
+        mFragmentList.add(HelpStapFragment.newInstance("Zet Bluetooth aan", R.drawable.help_stap_2));
+        mFragmentList.add(HelpStapFragment.newInstance("Koppel de Bluetooth apparaten\n" +
                 "met de naam TARGIT", R.drawable.help_stap_3));
-        stappen.add(HelpStapFragment.newInstance("Geef de pincode 1234 in", R.drawable.help_stap_4));
+        mFragmentList.add(HelpStapFragment.newInstance("Geef de pincode 1234 in", R.drawable.help_stap_4));
 
         // Instantiate a ViewPager and a PagerAdapter.
-        mPager = (ViewPager) view.findViewById(R.id.pager);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager(), stappen);
+        /*
+          The pager widget, which handles animation and allows swiping horizontally to access previous
+          and next wizard steps.
+         */
+        ViewPager mPager = (ViewPager) view.findViewById(R.id.pager);
+        /*
+         The pager adapter, which provides the pages to the view pager widget.
+         */
+        PagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager(), mFragmentList);
         mPager.setAdapter(mPagerAdapter);
 
         // linken  van tabs met viewpager
@@ -70,7 +64,7 @@ public class HelpFragment extends Fragment {
         });
 
         //hide the toolbar
-        if(((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
+        if (((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         }
 
