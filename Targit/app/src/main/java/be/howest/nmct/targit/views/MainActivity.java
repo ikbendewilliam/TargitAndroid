@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //instellen font highscores
-//        Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
-//        TextView txtHighscores = (TextView)findViewById(R.id.activity_main_button_highscore);
-//        txtHighscores.setTypeface(font);
+        Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
+        TextView txtHighscores = (TextView)findViewById(R.id.activity_main_button_highscore);
+        txtHighscores.setTypeface(font);
 
         findViewById(R.id.activity_main_imageview_smashit).setOnClickListener(new View.OnClickListener() {
             @Override

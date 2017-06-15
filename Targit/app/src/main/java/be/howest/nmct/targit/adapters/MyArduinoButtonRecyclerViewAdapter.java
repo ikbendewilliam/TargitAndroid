@@ -115,6 +115,7 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
                         // turn all leds off
                         bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
                         // Let this device turn on
+                        bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
                         bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_ON);
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
