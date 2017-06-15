@@ -78,4 +78,7 @@ public abstract class Constants {
     // Helpstepfragment
     public static final String EXTRA_HELP_TEXT = "helptext";
     public static final String EXTRA_HELP_IMAGE = "helpimage";
+
+    // Textsize
+    public static final double TEXT_SIZE = 12.6;
 }

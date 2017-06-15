@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.R;
 
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_EASY;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_HARD;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_MEDIUM;
+import static be.howest.nmct.targit.Constants.TEXT_SIZE;
 
 // The information shown for smashit
 public class SmashitInfoFragment extends Fragment {
@@ -90,6 +92,17 @@ public class SmashitInfoFragment extends Fragment {
         txt2.setTypeface(font);
         TextView txt3 = (TextView) view.findViewById(R.id.smashit_info_tekst_3);
         txt3.setTypeface(font);
+
+        //instellen autosize textfields
+        long textSize = Math.round(TEXT_SIZE * getResources().getDisplayMetrics().density);
+        txtDot.setTextSize(textSize);
+        txtDot1.setTextSize(textSize);
+        txtDot2.setTextSize(textSize);
+        txtDot3.setTextSize(textSize);
+        txtLevens.setTextSize(textSize);
+        txt1.setTextSize(textSize);
+        txt2.setTextSize(textSize);
+        txt3.setTextSize(textSize);
 
         return view;
     }
