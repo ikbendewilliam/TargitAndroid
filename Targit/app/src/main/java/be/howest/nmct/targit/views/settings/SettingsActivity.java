@@ -69,7 +69,7 @@ public class SettingsActivity extends AppCompatActivity implements StatusFragmen
     // @param newFragment: the fragment to show
     private void showFragment(Fragment newFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.addToBackStack(null);
+        transaction.replace(R.id.framelayout_in_settingsactivity, newFragment);
         transaction.commit();
     }
 
