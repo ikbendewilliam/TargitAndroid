@@ -83,20 +83,7 @@ public class HighscoreFragment extends Fragment {
         });
 
         // retrieve the highscores
-        // returns a new list if nothing found
-        mHighscoreEntries = getHighscoreFromFile(mGameMode + "_" + mCategory);
-
-        // Check the size of the list
-        if (mHighscoreEntries.size() < 6) {
-            // If to few in the list, create new entries
-            mHighscoreEntries.clear();
-            mHighscoreEntries.add(new HighscoreEntry("William", 50));
-            mHighscoreEntries.add(new HighscoreEntry("Gilles", 40));
-            mHighscoreEntries.add(new HighscoreEntry("Downey", 30));
-            mHighscoreEntries.add(new HighscoreEntry("Matthijs", 20));
-            mHighscoreEntries.add(new HighscoreEntry("Tarik", 10));
-            mHighscoreEntries.add(new HighscoreEntry("Eefje", 1));
-        }
+        loadList();
 
         // if a new entry is provided, check if it is in the highscore
         if (mNewEntry != null) {
@@ -155,6 +142,33 @@ public class HighscoreFragment extends Fragment {
         if (checkList()) {
             // notify the adapter that the list has changed
             myHighscoreRecyclerViewAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void changeList(String gameMode, int category)
+    {
+        mGameMode= gameMode;
+        mCategory = "" + category;
+
+        loadList();
+        myHighscoreRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    private void loadList() {
+        // retrieve the highscores
+        // returns a new list if nothing found
+        mHighscoreEntries = getHighscoreFromFile(mGameMode + "_" + mCategory);
+
+        // Check the size of the list
+        if (mHighscoreEntries.size() < 6) {
+            // If to few in the list, create new entries
+            mHighscoreEntries.clear();
+            mHighscoreEntries.add(new HighscoreEntry("William", 50));
+            mHighscoreEntries.add(new HighscoreEntry("Gilles", 40));
+            mHighscoreEntries.add(new HighscoreEntry("Downey", 30));
+            mHighscoreEntries.add(new HighscoreEntry("Matthijs", 20));
+            mHighscoreEntries.add(new HighscoreEntry("Tarik", 10));
+            mHighscoreEntries.add(new HighscoreEntry("Eefje", 1));
         }
     }
 
