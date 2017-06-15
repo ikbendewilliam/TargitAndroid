@@ -111,7 +111,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="@color/colorMain"
-            android:text="@string/title_activity_highscore"
+            android:text="HiGHSCORE"
             android:textAllCaps="false"
             android:textColor="@color/colorText"
             android:textSize="24sp"

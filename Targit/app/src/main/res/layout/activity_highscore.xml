@@ -6,25 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="be.howest.nmct.targit.views.highscore.HighscoreActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/pattern_repeat">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorBackground"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:elevation="4dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TextView
-        android:id="@+id/highscore_textview_score"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/highscoreTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"/>
-
-    <Button
-        android:id="@+id/highscore_button_to_mainactivity"
+        android:background="@color/colorBackground"
+        app:tabTextColor="@color/colorWhite"
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabIndicatorColor="@color/colorWhite"
+        android:elevation="4dp"
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/highscorePager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hoofdmenu"/>
-
-    <FrameLayout
-        android:id="@+id/framelayout_in_highscoreactivity"
-        android:layout_width="match_parent"
-        android:layout_height="508dp"/>
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>
