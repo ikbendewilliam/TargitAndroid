@@ -94,7 +94,7 @@ public class SmashitInfoFragment extends Fragment {
         txt3.setTypeface(font);
 
         //instellen autosize textfields
-        long textSize = Math.round(TEXT_SIZE * getResources().getDisplayMetrics().densityDpi);
+        long textSize = Math.round(TEXT_SIZE/getResources().getDisplayMetrics().densityDpi);
         txtDot.setTextSize(textSize);
         txtDot1.setTextSize(textSize);
         txtDot2.setTextSize(textSize);
