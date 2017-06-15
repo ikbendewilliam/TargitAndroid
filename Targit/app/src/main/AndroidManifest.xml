@@ -31,11 +31,14 @@
             android:name=".views.infogamemode.InfoGameModeActivity"
             android:label="@string/title_activity_info_game_mode"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".views.ingame.GameActivity"
             android:label="@string/title_activity_game"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GameOverActivity"
+            android:label="@string/title_activity_game_over"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
