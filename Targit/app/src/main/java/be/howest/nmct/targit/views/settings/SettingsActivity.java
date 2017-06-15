@@ -40,7 +40,7 @@ public class SettingsActivity extends AppCompatActivity{
         setSupportActionBar(myToolbar);
 
         //back toets toevoegen aan toolbar
-        myToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back_white));
+        myToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back_white,getTheme()));
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

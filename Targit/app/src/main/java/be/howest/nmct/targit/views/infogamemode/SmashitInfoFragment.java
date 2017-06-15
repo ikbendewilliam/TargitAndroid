@@ -55,6 +55,8 @@ public class SmashitInfoFragment extends Fragment {
                     mListener.playSmashit(EXTRA_DIFFICULTY_HARD);
             }
         });
+
+        //back button listener
         view.findViewById(R.id.smashit_info_back_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -39,24 +39,137 @@
             app:layout_heightPercent="100%"
             app:layout_widthPercent="50%">
 
-
-            <ImageView
-                android:id="@+id/imageView"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/zen_it_knop"
-                android:layout_weight="1"/>
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/zenit_info_back_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back_white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@null"/>
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/zen_it_knop" />
+            </RelativeLayout>
 
 
 
-            <ImageView
+
+
+            <RelativeLayout
+                android:id="@+id/zenit_info_tekst_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/colorZenit"
 
                 android:layout_margin="30dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="@color/colorZenit"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/zenit_info_tekst_dot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="•"
+                    android:textSize="27sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    android:id="@+id/zenit_info_tekst_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Druk op de knop die oplicht."
+                    android:textSize="27sp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@id/zenit_info_tekst_dot"/>
+
+                <TextView
+                    android:id="@+id/zenit_info_tekst_dot_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="•"
+                    android:textSize="27sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_below="@+id/zenit_info_tekst_1"/>
+
+                <TextView
+                    android:id="@+id/zenit_info_tekst_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="De volgende knop licht pas op als je op de opgelichte knop drukt."
+                    android:textSize="27sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/zenit_info_tekst_1"
+                    android:layout_toEndOf="@id/zenit_info_tekst_dot_1"/>
+
+                <TextView
+                    android:id="@+id/zenit_info_tekst_dot_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="•"
+                    android:textSize="27sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_below="@+id/zenit_info_tekst_2"/>
+
+                <TextView
+                    android:id="@+id/zenit_info_tekst_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Je krijgt 1 punt als je op de knop drukt die oplicht."
+                    android:textSize="27sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/zenit_info_tekst_2"
+                    android:layout_toEndOf="@id/zenit_info_tekst_dot_2"/>
+
+                <TextView
+                    android:id="@+id/zenit_info_tekst_dot_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="•"
+                    android:textSize="27sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_below="@+id/zenit_info_tekst_3"/>
+
+                <TextView
+                    android:id="@+id/zenit_info_tekst_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Je speelt voor een bepaalde tijdsduur."
+                    android:textSize="27sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="20dp"
+                    android:layout_below="@+id/zenit_info_tekst_3"
+                    android:layout_toEndOf="@id/zenit_info_tekst_dot_3"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 
