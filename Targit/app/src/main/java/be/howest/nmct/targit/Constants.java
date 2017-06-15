@@ -21,6 +21,10 @@ public abstract class Constants {
             "TARGIT-05"
     };
 
+    // Settings status
+    public static final int ITEM_VIEW_TYPE_HEADER = 1;
+    public static final int ITEM_VIEW_TYPE_ITEM = 2; // to differentiate header and items
+
     // commands for communitcation with arduino
     public static final String COMMAND_END = ";"; // the end of every command send
     public static final String COMMAND_LED_ON = "LedOn"; // turn the led on the device on
@@ -70,4 +74,8 @@ public abstract class Constants {
     public static String EXTRA_GAMEMODE_SMASHIT = "smashit";
     public static String EXTRA_GAMEMODE_ZENIT = "zenit";
     public static String EXTRA_GAMEMODE_MEMORIT = "memorit";
+
+    // Helpstepfragment
+    public static final String EXTRA_HELP_TEXT = "helptext";
+    public static final String EXTRA_HELP_IMAGE = "helpimage";
 }

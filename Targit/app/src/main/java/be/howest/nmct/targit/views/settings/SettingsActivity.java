@@ -19,7 +19,7 @@ import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.adapters.ScreenSlidePagerAdapter;
 import be.howest.nmct.targit.models.ArduinoButton;
 
-public class SettingsActivity extends AppCompatActivity{
+public class SettingsActivity extends AppCompatActivity implements StatusFragment.StatusFragmentNavigateInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class SettingsActivity extends AppCompatActivity{
         setSupportActionBar(myToolbar);
 
         //back toets toevoegen aan toolbar
-        myToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back_white));
+        myToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_back_white, getTheme()));
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,9 +48,8 @@ public class SettingsActivity extends AppCompatActivity{
                 onBackPressed();
             }
         });
-
-
     }
+
     //handles full screen autohiding
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -62,9 +61,8 @@ public class SettingsActivity extends AppCompatActivity{
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
-
-
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
     }
 
     // show a fragment
@@ -73,5 +71,10 @@ public class SettingsActivity extends AppCompatActivity{
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout_in_settingsactivity, newFragment);
         transaction.commit();
+    }
+
+    @Override
+    public void navigateToFragment(Fragment newFragment) {
+        showFragment(newFragment);
     }
 }

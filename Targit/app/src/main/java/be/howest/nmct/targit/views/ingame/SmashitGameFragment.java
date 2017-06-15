@@ -41,6 +41,7 @@ public class SmashitGameFragment extends Fragment {
     private int mPressedOnFrame = 0; // When the button was pressed
     private int mScore = 0; // The current score
     private int mLives = 3; // The lives the player has left
+    private boolean mIsPressed = false;
     private ArduinoButton mLitButton = null; // Current lit button
     private ArduinoButton mPreviousLitButton = null; // The last lit button
     private Timer mTimer = new Timer(); // The game timer
@@ -197,6 +198,7 @@ public class SmashitGameFragment extends Fragment {
                         if (arduinoButton.isPressed() && arduinoButton.isConnected() && arduinoButton.isEnabled() && !arduinoButton.getDeviceName().equals(mLitButton.getDeviceName())) {
                             // if a wrong button is pressed
                             loseLive(frame, view);
+                            arduinoButton.setPressed(false); // this is a hack, sorry
                         }
                     }
                 }
@@ -207,13 +209,16 @@ public class SmashitGameFragment extends Fragment {
                 loseLive(frame, view);
             }
 
-        } else
+        } else {
+            mPressedOnFrame = frame;
             ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
+        }
     }
 
     // Lose a life
     // @param frame: the current frame
     // @param view: the current view
+
     private void loseLive(int frame, View view) {
         mLives--;
         mLitButton = null;

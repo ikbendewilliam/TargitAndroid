@@ -88,4 +88,8 @@ public class ArduinoButton {
         isPressed = false;
         isEnabled = enabled;
     }
+
+    public void setPressed(boolean isPressed) {
+        this.isPressed = isPressed;
+    }
 }

@@ -1,6 +1,7 @@
 package be.howest.nmct.targit.views.settings;
 
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import be.howest.nmct.targit.adapters.MyArduinoButtonRecyclerViewAdapter;
 import be.howest.nmct.targit.bluetooth.BluetoothConnection;
 import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
+import be.howest.nmct.targit.views.ingame.ZenitGameFragment;
 
 import static be.howest.nmct.targit.Constants.COMMAND_LED_FLASH_SLOW;
 import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
@@ -35,6 +37,7 @@ public class StatusFragment extends Fragment {
     private boolean mButtonPressed = false; // If any button is pressed
     private BluetoothConnection mBluetoothConnection; // bt connection
     List<ArduinoButton> mArduinoButtons; // All devices
+    private StatusFragmentNavigateInterface mListener;
 
     public StatusFragment() {
         // Required empty public constructor
@@ -54,7 +57,7 @@ public class StatusFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager); // Set the manager
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-        layoutManager.getOrientation()); //create a divider between rows
+                layoutManager.getOrientation()); //create a divider between rows
         recyclerView.addItemDecoration(dividerItemDecoration); //set the divider
 
         myArduinoButtonRecyclerViewAdapter = new MyArduinoButtonRecyclerViewAdapter(mArduinoButtons); // create new adapter
@@ -72,7 +75,8 @@ public class StatusFragment extends Fragment {
         view.findViewById(R.id.settings_status_search_help).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFragment(new HelpFragment());
+                if (mListener != null)
+                    mListener.navigateToFragment(new HelpFragment());
             }
         });
 
@@ -105,15 +109,7 @@ public class StatusFragment extends Fragment {
                         }
 
                         if (mConnected != connected || mConnecting != connecting || mPressed != pressed || buttonPressed != mButtonPressed) {
-                            // If changes occur, update the ui
-//                            TextView textview_connected_devices = (TextView) view.findViewById(R.id.settings_status_number);
-//                            TextView textview_clicked_buttons = (TextView) view.findViewById(R.id.settings_status_pressed);
-//                            textview_connected_devices.setText("#Connected devices: " + connected);
-//                            textview_clicked_buttons.setText("#clicked buttons: " + pressed);
-
                             if (mConnected != connected) {
-                                for (ArduinoButton arduinoButton : mArduinoButtons)
-                                    arduinoButton.setConnected(mBluetoothConnection.isDeviceConnected(arduinoButton.getDeviceName()));
                                 mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn them off so they flash in sync
                                 mBluetoothConnection.sendMessageToAll(COMMAND_LED_FLASH_SLOW); // flash all leds
                             }
@@ -131,11 +127,24 @@ public class StatusFragment extends Fragment {
         timer.schedule(checkButtons, 0, 50);
     }
 
-    // show a fragment
-    // @param newFragment: the fragment to show
-    private void showFragment(Fragment newFragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.framelayout_in_settingsactivity, newFragment);
-        transaction.commit();
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof StatusFragmentNavigateInterface) {
+            mListener = (StatusFragmentNavigateInterface) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement StatusFragmentNavigateInterface");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface StatusFragmentNavigateInterface {
+        void navigateToFragment(Fragment newFragment);
     }
 }

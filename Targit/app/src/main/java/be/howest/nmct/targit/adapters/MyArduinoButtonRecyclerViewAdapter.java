@@ -3,6 +3,7 @@ package be.howest.nmct.targit.adapters;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,17 +20,11 @@ import java.util.List;
 
 import static be.howest.nmct.targit.Constants.COMMAND_LED_FLASH_SLOW;
 import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
+import static be.howest.nmct.targit.Constants.ITEM_VIEW_TYPE_HEADER;
+import static be.howest.nmct.targit.Constants.ITEM_VIEW_TYPE_ITEM;
 
 // Class that fills recycleview in settings -> status (StatusFragment)
 public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyArduinoButtonRecyclerViewAdapter.ViewHolder> {
-
-    //if return 1 show header, if 2 show list item
-    @Override
-    public int getItemViewType(int position) {
-        if (position == 0) return 1;
-        else return 2;
-    }
-
     private final List<ArduinoButton> mValues; // Values in the list
 
     // Constructor
@@ -42,7 +37,7 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        if (viewType == 1) {
+        if (viewType == ITEM_VIEW_TYPE_HEADER) {
             // inflate your first item layout & return that viewHolder
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.fragment_status_bluetooth_item_header, parent, false);
@@ -59,7 +54,7 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         //voor header geen functionaliteit
-        if (getItemViewType(position) == 1)
+        if (getItemViewType(position) == ITEM_VIEW_TYPE_HEADER)
             return;
 
 
@@ -98,12 +93,43 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
                     BluetoothConnection bluetoothConnection = BluetoothConnection.getBluetoothConnection();
                     // Get the deviceName
                     String deviceName = mValues.get(holder.getAdapterPosition() - 1).getDeviceName();
-                    // Let this device  flash slowly
+                    // turn this device off
                     bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_OFF);
                     // Disable the device
                     // WARNING: This is immediatly, you can't send any commands until you enable it again!
                     mValues.get(holder.getAdapterPosition() - 1).setEnabled(false);
                 }
+            }
+        });
+
+        holder.mLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Get the BluetoothConnection manager
+                BluetoothConnection bluetoothConnection = BluetoothConnection.getBluetoothConnection();
+                // Get the deviceName
+                String deviceName = mValues.get(holder.getAdapterPosition() - 1).getDeviceName();
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        // turn all leds off
+                        bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+                        // Let this device turn on
+                        bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+                        bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_ON);
+                        return true; // if you want to handle the touch event
+                    case MotionEvent.ACTION_UP:
+                        // flash all leds
+                        bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_FLASH_SLOW);
+                        return true; // if you want to handle the touch event
+                }
+                return false;
+            }
+        });
+
+        holder.mLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
 
@@ -123,7 +149,15 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
     // Returns the number of items in this list
     @Override
     public int getItemCount() {
-        return mValues.size() + 1;
+        return mValues.size() + 1; // The list + the header
+    }
+
+    //if return 1 show header, if 2 show list item
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) return ITEM_VIEW_TYPE_HEADER;
+        else
+            return ITEM_VIEW_TYPE_ITEM;
     }
 
     // ViewHolder represents a row in the list (fragment_status_bluetooth_item.xml)

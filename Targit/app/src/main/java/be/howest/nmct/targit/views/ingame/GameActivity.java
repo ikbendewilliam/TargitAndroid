@@ -87,6 +87,12 @@ public class GameActivity extends AppCompatActivity
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        // disable the back pressed
+    }
+
     //handles full screen autohiding
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

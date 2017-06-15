@@ -1,6 +1,7 @@
 package be.howest.nmct.targit.views;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //instellen font highscores
-//        Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
-//        TextView txtHighscores = (TextView)findViewById(R.id.activity_main_button_highscore);
-//        txtHighscores.setTypeface(font);
+        Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
+        TextView txtHighscores = (TextView)findViewById(R.id.activity_main_button_highscore);
+        txtHighscores.setTypeface(font);
 
         findViewById(R.id.activity_main_imageview_smashit).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
             // if there are no devices yet
             connectDevices(); // Connect to the devices
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE); // remove all bakstackentries
+        super.onBackPressed(); // close the app
     }
 
     //handles full screen autohiding

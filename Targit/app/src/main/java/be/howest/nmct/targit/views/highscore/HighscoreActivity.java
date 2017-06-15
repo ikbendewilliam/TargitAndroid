@@ -63,6 +63,11 @@ public class HighscoreActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        showActivity(MainActivity.class);
+    }
+
     //handles full screen autohiding
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
