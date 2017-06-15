@@ -1,6 +1,7 @@
 package be.howest.nmct.targit.views.ingame;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -45,6 +46,8 @@ public class SmashitGameFragment extends Fragment {
     private Timer mTimer = new Timer(); // The game timer
     private List<ArduinoButton> mArduinoButtons; // All devices
     private BluetoothConnection mBluetoothConnection; // The bt connection
+    private MediaPlayer pointPlayer;
+    private MediaPlayer failPlayer;
 
     private OnSmashitGameListener mListener; // Listener to stop the game
 
@@ -84,6 +87,9 @@ public class SmashitGameFragment extends Fragment {
         mBluetoothConnection = BluetoothConnection.getBluetoothConnection(); // Get the connection
         mArduinoButtons = mBluetoothConnection.getArduinoButtons(); // get the devices
         mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
+
+        pointPlayer = MediaPlayer.create(getContext(), R.raw.point); // Set the point sound
+        failPlayer = MediaPlayer.create(getContext(), R.raw.fail); // Set the fail sound
 
         startGameSteps(view); // configure the routine
         // initiate the textfields
@@ -174,6 +180,7 @@ public class SmashitGameFragment extends Fragment {
                     mPreviousLitButton = mLitButton; // set the previous button
                     mLitButton = null; // unset the lit button
                     mScore++; // increment score
+                    pointPlayer.start(); // Play the sound
                     mPressedOnFrame = frame; // This frame it is pressed
                     if ((mDifficulty.equals(EXTRA_DIFFICULTY_EASY) && mWaitFrames > TIME_TO_PRESS_MIN_EASY / STEP_TIME)
                             || (mDifficulty.equals(EXTRA_DIFFICULTY_MEDIUM) && mWaitFrames > TIME_TO_PRESS_MIN_MEDIUM / STEP_TIME)
@@ -200,8 +207,10 @@ public class SmashitGameFragment extends Fragment {
                 loseLive(frame, view);
             }
 
-        } else
+        } else {
+            mPressedOnFrame = frame;
             ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
+        }
     }
 
     // Lose a life
@@ -214,6 +223,9 @@ public class SmashitGameFragment extends Fragment {
         showLives(view);
         if (mLives <= 0)
             stopGame(); // Stop the game when run out of lives
+        else {
+            failPlayer.start();  // Play the sound
+        }
         mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
     }
 
