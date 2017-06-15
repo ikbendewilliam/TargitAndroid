@@ -1,0 +1,135 @@
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="horizontal"
+    tools:context=".views.infogamemode.SmashitInfoFragment">
+
+    <LinearLayout
+        android:id="@+id/fragment_game_over_smashit_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="50%">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/fragment_game_over_smashit_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:src="@drawable/ic_back_white" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/fragment_game_over_smashit_left"
+        android:background="#ffffff"
+        android:elevation="2dp"
+        app:layout_heightPercent="90%"
+        android:id="@+id/view" />
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_toEndOf="@id/fragment_game_over_smashit_left"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="50%">
+
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                app:layout_heightPercent="20%"
+                app:layout_widthPercent="30%"
+                android:id="@+id/fragment_game_over_smashit_relativelayout_score">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ellipse_1" />
+
+                <TextView
+                    android:id="@+id/fragment_game_over_smashit_textview_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="21"
+                    android:textColor="@color/colorText"
+                    android:textSize="52sp" />
+
+            </android.support.percent.PercentRelativeLayout>
+        <android.support.percent.PercentRelativeLayout
+            android:id="@+id/fragment_game_over_smashit_relativelayout_margin_score_box"
+            android:layout_below="@id/fragment_game_over_smashit_relativelayout_score"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="10%"
+            app:layout_widthPercent="100%"
+            />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/fragment_game_over_smashit_relativelayout_box"
+            android:background="@color/colorSmashit"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="20%"
+            app:layout_widthPercent="70%"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/fragment_game_over_smashit_relativelayout_margin_score_box">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Score Opslaan"
+                android:textColor="@color/colorText"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"/>
+            <EditText
+                android:gravity="bottom"
+                android:layout_gravity="bottom"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"
+                android:textColorHighlight="@color/colorText"
+                android:shadowColor="@color/colorText"
+                android:id="@+id/fragment_game_over_smashit_edittext_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+
+</android.support.percent.PercentRelativeLayout>
