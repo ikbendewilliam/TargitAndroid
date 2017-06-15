@@ -25,14 +25,6 @@ import static be.howest.nmct.targit.Constants.ITEM_VIEW_TYPE_ITEM;
 
 // Class that fills recycleview in settings -> status (StatusFragment)
 public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyArduinoButtonRecyclerViewAdapter.ViewHolder> {
-    //if return 1 show header, if 2 show list item
-    @Override
-    public int getItemViewType(int position) {
-        if (position == 0) return ITEM_VIEW_TYPE_HEADER;
-        else
-            return ITEM_VIEW_TYPE_ITEM;
-    }
-
     private final List<ArduinoButton> mValues; // Values in the list
 
     // Constructor
@@ -157,6 +149,14 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
     @Override
     public int getItemCount() {
         return mValues.size() + 1; // The list + the header
+    }
+
+    //if return 1 show header, if 2 show list item
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) return ITEM_VIEW_TYPE_HEADER;
+        else
+            return ITEM_VIEW_TYPE_ITEM;
     }
 
     // ViewHolder represents a row in the list (fragment_status_bluetooth_item.xml)
