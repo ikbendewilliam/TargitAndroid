@@ -36,25 +36,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ataç Tarik"
-                android:textColor="@android:color/black"
-                android:textSize="15dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ataç Tarik"
-                android:textColor="@android:color/black"
-                android:textSize="15dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ataç Tarik"
-                android:textColor="@android:color/black"
-                android:textSize="15dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ataç Tarik"
+                android:text="Ataç Tarik
+Ataç Tarik
+Ataç Tarik
+Ataç Tarik"
                 android:textColor="@android:color/black"
                 android:textSize="15dp"/>
         </LinearLayout>
@@ -83,25 +68,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Created by Dooder - Freepik.com"
-                    android:textColor="@android:color/black"
-                    android:textSize="15dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vecteezy.com"
-                    android:textColor="@android:color/black"
-                    android:textSize="15dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Created by D3images - Freepik.com"
-                    android:textColor="@android:color/black"
-                    android:textSize="15dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Made by Dmitriy Prodchenko"
+                    android:text="Created by Dooder - Freepik.com
+Vecteezy.com
+Created by D3images - Freepik.com
+Made by Dmitriy Prodchenko"
                     android:textColor="@android:color/black"
                     android:textSize="15dp"/>
             </LinearLayout>
