@@ -74,4 +74,8 @@ public abstract class Constants {
     public static String EXTRA_GAMEMODE_SMASHIT = "smashit";
     public static String EXTRA_GAMEMODE_ZENIT = "zenit";
     public static String EXTRA_GAMEMODE_MEMORIT = "memorit";
+
+    // Helpstepfragment
+    public static final String EXTRA_HELP_TEXT = "helptext";
+    public static final String EXTRA_HELP_IMAGE = "helpimage";
 }
