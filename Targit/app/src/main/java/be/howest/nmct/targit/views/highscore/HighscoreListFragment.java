@@ -4,11 +4,13 @@ package be.howest.nmct.targit.views.highscore;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,8 +24,21 @@ import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.adapters.MyHighscoreRecyclerViewAdapter;
 import be.howest.nmct.targit.models.HighscoreEntry;
 
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_EASY;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_HARD;
+import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_MEDIUM;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_LONG;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_MEDIUM;
+import static be.howest.nmct.targit.Constants.EXTRA_DURATION_SHORT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MEDIUM;
+
 // The fragment that shows the highscore
-public class HighscoreFragment extends Fragment {
+public class HighscoreListFragment extends Fragment {
     private String mGameMode; // The game mode (as defined in Constants)
     private String mCategory; // The game mode (as defined in Constants, ints are transformed into Strings)
     List<HighscoreEntry> mHighscoreEntries; // A list of all entries in this category
@@ -31,7 +46,7 @@ public class HighscoreFragment extends Fragment {
     private MyHighscoreRecyclerViewAdapter myHighscoreRecyclerViewAdapter; // The adapter that will fill the list
 
     // Required empty public constructor
-    public HighscoreFragment() {
+    public HighscoreListFragment() {
         // Required empty public constructor
     }
 
@@ -39,7 +54,7 @@ public class HighscoreFragment extends Fragment {
     // @param gameMode: the gamemode where you want the highscores from
     // @param category: the category where you want the highscores from
     // @param Nullable HighscoreEntry: if there is a new entry, define it here, otherwise null
-    public static HighscoreFragment newInstance(String gameMode, int category, @Nullable HighscoreEntry newEntry) {
+    public static HighscoreListFragment newInstance(String gameMode, int category, @Nullable HighscoreEntry newEntry) {
         // Transform category to String and call the other constructor
         return newInstance(gameMode, "" + category, newEntry);
     }
@@ -49,9 +64,9 @@ public class HighscoreFragment extends Fragment {
     // @param gameMode: the gamemode where you want the highscores from
     // @param category: the category where you want the highscores from
     // @param Nullable HighscoreEntry: if there is a new entry, define it here, otherwise null
-    public static HighscoreFragment newInstance(String gameMode, String category, @Nullable HighscoreEntry newEntry) {
+    public static HighscoreListFragment newInstance(String gameMode, String category, @Nullable HighscoreEntry newEntry) {
         // Create a new fragment
-        HighscoreFragment fragment = new HighscoreFragment();
+        HighscoreListFragment fragment = new HighscoreListFragment();
         // Set the variables to the provided parameters
         fragment.mGameMode = gameMode;
         fragment.mCategory = category;
@@ -63,24 +78,24 @@ public class HighscoreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_highscore, container, false);
+        View view = inflater.inflate(R.layout.fragment_highscore_list, container, false);
 
         // TODO: Remove this
         // add a clicklistener to reset the highscore
-        view.findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mHighscoreEntries.clear();
-                mHighscoreEntries.add(new HighscoreEntry("William", 50));
-                mHighscoreEntries.add(new HighscoreEntry("Gilles", 40));
-                mHighscoreEntries.add(new HighscoreEntry("Downey", 30));
-                mHighscoreEntries.add(new HighscoreEntry("Matthijs", 20));
-                mHighscoreEntries.add(new HighscoreEntry("Tarik", 10));
-                mHighscoreEntries.add(new HighscoreEntry("Eefje", 1));
-                saveHighscoreToFile(mHighscoreEntries, mGameMode + "_" + mCategory);
-                myHighscoreRecyclerViewAdapter.notifyDataSetChanged();
-            }
-        });
+//        view.findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mHighscoreEntries.clear();
+//                mHighscoreEntries.add(new HighscoreEntry("William", 50));
+//                mHighscoreEntries.add(new HighscoreEntry("Gilles", 40));
+//                mHighscoreEntries.add(new HighscoreEntry("Downey", 30));
+//                mHighscoreEntries.add(new HighscoreEntry("Matthijs", 20));
+//                mHighscoreEntries.add(new HighscoreEntry("Tarik", 10));
+//                mHighscoreEntries.add(new HighscoreEntry("Eefje", 1));
+//                saveHighscoreToFile(mHighscoreEntries, mGameMode + "_" + mCategory);
+//                myHighscoreRecyclerViewAdapter.notifyDataSetChanged();
+//            }
+//        });
 
         // retrieve the highscores
         loadList();
@@ -93,13 +108,55 @@ public class HighscoreFragment extends Fragment {
         // get the list
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.highscore_recycleview);
         // set the layoutmanager
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
         // create a new adapter
         myHighscoreRecyclerViewAdapter = new MyHighscoreRecyclerViewAdapter(mHighscoreEntries);
         // set the adapter
         recyclerView.setAdapter(myHighscoreRecyclerViewAdapter);
 
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                layoutManager.getOrientation()); //create a divider between rows
+        recyclerView.addItemDecoration(dividerItemDecoration); //set the divider
+
+        //Set title based on gamemode and diff
+        TextView txtTitle = (TextView) view.findViewById(R.id.fragment_highscore_list_title);
+        setTitle(txtTitle);
+
         return view;
+    }
+
+    // Set title based on gamemode and diff
+    private void setTitle(TextView txtTitle) {
+        int id = 0;
+
+        if(mGameMode.equals(EXTRA_GAME_SMASHIT)) {
+            if(mCategory.equals(EXTRA_DIFFICULTY_EASY))
+                id = R.string.smashit_easy;
+            else if(mCategory.equals(EXTRA_DIFFICULTY_MEDIUM))
+                id = R.string.smashit_medium;
+            else if(mCategory.equals(EXTRA_DIFFICULTY_HARD))
+                id = R.string.smashit_hard;
+        }
+        else if (mGameMode.equals(EXTRA_GAME_ZENIT)) {
+            if(mCategory.equals("" + EXTRA_DURATION_LONG))
+                id = R.string.zenit_easy;
+            else if(mCategory.equals("" + EXTRA_DURATION_MEDIUM))
+                id = R.string.zenit_medium;
+            else if(mCategory.equals("" + EXTRA_DURATION_SHORT))
+                id = R.string.zenit_hard;
+        }
+        else if (mGameMode.equals(EXTRA_GAME_MEMORIT)) {
+            if(mCategory.equals("" + EXTRA_LIVES_MANY))
+                id = R.string.memorit_easy;
+            else if(mCategory.equals("" + EXTRA_LIVES_MEDIUM))
+                id = R.string.memorit_medium;
+            else if(mCategory.equals("" + EXTRA_LIVES_FEW))
+                id = R.string.memorit_hard;
+        }
+
+        txtTitle.setText(getString(id));
+
     }
 
     // Check if the new value is in the highscore
