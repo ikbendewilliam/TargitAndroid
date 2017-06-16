@@ -11,7 +11,7 @@ import java.util.List;
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.models.HighscoreEntry;
 
-// Class that fills recycleview in highscore (HighscoreFragment)
+// Class that fills recycleview in highscore (HighscoreListFragment)
 public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighscoreRecyclerViewAdapter.ViewHolder> {
 
     private final List<HighscoreEntry> mValues; // Values in the list

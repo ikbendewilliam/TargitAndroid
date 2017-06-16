@@ -72,7 +72,6 @@ public abstract class Constants {
     public static int WAIT_TIME_MIN = 200; // The min time in ms each button has to lit up
     public static float WAIT_TIME_RATE = 0.8f; // The time increased with every lit up button
 
-
     // Info game
     public static String EXTRA_GAMEMODE = "gameMode";
     public static String EXTRA_GAMEMODE_SMASHIT = "smashit";
@@ -86,4 +85,9 @@ public abstract class Constants {
 
     // Textsize
     public static final double TEXT_SIZE = 8000;
+
+    // HighscoreFragment
+    public static final int BUTTON_EASY = 1;
+    public static final int BUTTON_MEDIUM = 2;
+    public static final int BUTTON_HARD = 3;
 }

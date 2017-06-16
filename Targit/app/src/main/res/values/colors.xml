@@ -14,6 +14,7 @@
     <color name="colorZenitsecondary">#426316</color>
 
     <color name="colorText">#fefefe</color>
+    <color name="colorSeparator">#d4d4d4</color>
 
     <color name="colorMoeilijk">#c92d1d</color>
     <color name="colorMakkelijk">#7db038</color>

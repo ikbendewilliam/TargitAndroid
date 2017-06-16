@@ -13,4 +13,16 @@
     <string name="info_smashit">smashit</string>
     <string name="settings_about">dit is de about page, welkom bij onze app</string>
     <string name="title_activity_game_over">GameOverActivity</string>
+
+    <string name="smashit_easy">Traag</string>
+    <string name="smashit_medium">Matig</string>
+    <string name="smashit_hard">Snel</string>
+
+    <string name="zenit_easy">30 seconden</string>
+    <string name="zenit_medium">60 seconden</string>
+    <string name="zenit_hard">90 seconden</string>
+
+    <string name="memorit_easy">5 levens</string>
+    <string name="memorit_medium">3 levens</string>
+    <string name="memorit_hard">1 leven</string>
 </resources>
