@@ -15,7 +15,7 @@
     <TextView
         android:id="@+id/highscore_list_item_place"
         android:gravity="start"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textAlignment="center"
@@ -35,7 +35,7 @@
     <TextView
         android:id="@+id/highscore_list_item_score"
         android:gravity="end"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textAlignment="center"
