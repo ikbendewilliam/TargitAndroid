@@ -14,10 +14,14 @@
 
     <TextView
         android:id="@+id/highscore_list_item_place"
-        android:gravity="start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="1"
+        android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
+        android:background="@drawable/ic_ellipse_first"
+        android:textColor="@color/colorWhite"
         android:textAlignment="center"
         android:textSize="20sp"
         android:layout_gravity="center_vertical"/>
@@ -28,6 +32,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="20sp"
         android:layout_gravity="center_vertical"/>
@@ -35,6 +40,7 @@
     <TextView
         android:id="@+id/highscore_list_item_score"
         android:gravity="end"
+        android:layout_margin="@dimen/text_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"

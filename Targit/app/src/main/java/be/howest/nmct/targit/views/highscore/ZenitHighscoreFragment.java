@@ -2,6 +2,7 @@ package be.howest.nmct.targit.views.highscore;
 
 
 import android.app.FragmentTransaction;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ public class ZenitHighscoreFragment extends Fragment {
         btnHighscoreMedium = (Button) view.findViewById(R.id.fragment_zenit_highscore_medium);
         btnHighscoreHard = (Button) view.findViewById(R.id.fragment_zenit_highscore_hard);
 
+        //set listeners on the buttons
         btnHighscoreEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,9 +69,16 @@ public class ZenitHighscoreFragment extends Fragment {
             }
         });
 
+        //set the fonts
+        Typeface font = Typeface.createFromAsset( getActivity().getAssets(), "font/BRLNSDB.TTF");
+        btnHighscoreEasy.setTypeface(font);
+        btnHighscoreMedium.setTypeface(font);
+        btnHighscoreHard.setTypeface(font);
+
         return view;
     }
 
+    //change bg of the button selected
     private void selectButton(int buttonId) {
         btnHighscoreEasy.setBackgroundResource(R.drawable.postit_green);
         btnHighscoreMedium.setBackgroundResource(R.drawable.postit_orange);
@@ -88,6 +97,7 @@ public class ZenitHighscoreFragment extends Fragment {
         }
     }
 
+    //change the list for another category
     private void showlistFragment(int category) {
         HighscoreListFragment highscoreListFragment = HighscoreListFragment.newInstance(EXTRA_GAME_ZENIT, category, null);
         mHighscoreListFragment = highscoreListFragment;

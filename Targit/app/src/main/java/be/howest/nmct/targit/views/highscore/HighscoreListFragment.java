@@ -1,6 +1,7 @@
 package be.howest.nmct.targit.views.highscore;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -83,6 +84,10 @@ public class HighscoreListFragment extends Fragment {
 
         //Set title based on gamemode and diff
         txtTitle = (TextView) view.findViewById(R.id.fragment_highscore_list_title);
+
+        //set the fonts
+        Typeface font = Typeface.createFromAsset( getActivity().getAssets(), "font/BRLNSDB.TTF");
+        txtTitle.setTypeface(font);
 
         // TODO: Remove this
         // add a clicklistener to reset the highscore
