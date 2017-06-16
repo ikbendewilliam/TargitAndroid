@@ -187,6 +187,7 @@ public class MemoritGameFragment extends Fragment {
                 // if no button is lit, and a second has passed, the iterator is 0 and the user isn't pressing buttons
                 mLastFrameLit = frame; // set the lastframelit to this frame
                 mLitButton = mSequence.get(mIterator); // set the lit button to the first one
+                //                 max wait time | ^ | increase rate | total size | current | minus 1 (iterator starts at 0, while size is min 1)
                 mWaitTime = (int)(WAIT_TIME_MAX * Math.pow(0.8, mSequence.size() - mIterator) - 1); // Set the wait time
                 if (mWaitTime < WAIT_TIME_MIN)
                     mWaitTime = WAIT_TIME_MIN;
@@ -207,6 +208,7 @@ public class MemoritGameFragment extends Fragment {
                 mLastFrameLit = frame; // set the lastframelit to this frame
                 mLitButton = null; // No button is lit > mLitButton = null
                 mIterator++; // increment iterator
+                //                 max wait time | ^ | increase rate | total size | current | minus 1 (iterator starts at 0, while size is min 1)
                 mWaitTime = (int)(WAIT_TIME_MAX * Math.pow(0.8, mSequence.size() - mIterator) - 1); // Increase the wait time
                 if (mWaitTime < WAIT_TIME_MIN)
                     mWaitTime = WAIT_TIME_MIN;
