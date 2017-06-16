@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.models.HighscoreEntry;
-import be.howest.nmct.targit.views.highscore.HighscoreFragment;
+import be.howest.nmct.targit.views.highscore.HighscoreListFragment;
 import be.howest.nmct.targit.views.settings.AboutFragment;
 
 import static be.howest.nmct.targit.Constants.EXTRA_CATEGORY;
@@ -24,7 +24,7 @@ import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
 import static be.howest.nmct.targit.Constants.EXTRA_SCORE;
 
 public class GameOverActivity extends AppCompatActivity implements SaveScoreFragment.SaveScoreTransitionListener {
-    private HighscoreFragment mHighscoreFragment;
+    private HighscoreListFragment mHighscoreListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,8 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
             int score = getIntent().getIntExtra(EXTRA_SCORE, 0);
             String category = getIntent().getStringExtra(EXTRA_CATEGORY);
 
-            mHighscoreFragment = HighscoreFragment.newInstance(gamemode, category, null);
-            showHighscoreFragment();
+            mHighscoreListFragment = HighscoreListFragment.newInstance(gamemode, category, null);
+            showHighscoreListFragment();
             if (score == 0) {
                 showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
             } else {
@@ -85,9 +85,9 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
         transaction.commit();
     }
 
-    private void showHighscoreFragment() {
+    private void showHighscoreListFragment() {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_game_over_framelayout_highscore, mHighscoreFragment);
+        transaction.replace(R.id.activity_game_over_framelayout_highscore, mHighscoreListFragment);
         transaction.commit();
     }
 
@@ -108,7 +108,7 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
 
     @Override
     public void saveScore(HighscoreEntry newEntry) {
-        mHighscoreFragment.addEntry(newEntry);
+        mHighscoreListFragment.addEntry(newEntry);
         showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
     }
 

@@ -60,7 +60,7 @@
             tools:context="be.howest.nmct.targit.views.highscore.HighscoreListFragment"
             tools:listitem="@layout/fragment_highscore_list_item"
             android:layout_below="@+id/fragment_highscore_list_title"
-            android:layout_toRightOf="@id/highscore_right_border"
+            android:layout_toEndOf="@id/highscore_right_border"
             />
 
 
@@ -69,7 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             app:layout_widthPercent="17%"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentEnd="true"/>
 
         <View
             android:layout_width="match_parent"
