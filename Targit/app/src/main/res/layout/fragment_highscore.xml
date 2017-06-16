@@ -6,6 +6,8 @@
     android:orientation="vertical"
     tools:context="be.howest.nmct.targit.views.highscore.HighscoreFragment">
 
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/highscore_recycleview"
         android:name="be.howest.nmct.targit.views.highscore.HighscoreFragment"
