@@ -2,13 +2,74 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_game_over_top_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="be.howest.nmct.targit.views.gameover.GameOverActivity">
 
-    <FrameLayout
+    <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/activity_game_over_framelayout"/>
+        android:background="@color/colorBackground"
+        android:orientation="horizontal">
+
+        <android.support.percent.PercentRelativeLayout
+            android:id="@+id/fragment_save_score_left"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="50%">
+
+
+            <View
+                android:id="@+id/fragment_save_score_view_margin_top_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_heightPercent="5%"
+                app:layout_widthPercent="100%" />
+
+            <TextView
+                android:id="@+id/fragment_save_score_textview_gametitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragment_save_score_view_margin_top_title"
+                android:layout_centerHorizontal="true"
+                android:text="something"
+                android:textColor="@color/colorText"
+                android:textSize="24sp" />
+
+            <FrameLayout
+                android:id="@+id/activity_game_over_framelayout_highscore"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@id/fragment_save_score_textview_gametitle"
+                app:layout_heightPercent="100%"
+                app:layout_widthPercent="100%" />
+
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/fragment_save_score_left"
+            android:background="#ffffff"
+            android:elevation="2dp"
+            app:layout_heightPercent="90%" />
+
+        <FrameLayout
+            android:id="@+id/activity_game_over_framelayout_right"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_toEndOf="@id/view"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="50%" />
+
+    </android.support.percent.PercentRelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
