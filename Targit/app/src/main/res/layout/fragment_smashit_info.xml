@@ -74,6 +74,7 @@
             android:background="@color/colorSmashit"
             android:padding="20dp">
 
+
             <TextView
                 android:id="@+id/smashit_info_tekst_dot"
                 android:layout_width="wrap_content"
