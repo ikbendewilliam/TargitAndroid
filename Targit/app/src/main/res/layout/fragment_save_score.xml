@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     tools:context=".views.infogamemode.SmashitInfoFragment">
 
-    <LinearLayout
+    <android.support.percent.PercentRelativeLayout
         android:id="@+id/fragment_game_over_smashit_left"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -17,19 +17,31 @@
         app:layout_widthPercent="50%">
 
 
+        <View
+            android:id="@+id/fragment_savescore_view_margin_top_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="5%"
+            app:layout_widthPercent="100%" />
+
+        <TextView
+            android:id="@+id/fragment_game_over_smashit_textview_gametitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fragment_savescore_view_margin_top_title"
+            android:layout_centerHorizontal="true"
+            android:text="something"
+            android:textColor="@color/colorText"
+            android:textSize="24sp" />
+        <FrameLayout
+            android:layout_below="@id/fragment_game_over_smashit_textview_gametitle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="100%"/>
 
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/colorText"
-                android:textSize="24sp"
-                android:text="something"/>
-
-
-    </LinearLayout>
+    </android.support.percent.PercentRelativeLayout>
 
     <View
         android:id="@+id/view"
