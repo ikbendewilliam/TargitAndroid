@@ -17,6 +17,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import be.howest.nmct.targit.R;
+import be.howest.nmct.targit.views.gameover.GameOverActivity;
 import be.howest.nmct.targit.views.highscore.HighscoreActivity;
 import be.howest.nmct.targit.views.MainActivity;
 
@@ -127,8 +128,8 @@ public class GameActivity extends AppCompatActivity
     // @param gameMode: the mode that was played
     // @param score: the achieved score
     // @param category: The played category
-    void showHighscoreActivity(String gameMode, int score, String category) {
-        Intent intent = new Intent(this, HighscoreActivity.class);
+    void showGameOverActivity(String gameMode, int score, String category) {
+        Intent intent = new Intent(this, GameOverActivity.class);
         intent.putExtra(EXTRA_GAME, gameMode);
         intent.putExtra(EXTRA_SCORE, score);
         intent.putExtra(EXTRA_CATEGORY, category);
@@ -142,6 +143,6 @@ public class GameActivity extends AppCompatActivity
     // @param category: The played category
     @Override
     public void stopGame(String gameMode, int score, String category) {
-        showHighscoreActivity(gameMode, score, category);
+        showGameOverActivity(gameMode, score, category);
     }
 }
