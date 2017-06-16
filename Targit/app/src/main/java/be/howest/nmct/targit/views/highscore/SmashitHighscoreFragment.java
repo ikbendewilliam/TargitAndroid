@@ -11,15 +11,19 @@ import android.widget.Button;
 
 import be.howest.nmct.targit.R;
 
+import static be.howest.nmct.targit.Constants.BUTTON_EASY;
+import static be.howest.nmct.targit.Constants.BUTTON_HARD;
+import static be.howest.nmct.targit.Constants.BUTTON_MEDIUM;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_EASY;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_HARD;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_MEDIUM;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
 
 
 public class SmashitHighscoreFragment extends Fragment {
 
-
+    private HighscoreListFragment mHighscoreListFragment;
     private Button btnHighscoreEasy;
     private Button btnHighscoreMedium;
     private Button btnHighscoreHard;
@@ -35,7 +39,7 @@ public class SmashitHighscoreFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_smashit_highscore, container, false);
 
-        showList(EXTRA_DIFFICULTY_EASY);
+        showlistFragment(EXTRA_DIFFICULTY_EASY);
 
        btnHighscoreEasy = (Button) view.findViewById(R.id.fragment_smashit_highscore_easy);
        btnHighscoreMedium = (Button) view.findViewById(R.id.fragment_smashit_highscore_medium);
@@ -44,22 +48,22 @@ public class SmashitHighscoreFragment extends Fragment {
         btnHighscoreEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectButton(1);
-                showList(EXTRA_DIFFICULTY_EASY);
+                selectButton(BUTTON_EASY);
+                mHighscoreListFragment.changeList(EXTRA_GAME_SMASHIT,EXTRA_DIFFICULTY_EASY);
             }
         });
         btnHighscoreMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectButton(2);
-                showList(EXTRA_DIFFICULTY_MEDIUM);
+                selectButton(BUTTON_MEDIUM);
+                mHighscoreListFragment.changeList(EXTRA_GAME_SMASHIT,EXTRA_DIFFICULTY_MEDIUM);
             }
         });
         btnHighscoreHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectButton(3);
-                showList(EXTRA_DIFFICULTY_HARD);
+                selectButton(BUTTON_HARD);
+                mHighscoreListFragment.changeList(EXTRA_GAME_SMASHIT,EXTRA_DIFFICULTY_HARD);
             }
         });
 
@@ -68,27 +72,28 @@ public class SmashitHighscoreFragment extends Fragment {
         return view;
     }
 
-    private void selectButton(int id) {
+    private void selectButton(int buttonId) {
         btnHighscoreEasy.setBackgroundResource(R.drawable.postit_green);
         btnHighscoreMedium.setBackgroundResource(R.drawable.postit_orange);
         btnHighscoreHard.setBackgroundResource(R.drawable.postit_red);
 
-        switch(id) {
-            case 1:
+        switch (buttonId) {
+            case BUTTON_EASY:
                 btnHighscoreEasy.setBackgroundResource(R.drawable.postit_green_selected);
                 break;
-            case 2:
+            case BUTTON_MEDIUM:
                 btnHighscoreMedium.setBackgroundResource(R.drawable.postit_orange_selected);
                 break;
-            case 3:
+            case BUTTON_HARD:
                 btnHighscoreHard.setBackgroundResource(R.drawable.postit_red_selected);
                 break;
         }
     }
 
-    private void showList(String diff) {
-        HighscoreListFragment listFragment = HighscoreListFragment.newInstance(EXTRA_GAME_SMASHIT, diff, null);
-        showFragment(listFragment);
+    private void showlistFragment(String category) {
+        HighscoreListFragment highscoreListFragment = HighscoreListFragment.newInstance(EXTRA_GAME_SMASHIT, category, null);
+        mHighscoreListFragment = highscoreListFragment;
+        showFragment(highscoreListFragment);
     }
 
     private void showFragment(Fragment newFragment) {
