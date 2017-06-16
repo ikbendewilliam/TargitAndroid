@@ -47,7 +47,7 @@ public class GameOverActivity extends AppCompatActivity {
     private void showFragment(Fragment newFragment) {
         //Log.i(Constants.TAG, "showFragment: " + newFragment.toString());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.framelayout_in_gameactivity, newFragment);
+        transaction.replace(R.id.activity_game_over_framelayout, newFragment);
         transaction.commit();
     }
 
