@@ -63,66 +63,17 @@ public class SaveScoreFragment extends Fragment {
         txtScore.setText(score);
 
         //get the elements that need color change
-
-
-
         //check which game mode it was
         //TODO: insert category
-        if(gamemode.equals(EXTRA_GAME_SMASHIT)){
+        if (gamemode.equals(EXTRA_GAME_SMASHIT)) {
             //set title name
             txtTitle.setText("SMASH - iT");
-
-
-        }else if(gamemode.equals(EXTRA_GAME_ZENIT)){
+        } else if (gamemode.equals(EXTRA_GAME_ZENIT)) {
             //set title name
             txtTitle.setText("ZEN - iT");
-
-
-        }else if(gamemode.equals(EXTRA_GAME_MEMORIT)){
+        } else if (gamemode.equals(EXTRA_GAME_MEMORIT)) {
             //set title name
             txtTitle.setText("MEMOR - iT");
-
-        }
-
-
-        //set font
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
-        EditText name = (EditText) view.findViewById(R.id.fragment_save_score_edittext_name);
-        name.setTypeface(font);
-        TextView txtTitle = (TextView) view.findViewById(R.id.fragment_save_score_textview_gametitle);
-        txtTitle.setTypeface(font);
-        Button btnSave = (Button) view.findViewById(R.id.fragment_save_score_button_save);
-        btnSave.setTypeface(font);
-        Button btnCancel = (Button) view.findViewById(R.id.fragment_save_score_button_cancel);
-        btnCancel.setTypeface(font);
-        TextView txtScoreTitle = (TextView) view.findViewById(R.id.fragment_save_score_textview_score);
-        txtScoreTitle.setTypeface(font);
-        TextView txtScore = (TextView) view.findViewById(R.id.fragment_save_score_textview_score);
-        txtScore.setTypeface(font);
-
-        //set score
-        txtScore.setText(score);
-
-        //get the elements that need color change
-
-
-
-        //check which game mode it was
-        //TODO: insert category
-        if(gamemode.equals(EXTRA_GAME_SMASHIT)){
-            //set title name
-            txtTitle.setText("SMASH - iT");
-
-
-        }else if(gamemode.equals(EXTRA_GAME_ZENIT)){
-            //set title name
-            txtTitle.setText("ZEN - iT");
-
-
-        }else if(gamemode.equals(EXTRA_GAME_MEMORIT)){
-            //set title name
-            txtTitle.setText("MEMOR - iT");
-
         }
 
         final View tempView = view;
