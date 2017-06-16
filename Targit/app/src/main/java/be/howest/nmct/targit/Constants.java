@@ -84,7 +84,7 @@ public abstract class Constants {
     public static final String EXTRA_HELP_IMAGE = "helpimage";
 
     // Textsize
-    public static final double TEXT_SIZE = 8000;
+    public static final double TEXT_SIZE = 8000; // This is depending on dpi, that's why it's so big
 
     // HighscoreFragment
     public static final int BUTTON_EASY = 1;
