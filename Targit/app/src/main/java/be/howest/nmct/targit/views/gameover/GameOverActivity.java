@@ -2,12 +2,14 @@ package be.howest.nmct.targit.views.gameover;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.models.HighscoreEntry;
@@ -18,6 +20,7 @@ import static be.howest.nmct.targit.Constants.EXTRA_CATEGORY;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
 import static be.howest.nmct.targit.Constants.EXTRA_SCORE;
 
 public class GameOverActivity extends AppCompatActivity implements SaveScoreFragment.SaveScoreTransitionListener {
@@ -49,24 +52,40 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
                 showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
             } else {
                 //make fragment
-                Fragment saveScoreFragment = SaveScoreFragment.newInstance();
+                Fragment saveScoreFragment = new SaveScoreFragment();
                 //put arguments for fragment
                 saveScoreFragment.setArguments(getIntent().getExtras());
                 //show the fragment
                 showFragmentInGameOverLayoutRight(saveScoreFragment);
             }
+
+            Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
+            TextView txtTitle = (TextView) findViewById(R.id.fragment_save_score_textview_gametitle);
+            txtTitle.setTypeface(font);
+
+            //get the elements that need color change
+            //check which game mode it was
+            //TODO: insert category
+            if (gamemode.equals(EXTRA_GAME_SMASHIT)) {
+                //set title name
+                txtTitle.setText("SMASH - iT");
+            } else if (gamemode.equals(EXTRA_GAME_ZENIT)) {
+                //set title name
+                txtTitle.setText("ZEN - iT");
+            } else if (gamemode.equals(EXTRA_GAME_MEMORIT)) {
+                //set title name
+                txtTitle.setText("MEMOR - iT");
+            }
         }
     }
 
     private void showFragmentInGameOverLayoutRight(Fragment newFragment) {
-        //Log.i(Constants.TAG, "showFragment: " + newFragment.toString());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_game_over_framelayout_right, newFragment);
         transaction.commit();
     }
 
     private void showHighscoreFragment() {
-        //Log.i(Constants.TAG, "showFragment: " + newFragment.toString());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_game_over_framelayout_highscore, mHighscoreFragment);
         transaction.commit();
@@ -90,6 +109,11 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
     @Override
     public void saveScore(HighscoreEntry newEntry) {
         mHighscoreFragment.addEntry(newEntry);
+        showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
+    }
+
+    @Override
+    public void dismissScore() {
         showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
     }
 }
