@@ -52,12 +52,12 @@ public abstract class Constants {
     public static String EXTRA_DIFFICULTY_EASY = "easy";
     public static String EXTRA_DIFFICULTY_MEDIUM = "medium";
     public static String EXTRA_DIFFICULTY_HARD = "hard";
-    public static int TIME_TO_PRESS_MAX_EASY = 8000;
-    public static int TIME_TO_PRESS_MAX_MEDIUM = 6000;
+    public static int TIME_TO_PRESS_MAX_EASY = 7000;
+    public static int TIME_TO_PRESS_MAX_MEDIUM = 5000;
     public static int TIME_TO_PRESS_MAX_HARD = 3000;
-    public static int TIME_TO_PRESS_MIN_EASY = 3000;
-    public static int TIME_TO_PRESS_MIN_MEDIUM = 2000;
-    public static int TIME_TO_PRESS_MIN_HARD = 1000;
+    public static int TIME_TO_PRESS_MIN_EASY = 1500;
+    public static int TIME_TO_PRESS_MIN_MEDIUM = 1000;
+    public static int TIME_TO_PRESS_MIN_HARD = 500;
     // Zenit
     public static String EXTRA_DURATION = "duration";
     public static int EXTRA_DURATION_SHORT = 30; // WARNING: changing these times discards the previous highscore
