@@ -14,11 +14,7 @@ import be.howest.nmct.targit.R;
 import static be.howest.nmct.targit.Constants.EXTRA_DURATION_LONG;
 import static be.howest.nmct.targit.Constants.EXTRA_DURATION_MEDIUM;
 import static be.howest.nmct.targit.Constants.EXTRA_DURATION_SHORT;
-import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
-import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
-import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
-import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MEDIUM;
 
 
 public class ZenitHighscoreFragment extends Fragment {
@@ -70,19 +66,19 @@ public class ZenitHighscoreFragment extends Fragment {
     }
 
     private void selectButton(int id) {
-        btnHighscoreEasy.setBackgroundResource(R.drawable.green_postit);
-        btnHighscoreMedium.setBackgroundResource(R.drawable.orange_postit);
-        btnHighscoreHard.setBackgroundResource(R.drawable.red_postit);
+        btnHighscoreEasy.setBackgroundResource(R.drawable.postit_green);
+        btnHighscoreMedium.setBackgroundResource(R.drawable.postit_orange);
+        btnHighscoreHard.setBackgroundResource(R.drawable.postit_red);
 
         switch(id) {
             case 1:
-                btnHighscoreEasy.setBackgroundResource(R.drawable.green_postit_selected);
+                btnHighscoreEasy.setBackgroundResource(R.drawable.postit_green_selected);
                 break;
             case 2:
-                btnHighscoreMedium.setBackgroundResource(R.drawable.orange_postit_selected);
+                btnHighscoreMedium.setBackgroundResource(R.drawable.postit_orange_selected);
                 break;
             case 3:
-                btnHighscoreHard.setBackgroundResource(R.drawable.red_postit_selected);
+                btnHighscoreHard.setBackgroundResource(R.drawable.postit_red_selected);
                 break;
         }
     }

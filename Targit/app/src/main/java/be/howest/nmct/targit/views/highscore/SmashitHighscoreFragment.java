@@ -4,13 +4,10 @@ package be.howest.nmct.targit.views.highscore;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.percent.PercentRelativeLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
-import be.howest.nmct.targit.Constants;
 
 import be.howest.nmct.targit.R;
 
@@ -72,19 +69,19 @@ public class SmashitHighscoreFragment extends Fragment {
     }
 
     private void selectButton(int id) {
-        btnHighscoreEasy.setBackgroundResource(R.drawable.green_postit);
-        btnHighscoreMedium.setBackgroundResource(R.drawable.orange_postit);
-        btnHighscoreHard.setBackgroundResource(R.drawable.red_postit);
+        btnHighscoreEasy.setBackgroundResource(R.drawable.postit_green);
+        btnHighscoreMedium.setBackgroundResource(R.drawable.postit_orange);
+        btnHighscoreHard.setBackgroundResource(R.drawable.postit_red);
 
         switch(id) {
             case 1:
-                btnHighscoreEasy.setBackgroundResource(R.drawable.green_postit_selected);
+                btnHighscoreEasy.setBackgroundResource(R.drawable.postit_green_selected);
                 break;
             case 2:
-                btnHighscoreMedium.setBackgroundResource(R.drawable.orange_postit_selected);
+                btnHighscoreMedium.setBackgroundResource(R.drawable.postit_orange_selected);
                 break;
             case 3:
-                btnHighscoreHard.setBackgroundResource(R.drawable.red_postit_selected);
+                btnHighscoreHard.setBackgroundResource(R.drawable.postit_red_selected);
                 break;
         }
     }
