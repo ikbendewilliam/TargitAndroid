@@ -11,6 +11,9 @@ import android.widget.Button;
 
 import be.howest.nmct.targit.R;
 
+import static be.howest.nmct.targit.Constants.BUTTON_EASY;
+import static be.howest.nmct.targit.Constants.BUTTON_HARD;
+import static be.howest.nmct.targit.Constants.BUTTON_MEDIUM;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_EASY;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_HARD;
 import static be.howest.nmct.targit.Constants.EXTRA_DIFFICULTY_MEDIUM;
@@ -23,7 +26,7 @@ import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MEDIUM;
 
 
 public class MemoritHighscoreFragment extends Fragment {
-
+    private HighscoreListFragment mHighscoreListFragment;
     private Button btnHighscoreEasy;
     private Button btnHighscoreMedium;
     private Button btnHighscoreHard;
@@ -39,7 +42,7 @@ public class MemoritHighscoreFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_memorit_highscore, container, false);
 
-        showList(EXTRA_LIVES_MANY);
+        showlistFragment(EXTRA_LIVES_MANY);
 
         btnHighscoreEasy = (Button) view.findViewById(R.id.fragment_memorit_highscore_easy);
         btnHighscoreMedium = (Button) view.findViewById(R.id.fragment_memorit_highscore_medium);
@@ -48,50 +51,52 @@ public class MemoritHighscoreFragment extends Fragment {
         btnHighscoreEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectButton(1);
-                showList(EXTRA_LIVES_MANY);
+                selectButton(BUTTON_EASY);
+                mHighscoreListFragment.changeList(EXTRA_GAME_MEMORIT, EXTRA_LIVES_MANY);
             }
         });
         btnHighscoreMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectButton(2);
-                showList(EXTRA_LIVES_MEDIUM);
+                selectButton(BUTTON_MEDIUM);
+                mHighscoreListFragment.changeList(EXTRA_GAME_MEMORIT, EXTRA_LIVES_MEDIUM);
             }
         });
         btnHighscoreHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectButton(3);
-                showList(EXTRA_LIVES_FEW);
+                selectButton(BUTTON_HARD);
+                mHighscoreListFragment.changeList(EXTRA_GAME_MEMORIT, EXTRA_LIVES_FEW);
             }
         });
 
         return view;
     }
 
-    private void selectButton(int id) {
+    private void showlistFragment(int category) {
+        HighscoreListFragment highscoreListFragment = HighscoreListFragment.newInstance(EXTRA_GAME_MEMORIT, category, null);
+        mHighscoreListFragment = highscoreListFragment;
+        showFragment(highscoreListFragment);
+    }
+
+    private void selectButton(int buttonId) {
         btnHighscoreEasy.setBackgroundResource(R.drawable.green_postit);
         btnHighscoreMedium.setBackgroundResource(R.drawable.orange_postit);
         btnHighscoreHard.setBackgroundResource(R.drawable.red_postit);
 
-        switch(id) {
-            case 1:
+        switch (buttonId) {
+            case BUTTON_EASY:
                 btnHighscoreEasy.setBackgroundResource(R.drawable.green_postit_selected);
                 break;
-            case 2:
+            case BUTTON_MEDIUM:
                 btnHighscoreMedium.setBackgroundResource(R.drawable.orange_postit_selected);
                 break;
-            case 3:
+            case BUTTON_HARD:
                 btnHighscoreHard.setBackgroundResource(R.drawable.red_postit_selected);
                 break;
         }
     }
 
-    private void showList(int diff) {
-        HighscoreListFragment listFragment = HighscoreListFragment.newInstance(EXTRA_GAME_MEMORIT, diff, null);
-        showFragment(listFragment);
-    }
 
     private void showFragment(Fragment newFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
