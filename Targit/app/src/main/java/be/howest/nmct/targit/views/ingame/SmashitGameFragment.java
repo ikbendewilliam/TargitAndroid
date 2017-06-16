@@ -49,6 +49,7 @@ public class SmashitGameFragment extends Fragment {
     private BluetoothConnection mBluetoothConnection; // The bt connection
     private MediaPlayer pointPlayer;
     private MediaPlayer failPlayer;
+    private MediaPlayer gameoverPlayer;
 
     private OnSmashitGameListener mListener; // Listener to stop the game
 
@@ -91,6 +92,7 @@ public class SmashitGameFragment extends Fragment {
 
         pointPlayer = MediaPlayer.create(getContext(), R.raw.point); // Set the point sound
         failPlayer = MediaPlayer.create(getContext(), R.raw.fail); // Set the fail sound
+        gameoverPlayer = MediaPlayer.create(getContext(), R.raw.gameover); // Set the game over sound
 
         startGameSteps(view); // configure the routine
         // initiate the textfields
@@ -120,6 +122,7 @@ public class SmashitGameFragment extends Fragment {
     private void stopGame() {
         if (mListener != null)
             mListener.stopGame(EXTRA_GAME_SMASHIT, mScore, mDifficulty); // Send the highscore
+        gameoverPlayer.start();
         mTimer.cancel(); // Stop the actual game
         mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
     }
