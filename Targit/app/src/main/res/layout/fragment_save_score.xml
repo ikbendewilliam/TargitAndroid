@@ -22,7 +22,7 @@
             android:src="@drawable/ellipse_1" />
 
         <TextView
-            android:id="@+id/fragment_save_score_textview_scoretext"
+            android:id="@+id/fragment_save_score_textview_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -53,6 +53,7 @@
         app:layout_widthPercent="70%">
 
         <TextView
+            android:id="@+id/fragment_save_score_textview_scoretitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
