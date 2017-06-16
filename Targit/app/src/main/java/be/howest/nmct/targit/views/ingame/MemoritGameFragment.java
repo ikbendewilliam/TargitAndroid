@@ -185,9 +185,11 @@ public class MemoritGameFragment extends Fragment {
                 mUserinput = false; // Start the automated "show"
             } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 1000 && mIterator == 0 && !mUserinput) {
                 // if no button is lit, and a second has passed, the iterator is 0 and the user isn't pressing buttons
-                mWaitTime = WAIT_TIME_MAX; // Reset the wait time
                 mLastFrameLit = frame; // set the lastframelit to this frame
                 mLitButton = mSequence.get(mIterator); // set the lit button to the first one
+                mWaitTime = (int)(WAIT_TIME_MAX * Math.pow(0.8, mSequence.size() - mIterator) - 1); // Set the wait time
+                if (mWaitTime < WAIT_TIME_MIN)
+                    mWaitTime = WAIT_TIME_MIN;
                 mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), COMMAND_LED_ON); // Turn the led on this device on
             } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 200 && mIterator != 0 && mIterator < mSequence.size() && !mUserinput) {
                 // if no button is lit, and a 200 ms has passed, the iterator is not the max and the user isn't pressing buttons
@@ -205,14 +207,13 @@ public class MemoritGameFragment extends Fragment {
                 mLastFrameLit = frame; // set the lastframelit to this frame
                 mLitButton = null; // No button is lit > mLitButton = null
                 mIterator++; // increment iterator
-                mWaitTime *= 0.8;
+                mWaitTime = (int)(WAIT_TIME_MAX * Math.pow(0.8, mSequence.size() - mIterator) - 1); // Increase the wait time
                 if (mWaitTime < WAIT_TIME_MIN)
                     mWaitTime = WAIT_TIME_MIN;
                 mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // Turn all leds off
             } else if (mUserinput && mIterator < mSequence.size()) {
                 // If it's the users turn and he hasn't pressed all buttons
                 mLitButton = mSequence.get(mIterator); // set the to check button
-
                 if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled() && !mIsPressed) {
                     // If this correct button is pressed and can be pressed
                     mScore++;
