@@ -1,0 +1,144 @@
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_toEndOf="@id/fragment_save_score_left"
+    tools:context=".views.infogamemode.SmashitInfoFragment">
+
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_save_score_relativelayout_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        app:layout_heightPercent="20%"
+        app:layout_widthPercent="30%">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ellipse_1" />
+
+        <TextView
+            android:id="@+id/fragment_save_score_textview_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="21"
+            android:textColor="@color/colorText"
+            android:textSize="52sp" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--Variable margin for responsiveness-->
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_save_score_relativelayout_margin_score_box"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/fragment_save_score_relativelayout_score"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%" />
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_save_score_relativelayout_box"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/fragment_save_score_relativelayout_margin_score_box"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorSmashit"
+        android:orientation="vertical"
+        app:layout_heightPercent="20%"
+        app:layout_widthPercent="70%">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Score Opslaan"
+            android:textColor="@color/colorText"
+            android:textSize="20sp" />
+
+        <View
+            android:id="@+id/fragment_save_score_view_edittext_bottom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            app:layout_heightPercent="15%"
+            app:layout_widthPercent="100%" />
+
+        <EditText
+            android:id="@+id/fragment_save_score_edittext_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/fragment_save_score_view_edittext_bottom"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/colorText"
+            android:gravity="bottom"
+            android:hint="Naam"
+            android:shadowColor="@color/colorText"
+            android:textColor="@color/colorText"
+            android:textColorHighlight="@color/colorText"
+            android:textColorHint="@color/colorText"
+            app:layout_widthPercent="90%" />
+
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--Variable margin for responsiveness-->
+    <View
+        android:id="@+id/fragment_save_score_view_margin_box_buttons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/fragment_save_score_relativelayout_box"
+        app:layout_heightPercent="25%"
+        app:layout_widthPercent="100%" />
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_save_score_relativelayout_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/fragment_save_score_view_margin_box_buttons"
+
+        android:layout_centerHorizontal="true"
+        app:layout_widthPercent="80%">
+
+        <Button
+            android:id="@+id/fragment_save_score_button_save"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/colorSmashit"
+            android:elevation="4dp"
+            android:text="Opslaan"
+            android:textAllCaps="false"
+            android:textColor="@color/colorText"
+            android:textSize="24sp"
+            app:layout_heightPercent="40%"
+            app:layout_widthPercent="35%" />
+
+        <Button
+
+            android:id="@+id/fragment_save_score_button_cancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="4dp"
+            android:background="@color/colorSmashit"
+            android:elevation="4dp"
+            android:text="Annuleren"
+            android:textAllCaps="false"
+            android:textColor="@color/colorText"
+            android:textSize="24dp"
+            app:layout_heightPercent="40%"
+            app:layout_widthPercent="35%" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+</android.support.percent.PercentRelativeLayout>
+
