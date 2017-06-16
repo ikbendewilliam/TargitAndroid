@@ -68,12 +68,17 @@ public abstract class Constants {
     public static int EXTRA_LIVES_MANY = 5; // WARNING: changing these lives discards the previous highscore
     public static int EXTRA_LIVES_MEDIUM = 3; // WARNING: changing these lives discards the previous highscore
     public static int EXTRA_LIVES_FEW = 1; // WARNING: changing these lives discards the previous highscore
+    public static int WAIT_TIME_MAX = 2000; // The time in ms the last button lits up
+    public static int WAIT_TIME_MIN = 200; // The min time in ms each button has to lit up
+    public static float WAIT_TIME_RATE = 0.8f; // The time increased with every lit up button
+
 
     // Info game
     public static String EXTRA_GAMEMODE = "gameMode";
     public static String EXTRA_GAMEMODE_SMASHIT = "smashit";
     public static String EXTRA_GAMEMODE_ZENIT = "zenit";
     public static String EXTRA_GAMEMODE_MEMORIT = "memorit";
+    public static int MIN_DEVICES_CONNETED = 2;
 
     // Helpstepfragment
     public static final String EXTRA_HELP_TEXT = "helptext";
