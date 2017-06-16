@@ -1,5 +1,7 @@
 package be.howest.nmct.targit.views.gameover;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import be.howest.nmct.targit.R;
+
+import static be.howest.nmct.targit.Constants.EXTRA_CATEGORY;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
+import static be.howest.nmct.targit.Constants.EXTRA_SCORE;
 
 public class GameOverActivity extends AppCompatActivity {
 
@@ -23,6 +31,24 @@ public class GameOverActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
+
+        //check if the activity recieved all the params (EXTRA_GAME,EXTRA_SCORE,EXTRA_CATEGORY
+        if (getIntent().hasExtra(EXTRA_GAME) && getIntent().hasExtra(EXTRA_SCORE)
+                && getIntent().hasExtra(EXTRA_CATEGORY)) {
+            //make fragment
+            Fragment saveScoreFragment = SaveScoreFragment.newInstance();
+            //put arguments for fragment
+            saveScoreFragment.setArguments(getIntent().getExtras());
+            //show the fragment
+            showFragment(saveScoreFragment);
+        }
+    }
+
+    private void showFragment(Fragment newFragment) {
+        //Log.i(Constants.TAG, "showFragment: " + newFragment.toString());
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.framelayout_in_gameactivity, newFragment);
+        transaction.commit();
     }
 
     //handles full screen autohiding
