@@ -70,6 +70,7 @@ public abstract class Constants {
     public static int EXTRA_LIVES_FEW = 1; // WARNING: changing these lives discards the previous highscore
     public static int WAIT_TIME_MAX = 2000; // The time in ms the last button lits up
     public static int WAIT_TIME_MIN = 200; // The min time in ms each button has to lit up
+    public static float WAIT_TIME_RATE = 0.8f; // The time increased with every lit up button
 
 
     // Info game
