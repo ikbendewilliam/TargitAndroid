@@ -27,6 +27,8 @@ import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
 import static be.howest.nmct.targit.Constants.COMMAND_LED_ON;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.STEP_TIME;
+import static be.howest.nmct.targit.Constants.WAIT_TIME_MAX;
+import static be.howest.nmct.targit.Constants.WAIT_TIME_MIN;
 
 public class MemoritGameFragment extends Fragment {
     private int mLastFrameLit = 0; // The frame when the last device lit up
@@ -35,6 +37,7 @@ public class MemoritGameFragment extends Fragment {
     private int mCategory; // The played category
     private int mLives; // Current lives
     private int mIterator = 0; // An iterator to keep track of which button to press/which device to lit up
+    private int mWaitTime = WAIT_TIME_MAX;
     private boolean mUserinput = true; // If it is the user its turn
     private boolean mIsPressed = false; // If a button is being pressed
     private ArduinoButton mLitButton = null; // Which button to lit
@@ -182,6 +185,7 @@ public class MemoritGameFragment extends Fragment {
                 mUserinput = false; // Start the automated "show"
             } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 1000 && mIterator == 0 && !mUserinput) {
                 // if no button is lit, and a second has passed, the iterator is 0 and the user isn't pressing buttons
+                mWaitTime = WAIT_TIME_MAX; // Reset the wait time
                 mLastFrameLit = frame; // set the lastframelit to this frame
                 mLitButton = mSequence.get(mIterator); // set the lit button to the first one
                 mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), COMMAND_LED_ON); // Turn the led on this device on
@@ -196,11 +200,14 @@ public class MemoritGameFragment extends Fragment {
                 mUserinput = true; // Start the users play
                 mIterator = 0; // reset iterator
                 mLitButton = mSequence.get(mIterator); // Wait for the user to press the first button
-            } else if (mLitButton != null && (frame - mLastFrameLit) * STEP_TIME > 1500 && mIterator < mSequence.size() && !mUserinput) {
-                // if a button is lit, and 1.5sec has passed, the iterator is not the max and the user isn't pressing buttons
+            } else if (mLitButton != null && (frame - mLastFrameLit) * STEP_TIME > mWaitTime && mIterator < mSequence.size() && !mUserinput) {
+                // if a button is lit, and mWaitTime [ms] has passed, the iterator is not the max and the user isn't pressing buttons
                 mLastFrameLit = frame; // set the lastframelit to this frame
                 mLitButton = null; // No button is lit > mLitButton = null
                 mIterator++; // increment iterator
+                mWaitTime *= 0.8;
+                if (mWaitTime < WAIT_TIME_MIN)
+                    mWaitTime = WAIT_TIME_MIN;
                 mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // Turn all leds off
             } else if (mUserinput && mIterator < mSequence.size()) {
                 // If it's the users turn and he hasn't pressed all buttons
