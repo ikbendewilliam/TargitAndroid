@@ -1,0 +1,72 @@
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="be.howest.nmct.targit.views.highscore.SmashitHighscoreFragment">
+
+
+
+        <FrameLayout
+            android:id="@+id/framelayout_in_fragment_smashit_highscore"
+            android:layout_width="0dp"
+            app:layout_widthPercent="45%"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+
+            />
+    <View
+        android:id="@+id/fragment_smashit_highscore_view"
+        android:layout_width="0dp"
+        app:layout_widthPercent="65%"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/fragment_smashit_highscore_easy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_widthPercent="12%"
+        app:layout_heightPercent="7%"
+        android:background="@drawable/postit_green_selected"
+        android:text="@string/smashit_easy"
+        android:textAllCaps="false"
+        android:textColor="@color/colorText"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/fragment_smashit_highscore_view"
+        android:layout_alignTop="@id/framelayout_in_fragment_smashit_highscore"
+        />
+
+    <Button
+        android:id="@+id/fragment_smashit_highscore_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_widthPercent="12%"
+        app:layout_heightPercent="7%"
+        android:background="@drawable/postit_orange"
+        android:text="@string/smashit_medium"
+        android:textAllCaps="false"
+        android:textColor="@color/colorText"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/fragment_smashit_highscore_view"
+        android:layout_below="@id/fragment_smashit_highscore_easy"
+        />
+
+    <Button
+        android:id="@+id/fragment_smashit_highscore_hard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_widthPercent="12%"
+        app:layout_heightPercent="7%"
+        android:background="@drawable/postit_red"
+        android:text="@string/smashit_hard"
+        android:textAllCaps="false"
+        android:textColor="@color/colorText"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/fragment_smashit_highscore_view"
+        android:layout_below="@id/fragment_smashit_highscore_medium"
+        />
+
+
+
+</android.support.percent.PercentRelativeLayout>

@@ -1,5 +1,6 @@
 package be.howest.nmct.targit.adapters;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,7 @@ import java.util.List;
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.models.HighscoreEntry;
 
-// Class that fills recycleview in highscore (HighscoreFragment)
+// Class that fills recycleview in highscore (HighscoreListFragment)
 public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighscoreRecyclerViewAdapter.ViewHolder> {
 
     private final List<HighscoreEntry> mValues; // Values in the list
@@ -27,8 +28,17 @@ public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighs
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_highscore_list_item, parent, false);
+
+        //set the fonts
+        Typeface font = Typeface.createFromAsset( parent.getContext().getAssets(), "font/BRLNSR.TTF");
+        ((TextView)view.findViewById(R.id.highscore_list_item_place)).setTypeface(font);
+        ((TextView)view.findViewById(R.id.highscore_list_item_name)).setTypeface(font);
+        ((TextView)view.findViewById(R.id.highscore_list_item_score)).setTypeface(font);
+
         return new ViewHolder(view);
     }
+
+
 
     // When items are placed in their UI (fragment_highscore_list_item.xml)
     @Override
@@ -63,6 +73,8 @@ public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighs
             mName = (TextView) view.findViewById(R.id.highscore_list_item_name);
             mScore = (TextView) view.findViewById(R.id.highscore_list_item_score);
         }
+
+
     }
 }
 

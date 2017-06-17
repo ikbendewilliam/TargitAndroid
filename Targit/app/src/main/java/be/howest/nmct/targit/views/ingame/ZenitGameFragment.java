@@ -37,6 +37,7 @@ public class ZenitGameFragment extends Fragment {
     private List<ArduinoButton> mArduinoButtons; // All devices
     private BluetoothConnection mBluetoothConnection; // bt connection
     private MediaPlayer pointPlayer;
+    private MediaPlayer gameoverPlayer;
 
     private OnZenitGameListener mListener; // Listener to stop the game
 
@@ -70,6 +71,7 @@ public class ZenitGameFragment extends Fragment {
         mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // turn all leds off
 
         pointPlayer = MediaPlayer.create(getContext(), R.raw.point); // Set the point sound
+        gameoverPlayer = MediaPlayer.create(getContext(), R.raw.gameover); // Set the game over sound
 
         startGameSteps(view); // configure the routine
         // initiate the textfield
@@ -82,6 +84,7 @@ public class ZenitGameFragment extends Fragment {
     private void stopGame() {
         if (mListener != null)
             mListener.stopGame(EXTRA_GAME_ZENIT, mScore, "" + mDuration); // Send the highscore
+        gameoverPlayer.start();
         mTimer.cancel(); // Stop the actual game
         mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
     }

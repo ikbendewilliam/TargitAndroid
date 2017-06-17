@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import be.howest.nmct.targit.R;
 
+import static be.howest.nmct.targit.Constants.EXTRA_CATEGORY;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
@@ -82,10 +83,12 @@ public class GameOverFragment extends Fragment {
     }
 
     //make instance of fragment
-    public static GameOverFragment newInstance(String score) {
+    public static GameOverFragment newInstance(String score,String gamemode,String category) {
         Bundle args = new Bundle();
         //Give score as a param
         args.putString(EXTRA_SCORE,score);
+        args.putString(EXTRA_GAME,gamemode);
+        args.putString(EXTRA_CATEGORY,category);
         GameOverFragment fragment = new GameOverFragment();
         fragment.setArguments(args);
         return fragment;

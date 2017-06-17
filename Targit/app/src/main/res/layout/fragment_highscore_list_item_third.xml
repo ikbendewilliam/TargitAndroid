@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!--<ImageView-->
+    <!--android:id="@+id/arduinobutton_connected"-->
+    <!--android:layout_width="80dp"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:layout_margin="@dimen/text_margin"-->
+    <!--android:src=""-->
+    <!--android:layout_gravity="center_vertical"/>-->
+
+    <TextView
+        android:id="@+id/highscore_list_item_place"
+        android:gravity="start"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/highscore_list_item_name"
+        android:gravity="start"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="20sp"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/highscore_list_item_score"
+        android:gravity="end"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_gravity="center_vertical"
+        />
+
+    <!--<TextView-->
+    <!--android:id="@+id/highscore_list_item_place"-->
+    <!--android:gravity="start"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:text="1" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/highscore_list_item_name"-->
+    <!--android:gravity="start"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="4"-->
+    <!--android:text="William" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/highscore_list_item_score"-->
+    <!--android:gravity="end"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="2"-->
+    <!--android:text="OVER 9000!!!" />-->
+
+</LinearLayout>
