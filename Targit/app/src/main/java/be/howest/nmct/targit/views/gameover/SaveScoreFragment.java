@@ -42,26 +42,33 @@ public class SaveScoreFragment extends Fragment {
         String category = getArguments().getString(EXTRA_CATEGORY);
         final View view = inflater.inflate(R.layout.fragment_save_score, container, false);
 
-        //set font
+        //region setfont
+        //getfont
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
+        //name inputfield
         EditText name = (EditText) view.findViewById(R.id.fragment_save_score_edittext_name);
         name.setTypeface(font);
+        //save button
         Button btnSave = (Button) view.findViewById(R.id.fragment_save_score_button_save);
         btnSave.setTypeface(font);
+        //cancel button
         Button btnCancel = (Button) view.findViewById(R.id.fragment_save_score_button_cancel);
         btnCancel.setTypeface(font);
+        //score title
         TextView txtScoreTitle = (TextView) view.findViewById(R.id.fragment_save_score_textview_scoretitle);
         txtScoreTitle.setTypeface(font);
+        //score text
         TextView txtScore = (TextView) view.findViewById(R.id.fragment_save_score_textview_score);
         txtScore.setTypeface(font);
+        //endregion
 
-        //set score
+        //set score value
         txtScore.setText("" + score);
 
         RelativeLayout relativeLayoutBox = (RelativeLayout) view.findViewById(R.id.fragment_save_score_relativelayout_box);
         ImageView ellipse = (ImageView) view.findViewById(R.id.fragment_game_over_imageview_ellipse);
 
-
+        //region set design for correct gamemode
         if (gamemode.equals(EXTRA_GAME_SMASHIT)) {
             //set the right colors according to the selected gamemode
             //change the name box background
@@ -93,7 +100,9 @@ public class SaveScoreFragment extends Fragment {
             ellipse.setImageResource(R.drawable.memorit_ellipse);
 
         }
+        //endregion
 
+        //region OnClickListeners
         view.findViewById(R.id.fragment_save_score_button_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,9 +122,10 @@ public class SaveScoreFragment extends Fragment {
         view.findViewById(R.id.fragment_save_score_button_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.dismissScore(new HighscoreEntry("",score));
+                mListener.dismissScore(new HighscoreEntry("", score));
             }
         });
+        //endregion
         return view;
     }
 
@@ -138,6 +148,7 @@ public class SaveScoreFragment extends Fragment {
 
     interface SaveScoreTransitionListener {
         void saveScore(HighscoreEntry newEntry);
+
         void dismissScore(HighscoreEntry newEntry);
     }
 }
