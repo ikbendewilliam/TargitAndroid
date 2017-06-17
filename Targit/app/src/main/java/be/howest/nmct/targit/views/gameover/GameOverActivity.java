@@ -109,11 +109,12 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
     @Override
     public void saveScore(HighscoreEntry newEntry) {
         mHighscoreFragment.addEntry(newEntry);
-        showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
+
+        showFragmentInGameOverLayoutRight(GameOverFragment.newInstance(""+newEntry.getScore()));
     }
 
     @Override
-    public void dismissScore() {
-        showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
+    public void dismissScore(HighscoreEntry newEntry) {
+        showFragmentInGameOverLayoutRight(GameOverFragment.newInstance(""+newEntry.getScore()));
     }
 }

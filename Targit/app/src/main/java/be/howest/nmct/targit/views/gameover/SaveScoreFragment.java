@@ -6,11 +6,14 @@ import android.net.Uri;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import be.howest.nmct.targit.R;
@@ -55,6 +58,42 @@ public class SaveScoreFragment extends Fragment {
         //set score
         txtScore.setText("" + score);
 
+        RelativeLayout relativeLayoutBox = (RelativeLayout) view.findViewById(R.id.fragment_save_score_relativelayout_box);
+        ImageView ellipse = (ImageView) view.findViewById(R.id.fragment_game_over_imageview_ellipse);
+
+
+        if (gamemode.equals(EXTRA_GAME_SMASHIT)) {
+            //set the right colors according to the selected gamemode
+            //change the name box background
+            relativeLayoutBox.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSmashit));
+            //change buttons color
+            btnCancel.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSmashit));
+            btnSave.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSmashit));
+            //change oval image
+            ellipse.setImageResource(R.drawable.ellipse_1);
+
+        } else if (gamemode.equals(EXTRA_GAME_ZENIT)) {
+            //set the right colors according to the selected gamemode
+            //change the name box background
+            relativeLayoutBox.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorZenit));
+            //change buttons color
+            btnCancel.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorZenit));
+            btnSave.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorZenit));
+            //change oval image
+            ellipse.setImageResource(R.drawable.zenit_ellipse);
+
+        } else if (gamemode.equals(EXTRA_GAME_MEMORIT)) {
+            //set the right colors according to the selected gamemode
+            //change the name box background
+            relativeLayoutBox.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMemorit));
+            //change buttons color
+            btnCancel.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMemorit));
+            btnSave.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMemorit));
+            //change oval image
+            ellipse.setImageResource(R.drawable.memorit_ellipse);
+
+        }
+
         view.findViewById(R.id.fragment_save_score_button_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +113,7 @@ public class SaveScoreFragment extends Fragment {
         view.findViewById(R.id.fragment_save_score_button_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.dismissScore();
+                mListener.dismissScore(new HighscoreEntry("",score));
             }
         });
         return view;
@@ -99,6 +138,6 @@ public class SaveScoreFragment extends Fragment {
 
     interface SaveScoreTransitionListener {
         void saveScore(HighscoreEntry newEntry);
-        void dismissScore();
+        void dismissScore(HighscoreEntry newEntry);
     }
 }
