@@ -129,7 +129,7 @@ public class SmashitHighscoreFragment extends Fragment {
 
     //change the list for another category
     private void showlistFragment(String category) {
-        HighscoreListFragment highscoreListFragment = HighscoreListFragment.newInstance(EXTRA_GAME_SMASHIT, category, null);
+        HighscoreListFragment highscoreListFragment = HighscoreListFragment.newInstance(EXTRA_GAME_SMASHIT, category, null, true);
         mHighscoreListFragment = highscoreListFragment;
         showFragment(highscoreListFragment);
     }

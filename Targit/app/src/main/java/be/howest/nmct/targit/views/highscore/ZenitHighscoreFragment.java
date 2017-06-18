@@ -128,7 +128,7 @@ public class ZenitHighscoreFragment extends Fragment {
 
     //change the list for another category
     private void showlistFragment(int category) {
-        HighscoreListFragment highscoreListFragment = HighscoreListFragment.newInstance(EXTRA_GAME_ZENIT, category, null);
+        HighscoreListFragment highscoreListFragment = HighscoreListFragment.newInstance(EXTRA_GAME_ZENIT, category, null, true);
         mHighscoreListFragment = highscoreListFragment;
         showFragment(highscoreListFragment);
     }

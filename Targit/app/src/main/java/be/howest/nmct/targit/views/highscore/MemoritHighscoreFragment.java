@@ -83,7 +83,7 @@ public class MemoritHighscoreFragment extends Fragment {
 
     //change the list for another category
     private void showlistFragment(int category) {
-        HighscoreListFragment highscoreListFragment = HighscoreListFragment.newInstance(EXTRA_GAME_MEMORIT, category, null);
+        HighscoreListFragment highscoreListFragment = HighscoreListFragment.newInstance(EXTRA_GAME_MEMORIT, category, null, true);
         mHighscoreListFragment = highscoreListFragment;
         showFragment(highscoreListFragment);
     }
