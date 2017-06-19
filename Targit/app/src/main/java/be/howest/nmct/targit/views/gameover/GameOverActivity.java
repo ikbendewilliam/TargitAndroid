@@ -46,6 +46,7 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
             int score = getIntent().getIntExtra(EXTRA_SCORE, 0);
             String category = getIntent().getStringExtra(EXTRA_CATEGORY);
 
+            //show highscore fragment
             mHighscoreListFragment = HighscoreListFragment.newInstance(gamemode, category, null);
             showHighscoreListFragment();
 
@@ -74,6 +75,7 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
             if (gamemode.equals(EXTRA_GAME_SMASHIT)) {
                 //set title name
                 txtTitle.setText("SMASH - iT");
+
             } else if (gamemode.equals(EXTRA_GAME_ZENIT)) {
                 //set title name
                 txtTitle.setText("ZEN - iT");
