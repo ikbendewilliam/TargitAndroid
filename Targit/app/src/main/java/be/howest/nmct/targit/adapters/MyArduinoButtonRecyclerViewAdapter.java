@@ -119,10 +119,14 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
                             // Let this device turn on
                             bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
                             bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_ON);
+                            mValues.get(holder.getAdapterPosition() - 1).setLit(true);
+                            notifyDataSetChanged();
                             return true; // if you want to handle the touch event
                         case MotionEvent.ACTION_UP:
                             // flash all leds
                             bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_FLASH_SLOW);
+                            mValues.get(holder.getAdapterPosition() - 1).setLit(false);
+                            notifyDataSetChanged();
                             return true; // if you want to handle the touch event
                     }
                 }
@@ -143,9 +147,9 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
         if (mValues.get(position - 1).isPressed()) {
             // If the button on the device is pressed, change the background of this row
             holder.mLayout.setBackgroundColor(Color.rgb(128, 200, 200));
-//        } else if () {
-//            // If the button on the device is NOT pressed, revert the background of this row
-//            holder.mLayout.setBackgroundColor(Color.rgb(255, 255, 255));
+        } else if (mValues.get(position - 1).isLit()) {
+            // If the device on the UI is pressed
+            holder.mLayout.setBackgroundColor(Color.rgb(200, 128, 200));
         } else {
             // If the button on the device is NOT pressed, revert the background of this row
             holder.mLayout.setBackgroundColor(Color.rgb(255, 255, 255));
