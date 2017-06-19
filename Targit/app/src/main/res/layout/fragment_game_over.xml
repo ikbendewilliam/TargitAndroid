@@ -78,7 +78,7 @@
             android:layout_marginBottom="4dp"
             android:background="@color/colorSmashit"
             android:elevation="4dp"
-            android:text="Menu"
+            android:text="@string/game_over_button_menu"
             android:textAllCaps="false"
             android:textColor="@color/colorText"
             android:textSize="24sp"
@@ -94,10 +94,10 @@
             android:layout_margin="4dp"
             android:background="@color/colorSmashit"
             android:elevation="4dp"
-            android:text="Opnieuw"
+            android:text="@string/game_over_button_again"
             android:textAllCaps="false"
             android:textColor="@color/colorText"
-            android:textSize="24dp"
+            android:textSize="24sp"
             app:layout_heightPercent="40%"
             app:layout_widthPercent="20%" />
 

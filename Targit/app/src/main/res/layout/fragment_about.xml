@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gemaakt door Targit Team"
+                android:text="@string/about_title_made_by"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:layout_marginBottom="2dp"/>
@@ -36,27 +36,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ataç Tarik"
+                android:text="@string/about_made_by_name_1"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Missiaen Matthijs"
+                android:text="@string/about_made_by_name_2"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Robersscheuten Downey"
+                android:text="@string/about_made_by_name_3"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="William Verhaeghe"
+                android:text="@string/about_made_by_name_4"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -75,7 +75,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Credit"
+                    android:text="@string/about_title_credit"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:layout_marginBottom="2dp"/>
@@ -83,27 +83,27 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Created by Dooder - Freepik.com"
+                    android:text="@string/about_credit_line_1"
                     android:textColor="@android:color/black"
-                    android:textSize="15dp"/>
+                    android:textSize="15sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vecteezy.com"
+                    android:text="@string/about_credit_line_2"
                     android:textColor="@android:color/black"
-                    android:textSize="15dp"/>
+                    android:textSize="15sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Created by D3images - Freepik.com"
+                    android:text="@string/about_credit_line_3"
                     android:textColor="@android:color/black"
-                    android:textSize="15dp"/>
+                    android:textSize="15sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Made by Dmitriy Prodchenko"
+                    android:text="@string/about_credit_line_4"
                     android:textColor="@android:color/black"
-                    android:textSize="15dp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
