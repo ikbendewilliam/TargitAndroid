@@ -178,6 +178,17 @@ public class SmashitGameFragment extends Fragment {
                 mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
                 mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST); // Flash the button to press
             } else if (mLitButton != null) {
+                for (ArduinoButton arduinoButton : mArduinoButtons) {
+                    // Loop all buttons
+                    if (mLitButton != null) {
+                        // If a button is lit
+                        if (arduinoButton.isPressed() && arduinoButton.isConnected() && arduinoButton.isEnabled() && !arduinoButton.getDeviceName().equals(mLitButton.getDeviceName())) {
+                            // if a wrong button is pressed
+                            loseLive(frame, view);
+                            arduinoButton.setPressed(false); // this is a hack, sorry
+                        }
+                    }
+                }
                 // If a button is lit
                 if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
                     // If this button is pressed
@@ -193,17 +204,6 @@ public class SmashitGameFragment extends Fragment {
 
                     ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_score)).setText("" + mScore);
                     mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
-                }
-                for (ArduinoButton arduinoButton : mArduinoButtons) {
-                    // Loop all buttons
-                    if (mLitButton != null) {
-                        // If a button is lit
-                        if (arduinoButton.isPressed() && arduinoButton.isConnected() && arduinoButton.isEnabled() && !arduinoButton.getDeviceName().equals(mLitButton.getDeviceName())) {
-                            // if a wrong button is pressed
-                            loseLive(frame, view);
-                            arduinoButton.setPressed(false); // this is a hack, sorry
-                        }
-                    }
                 }
             }
 

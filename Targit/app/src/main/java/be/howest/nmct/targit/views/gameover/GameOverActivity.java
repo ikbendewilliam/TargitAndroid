@@ -2,6 +2,7 @@ package be.howest.nmct.targit.views.gameover;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,17 +14,20 @@ import android.widget.TextView;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.models.HighscoreEntry;
+import be.howest.nmct.targit.views.MainActivity;
 import be.howest.nmct.targit.views.highscore.HighscoreListFragment;
+import be.howest.nmct.targit.views.infogamemode.InfoGameModeActivity;
 import be.howest.nmct.targit.views.settings.AboutFragment;
 
 import static be.howest.nmct.targit.Constants.EXTRA_CATEGORY;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME;
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
 import static be.howest.nmct.targit.Constants.EXTRA_SCORE;
 
-public class GameOverActivity extends AppCompatActivity implements SaveScoreFragment.SaveScoreTransitionListener {
+public class GameOverActivity extends AppCompatActivity implements SaveScoreFragment.SaveScoreTransitionListener, GameOverFragment.OnGameOverListener {
     private HighscoreListFragment mHighscoreListFragment;
 
     @Override
@@ -52,8 +56,8 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
             //redirect player to game over instead of savescore if he has a score of 0
             if (score == 0) {
                 //show game over fragment
-                showFragmentInGameOverLayoutRight(GameOverFragment.newInstance(""+score,
-                        gamemode,category));
+                showFragmentInGameOverLayoutRight(GameOverFragment.newInstance("" + score,
+                        gamemode, category));
             } else {
                 //make fragment
                 Fragment saveScoreFragment = new SaveScoreFragment();
@@ -90,6 +94,7 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
         transaction.replace(R.id.activity_game_over_framelayout_right, newFragment);
         transaction.commit();
     }
+
     //show highscore fragment on the left side of the screen
     private void showHighscoreListFragment() {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -118,15 +123,38 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
         //Save score
         mHighscoreListFragment.addEntry(newEntry);
         //show the game over fragment
-        showFragmentInGameOverLayoutRight(GameOverFragment.newInstance(""+newEntry.getScore(),
-                getIntent().getStringExtra(EXTRA_GAME),getIntent().getStringExtra(EXTRA_CATEGORY)));
+        showFragmentInGameOverLayoutRight(GameOverFragment.newInstance("" + newEntry.getScore(),
+                getIntent().getStringExtra(EXTRA_GAME), getIntent().getStringExtra(EXTRA_CATEGORY)));
     }
 
     //used when the player doesn't want to save the score
     @Override
     public void dismissScore(HighscoreEntry newEntry) {
         //show the game over fragment
-        showFragmentInGameOverLayoutRight(GameOverFragment.newInstance(""+newEntry.getScore(),
-                getIntent().getStringExtra(EXTRA_GAME),getIntent().getStringExtra(EXTRA_CATEGORY)));
+        showFragmentInGameOverLayoutRight(GameOverFragment.newInstance("" + newEntry.getScore(),
+                getIntent().getStringExtra(EXTRA_GAME), getIntent().getStringExtra(EXTRA_CATEGORY)));
+    }
+
+    // Change to an activity
+    // @param activity: the class of the activity you want to show
+    void showActivity(Class activity) {
+        Intent intent = new Intent(this, activity);
+        startActivity(intent);
+    }
+
+    void showInfoGameModeActivity(String gameMode) {
+        Intent intent = new Intent(this, InfoGameModeActivity.class);
+        intent.putExtra(EXTRA_GAMEMODE, gameMode);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showMainActivity() {
+        showActivity(MainActivity.class);
+    }
+
+    @Override
+    public void showGameInfoActivity(String gameMode) {
+        showInfoGameModeActivity(gameMode);
     }
 }

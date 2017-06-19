@@ -10,6 +10,7 @@ import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,9 @@ import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MEDIUM;
+import static be.howest.nmct.targit.Constants.SAVESTATE_LIST_CATEGORY;
+import static be.howest.nmct.targit.Constants.SAVESTATE_LIST_GAMEMODE;
+import static be.howest.nmct.targit.Constants.TAG;
 
 // The fragment that shows the highscore
 public class HighscoreListFragment extends Fragment {
@@ -85,7 +89,7 @@ public class HighscoreListFragment extends Fragment {
     // @param Nullable HighscoreEntry: if there is a new entry, define it here, otherwise null
     // @param removeBoolean: if true bottom of the image will be removed
     public static HighscoreListFragment newInstance(String gameMode, int category, @Nullable HighscoreEntry newEntry, boolean removeBottom) {
-        HighscoreListFragment fragment = newInstance(gameMode,category,newEntry);
+        HighscoreListFragment fragment = newInstance(gameMode, category, newEntry);
         // Set the variable removeBoolean
         fragment.mRemoveBottom = removeBottom;
         return fragment;
@@ -98,7 +102,7 @@ public class HighscoreListFragment extends Fragment {
     // @param Nullable HighscoreEntry: if there is a new entry, define it here, otherwise null
     // @param removeBoolean: if true bottom of the image will be removed
     public static HighscoreListFragment newInstance(String gameMode, String category, @Nullable HighscoreEntry newEntry, boolean removeBottom) {
-        HighscoreListFragment fragment = newInstance(gameMode,category,newEntry);
+        HighscoreListFragment fragment = newInstance(gameMode, category, newEntry);
         // Set the variable removeBoolean
         fragment.mRemoveBottom = removeBottom;
         return fragment;
@@ -107,6 +111,14 @@ public class HighscoreListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            if (savedInstanceState.keySet().contains(SAVESTATE_LIST_GAMEMODE) && savedInstanceState.keySet().contains(SAVESTATE_LIST_CATEGORY)) {
+                mGameMode = savedInstanceState.getString(SAVESTATE_LIST_GAMEMODE);
+                mCategory = savedInstanceState.getString(SAVESTATE_LIST_CATEGORY);
+                Log.i(TAG, "onCreateView: " + mGameMode);
+            }
+        }
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_highscore_list, container, false);
 
@@ -114,29 +126,12 @@ public class HighscoreListFragment extends Fragment {
         txtTitle = (TextView) view.findViewById(R.id.fragment_highscore_list_title);
 
         //set the fonts
-        Typeface font = Typeface.createFromAsset( getActivity().getAssets(), "font/BRLNSDB.TTF");
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         txtTitle.setTypeface(font);
 
         //remove the bottom part of the background
-        if(mRemoveBottom)
+        if (mRemoveBottom)
             removeBottomPart(view);
-
-        // TODO: Remove this
-        // add a clicklistener to reset the highscore
-//        view.findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mHighscoreEntries.clear();
-//                mHighscoreEntries.add(new HighscoreEntry("William", 50));
-//                mHighscoreEntries.add(new HighscoreEntry("Gilles", 40));
-//                mHighscoreEntries.add(new HighscoreEntry("Downey", 30));
-//                mHighscoreEntries.add(new HighscoreEntry("Matthijs", 20));
-//                mHighscoreEntries.add(new HighscoreEntry("Tarik", 10));
-//                mHighscoreEntries.add(new HighscoreEntry("Eefje", 1));
-//                saveHighscoreToFile(mHighscoreEntries, mGameMode + "_" + mCategory);
-//                myHighscoreRecyclerViewAdapter.notifyDataSetChanged();
-//            }
-//        });
 
         // retrieve the highscores
         loadList();
@@ -171,11 +166,11 @@ public class HighscoreListFragment extends Fragment {
 
         //Remove bottom border
         View borderBottom = view.findViewById(R.id.highscore_list_border_bottom);
-        ((ViewGroup)borderBottom.getParent()).removeView(borderBottom);
+        ((ViewGroup) borderBottom.getParent()).removeView(borderBottom);
 
         //expand the list to the bottom
-        RecyclerView list = (RecyclerView) view.findViewById(R.id.highscore_recycleview) ;
-        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams)list.getLayoutParams();
+        RecyclerView list = (RecyclerView) view.findViewById(R.id.highscore_recycleview);
+        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) list.getLayoutParams();
         PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
         info.heightPercent = 1f;
         list.setLayoutParams(params);
@@ -185,32 +180,31 @@ public class HighscoreListFragment extends Fragment {
     private void setTitle(TextView txtTitle) {
         int id = 0;
 
-        if(mGameMode.equals(EXTRA_GAME_SMASHIT)) {
-            if(mCategory.equals(EXTRA_DIFFICULTY_EASY))
+        Log.i(TAG, "setTitle: " + mGameMode);
+        if (mGameMode.equals(EXTRA_GAME_SMASHIT)) {
+            if (mCategory.equals(EXTRA_DIFFICULTY_EASY))
                 id = R.string.smashit_easy;
-            else if(mCategory.equals(EXTRA_DIFFICULTY_MEDIUM))
+            else if (mCategory.equals(EXTRA_DIFFICULTY_MEDIUM))
                 id = R.string.smashit_medium;
-            else if(mCategory.equals(EXTRA_DIFFICULTY_HARD))
+            else if (mCategory.equals(EXTRA_DIFFICULTY_HARD))
                 id = R.string.smashit_hard;
-        }
-        else if (mGameMode.equals(EXTRA_GAME_ZENIT)) {
-            if(mCategory.equals("" + EXTRA_DURATION_LONG))
+        } else if (mGameMode.equals(EXTRA_GAME_ZENIT)) {
+            if (mCategory.equals("" + EXTRA_DURATION_SHORT))
                 id = R.string.zenit_easy;
-            else if(mCategory.equals("" + EXTRA_DURATION_MEDIUM))
+            else if (mCategory.equals("" + EXTRA_DURATION_MEDIUM))
                 id = R.string.zenit_medium;
-            else if(mCategory.equals("" + EXTRA_DURATION_SHORT))
+            else if (mCategory.equals("" + EXTRA_DURATION_LONG))
                 id = R.string.zenit_hard;
-        }
-        else if (mGameMode.equals(EXTRA_GAME_MEMORIT)) {
-            if(mCategory.equals("" + EXTRA_LIVES_MANY))
+        } else if (mGameMode.equals(EXTRA_GAME_MEMORIT)) {
+            if (mCategory.equals("" + EXTRA_LIVES_MANY))
                 id = R.string.memorit_easy;
-            else if(mCategory.equals("" + EXTRA_LIVES_MEDIUM))
+            else if (mCategory.equals("" + EXTRA_LIVES_MEDIUM))
                 id = R.string.memorit_medium;
-            else if(mCategory.equals("" + EXTRA_LIVES_FEW))
+            else if (mCategory.equals("" + EXTRA_LIVES_FEW))
                 id = R.string.memorit_hard;
         }
 
-        if(id != 0)
+        if (id != 0)
             txtTitle.setText(getString(id));
 
     }
@@ -258,9 +252,8 @@ public class HighscoreListFragment extends Fragment {
         }
     }
 
-    public void changeList(String gameMode, String category)
-    {
-        mGameMode= gameMode;
+    public void changeList(String gameMode, String category) {
+        mGameMode = gameMode;
         mCategory = category;
 
         loadList();
@@ -273,8 +266,12 @@ public class HighscoreListFragment extends Fragment {
 
     private void loadList() {
         // retrieve the highscores
+        if (mHighscoreEntries == null)
+            mHighscoreEntries = new ArrayList<>();
         // returns a new list if nothing found
-        mHighscoreEntries = getHighscoreFromFile(mGameMode + "_" + mCategory);
+        List<HighscoreEntry> tempList = getHighscoreFromFile(mGameMode + "_" + mCategory);
+        mHighscoreEntries.clear();
+        mHighscoreEntries.addAll(tempList);
 
         // Check the size of the list
         if (mHighscoreEntries.size() < 6) {
@@ -287,7 +284,7 @@ public class HighscoreListFragment extends Fragment {
             mHighscoreEntries.add(new HighscoreEntry("Tarik", 10));
             mHighscoreEntries.add(new HighscoreEntry("Eefje", 1));
         }
-
+        Log.i(TAG, "loadList: " + mHighscoreEntries.toString());
         //change the title
         setTitle(txtTitle);
     }
@@ -337,5 +334,12 @@ public class HighscoreListFragment extends Fragment {
         }
         // Return the list
         return highscoreEntries;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(SAVESTATE_LIST_GAMEMODE, mGameMode);
+        outState.putString(SAVESTATE_LIST_CATEGORY, mCategory);
+        super.onSaveInstanceState(outState);
     }
 }

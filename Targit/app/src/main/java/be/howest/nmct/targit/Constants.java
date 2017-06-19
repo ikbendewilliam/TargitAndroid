@@ -96,4 +96,6 @@ public abstract class Constants {
     public static final int BUTTON_EASY = 1;
     public static final int BUTTON_MEDIUM = 2;
     public static final int BUTTON_HARD = 3;
+    public static final String SAVESTATE_LIST_GAMEMODE = "be.howest.nmct.targit.gamemode";
+    public static final String SAVESTATE_LIST_CATEGORY = "be.howest.nmct.targit.gamemode";
 }
