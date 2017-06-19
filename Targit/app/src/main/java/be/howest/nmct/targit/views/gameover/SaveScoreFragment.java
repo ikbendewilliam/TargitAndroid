@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,6 +48,7 @@ public class SaveScoreFragment extends Fragment {
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         //name inputfield
         EditText name = (EditText) view.findViewById(R.id.fragment_save_score_edittext_name);
+        name.setSingleLine();
         name.setTypeface(font);
         //save button
         Button btnSave = (Button) view.findViewById(R.id.fragment_save_score_button_save);
