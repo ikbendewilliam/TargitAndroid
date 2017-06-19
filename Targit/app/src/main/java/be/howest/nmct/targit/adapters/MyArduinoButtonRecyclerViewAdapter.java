@@ -107,21 +107,24 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
             public boolean onTouch(View v, MotionEvent event) {
                 // Get the BluetoothConnection manager
                 BluetoothConnection bluetoothConnection = BluetoothConnection.getBluetoothConnection();
-                // Get the deviceName
-                String deviceName = mValues.get(holder.getAdapterPosition() - 1).getDeviceName();
+                if (holder.getAdapterPosition() - 1 >= 0) {
+                    // When pressing buttons and using the ui this may fail
+                    // Get the deviceName
+                    String deviceName = mValues.get(holder.getAdapterPosition() - 1).getDeviceName();
 
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        // turn all leds off
-                        bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
-                        // Let this device turn on
-                        bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
-                        bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_ON);
-                        return true; // if you want to handle the touch event
-                    case MotionEvent.ACTION_UP:
-                        // flash all leds
-                        bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_FLASH_SLOW);
-                        return true; // if you want to handle the touch event
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            // turn all leds off
+                            bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+                            // Let this device turn on
+                            bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF);
+                            bluetoothConnection.sendMessageToDevice(deviceName, Constants.COMMAND_LED_ON);
+                            return true; // if you want to handle the touch event
+                        case MotionEvent.ACTION_UP:
+                            // flash all leds
+                            bluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_FLASH_SLOW);
+                            return true; // if you want to handle the touch event
+                    }
                 }
                 return false;
             }

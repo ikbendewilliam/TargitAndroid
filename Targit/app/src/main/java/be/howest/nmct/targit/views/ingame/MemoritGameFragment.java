@@ -48,6 +48,7 @@ public class MemoritGameFragment extends Fragment {
     private List<ArduinoButton> mSequence = new ArrayList<>(); // The given sequence
     private MediaPlayer pointPlayer;
     private MediaPlayer failPlayer;
+    private MediaPlayer gameoverPlayer;
 
     private OnMemoritGameListener mListener; // A listener to stop the game
 
@@ -82,6 +83,7 @@ public class MemoritGameFragment extends Fragment {
 
         pointPlayer = MediaPlayer.create(getContext(), R.raw.point); // Set the point sound
         failPlayer = MediaPlayer.create(getContext(), R.raw.fail); // Set the fail sound
+        gameoverPlayer = MediaPlayer.create(getContext(), R.raw.gameover); // Set the game over sound
 
         startGameSteps(view); // configure the routine
         // initiate the textfields
@@ -126,6 +128,7 @@ public class MemoritGameFragment extends Fragment {
     private void stopGame() {
         if (mListener != null)
             mListener.stopGame(EXTRA_GAME_MEMORIT, mScore, "" + mCategory); // Send the highscore
+        gameoverPlayer.start();
         mTimer.cancel(); // Stop the actual game
         mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // Turn all leds off
     }

@@ -52,12 +52,12 @@ public abstract class Constants {
     public static String EXTRA_DIFFICULTY_EASY = "easy";
     public static String EXTRA_DIFFICULTY_MEDIUM = "medium";
     public static String EXTRA_DIFFICULTY_HARD = "hard";
-    public static int TIME_TO_PRESS_MAX_EASY = 8000;
-    public static int TIME_TO_PRESS_MAX_MEDIUM = 6000;
+    public static int TIME_TO_PRESS_MAX_EASY = 7000;
+    public static int TIME_TO_PRESS_MAX_MEDIUM = 5000;
     public static int TIME_TO_PRESS_MAX_HARD = 3000;
-    public static int TIME_TO_PRESS_MIN_EASY = 3000;
-    public static int TIME_TO_PRESS_MIN_MEDIUM = 2000;
-    public static int TIME_TO_PRESS_MIN_HARD = 1000;
+    public static int TIME_TO_PRESS_MIN_EASY = 1500;
+    public static int TIME_TO_PRESS_MIN_MEDIUM = 1000;
+    public static int TIME_TO_PRESS_MIN_HARD = 500;
     // Zenit
     public static String EXTRA_DURATION = "duration";
     public static int EXTRA_DURATION_SHORT = 30; // WARNING: changing these times discards the previous highscore
@@ -72,7 +72,6 @@ public abstract class Constants {
     public static int WAIT_TIME_MIN = 200; // The min time in ms each button has to lit up
     public static float WAIT_TIME_RATE = 0.8f; // The time increased with every lit up button
 
-
     // Info game
     public static String EXTRA_GAMEMODE = "gameMode";
     public static String EXTRA_GAMEMODE_SMASHIT = "smashit";
@@ -85,5 +84,10 @@ public abstract class Constants {
     public static final String EXTRA_HELP_IMAGE = "helpimage";
 
     // Textsize
-    public static final double TEXT_SIZE = 8000;
+    public static final double TEXT_SIZE = 8000; // This is depending on dpi, that's why it's so big
+
+    // HighscoreFragment
+    public static final int BUTTON_EASY = 1;
+    public static final int BUTTON_MEDIUM = 2;
+    public static final int BUTTON_HARD = 3;
 }
