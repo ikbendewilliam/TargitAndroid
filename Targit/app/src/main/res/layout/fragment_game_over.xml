@@ -39,7 +39,7 @@
         android:layout_height="0dp"
         android:layout_below="@id/fragment_game_over_relativelayout_score"
         app:layout_heightPercent="3%"
-        app:layout_widthPercent="100%" />
+        app:layout_widthPercent="100%"/>
 
     <ImageView
         android:id="@+id/fragment_game_over_imageview_game_over"
@@ -58,7 +58,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_below="@id/fragment_game_over_imageview_game_over"
-        app:layout_heightPercent="5%"
+        app:layout_heightPercent="14%"
         app:layout_widthPercent="100%" />
 
     <android.support.percent.PercentRelativeLayout
@@ -83,7 +83,7 @@
             android:textColor="@color/colorText"
             android:textSize="24sp"
             app:layout_heightPercent="40%"
-            app:layout_widthPercent="30%" />
+            app:layout_widthPercent="35%" />
 
         <Button
 
@@ -99,7 +99,7 @@
             android:textColor="@color/colorText"
             android:textSize="24sp"
             app:layout_heightPercent="40%"
-            app:layout_widthPercent="30%" />
+            app:layout_widthPercent="35%" />
 
     </android.support.percent.PercentRelativeLayout>
 
