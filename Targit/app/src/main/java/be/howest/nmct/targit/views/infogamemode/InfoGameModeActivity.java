@@ -128,4 +128,9 @@ public class InfoGameModeActivity extends AppCompatActivity
     public void playSmashit(String cmdDifficulty) {
         showGameActivity(EXTRA_GAME_SMASHIT, EXTRA_DIFFICULTY, cmdDifficulty);
     }
+
+    @Override
+    public void onBackPressed() {
+        showActivity(MainActivity.class);
+    }
 }

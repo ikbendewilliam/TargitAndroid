@@ -26,6 +26,9 @@ import be.howest.nmct.targit.models.ArduinoButton;
 import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
 import static be.howest.nmct.targit.Constants.COMMAND_LED_ON;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
+import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MEDIUM;
 import static be.howest.nmct.targit.Constants.STEP_TIME;
 import static be.howest.nmct.targit.Constants.WAIT_TIME_MAX;
 import static be.howest.nmct.targit.Constants.WAIT_TIME_MIN;
@@ -102,26 +105,51 @@ public class MemoritGameFragment extends Fragment {
     }
 
     private void showLives(View view) {
-        if (mLives >= 1)
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
-        else
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
-        if (mLives >= 2)
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_memorit);
-        else
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_leeg);
-        if (mLives >= 3)
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_memorit);
-        else
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_leeg);
-        if (mLives >= 4)
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_memorit);
-        else
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_leeg);
-        if (mLives >= 5)
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart5)).setImageResource(R.drawable.ic_hart_memorit);
-        else
-            ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart5)).setImageResource(R.drawable.ic_hart_leeg);
+        if (mCategory == EXTRA_LIVES_FEW)
+        {
+            if (mLives >= 1)
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
+            else
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
+        }
+        else if (mCategory == EXTRA_LIVES_MEDIUM)
+        {
+            if (mLives >= 1)
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_memorit);
+            else
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_leeg);
+            if (mLives >= 2)
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
+            else
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
+            if (mLives >= 3)
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_memorit);
+            else
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_leeg);
+        }
+        else if (mCategory == EXTRA_LIVES_MANY)
+        {
+            if (mLives >= 1)
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_memorit);
+            else
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_leeg);
+            if (mLives >= 2)
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_memorit);
+            else
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_leeg);
+            if (mLives >= 3)
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
+            else
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
+            if (mLives >= 4)
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_memorit);
+            else
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_leeg);
+            if (mLives >= 5)
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart5)).setImageResource(R.drawable.ic_hart_memorit);
+            else
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart5)).setImageResource(R.drawable.ic_hart_leeg);
+        }
     }
 
     // End the game

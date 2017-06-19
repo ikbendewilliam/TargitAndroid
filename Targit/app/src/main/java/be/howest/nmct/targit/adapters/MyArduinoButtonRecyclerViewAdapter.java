@@ -153,7 +153,13 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
                     handler.post(new Runnable() {
                         public void run() {
                             mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_FLASH_SLOW);
-                            mValues.get(holder.getAdapterPosition() - 1).setLit(false);
+                            if (holder.getAdapterPosition() - 1 >= 0)
+                                mValues.get(holder.getAdapterPosition() - 1).setLit(false);
+                            else {
+                                for (int i = 0; i < mValues.size(); i++) {
+                                    mValues.get(i).setLit(false);
+                                }
+                            }
                             notifyDataSetChanged();
                         }
                     });
