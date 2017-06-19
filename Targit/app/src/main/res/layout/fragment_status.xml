@@ -55,7 +55,7 @@
                 android:paddingStart="10dp"
                 android:background="@color/colorMain"
                 android:textColor="@color/colorWhite"
-                android:text="Zoek knoppen"
+                android:text="@string/status_search_buttons"
                 android:layout_margin="@dimen/text_margin"
                 android:layout_gravity="center"/>
         </LinearLayout>
