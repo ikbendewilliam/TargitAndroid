@@ -48,8 +48,12 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
 
             mHighscoreListFragment = HighscoreListFragment.newInstance(gamemode, category, null);
             showHighscoreListFragment();
+
+            //redirect player to game over instead of savescore if he has a score of 0
             if (score == 0) {
-                showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
+                //show game over fragment
+                showFragmentInGameOverLayoutRight(GameOverFragment.newInstance(""+score,
+                        gamemode,category));
             } else {
                 //make fragment
                 Fragment saveScoreFragment = new SaveScoreFragment();
@@ -59,6 +63,7 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
                 showFragmentInGameOverLayoutRight(saveScoreFragment);
             }
 
+            //set font
             Typeface font = Typeface.createFromAsset(getAssets(), "font/BRLNSDB.TTF");
             TextView txtTitle = (TextView) findViewById(R.id.fragment_save_score_textview_gametitle);
             txtTitle.setTypeface(font);
@@ -79,12 +84,13 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
         }
     }
 
+    //show a fragment on the rightside of the screen.
     private void showFragmentInGameOverLayoutRight(Fragment newFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_game_over_framelayout_right, newFragment);
         transaction.commit();
     }
-
+    //show highscore fragment on the left side of the screen
     private void showHighscoreListFragment() {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.activity_game_over_framelayout_highscore, mHighscoreListFragment);
@@ -106,14 +112,21 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
         }
     }
 
+    //used when the player filled in their name and saved the score
     @Override
     public void saveScore(HighscoreEntry newEntry) {
+        //Save score
         mHighscoreListFragment.addEntry(newEntry);
-        showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
+        //show the game over fragment
+        showFragmentInGameOverLayoutRight(GameOverFragment.newInstance(""+newEntry.getScore(),
+                getIntent().getStringExtra(EXTRA_GAME),getIntent().getStringExtra(EXTRA_CATEGORY)));
     }
 
+    //used when the player doesn't want to save the score
     @Override
-    public void dismissScore() {
-        showFragmentInGameOverLayoutRight(new AboutFragment()); // TODO: Show game over fragment
+    public void dismissScore(HighscoreEntry newEntry) {
+        //show the game over fragment
+        showFragmentInGameOverLayoutRight(GameOverFragment.newInstance(""+newEntry.getScore(),
+                getIntent().getStringExtra(EXTRA_GAME),getIntent().getStringExtra(EXTRA_CATEGORY)));
     }
 }

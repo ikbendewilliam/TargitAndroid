@@ -2,4 +2,9 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="postit_selected_margin_left">-10dp</dimen>
+    <dimen name="highscore_list_item_first_textSize">24sp</dimen>
+    <dimen name="highscore_list_item_second_textSize">21sp</dimen>
+    <dimen name="highscore_list_item_third_textSize">18sp</dimen>
+    <dimen name="highscore_list_item_default_textSize">18sp</dimen>
+    <dimen name="highscore_buttons_textSize">20sp</dimen>
 </resources>

@@ -1,9 +1,12 @@
 package be.howest.nmct.targit.views.highscore;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.percent.PercentLayoutHelper;
+import android.support.percent.PercentRelativeLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +47,8 @@ public class HighscoreListFragment extends Fragment {
     List<HighscoreEntry> mHighscoreEntries; // A list of all entries in this category
     private HighscoreEntry mNewEntry; // The new entry provided (can be null)
     private MyHighscoreRecyclerViewAdapter myHighscoreRecyclerViewAdapter; // The adapter that will fill the list
+    private TextView txtTitle; // The text field for the title
+    private boolean mRemoveBottom = false; // If true the bottom of the background will be removed
 
     // Required empty public constructor
     public HighscoreListFragment() {
@@ -74,11 +79,47 @@ public class HighscoreListFragment extends Fragment {
         return fragment;
     }
 
+    // New instance of this fragment, with parameters
+    // @param gameMode: the gamemode where you want the highscores from
+    // @param category: the category where you want the highscores from
+    // @param Nullable HighscoreEntry: if there is a new entry, define it here, otherwise null
+    // @param removeBoolean: if true bottom of the image will be removed
+    public static HighscoreListFragment newInstance(String gameMode, int category, @Nullable HighscoreEntry newEntry, boolean removeBottom) {
+        HighscoreListFragment fragment = newInstance(gameMode,category,newEntry);
+        // Set the variable removeBoolean
+        fragment.mRemoveBottom = removeBottom;
+        return fragment;
+    }
+
+
+    // New instance of this fragment, with parameters
+    // @param gameMode: the gamemode where you want the highscores from
+    // @param category: the category where you want the highscores from
+    // @param Nullable HighscoreEntry: if there is a new entry, define it here, otherwise null
+    // @param removeBoolean: if true bottom of the image will be removed
+    public static HighscoreListFragment newInstance(String gameMode, String category, @Nullable HighscoreEntry newEntry, boolean removeBottom) {
+        HighscoreListFragment fragment = newInstance(gameMode,category,newEntry);
+        // Set the variable removeBoolean
+        fragment.mRemoveBottom = removeBottom;
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_highscore_list, container, false);
+
+        //Set title based on gamemode and diff
+        txtTitle = (TextView) view.findViewById(R.id.fragment_highscore_list_title);
+
+        //set the fonts
+        Typeface font = Typeface.createFromAsset( getActivity().getAssets(), "font/BRLNSDB.TTF");
+        txtTitle.setTypeface(font);
+
+        //remove the bottom part of the background
+        if(mRemoveBottom)
+            removeBottomPart(view);
 
         // TODO: Remove this
         // add a clicklistener to reset the highscore
@@ -119,11 +160,25 @@ public class HighscoreListFragment extends Fragment {
                 layoutManager.getOrientation()); //create a divider between rows
         recyclerView.addItemDecoration(dividerItemDecoration); //set the divider
 
-        //Set title based on gamemode and diff
-        TextView txtTitle = (TextView) view.findViewById(R.id.fragment_highscore_list_title);
-        setTitle(txtTitle);
-
         return view;
+    }
+
+    //Remove the bottom part of the background by editing the layout
+    private void removeBottomPart(View view) {
+        //change the background
+        View layout = view.findViewById(R.id.highscore_list_layout);
+        layout.setBackgroundResource(R.drawable.highscoreboard_bottom);
+
+        //Remove bottom border
+        View borderBottom = view.findViewById(R.id.highscore_list_border_bottom);
+        ((ViewGroup)borderBottom.getParent()).removeView(borderBottom);
+
+        //expand the list to the bottom
+        RecyclerView list = (RecyclerView) view.findViewById(R.id.highscore_recycleview) ;
+        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams)list.getLayoutParams();
+        PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
+        info.heightPercent = 1f;
+        list.setLayoutParams(params);
     }
 
     // Set title based on gamemode and diff
@@ -155,7 +210,8 @@ public class HighscoreListFragment extends Fragment {
                 id = R.string.memorit_hard;
         }
 
-        txtTitle.setText(getString(id));
+        if(id != 0)
+            txtTitle.setText(getString(id));
 
     }
 
@@ -202,13 +258,17 @@ public class HighscoreListFragment extends Fragment {
         }
     }
 
-    public void changeList(String gameMode, int category)
+    public void changeList(String gameMode, String category)
     {
         mGameMode= gameMode;
-        mCategory = "" + category;
+        mCategory = category;
 
         loadList();
         myHighscoreRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    public void changeList(String gameMode, int category) {
+        changeList(gameMode, "" + category);
     }
 
     private void loadList() {
@@ -227,6 +287,9 @@ public class HighscoreListFragment extends Fragment {
             mHighscoreEntries.add(new HighscoreEntry("Tarik", 10));
             mHighscoreEntries.add(new HighscoreEntry("Eefje", 1));
         }
+
+        //change the title
+        setTitle(txtTitle);
     }
 
     // Save the scores
