@@ -85,7 +85,8 @@
             android:textColor="@color/colorText"
             android:textColorHighlight="@color/colorText"
             android:textColorHint="@color/colorText"
-            app:layout_widthPercent="90%" />
+            app:layout_widthPercent="90%"
+            android:maxLines="1"/>
 
 
     </android.support.percent.PercentRelativeLayout>

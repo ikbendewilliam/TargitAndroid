@@ -242,7 +242,7 @@
             android:layout_alignStart="@+id/smashit_info_button_play_hard"
             android:layout_marginTop="23.3dp"
             android:background="@color/colorMatig"
-            android:text="@string/smashit_medium"
+            android:text="@string/smashit_info_button_matig"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="30sp"/>
