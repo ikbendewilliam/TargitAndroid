@@ -93,6 +93,7 @@ public class HighscoreActivity extends AppCompatActivity {
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.highscorePager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager(), fragments);
+        mPager.setOffscreenPageLimit(2);
         mPager.setAdapter(mPagerAdapter);
 
         // linken  van tabs met viewpager
