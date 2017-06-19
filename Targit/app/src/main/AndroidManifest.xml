@@ -44,7 +44,8 @@
             android:name=".views.gameover.GameOverActivity"
             android:label="@string/title_activity_game_over"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

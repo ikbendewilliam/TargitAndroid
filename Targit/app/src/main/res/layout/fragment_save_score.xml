@@ -88,7 +88,8 @@
             app:layout_widthPercent="90%"
             android:maxLines="1"
             android:lines="1"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:maxLength="50"/>
 
 
     </android.support.percent.PercentRelativeLayout>
