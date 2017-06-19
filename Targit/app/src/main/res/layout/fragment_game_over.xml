@@ -1,0 +1,108 @@
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.infogamemode.SmashitInfoFragment">
+
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_game_over_relativelayout_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        app:layout_heightPercent="20%"
+        app:layout_widthPercent="30%">
+
+        <ImageView
+            android:id="@+id/fragment_game_over_imageview_ellipse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ellipse_1" />
+
+        <TextView
+            android:id="@+id/fragment_game_over_textview_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="21"
+            android:textColor="@color/colorText"
+            android:textSize="52sp" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <!--Variable margin for responsiveness-->
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_game_over_relativelayout_margin_score_box"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/fragment_game_over_relativelayout_score"
+        app:layout_heightPercent="3%"
+        app:layout_widthPercent="100%" />
+
+    <ImageView
+        android:id="@+id/fragment_game_over_imageview_game_over"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/fragment_game_over_relativelayout_margin_score_box"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:src="@drawable/game_over_smashit"
+        app:layout_heightPercent="40%"
+        app:layout_widthPercent="70%"/>
+
+    <!--Variable margin for responsiveness-->
+    <View
+        android:id="@+id/fragment_game_over_view_margin_box_buttons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/fragment_game_over_imageview_game_over"
+        app:layout_heightPercent="5%"
+        app:layout_widthPercent="100%" />
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/fragment_game_over_relativelayout_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/fragment_game_over_view_margin_box_buttons"
+
+        android:layout_centerHorizontal="true"
+        app:layout_widthPercent="80%">
+
+        <Button
+            android:id="@+id/fragment_game_over_button_save"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/colorSmashit"
+            android:elevation="4dp"
+            android:text="@string/game_over_button_menu"
+            android:textAllCaps="false"
+            android:textColor="@color/colorText"
+            android:textSize="24sp"
+            app:layout_heightPercent="40%"
+            app:layout_widthPercent="20%" />
+
+        <Button
+
+            android:id="@+id/fragment_game_over_button_cancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="4dp"
+            android:background="@color/colorSmashit"
+            android:elevation="4dp"
+            android:text="@string/game_over_button_again"
+            android:textAllCaps="false"
+            android:textColor="@color/colorText"
+            android:textSize="24sp"
+            app:layout_heightPercent="40%"
+            app:layout_widthPercent="20%" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+</android.support.percent.PercentRelativeLayout>
+

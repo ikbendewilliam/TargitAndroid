@@ -1,5 +1,6 @@
 package be.howest.nmct.targit.adapters;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,11 @@ import java.util.List;
 
 import be.howest.nmct.targit.R;
 import be.howest.nmct.targit.models.HighscoreEntry;
+
+import static be.howest.nmct.targit.Constants.HIGHSCORE_ITEM_VIEW_TYPE_DEFAULT;
+import static be.howest.nmct.targit.Constants.HIGHSCORE_ITEM_VIEW_TYPE_FIRST;
+import static be.howest.nmct.targit.Constants.HIGHSCORE_ITEM_VIEW_TYPE_SECOND;
+import static be.howest.nmct.targit.Constants.HIGHSCORE_ITEM_VIEW_TYPE_THIRD;
 
 // Class that fills recycleview in highscore (HighscoreListFragment)
 public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighscoreRecyclerViewAdapter.ViewHolder> {
@@ -27,7 +33,41 @@ public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighs
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_highscore_list_item, parent, false);
+
+        switch(viewType) {
+            case HIGHSCORE_ITEM_VIEW_TYPE_FIRST:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.fragment_highscore_list_item_first, parent, false);
+                break;
+            case HIGHSCORE_ITEM_VIEW_TYPE_SECOND:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.fragment_highscore_list_item_second, parent, false);
+                break;
+            case HIGHSCORE_ITEM_VIEW_TYPE_THIRD:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.fragment_highscore_list_item_third, parent, false);
+                break;
+        }
+
+        //set the fonts
+        Typeface font = Typeface.createFromAsset( parent.getContext().getAssets(), "font/BRLNSR.TTF");
+        ((TextView)view.findViewById(R.id.highscore_list_item_place)).setTypeface(font);
+        ((TextView)view.findViewById(R.id.highscore_list_item_name)).setTypeface(font);
+        ((TextView)view.findViewById(R.id.highscore_list_item_score)).setTypeface(font);
+
         return new ViewHolder(view);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(position == 0)
+            return HIGHSCORE_ITEM_VIEW_TYPE_FIRST;
+        if(position == 1)
+            return HIGHSCORE_ITEM_VIEW_TYPE_SECOND;
+        if(position == 2)
+            return HIGHSCORE_ITEM_VIEW_TYPE_THIRD;
+
+        return HIGHSCORE_ITEM_VIEW_TYPE_DEFAULT;
     }
 
     // When items are placed in their UI (fragment_highscore_list_item.xml)
@@ -63,6 +103,8 @@ public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighs
             mName = (TextView) view.findViewById(R.id.highscore_list_item_name);
             mScore = (TextView) view.findViewById(R.id.highscore_list_item_score);
         }
+
+
     }
 }
 

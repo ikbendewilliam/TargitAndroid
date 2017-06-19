@@ -25,6 +25,12 @@ public abstract class Constants {
     public static final int ITEM_VIEW_TYPE_HEADER = 1;
     public static final int ITEM_VIEW_TYPE_ITEM = 2; // to differentiate header and items
 
+    // Highscore list items
+    public static final int HIGHSCORE_ITEM_VIEW_TYPE_FIRST = 1;
+    public static final int HIGHSCORE_ITEM_VIEW_TYPE_SECOND = 2;
+    public static final int HIGHSCORE_ITEM_VIEW_TYPE_THIRD = 3;
+    public static final int HIGHSCORE_ITEM_VIEW_TYPE_DEFAULT = 4;
+
     // commands for communitcation with arduino
     public static final String COMMAND_END = ";"; // the end of every command send
     public static final String COMMAND_LED_ON = "LedOn"; // turn the led on the device on

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:orientation="horizontal">
 
     <!--<ImageView-->
@@ -12,16 +12,24 @@
     <!--android:src=""-->
     <!--android:layout_gravity="center_vertical"/>-->
 
-    <TextView
-        android:id="@+id/highscore_list_item_place"
-        android:gravity="start"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:layout_gravity="center_vertical"/>
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/highscore_list_item_place"
+            android:gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="1"
+            android:layout_marginLeft="18.5dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:background="@drawable/ic_ellipse_second"
+            android:textColor="@color/colorWhite"
+            android:textAlignment="center"
+            android:textSize="@dimen/highscore_list_item_second_textSize"
+            android:layout_gravity="center"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/highscore_list_item_name"
@@ -29,20 +37,22 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginRight="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="20sp"
+        android:textSize="@dimen/highscore_list_item_second_textSize"
         android:layout_gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/highscore_list_item_score"
         android:gravity="end"
-        android:layout_width="80dp"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="@dimen/highscore_list_item_second_textSize"
         android:layout_gravity="center_vertical"
         />
 

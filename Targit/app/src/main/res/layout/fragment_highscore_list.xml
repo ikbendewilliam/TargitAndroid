@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="be.howest.nmct.targit.views.highscore.HighscoreListFragment"
-    android:background="@drawable/highscoreboard">
+    android:background="@drawable/highscoreboard"
+    android:id="@+id/highscore_list_layout">
 
         <!--<ImageView-->
             <!--android:layout_width="0dp"-->
@@ -72,10 +73,13 @@
             android:layout_alignParentEnd="true"/>
 
         <View
+            android:id="@+id/highscore_list_border_bottom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_heightPercent="9%"
             android:layout_alignParentBottom="true"/>
+
+
 
         <!--for debugging only-->
         <!--<Button-->

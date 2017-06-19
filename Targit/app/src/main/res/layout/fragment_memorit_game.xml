@@ -157,7 +157,7 @@
             android:background="@color/colorStop"
             android:paddingEnd="40dp"
             android:paddingStart="40dp"
-            android:text="stop"
+            android:text="@string/stop"
             android:textColor="@color/colorText"
             android:textSize="32sp"
             app:layout_heightPercent="40%"
