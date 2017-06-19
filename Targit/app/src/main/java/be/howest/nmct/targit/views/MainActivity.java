@@ -114,8 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE); // remove all bakstackentries
-        super.onBackPressed(); // close the app
+        // Don't do anything
     }
 
     public void updateUIAsync() {

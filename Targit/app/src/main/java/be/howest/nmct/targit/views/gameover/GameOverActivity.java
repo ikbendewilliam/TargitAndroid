@@ -151,6 +151,11 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
     }
 
     @Override
+    public void onBackPressed() {
+        // Don't go back
+    }
+
+    @Override
     public void showMainActivity() {
         showActivity(MainActivity.class);
     }
