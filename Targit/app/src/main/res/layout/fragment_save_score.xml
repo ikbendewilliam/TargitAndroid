@@ -85,7 +85,11 @@
             android:textColor="@color/colorText"
             android:textColorHighlight="@color/colorText"
             android:textColorHint="@color/colorText"
-            app:layout_widthPercent="90%" />
+            app:layout_widthPercent="90%"
+            android:maxLines="1"
+            android:lines="1"
+            android:singleLine="true"
+            android:maxLength="50"/>
 
 
     </android.support.percent.PercentRelativeLayout>
@@ -96,7 +100,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_below="@id/fragment_save_score_relativelayout_box"
-        app:layout_heightPercent="25%"
+        app:layout_heightPercent="27%"
         app:layout_widthPercent="100%" />
 
     <android.support.percent.PercentRelativeLayout
@@ -110,13 +114,13 @@
         app:layout_widthPercent="80%">
 
         <Button
-            android:id="@+id/fragment_save_score_button_save"
+            android:id="@+id/fragment_save_score_button_cancel"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="4dp"
             android:background="@color/colorSmashit"
             android:elevation="4dp"
-            android:text="@string/save_score_save"
+            android:text="@string/save_score_cancle"
             android:textAllCaps="false"
             android:textColor="@color/colorText"
             android:textSize="24sp"
@@ -125,17 +129,17 @@
 
         <Button
 
-            android:id="@+id/fragment_save_score_button_cancel"
+            android:id="@+id/fragment_save_score_button_save"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_alignParentEnd="true"
             android:layout_margin="4dp"
             android:background="@color/colorSmashit"
             android:elevation="4dp"
-            android:text="@string/save_score_cancle"
+            android:text="@string/save_score_save"
             android:textAllCaps="false"
             android:textColor="@color/colorText"
-            android:textSize="24dp"
+            android:textSize="24sp"
             app:layout_heightPercent="40%"
             app:layout_widthPercent="35%" />
 

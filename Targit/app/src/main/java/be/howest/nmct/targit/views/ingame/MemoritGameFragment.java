@@ -234,11 +234,13 @@ public class MemoritGameFragment extends Fragment {
                     mIsPressed = false; // the button isn't pressed anymore
                 }
 
-                for (ArduinoButton arduinoButton : mArduinoButtons) {
+                for (int i = 0; i < mArduinoButtons.size(); i++) {
+                    ArduinoButton arduinoButton = mArduinoButtons.get(i);
                     // loop through all buttons
                     if (arduinoButton.isPressed() && arduinoButton.isConnected() && arduinoButton.isEnabled() && !arduinoButton.getDeviceName().equals(mLitButton.getDeviceName())) {
                         // Check to see if the wrong button is pressed
                         loseLife(frame, view); // Lose a life and restart the sequance show
+                        i = mArduinoButtons.size();
                     }
                 }
             }
