@@ -17,6 +17,7 @@
         app:layout_widthPercent="30%">
 
         <ImageView
+            android:id="@+id/fragment_save_score_imageview_ellipse"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ellipse_1" />

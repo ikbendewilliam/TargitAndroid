@@ -1,6 +1,7 @@
 package be.howest.nmct.targit.views.gameover;
 
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import be.howest.nmct.targit.R;
+import be.howest.nmct.targit.views.infogamemode.SmashitInfoFragment;
 
 import static be.howest.nmct.targit.Constants.EXTRA_CATEGORY;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME;
@@ -25,6 +27,7 @@ import static be.howest.nmct.targit.Constants.EXTRA_SCORE;
 
 public class GameOverFragment extends Fragment {
 
+    private OnGameOverListener mListener; // A listener to start the game
 
     public GameOverFragment() {
         // Required empty public constructor
@@ -53,49 +56,69 @@ public class GameOverFragment extends Fragment {
         }
 
         //get the UI elements
-        Button btnSave = (Button) view.findViewById(R.id.fragment_game_over_button_save);
-        Button btnCancel = (Button) view.findViewById(R.id.fragment_game_over_button_cancel);
+        Button btnMenu = (Button) view.findViewById(R.id.fragment_game_over_button_menu);
+        Button btnRestart = (Button) view.findViewById(R.id.fragment_game_over_button_restart);
         ImageView imgGameOver = (ImageView) view.findViewById(R.id.fragment_game_over_imageview_game_over);
+        ImageView imgEllipse = (ImageView) view.findViewById(R.id.fragment_game_over_imageview_ellipse);
 
         //region set font
         //get font
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         //score text
-        TextView txtScore = (TextView)view.findViewById(R.id.fragment_game_over_textview_score);
+        TextView txtScore = (TextView) view.findViewById(R.id.fragment_game_over_textview_score);
         txtScore.setTypeface(font);
         //button save
-        btnSave.setTypeface(font);
+        btnMenu.setTypeface(font);
         //button cancel
-        btnCancel.setTypeface(font);
+        btnRestart.setTypeface(font);
         //endregion
 
         //region set design for correct gamemode
         if (gamemode.equals(EXTRA_GAME_SMASHIT)) {
             //set the right colors & assets according to the selected gamemode
             //change buttons color
-            btnCancel.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSmashit));
-            btnSave.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSmashit));
+            btnRestart.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSmashit));
+            btnMenu.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSmashit));
             //change oval image
+            imgEllipse.setImageResource(R.drawable.ellipse_1);
             imgGameOver.setImageResource(R.drawable.game_over_smashit);
 
         } else if (gamemode.equals(EXTRA_GAME_ZENIT)) {
             //set the right colors & assets according to the selected gamemode
             //change buttons color
-            btnCancel.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorZenit));
-            btnSave.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorZenit));
+            btnRestart.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorZenit));
+            btnMenu.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorZenit));
             //change oval image
+            imgEllipse.setImageResource(R.drawable.zenit_ellipse);
             imgGameOver.setImageResource(R.drawable.game_over_zenit);
 
         } else if (gamemode.equals(EXTRA_GAME_MEMORIT)) {
             //set the right colors & assets according to the selected gamemode
             //change buttons color
-            btnCancel.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMemorit));
-            btnSave.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMemorit));
+            btnRestart.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMemorit));
+            btnMenu.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorMemorit));
             //change oval image
-            imgGameOver.setImageResource(R.drawable.memorit_ellipse);
+            imgEllipse.setImageResource(R.drawable.memorit_ellipse);
+            imgGameOver.setImageResource(R.drawable.game_over_memorit);
 
         }
         //endregion
+
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null)
+                    mListener.showMainActivity();
+            }
+        });
+        final String finalGamemode = gamemode;
+        btnRestart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null)
+                    mListener.showGameInfoActivity(finalGamemode);
+            }
+        });
 
         return view;
 
@@ -112,6 +135,31 @@ public class GameOverFragment extends Fragment {
         GameOverFragment fragment = new GameOverFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    // A standard implementation when using a listener
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnGameOverListener) {
+            mListener = (OnGameOverListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnGameOverListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    // The listener defined
+    public interface OnGameOverListener {
+        void showMainActivity();
+
+        void showGameInfoActivity(String gameMode);
     }
 
 }
