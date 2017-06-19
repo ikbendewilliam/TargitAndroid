@@ -143,6 +143,9 @@ public class MyArduinoButtonRecyclerViewAdapter extends RecyclerView.Adapter<MyA
         if (mValues.get(position - 1).isPressed()) {
             // If the button on the device is pressed, change the background of this row
             holder.mLayout.setBackgroundColor(Color.rgb(128, 200, 200));
+//        } else if () {
+//            // If the button on the device is NOT pressed, revert the background of this row
+//            holder.mLayout.setBackgroundColor(Color.rgb(255, 255, 255));
         } else {
             // If the button on the device is NOT pressed, revert the background of this row
             holder.mLayout.setBackgroundColor(Color.rgb(255, 255, 255));
