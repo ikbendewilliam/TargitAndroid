@@ -48,6 +48,7 @@ public class SaveScoreFragment extends Fragment {
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         //name inputfield
         EditText name = (EditText) view.findViewById(R.id.fragment_save_score_edittext_name);
+        name.setSingleLine();
         name.setTypeface(font);
         //save button
         Button btnSave = (Button) view.findViewById(R.id.fragment_save_score_button_save);
