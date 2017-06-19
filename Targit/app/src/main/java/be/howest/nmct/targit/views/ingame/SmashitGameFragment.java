@@ -189,21 +189,23 @@ public class SmashitGameFragment extends Fragment {
                         }
                     }
                 }
-                // If a button is lit
-                if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
-                    // If this button is pressed
-                    mPreviousLitButton = mLitButton; // set the previous button
-                    mLitButton = null; // unset the lit button
-                    mScore++; // increment score
-                    pointPlayer.start(); // Play the sound
-                    mPressedOnFrame = frame; // This frame it is pressed
-                    if ((mDifficulty.equals(EXTRA_DIFFICULTY_EASY) && mWaitFrames > TIME_TO_PRESS_MIN_EASY / STEP_TIME)
-                            || (mDifficulty.equals(EXTRA_DIFFICULTY_MEDIUM) && mWaitFrames > TIME_TO_PRESS_MIN_MEDIUM / STEP_TIME)
-                            || (mDifficulty.equals(EXTRA_DIFFICULTY_HARD) && mWaitFrames > TIME_TO_PRESS_MIN_HARD / STEP_TIME))
-                        mWaitFrames--; // decrement waitFrames
+                if (mLitButton != null) {
+                    // If a button is lit
+                    if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
+                        // If this button is pressed
+                        mPreviousLitButton = mLitButton; // set the previous button
+                        mLitButton = null; // unset the lit button
+                        mScore++; // increment score
+                        pointPlayer.start(); // Play the sound
+                        mPressedOnFrame = frame; // This frame it is pressed
+                        if ((mDifficulty.equals(EXTRA_DIFFICULTY_EASY) && mWaitFrames > TIME_TO_PRESS_MIN_EASY / STEP_TIME)
+                                || (mDifficulty.equals(EXTRA_DIFFICULTY_MEDIUM) && mWaitFrames > TIME_TO_PRESS_MIN_MEDIUM / STEP_TIME)
+                                || (mDifficulty.equals(EXTRA_DIFFICULTY_HARD) && mWaitFrames > TIME_TO_PRESS_MIN_HARD / STEP_TIME))
+                            mWaitFrames--; // decrement waitFrames
 
-                    ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_score)).setText("" + mScore);
-                    mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
+                        ((TextView) view.findViewById(R.id.fragment_smashit_game_textview_score)).setText("" + mScore);
+                        mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
+                    }
                 }
             }
 
