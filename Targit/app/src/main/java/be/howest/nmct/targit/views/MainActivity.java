@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Initialize bt connection
-        mBluetoothConnection = BluetoothConnection.initiate(this);
+        mBluetoothConnection = BluetoothConnection.initiate();
         if (mBluetoothConnection.getArduinoButtons().size() == 0) {
             // if there are no devices yet
             connectDevices(); // Connect to the devices

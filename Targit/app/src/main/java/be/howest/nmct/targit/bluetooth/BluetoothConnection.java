@@ -1,7 +1,9 @@
 package be.howest.nmct.targit.bluetooth;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -31,22 +33,32 @@ public class BluetoothConnection {
     // Constructor
     // This is private so no new instances can be created of this class
     // @param activity: the activity the connection is in created
-    private BluetoothConnection(Activity activity) {
+    private BluetoothConnection() {
         // initiate the list
         mBluetooth = new ArrayList<>();
-        // make a temp instance to enable bt
-        Bluetooth bluetooth = new Bluetooth(activity);
-        bluetooth.enableBluetooth();
+        EnableBluetooth();
+    }
+
+    // Checks bt, returns if already enabled, otherwise enable it
+    private void EnableBluetooth() {
+        // get the instance to enable bt
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        if(bluetoothAdapter!=null) {
+            // Check if it was enabled
+            if (!bluetoothAdapter.isEnabled()) {
+                bluetoothAdapter.enable();
+            }
+        }
     }
 
     // Initialize the connection
-    // @param activity: the activity the connection is in created
     // @return BluetoothConnection: Either the new connection or the already existing one
-    public static BluetoothConnection initiate(Activity activity) {
+    public static BluetoothConnection initiate() {
         // Check whether the instance is already created
         if (thisBluetoothConnection == null) {
             // Create the only instance of this class
-            thisBluetoothConnection = new BluetoothConnection(activity);
+            thisBluetoothConnection = new BluetoothConnection();
         }
         // Return the instance of this class
         return thisBluetoothConnection;
@@ -68,10 +80,16 @@ public class BluetoothConnection {
             // Set the communication
             bluetooth.setCommunicationCallback(getCommunicationCallback(arduinoButton));
 
-            // Log that we are attempting a connection
-            Log.i(Constants.TAG, "attempting connection to " + arduinoButton.getDeviceName());
-            // Start to connect to this device
-            bluetooth.connectToName(arduinoButton.getDeviceName());
+            // Get the adapter
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            if (bluetoothAdapter.isEnabled()) {
+                // Only connect if there is a connection
+                // Log that we are attempting a connection
+                Log.i(Constants.TAG, "attempting connection to " + arduinoButton.getDeviceName());
+                // Start to connect to this device
+                bluetooth.connectToName(arduinoButton.getDeviceName());
+                arduinoButton.setConnecting(true); // Set is connecting
+            }
 
             // Add the connection to mBluetooth
             mBluetooth.add(bluetooth);
