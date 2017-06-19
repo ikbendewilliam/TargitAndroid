@@ -10,6 +10,7 @@ public class ArduinoButton {
     private boolean isConnected = false; // Whether this button is currently connected
     private boolean isConnecting = false; // Whether this button is currently connecting
     private boolean isEnabled = true; // Whether this button is currently enabled
+    private boolean isLit = false; // Wheter this button is lit through the status page
 
     // Constructor
     // @param deviceName: the name of this device
@@ -91,5 +92,13 @@ public class ArduinoButton {
 
     public void setPressed(boolean isPressed) {
         this.isPressed = isPressed;
+    }
+
+    public boolean isLit() {
+        return isLit;
+    }
+
+    public void setLit(boolean lit) {
+        isLit = lit;
     }
 }
