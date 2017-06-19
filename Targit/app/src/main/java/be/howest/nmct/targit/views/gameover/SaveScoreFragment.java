@@ -66,7 +66,7 @@ public class SaveScoreFragment extends Fragment {
         txtScore.setText("" + score);
 
         RelativeLayout relativeLayoutBox = (RelativeLayout) view.findViewById(R.id.fragment_save_score_relativelayout_box);
-        ImageView ellipse = (ImageView) view.findViewById(R.id.fragment_game_over_imageview_ellipse);
+        ImageView ellipse = (ImageView) view.findViewById(R.id.fragment_save_score_imageview_ellipse);
 
         //region set design for correct gamemode
         if (gamemode.equals(EXTRA_GAME_SMASHIT)) {

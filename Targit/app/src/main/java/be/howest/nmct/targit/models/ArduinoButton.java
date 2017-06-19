@@ -8,7 +8,7 @@ public class ArduinoButton {
     private int pressedCount = 0; // How many times this button is pressed
     private boolean isPressed = false; // Whether this button is currently pressed
     private boolean isConnected = false; // Whether this button is currently connected
-    private boolean isConnecting = true; // Whether this button is currently connecting
+    private boolean isConnecting = false; // Whether this button is currently connecting
     private boolean isEnabled = true; // Whether this button is currently enabled
 
     // Constructor

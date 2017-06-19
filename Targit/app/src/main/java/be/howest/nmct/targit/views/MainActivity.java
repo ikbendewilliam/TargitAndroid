@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Initialize bt connection
-        mBluetoothConnection = BluetoothConnection.initiate(this);
+        mBluetoothConnection = BluetoothConnection.initiate();
         if (mBluetoothConnection.getArduinoButtons().size() == 0) {
             // if there are no devices yet
             connectDevices(); // Connect to the devices
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                             ((TextView) findViewById(R.id.activity_main_text_connection_error)).setText("Let op: Niet alle knoppen zijn verbonden (" + connections + " / " + DEVICE_NAMES.length + ")");
-                        } else if (connections < DEVICE_NAMES.length) {
+                        } else if (connections >= DEVICE_NAMES.length) {
                             mSmashitButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

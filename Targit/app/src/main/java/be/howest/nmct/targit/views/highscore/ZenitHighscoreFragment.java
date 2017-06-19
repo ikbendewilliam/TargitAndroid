@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.percent.PercentLayoutHelper;
 import android.support.percent.PercentRelativeLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import static be.howest.nmct.targit.Constants.EXTRA_DURATION_SHORT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_SMASHIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
+import static be.howest.nmct.targit.Constants.TAG;
 
 
 public class ZenitHighscoreFragment extends Fragment {
@@ -43,7 +45,7 @@ public class ZenitHighscoreFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_zenit_highscore, container, false);
 
-        showlistFragment(EXTRA_DURATION_LONG);
+        showlistFragment(EXTRA_DURATION_SHORT);
 
         btnHighscoreEasy = (Button) view.findViewById(R.id.fragment_zenit_highscore_easy);
         btnHighscoreMedium = (Button) view.findViewById(R.id.fragment_zenit_highscore_medium);
@@ -54,7 +56,7 @@ public class ZenitHighscoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectButton(BUTTON_EASY);
-                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT,EXTRA_DURATION_LONG);
+                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT,EXTRA_DURATION_SHORT);
             }
         });
         btnHighscoreMedium.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +70,7 @@ public class ZenitHighscoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectButton(BUTTON_HARD);
-                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT,EXTRA_DURATION_SHORT);
+                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT,EXTRA_DURATION_LONG);
             }
         });
 
