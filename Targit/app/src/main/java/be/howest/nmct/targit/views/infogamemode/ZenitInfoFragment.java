@@ -1,5 +1,7 @@
 package be.howest.nmct.targit.views.infogamemode;
 
+import android.app.DialogFragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -17,6 +19,8 @@ import be.howest.nmct.targit.R;
 import static be.howest.nmct.targit.Constants.EXTRA_DURATION_LONG;
 import static be.howest.nmct.targit.Constants.EXTRA_DURATION_MEDIUM;
 import static be.howest.nmct.targit.Constants.EXTRA_DURATION_SHORT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_SMASHIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_ZENIT;
 import static be.howest.nmct.targit.Constants.TEXT_SIZE;
 
 // The information shown for zenit
@@ -66,6 +70,13 @@ public class ZenitInfoFragment extends Fragment {
             }
         });
 
+        //fab listener
+        view.findViewById(R.id.zenit_info_help).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHelpDialog();
+            }
+        });
 
         //instellen fonts
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
@@ -106,6 +117,22 @@ public class ZenitInfoFragment extends Fragment {
         txt3.setTextSize(textSize);
 
         return view;
+    }
+
+    private void showHelpDialog() {
+        // DialogFragment.show() will take care of adding the fragment
+        // in a transaction.  We also want to remove any currently showing
+        // dialog, so make our own transaction and take care of that here.
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        // Create and show the dialog.
+        DialogFragment newFragment = InfoGameHelpFragment.newInstance(EXTRA_GAMEMODE_ZENIT);
+        newFragment.show(ft, "dialog");
     }
 
     // A standard implementation when using a listener

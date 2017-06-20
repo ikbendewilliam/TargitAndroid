@@ -74,6 +74,35 @@
             android:background="@color/colorSmashit"
             android:padding="20dp">
 
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="-10dp"
+                android:layout_marginBottom="-10dp"
+                android:clipChildren="true">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/smashit_info_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:color/transparent"
+                    android:clipChildren="false"
+                    android:layout_margin="@dimen/fab_margin">
+                </android.support.design.widget.FloatingActionButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="\?"
+                    android:elevation="16dp"
+                    android:textColor="@android:color/white"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:clipChildren="false"
+                    />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/smashit_info_tekst_dot"

@@ -79,11 +79,11 @@ public abstract class Constants {
     public static float WAIT_TIME_RATE = 0.8f; // The time increased with every lit up button
 
     // Info game
-    public static String EXTRA_GAMEMODE = "gameMode";
-    public static String EXTRA_GAMEMODE_SMASHIT = "smashit";
-    public static String EXTRA_GAMEMODE_ZENIT = "zenit";
-    public static String EXTRA_GAMEMODE_MEMORIT = "memorit";
-    public static int MIN_DEVICES_CONNETED = 2;
+    public static final String EXTRA_GAMEMODE = "gameMode";
+    public static final String EXTRA_GAMEMODE_SMASHIT = "smashit";
+    public static final String EXTRA_GAMEMODE_ZENIT = "zenit";
+    public static final String EXTRA_GAMEMODE_MEMORIT = "memorit";
+    public static final int MIN_DEVICES_CONNETED = 2;
 
     // Helpstepfragment
     public static final String EXTRA_HELP_TEXT = "helptext";
