@@ -144,7 +144,8 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                             ((TextView) findViewById(R.id.activity_main_text_connection_error)).setText("Fout: Te weinig knoppen verbonden om te spelen! (" + connections + " verbonden, minimum " + MIN_DEVICES_CONNETED + " nodig)");
-                        } else if (connections < DEVICE_NAMES.length) {
+                        } else
+                            if (connections < DEVICE_NAMES.length) {
                             mSmashitButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
