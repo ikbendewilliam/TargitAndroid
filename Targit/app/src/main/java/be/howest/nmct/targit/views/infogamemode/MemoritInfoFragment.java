@@ -1,5 +1,7 @@
 package be.howest.nmct.targit.views.infogamemode;
 
+import android.app.DialogFragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.R;
 
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_MEMORIT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_SMASHIT;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MEDIUM;
@@ -66,6 +70,14 @@ public class MemoritInfoFragment extends Fragment {
             }
         });
 
+        //fab listener
+        view.findViewById(R.id.memorit_info_help).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHelpDialog();
+            }
+        });
+
         //instellen fonts
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         Button btnSnel = (Button)view.findViewById(R.id.memorit_info_button_play_hard);
@@ -105,6 +117,22 @@ public class MemoritInfoFragment extends Fragment {
         txt3.setTextSize(textSize);
 
         return view;
+    }
+
+    private void showHelpDialog() {
+        // DialogFragment.show() will take care of adding the fragment
+        // in a transaction.  We also want to remove any currently showing
+        // dialog, so make our own transaction and take care of that here.
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        // Create and show the dialog.
+        DialogFragment newFragment = InfoGameHelpFragment.newInstance(EXTRA_GAMEMODE_MEMORIT);
+        newFragment.show(ft, "dialog");
     }
 
     // A standard implementation when using a listener
