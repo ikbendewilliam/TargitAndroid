@@ -38,7 +38,6 @@ public class StatusAboutFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,10 +53,8 @@ public class StatusAboutFragment extends Fragment {
         TabLayout tabLayout = (TabLayout) v.findViewById(R.id.settingsTabs);
 
         //setup tabs
-        tabLayout.addTab(tabLayout.newTab().setText("Status buttons"));
-        tabLayout.addTab(tabLayout.newTab().setText("About"));
-
-
+        tabLayout.addTab(tabLayout.newTab().setText("Status knoppen"));
+        tabLayout.addTab(tabLayout.newTab().setText("Over ons"));
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) v.findViewById(R.id.settingsPager);
