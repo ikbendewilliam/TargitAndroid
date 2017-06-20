@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         };
-        timer.schedule(checkButtons, 0, 200);
+        //timer.schedule(checkButtons, 0, 200);
     }
 
     //shows a dialog message that does nothing

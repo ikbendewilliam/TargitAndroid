@@ -10,6 +10,7 @@ tools:context="be.howest.nmct.targit.views.infogamemode.InfoGameHelpAnimationFra
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
+    android:layout_alignParentTop="true"
     android:text="Test"
     android:textAlignment="center"
     android:textSize="30sp"
@@ -20,6 +21,7 @@ tools:context="be.howest.nmct.targit.views.infogamemode.InfoGameHelpAnimationFra
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:src="@drawable/smashit_info_anim_1"
-    android:layout_below="@id/game_info_help_tekst" />
+    android:layout_below="@id/game_info_help_tekst"
+    android:padding="10dp"/>
 
 </RelativeLayout>
