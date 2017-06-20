@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Targit</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="title_activity_settings">Instellingen</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_highscore">Highscore</string>
     <string name="title_activity_info_game_mode">InfoGameModeActivity</string>
     <string name="title_activity_game">GameActivity</string>
@@ -16,8 +15,9 @@
     <string name="main_button_highscore">HiGHSCORE</string>
 
     <string name="smashit_easy">Traag</string>
-    <string name="smashit_medium">Matig</string>
+    <string name="smashit_medium">MATiG</string>
     <string name="smashit_hard">Snel</string>
+    <!--<string name="smashit_info_button_matig">MATiG</string>-->
 
     <string name="zenit_easy">30 seconden</string>
     <string name="zenit_medium">60 seconden</string>
@@ -32,7 +32,6 @@
     <string name="status_bluetooth_knoppen">Knoppen</string>
     <string name="status_search_buttons">Zoek knoppen</string>
 
-
     <string name="info_text_line_marker">•</string>
 
     <string name="smashit_info_text_1">Levens:</string>
@@ -45,9 +44,9 @@
     <string name="zenit_info_text_3">Je krijgt 1 punt als je op de knop drukt die oplicht.</string>
     <string name="zenit_info_text_4">Je speelt voor een bepaalde tijdsduur.</string>
 
-    <string name="memorit_info_text_1">Er wordt een patroon afgespeelt.</string>
-    <string name="memorit_info_text_2">Na dat het patroon is afgespeelt moet je het patroon nadoen.</string>
-    <string name="memorit_info_text_3">Het patroon wordt elke keer langer.</string>
+    <string name="memorit_info_text_1">Er wordt een patroon afgespeeld.</string>
+    <string name="memorit_info_text_2">Na dat het patroon is afgespeeld moet je het patroon nadoen.</string>
+    <string name="memorit_info_text_3">Het patroon word elke keer langer.</string>
     <string name="memorit_info_text_4">Je verliest een leven als je het patroon verkeerd herhaald hebt.</string>
 
     <string name="save_score_title">Score Opslaan</string>
@@ -70,5 +69,4 @@
     <string name="about_credit_line_2">Vecteezy.com</string>
     <string name="about_credit_line_3">Created by D3images - Freepik.com</string>
     <string name="about_credit_line_4">Made by Dmitriy Prodchenko</string>
-    <string name="smashit_info_button_matig">MATiG</string>
 </resources>

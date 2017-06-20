@@ -116,6 +116,7 @@ public class SaveScoreFragment extends Fragment {
                     builder.setMessage("Je moet minstens 3 characters ingeven.")
                             .setTitle("Oeps, foutje");
                     AlertDialog dialog = builder.create();
+                    dialog.show();
                 } else {
                     mListener.saveScore(new HighscoreEntry(name, score));
                 }
