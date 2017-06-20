@@ -1,8 +1,10 @@
 package be.howest.nmct.targit.views;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.bluetooth.BluetoothDevice;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
@@ -125,47 +127,46 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        int connections = mBluetoothConnection.getConnectedDevicesSize();
+                        final int connections = mBluetoothConnection.getConnectedDevicesSize();
                         if (connections < MIN_DEVICES_CONNETED) {
-                            mSmashitButton.setOnClickListener(new View.OnClickListener() {
+
+                            //onclick listener that shows an error
+                            View.OnClickListener onClickListener = new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    showDialogMessage("Fout","Te weinig knoppen verbonden om te spelen! (" + connections + " verbonden, minimum " + MIN_DEVICES_CONNETED + " nodig)");
                                 }
-                            });
-                            mZenitButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                }
-                            });
-                            mMemoritButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                }
-                            });
+                            };
+
+                            mSmashitButton.setOnClickListener(onClickListener);
+                            mZenitButton.setOnClickListener(onClickListener);
+                            mMemoritButton.setOnClickListener(onClickListener);
 
                             ((TextView) findViewById(R.id.activity_main_text_connection_error)).setText("Fout: Te weinig knoppen verbonden om te spelen! (" + connections + " verbonden, minimum " + MIN_DEVICES_CONNETED + " nodig)");
                         } else
                             if (connections < DEVICE_NAMES.length) {
+                                final String errorMessage = "Niet alle knoppen zijn verbonden (" + connections + " / " + DEVICE_NAMES.length + ")";
+
                             mSmashitButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    showInfoGameModeActivity(EXTRA_GAMEMODE_SMASHIT);
+                                    showDialogMessageWithCancle("Let op", errorMessage, EXTRA_GAMEMODE_SMASHIT);
                                 }
                             });
                             mZenitButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    showInfoGameModeActivity(EXTRA_GAMEMODE_ZENIT);
+                                    showDialogMessageWithCancle("Let op", errorMessage, EXTRA_GAMEMODE_ZENIT);
                                 }
                             });
                             mMemoritButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    showInfoGameModeActivity(EXTRA_GAMEMODE_MEMORIT);
+                                    showDialogMessageWithCancle("Let op", errorMessage, EXTRA_GAMEMODE_MEMORIT);
                                 }
                             });
 
-                            ((TextView) findViewById(R.id.activity_main_text_connection_error)).setText("Let op: Niet alle knoppen zijn verbonden (" + connections + " / " + DEVICE_NAMES.length + ")");
+                            ((TextView) findViewById(R.id.activity_main_text_connection_error)).setText("Let op: " + errorMessage);
                         } else if (connections >= DEVICE_NAMES.length) {
                             mSmashitButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -193,6 +194,53 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         timer.schedule(checkButtons, 0, 200);
+    }
+
+    //shows a dialog message that does nothing
+    private void showDialogMessage(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        //set message on dialog
+        builder.setMessage(message)
+                .setTitle(title);
+
+        //set button on dialog
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+                dialog.cancel();
+            }
+        });
+
+        //create and show the dialog
+        builder.create().show();
+    }
+
+    //shows a dialog message with ok and cancle
+    private void showDialogMessageWithCancle(String title, String message, final String gameMode) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        //set message on dialog
+        builder.setMessage(message)
+                .setTitle(title);
+
+        //set ok button on dialog
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+                showInfoGameModeActivity(gameMode);
+            }
+        });
+
+        builder.setNegativeButton(R.string.save_score_cancle, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+                dialog.cancel();
+            }
+        });
+
+        //create and show the dialog
+        builder.create().show();
     }
 
     //handles full screen autohiding
