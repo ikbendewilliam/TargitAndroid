@@ -107,15 +107,15 @@ public class SmashitGameFragment extends Fragment {
         if (mLives >= 1)
             ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart);
         else
-            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
+            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart1)).setVisibility(View.INVISIBLE);
         if (mLives >= 2)
             ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart);
         else
-            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_leeg);
+            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart2)).setVisibility(View.INVISIBLE);
         if (mLives >= 3)
             ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart);
         else
-            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_leeg);
+            ((ImageView) view.findViewById(R.id.fragment_smashit_game_imageview_heart3)).setVisibility(View.INVISIBLE);
     }
 
     // End the game

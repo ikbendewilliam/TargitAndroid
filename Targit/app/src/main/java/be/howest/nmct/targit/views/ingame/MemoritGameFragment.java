@@ -110,45 +110,45 @@ public class MemoritGameFragment extends Fragment {
             if (mLives >= 1)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
             else
-                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setVisibility(View.INVISIBLE);
         }
         else if (mCategory == EXTRA_LIVES_MEDIUM)
         {
             if (mLives >= 1)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_memorit);
             else
-                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_leeg);
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setVisibility(View.INVISIBLE);
             if (mLives >= 2)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
             else
-                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setVisibility(View.INVISIBLE);
             if (mLives >= 3)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_memorit);
             else
-                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_leeg);
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setVisibility(View.INVISIBLE);
         }
         else if (mCategory == EXTRA_LIVES_MANY)
         {
             if (mLives >= 1)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_memorit);
             else
-                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_leeg);
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setVisibility(View.INVISIBLE);
             if (mLives >= 2)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_memorit);
             else
-                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_leeg);
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setVisibility(View.INVISIBLE);
             if (mLives >= 3)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
             else
-                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_leeg);
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setVisibility(View.INVISIBLE);
             if (mLives >= 4)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_memorit);
             else
-                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_leeg);
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setVisibility(View.INVISIBLE);
             if (mLives >= 5)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart5)).setImageResource(R.drawable.ic_hart_memorit);
             else
-                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart5)).setImageResource(R.drawable.ic_hart_leeg);
+                ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart5)).setVisibility(View.INVISIBLE);
         }
     }
 
