@@ -1,5 +1,6 @@
 package be.howest.nmct.targit.views.ingame;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import be.howest.nmct.targit.models.ArduinoButton;
 
 import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
 import static be.howest.nmct.targit.Constants.COMMAND_LED_ON;
+import static be.howest.nmct.targit.Constants.COUNTDOWN_TIME;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
@@ -181,17 +183,17 @@ public class MemoritGameFragment extends Fragment {
     }
 
     private void gameStep(int frame, View view) {
-        if (frame * STEP_TIME > 3000) // after 3 seconds
+        if (frame * STEP_TIME > COUNTDOWN_TIME * 1000) // after 3 seconds
         {
             String time;
-            if ((frame * STEP_TIME / 1000 - 3) / 60 < 10)
-                time = "0" + (frame * STEP_TIME / 1000 - 3) / 60;
+            if ((frame * STEP_TIME / 1000 - COUNTDOWN_TIME) / 60 < 10)
+                time = "0" + (frame * STEP_TIME / 1000 - COUNTDOWN_TIME) / 60;
             else
-                time = "" + (frame * STEP_TIME / 1000 - 3) / 60;
-            if ((frame * STEP_TIME / 1000 - 3) % 60 < 10)
-                time += ":0" + (frame * STEP_TIME / 1000 - 3) % 60;
+                time = "" + (frame * STEP_TIME / 1000 - COUNTDOWN_TIME) / 60;
+            if ((frame * STEP_TIME / 1000 - COUNTDOWN_TIME) % 60 < 10)
+                time += ":0" + (frame * STEP_TIME / 1000 - COUNTDOWN_TIME) % 60;
             else
-                time += ":" + (frame * STEP_TIME / 1000 - 3) % 60;
+                time += ":" + (frame * STEP_TIME / 1000 - COUNTDOWN_TIME) % 60;
             ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText(time);
 
             if (mIterator >= mSequence.size() && mUserinput) {
@@ -273,7 +275,12 @@ public class MemoritGameFragment extends Fragment {
                 }
             }
         } else
-            ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000) % 60);
+            if(frame ==0)showCountdownDialog();
+            //((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000) % 60);
+    }
+    void showCountdownDialog() {
+        DialogFragment newFragment = GameCountdownFragment.newInstance(EXTRA_GAME_MEMORIT);
+        newFragment.show(getFragmentManager(), "dialog");
     }
 
     // Lose a life

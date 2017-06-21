@@ -1,0 +1,20 @@
+<RelativeLayout
+    android:id="@+id/fragment_game_countdown_topview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/circle_smashit"
+    android:layout_width="500dp"
+    android:layout_height="500dp"
+    tools:context="be.howest.nmct.targit.views.ingame.GameCountdownFragment">
+
+        <TextView
+            android:id="@+id/fragment_game_countdown_timer"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="150sp"
+            android:textColor="@color/colorText"
+            android:text="5"/>
+
+
+</RelativeLayout>

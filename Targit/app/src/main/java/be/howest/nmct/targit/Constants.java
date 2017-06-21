@@ -53,6 +53,7 @@ public abstract class Constants {
     public static String EXTRA_GAME_ZENIT = "zenit";
     public static String EXTRA_GAME_MEMORIT = "memorit";
     public static int STEP_TIME = 10; // The time between frames (in ms)
+    public static int COUNTDOWN_TIME = 5; //The time
     // Smashit
     public static String EXTRA_DIFFICULTY = "difficulty";
     public static String EXTRA_DIFFICULTY_EASY = "easy";

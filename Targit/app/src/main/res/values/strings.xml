@@ -77,4 +77,7 @@
     <string name="zenit_info_anim_text_1">Druk op knop</string>
     <string name="memorit_info_anim_text_1">Volg het voorgetoonde patroon</string>
     <string name="memorit_info_anim_text_2">Als je het patroon fout hebt verlies je een leven</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
