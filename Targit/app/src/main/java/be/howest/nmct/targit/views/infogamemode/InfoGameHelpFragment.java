@@ -2,6 +2,8 @@ package be.howest.nmct.targit.views.infogamemode;
 
 
 import android.app.DialogFragment;
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.TabLayout;
@@ -60,15 +62,12 @@ public class InfoGameHelpFragment extends DialogFragment {
         switch (mGameMode) {
             case EXTRA_GAMEMODE_SMASHIT:
                 view.findViewById(R.id.info_game_help_parent_layout).setBackgroundColor(getResources().getColor(R.color.colorSmashit,getActivity().getTheme()));
-                view.findViewById(R.id.info_game_help_done).setBackgroundColor(getResources().getColor(R.color.colorSmashitSecondary,getActivity().getTheme()));
                 break;
             case EXTRA_GAMEMODE_ZENIT:
                 view.findViewById(R.id.info_game_help_parent_layout).setBackgroundColor(getResources().getColor(R.color.colorZenit,getActivity().getTheme()));
-                view.findViewById(R.id.info_game_help_done).setBackgroundColor(getResources().getColor(R.color.colorZenitsecondary,getActivity().getTheme()));
                 break;
             case EXTRA_GAMEMODE_MEMORIT:
                 view.findViewById(R.id.info_game_help_parent_layout).setBackgroundColor(getResources().getColor(R.color.colorMemorit,getActivity().getTheme()));
-                view.findViewById(R.id.info_game_help_done).setBackgroundColor(getResources().getColor(R.color.colorMemoritSecondary,getActivity().getTheme()));
                 break;
         }
 
