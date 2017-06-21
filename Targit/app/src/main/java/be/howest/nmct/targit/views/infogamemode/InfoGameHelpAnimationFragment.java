@@ -1,6 +1,7 @@
 package be.howest.nmct.targit.views.infogamemode;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -46,7 +47,12 @@ public class InfoGameHelpAnimationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info_game_help_animation, container, false);
 
-        ((TextView) view.findViewById(R.id.game_info_help_tekst)).setText(mText);
+        TextView textView = (TextView) view.findViewById(R.id.game_info_help_tekst);
+        textView.setText(mText);
+
+        //instellen fonts
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
+        textView.setTypeface(font);
 
         try {
             mGifImage = new GifDrawable( getResources(), mGifId );

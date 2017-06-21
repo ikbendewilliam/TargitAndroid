@@ -244,9 +244,9 @@ public class BluetoothConnection {
         // initiate connections to 0
         int connections = 0;
         // Loop all connections
-        for (Bluetooth bluetooth : mBluetooth) {
+        for (ArduinoButton arduinoButton : mArduinoButtons) {
             // If this connection is connected
-            if (bluetooth.isConnected()) {
+            if (arduinoButton.isConnected() && arduinoButton.isEnabled()) {
                 // increment connections
                 connections++;
             }
