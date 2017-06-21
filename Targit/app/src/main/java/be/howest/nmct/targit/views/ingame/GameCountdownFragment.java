@@ -2,7 +2,9 @@ package be.howest.nmct.targit.views.ingame;
 
 
 import android.app.DialogFragment;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -54,7 +56,7 @@ public class GameCountdownFragment extends DialogFragment {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_game_countdown, container, false);
         //get topview
-        RelativeLayout relativeLayout = (RelativeLayout)mView.findViewById(R.id.fragment_game_countdown_topview);
+        RelativeLayout relativeLayout = (RelativeLayout)mView.findViewById(R.id.fragment_game_countdown_relativelayout_circleview);
         //region styling
         //set style
         setStyle(DialogFragment.STYLE_NO_FRAME,0);
@@ -65,7 +67,8 @@ public class GameCountdownFragment extends DialogFragment {
         //setfont on timer
         TextView txtTimer =(TextView) mView.findViewById(R.id.fragment_game_countdown_timer);
         txtTimer.setTypeface(font);
-
+        //make dialog transparent
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //check if variables are available
         if(getArguments().getString(EXTRA_GAME) != null){
             String gamemode = getArguments().getString(EXTRA_GAME);
