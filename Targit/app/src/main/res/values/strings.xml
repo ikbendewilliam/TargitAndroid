@@ -71,12 +71,11 @@
     <string name="about_credit_line_3">Created by D3images - Freepik.com</string>
     <string name="about_credit_line_4">Made by Dmitriy Prodchenko</string>
     <string name="skip">Sluiten</string>
-    
+
     <string name="smashit_info_anim_text_2">Je verliest een leven wanneer je telaat op een opgelichte knop drukt.</string>
     <string name="smashit_info_anim_text_3">Je verliest een leven wanneer je op een verkeerde knop drukt.</string>
     <string name="zenit_info_anim_text_1">Druk op de knop die licht geeft. Vervolgens zal de volgende knop branden.</string>
     <string name="memorit_info_anim_text_1">Volg het voorgetoonde patroon.</string>
     <string name="memorit_info_anim_text_2">Als je het patroon fout hebt verlies je een leven.</string>
     <string name="ok">OK</string>
->>>>>>> 56866dcaa5ab2ec30e1f356d69b052aacc1ca4f5
 </resources>
