@@ -44,40 +44,41 @@ public abstract class Constants {
     public static final String COMMAND_INCOMING_BUTTON_RELEASED = "BtnReleased"; // The command that the arduino sends when the button is released
 
     // Highscore
-    public static String EXTRA_SCORE = "score";
-    public static String EXTRA_CATEGORY = "category";
+    public static final String EXTRA_SCORE = "score";
+    public static final String EXTRA_CATEGORY = "category";
 
     // Ingame
-    public static String EXTRA_GAME = "gameMode";
-    public static String EXTRA_GAME_SMASHIT = "smashit";
-    public static String EXTRA_GAME_ZENIT = "zenit";
-    public static String EXTRA_GAME_MEMORIT = "memorit";
-    public static int STEP_TIME = 10; // The time between frames (in ms)
-    public static int COUNTDOWN_TIME = 5; //The time
+    public static final String EXTRA_GAME = "gameMode";
+    public static final String EXTRA_GAME_SMASHIT = "smashit";
+    public static final String EXTRA_GAME_ZENIT = "zenit";
+    public static final String EXTRA_GAME_MEMORIT = "memorit";
+    public static final int STEP_TIME = 10; // The time between frames (in ms)
+    public static final int COUNTDOWN_TIME = 5; //The time
+
     // Smashit
-    public static String EXTRA_DIFFICULTY = "difficulty";
-    public static String EXTRA_DIFFICULTY_EASY = "easy";
-    public static String EXTRA_DIFFICULTY_MEDIUM = "medium";
-    public static String EXTRA_DIFFICULTY_HARD = "hard";
-    public static int TIME_TO_PRESS_MAX_EASY = 7000;
-    public static int TIME_TO_PRESS_MAX_MEDIUM = 5000;
-    public static int TIME_TO_PRESS_MAX_HARD = 3000;
-    public static int TIME_TO_PRESS_MIN_EASY = 1500;
-    public static int TIME_TO_PRESS_MIN_MEDIUM = 1000;
-    public static int TIME_TO_PRESS_MIN_HARD = 500;
+    public static final String EXTRA_DIFFICULTY = "difficulty";
+    public static final String EXTRA_DIFFICULTY_EASY = "easy";
+    public static final String EXTRA_DIFFICULTY_MEDIUM = "medium";
+    public static final String EXTRA_DIFFICULTY_HARD = "hard";
+    public static final int TIME_TO_PRESS_MAX_EASY = 7000;
+    public static final int TIME_TO_PRESS_MAX_MEDIUM = 5000;
+    public static final int TIME_TO_PRESS_MAX_HARD = 3000;
+    public static final int TIME_TO_PRESS_MIN_EASY = 1500;
+    public static final int TIME_TO_PRESS_MIN_MEDIUM = 1000;
+    public static final int TIME_TO_PRESS_MIN_HARD = 500;
     // Zenit
-    public static String EXTRA_DURATION = "duration";
-    public static int EXTRA_DURATION_SHORT = 30; // WARNING: changing these times discards the previous highscore
-    public static int EXTRA_DURATION_MEDIUM = 60; // WARNING: changing these times discards the previous highscore
-    public static int EXTRA_DURATION_LONG = 90; // WARNING: changing these times discards the previous highscore
+    public static final String EXTRA_DURATION = "duration";
+    public static final int EXTRA_DURATION_SHORT = 30; // WARNING: changing these times discards the previous highscore
+    public static final int EXTRA_DURATION_MEDIUM = 60; // WARNING: changing these times discards the previous highscore
+    public static final int EXTRA_DURATION_LONG = 90; // WARNING: changing these times discards the previous highscore
     // Memorit
-    public static String EXTRA_LIVES = "lives";
-    public static int EXTRA_LIVES_MANY = 5; // WARNING: changing these lives discards the previous highscore
-    public static int EXTRA_LIVES_MEDIUM = 3; // WARNING: changing these lives discards the previous highscore
-    public static int EXTRA_LIVES_FEW = 1; // WARNING: changing these lives discards the previous highscore
-    public static int WAIT_TIME_MAX = 2000; // The time in ms the last button lits up
-    public static int WAIT_TIME_MIN = 200; // The min time in ms each button has to lit up
-    public static float WAIT_TIME_RATE = 0.8f; // The time increased with every lit up button
+    public static final String EXTRA_LIVES = "lives";
+    public static final int EXTRA_LIVES_MANY = 5; // WARNING: changing these lives discards the previous highscore
+    public static final int EXTRA_LIVES_MEDIUM = 3; // WARNING: changing these lives discards the previous highscore
+    public static final int EXTRA_LIVES_FEW = 1; // WARNING: changing these lives discards the previous highscore
+    public static final int WAIT_TIME_MAX = 2000; // The time in ms the last button lits up
+    public static final int WAIT_TIME_MIN = 200; // The min time in ms each button has to lit up
+    public static final float WAIT_TIME_RATE = 0.8f; // The time increased with every lit up button
 
     // Info game
     public static final String EXTRA_GAMEMODE = "gameMode";

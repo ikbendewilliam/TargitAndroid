@@ -195,23 +195,29 @@ public class MemoritGameFragment extends Fragment {
                 // If user has pressed all buttons or hasn't started yet
                 // Get a new random button that is different from the previous one
                 ArduinoButton arduinoButton;
-                int i = 0;
-                Random random = new Random();
-                do {
-                    arduinoButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
-                    if (i++ > 100) {
-                        stopGame();
-                        break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                if (mArduinoButtons.size() == 0) {
+                    stopGame(); // no bt detected
+                } else {
+                    // Get a new random button that is different from the previous one
+                    int i = 0;
+                    Random random = new Random();
+                    do {
+                        arduinoButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                        if (i++ > 100) {
+                            stopGame();
+                            break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                        }
                     }
-                }
-                while (!arduinoButton.isEnabled() || !arduinoButton.isConnected() || arduinoButton == mLitButton);
-                // Get a new random button that is different from the previous one
 
-                mSequence.add(arduinoButton); // Add this to the sequence
-                mIterator = 0; // reset iterator
-                mLitButton = null; // Set the lit button to null (no button is now lit)
-                mLastFrameLit = frame; // set the lastframelit to this frame
-                mUserinput = false; // Start the automated "show"
+                    while (!arduinoButton.isEnabled() || !arduinoButton.isConnected() || arduinoButton == mLitButton);
+                    // Get a new random button that is different from the previous one
+
+                    mSequence.add(arduinoButton); // Add this to the sequence
+                    mIterator = 0; // reset iterator
+                    mLitButton = null; // Set the lit button to null (no button is now lit)
+                    mLastFrameLit = frame; // set the lastframelit to this frame
+                    mUserinput = false; // Start the automated "show"
+                }
             } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 1000 && mIterator == 0 && !mUserinput) {
                 // if no button is lit, and a second has passed, the iterator is 0 and the user isn't pressing buttons
                 mLastFrameLit = frame; // set the lastframelit to this frame
