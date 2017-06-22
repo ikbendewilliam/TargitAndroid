@@ -15,7 +15,8 @@
     <string name="main_button_highscore">HiGHSCORE</string>
 
     <string name="smashit_easy">Traag</string>
-    <string name="smashit_medium">MATiG</string>
+    <string name="smashit_medium">Matig</string>
+    <string name="smashit_medium_caps">MATiG</string>
     <string name="smashit_hard">Snel</string>
     <!--<string name="smashit_info_button_matig">MATiG</string>-->
 
