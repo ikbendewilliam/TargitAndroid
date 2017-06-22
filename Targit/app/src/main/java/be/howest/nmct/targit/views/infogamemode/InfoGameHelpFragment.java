@@ -2,6 +2,8 @@ package be.howest.nmct.targit.views.infogamemode;
 
 
 import android.app.DialogFragment;
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.TabLayout;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,19 +56,18 @@ public class InfoGameHelpFragment extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info_game_help, container, false);
 
+        setStyle(STYLE_NO_FRAME,getTheme());
+
         //change background colors based on gamemode
         switch (mGameMode) {
             case EXTRA_GAMEMODE_SMASHIT:
                 view.findViewById(R.id.info_game_help_parent_layout).setBackgroundColor(getResources().getColor(R.color.colorSmashit,getActivity().getTheme()));
-                view.findViewById(R.id.info_game_help_done).setBackgroundColor(getResources().getColor(R.color.colorSmashitSecondary,getActivity().getTheme()));
                 break;
             case EXTRA_GAMEMODE_ZENIT:
                 view.findViewById(R.id.info_game_help_parent_layout).setBackgroundColor(getResources().getColor(R.color.colorZenit,getActivity().getTheme()));
-                view.findViewById(R.id.info_game_help_done).setBackgroundColor(getResources().getColor(R.color.colorZenitsecondary,getActivity().getTheme()));
                 break;
             case EXTRA_GAMEMODE_MEMORIT:
                 view.findViewById(R.id.info_game_help_parent_layout).setBackgroundColor(getResources().getColor(R.color.colorMemorit,getActivity().getTheme()));
-                view.findViewById(R.id.info_game_help_done).setBackgroundColor(getResources().getColor(R.color.colorMemoritSecondary,getActivity().getTheme()));
                 break;
         }
 
@@ -85,7 +87,7 @@ public class InfoGameHelpFragment extends DialogFragment {
         //aanmaken van de fragments voor elke help stap based on gamemode
         switch (mGameMode) {
             case EXTRA_GAMEMODE_SMASHIT:
-                mFragmentList.add(InfoGameHelpAnimationFragment.newInstance(getResources().getString(R.string.smashit_info_text_2), R.drawable.smashit_info_anim_1));
+                mFragmentList.add(InfoGameHelpAnimationFragment.newInstance(getResources().getString(R.string.smashit_info_text_4), R.drawable.smashit_info_anim_1));
                 mFragmentList.add(InfoGameHelpAnimationFragment.newInstance(getString(R.string.smashit_info_anim_text_2), R.drawable.smashit_info_anim_2));
                 mFragmentList.add(InfoGameHelpAnimationFragment.newInstance(getString(R.string.smashit_info_anim_text_3), R.drawable.smashit_info_anim_3));
                 break;
@@ -108,14 +110,22 @@ public class InfoGameHelpFragment extends DialogFragment {
          The pager adapter, which provides the pages to the view pager widget.
          */
         PagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getChildFragmentManager(), mFragmentList);
-        mPager.setOffscreenPageLimit(0);
         mPager.setAdapter(mPagerAdapter);
 
-        // linken  van tabs met viewpager
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.info_game_help_dots);
-        tabLayout.setupWithViewPager(mPager, true);
+        if(mFragmentList.size() > 1) {
+            // linken  van tabs met viewpager
+            TabLayout tabLayout = (TabLayout) view.findViewById(R.id.info_game_help_dots);
+            tabLayout.setupWithViewPager(mPager, true);
+        }
 
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        //make dialog have full width
+        if(getDialog().getWindow() != null)
+            getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, (int)getResources().getDimension(R.dimen.info_game_help_height));
+    }
 }

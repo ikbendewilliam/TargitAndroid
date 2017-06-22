@@ -7,4 +7,5 @@
     <dimen name="highscore_list_item_third_textSize">18sp</dimen>
     <dimen name="highscore_list_item_default_textSize">18sp</dimen>
     <dimen name="highscore_buttons_textSize">20sp</dimen>
+    <dimen name="info_game_help_height">500dp</dimen>
 </resources>
