@@ -32,7 +32,7 @@ public class ArduinoButton {
                 }
                 // set this button to pressed
                 isPressed = true;
-            // if the message says that the button is being released
+                // if the message says that the button is being released
             } else if (message.contains(Constants.COMMAND_INCOMING_BUTTON_RELEASED)) {
                 // set this button to not pressed
                 isPressed = false;

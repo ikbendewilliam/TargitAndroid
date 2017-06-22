@@ -18,9 +18,10 @@ public class HighscoreEntry {
     public HighscoreEntry(String fromString) {
         // Check if this string is legit
         if (!fromString.contains(";")) {
-            // TODO: remove this when done debugging
+
+            //remove this when done debugging
             // Otherwise throw an error
-            throw new RuntimeException("fromString must contain a ';'");
+            //throw new RuntimeException("fromString must contain a ';'");
         }
         // get the last ; so the program doesn't break when a user enters "wil;999999999"
         int lastIndex = fromString.lastIndexOf(";");

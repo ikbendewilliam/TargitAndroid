@@ -39,7 +39,7 @@
         android:layout_height="0dp"
         android:layout_below="@id/fragment_game_over_relativelayout_score"
         app:layout_heightPercent="3%"
-        app:layout_widthPercent="100%"/>
+        app:layout_widthPercent="100%" />
 
     <ImageView
         android:id="@+id/fragment_game_over_imageview_game_over"
@@ -50,7 +50,7 @@
         android:orientation="vertical"
         android:src="@drawable/game_over_smashit"
         app:layout_heightPercent="40%"
-        app:layout_widthPercent="70%"/>
+        app:layout_widthPercent="70%" />
 
     <!--Variable margin for responsiveness-->
     <View

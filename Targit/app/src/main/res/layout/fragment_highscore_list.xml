@@ -1,91 +1,90 @@
 <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/highscore_list_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.howest.nmct.targit.views.highscore.HighscoreListFragment"
     android:background="@drawable/highscoreboard"
-    android:id="@+id/highscore_list_layout">
+    tools:context="be.howest.nmct.targit.views.highscore.HighscoreListFragment">
 
-        <!--<ImageView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--app:layout_widthPercent="50%"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:src="@drawable/highscoreboard"-->
-            <!--android:layout_centerHorizontal="true"/>-->
-        <View
-            android:id="@+id/highscore_top_border"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_heightPercent="6%"
-            android:layout_alignParentTop="true"/>
-        <View
-            android:id="@+id/highscore_right_border"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:layout_widthPercent="15%"
-            android:layout_alignParentLeft="true"/>
+    <!--<ImageView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:layout_widthPercent="50%"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:src="@drawable/highscoreboard"-->
+    <!--android:layout_centerHorizontal="true"/>-->
+    <View
+        android:id="@+id/highscore_top_border"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        app:layout_heightPercent="6%" />
 
-        <TextView
-            android:id="@+id/fragment_highscore_list_title"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_widthPercent="68%"
-            app:layout_heightPercent="7%"
-            android:layout_below="@+id/highscore_top_border"
-            android:layout_toRightOf="@id/highscore_right_border"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:text="1 leven"
-            android:textColor="@android:color/black"
-            android:textSize="25sp"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            app:layout_widthPercent="40%"
-            android:background="@color/colorSeparator"
-            android:layout_below="@id/fragment_highscore_list_title"
-            android:layout_centerHorizontal="true"
+    <View
+        android:id="@+id/highscore_right_border"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        app:layout_widthPercent="15%" />
 
-            />
+    <TextView
+        android:id="@+id/fragment_highscore_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/highscore_top_border"
+        android:layout_toRightOf="@id/highscore_right_border"
+        android:gravity="center"
+        android:text="1 leven"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:layout_heightPercent="7%"
+        app:layout_widthPercent="68%" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/highscore_recycleview"
-            android:name="be.howest.nmct.targit.views.highscore.HighscoreFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_widthPercent="68%"
-            app:layout_heightPercent="78%"
-            app:layoutManager="LinearLayoutManager"
-            tools:context="be.howest.nmct.targit.views.highscore.HighscoreListFragment"
-            tools:listitem="@layout/fragment_highscore_list_item"
-            android:layout_below="@+id/fragment_highscore_list_title"
-            android:layout_toEndOf="@id/highscore_right_border"
-            />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_below="@id/fragment_highscore_list_title"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorSeparator"
+        app:layout_widthPercent="40%"
 
+        />
 
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:layout_widthPercent="17%"
-            android:layout_alignParentEnd="true"/>
-
-        <View
-            android:id="@+id/highscore_list_border_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_heightPercent="9%"
-            android:layout_alignParentBottom="true"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/highscore_recycleview"
+        android:name="be.howest.nmct.targit.views.highscore.HighscoreFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/fragment_highscore_list_title"
+        android:layout_toEndOf="@id/highscore_right_border"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_heightPercent="78%"
+        app:layout_widthPercent="68%"
+        tools:context="be.howest.nmct.targit.views.highscore.HighscoreListFragment"
+        tools:listitem="@layout/fragment_highscore_list_item" />
 
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        app:layout_widthPercent="17%" />
 
-        <!--for debugging only-->
-        <!--<Button-->
-        <!--android:id="@+id/reset"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="reset"/>-->
+    <View
+        android:id="@+id/highscore_list_border_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        app:layout_heightPercent="9%" />
+
+
+    <!--for debugging only-->
+    <!--<Button-->
+    <!--android:id="@+id/reset"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="reset"/>-->
 
 </android.support.percent.PercentRelativeLayout>

@@ -34,7 +34,7 @@ public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighs
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_highscore_list_item, parent, false);
 
-        switch(viewType) {
+        switch (viewType) {
             case HIGHSCORE_ITEM_VIEW_TYPE_FIRST:
                 view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.fragment_highscore_list_item_first, parent, false);
@@ -50,21 +50,21 @@ public class MyHighscoreRecyclerViewAdapter extends RecyclerView.Adapter<MyHighs
         }
 
         //set the fonts
-        Typeface font = Typeface.createFromAsset( parent.getContext().getAssets(), "font/BRLNSR.TTF");
-        ((TextView)view.findViewById(R.id.highscore_list_item_place)).setTypeface(font);
-        ((TextView)view.findViewById(R.id.highscore_list_item_name)).setTypeface(font);
-        ((TextView)view.findViewById(R.id.highscore_list_item_score)).setTypeface(font);
+        Typeface font = Typeface.createFromAsset(parent.getContext().getAssets(), "font/BRLNSR.TTF");
+        ((TextView) view.findViewById(R.id.highscore_list_item_place)).setTypeface(font);
+        ((TextView) view.findViewById(R.id.highscore_list_item_name)).setTypeface(font);
+        ((TextView) view.findViewById(R.id.highscore_list_item_score)).setTypeface(font);
 
         return new ViewHolder(view);
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 0)
+        if (position == 0)
             return HIGHSCORE_ITEM_VIEW_TYPE_FIRST;
-        if(position == 1)
+        if (position == 1)
             return HIGHSCORE_ITEM_VIEW_TYPE_SECOND;
-        if(position == 2)
+        if (position == 2)
             return HIGHSCORE_ITEM_VIEW_TYPE_THIRD;
 
         return HIGHSCORE_ITEM_VIEW_TYPE_DEFAULT;

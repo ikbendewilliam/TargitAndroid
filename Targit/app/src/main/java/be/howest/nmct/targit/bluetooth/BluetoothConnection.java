@@ -44,7 +44,7 @@ public class BluetoothConnection {
         // get the instance to enable bt
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        if(bluetoothAdapter!=null) {
+        if (bluetoothAdapter != null) {
             // Check if it was enabled
             if (!bluetoothAdapter.isEnabled()) {
                 bluetoothAdapter.enable();
@@ -257,7 +257,6 @@ public class BluetoothConnection {
 
     // Retry all failed connections
     public void retryConnections() {
-        // TODO: replace this variable with another loop perhaps
         // initiate connection to 0
         int connection = 0;
         // Loop all devices

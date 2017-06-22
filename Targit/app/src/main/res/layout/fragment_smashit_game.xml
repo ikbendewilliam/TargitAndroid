@@ -1,15 +1,3 @@
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--tools:context=".views.ingame.SmashitGameFragment"--><!--android:orientation="vertical">-->
-
-<!--<TextView--><!--android:id="@+id/ingame_textview_timer"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="@string/info_smashit" />-->
-
-<!--<TextView--><!--android:id="@+id/ingame_textview_score"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="@string/info_smashit" />-->
-
-<!--<TextView--><!--android:id="@+id/ingame_textview_lives"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="@string/info_smashit" />-->
-
-<!--<Button--><!--android:id="@+id/ingame_button_stop"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:text="stop"/>-->
-
-<!--</LinearLayout>-->
-
 <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -49,7 +37,7 @@
             android:elevation="4dp"
             android:src="@drawable/ic_hart"
             app:layout_heightPercent="35%"
-            app:layout_widthPercent="30%"/>
+            app:layout_widthPercent="30%" />
 
         <ImageView
             android:id="@+id/fragment_smashit_game_imageview_heart3"
@@ -113,7 +101,7 @@
             android:id="@+id/fragment_smashit_game_textview_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="01:20"
+            android:text="00:00"
             android:textColor="@color/colorText"
             android:textSize="45sp" />
     </android.support.percent.PercentRelativeLayout>

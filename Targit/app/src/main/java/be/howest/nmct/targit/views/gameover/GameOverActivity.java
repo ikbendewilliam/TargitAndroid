@@ -75,7 +75,7 @@ public class GameOverActivity extends AppCompatActivity implements SaveScoreFrag
 
             //get the elements that need color change
             //check which game mode it was
-            //TODO: insert category
+
             if (gamemode.equals(EXTRA_GAME_SMASHIT)) {
                 //set title name
                 txtTitle.setText("SMASH - iT");

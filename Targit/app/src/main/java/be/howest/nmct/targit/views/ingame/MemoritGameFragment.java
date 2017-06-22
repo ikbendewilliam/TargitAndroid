@@ -107,15 +107,12 @@ public class MemoritGameFragment extends Fragment {
     }
 
     private void showLives(View view) {
-        if (mCategory == EXTRA_LIVES_FEW)
-        {
+        if (mCategory == EXTRA_LIVES_FEW) {
             if (mLives >= 1)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
             else
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setVisibility(View.INVISIBLE);
-        }
-        else if (mCategory == EXTRA_LIVES_MEDIUM)
-        {
+        } else if (mCategory == EXTRA_LIVES_MEDIUM) {
             if (mLives >= 1)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_memorit);
             else
@@ -128,9 +125,7 @@ public class MemoritGameFragment extends Fragment {
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_memorit);
             else
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setVisibility(View.INVISIBLE);
-        }
-        else if (mCategory == EXTRA_LIVES_MANY)
-        {
+        } else if (mCategory == EXTRA_LIVES_MANY) {
             if (mLives >= 1)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_memorit);
             else
@@ -222,7 +217,7 @@ public class MemoritGameFragment extends Fragment {
                 mLastFrameLit = frame; // set the lastframelit to this frame
                 mLitButton = mSequence.get(mIterator); // set the lit button to the first one
                 //                 max wait time |    ^  | increase rate |      total size   | current | minus 1 (iterator starts at 0, while size is min 1)
-                mWaitTime = (int)(WAIT_TIME_MAX * Math.pow(WAIT_TIME_RATE, mSequence.size() - mIterator) - 1); // Increase the wait time
+                mWaitTime = (int) (WAIT_TIME_MAX * Math.pow(WAIT_TIME_RATE, mSequence.size() - mIterator) - 1); // Increase the wait time
                 if (mWaitTime < WAIT_TIME_MIN)
                     mWaitTime = WAIT_TIME_MIN;
                 mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), COMMAND_LED_ON); // Turn the led on this device on
@@ -243,7 +238,7 @@ public class MemoritGameFragment extends Fragment {
                 mLitButton = null; // No button is lit > mLitButton = null
                 mIterator++; // increment iterator
                 //                 max wait time |    ^  | increase rate |      total size   | current | minus 1 (iterator starts at 0, while size is min 1)
-                mWaitTime = (int)(WAIT_TIME_MAX * Math.pow(WAIT_TIME_RATE, mSequence.size() - mIterator) - 1); // Increase the wait time
+                mWaitTime = (int) (WAIT_TIME_MAX * Math.pow(WAIT_TIME_RATE, mSequence.size() - mIterator) - 1); // Increase the wait time
                 if (mWaitTime < WAIT_TIME_MIN)
                     mWaitTime = WAIT_TIME_MIN;
                 mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // Turn all leds off
@@ -274,10 +269,10 @@ public class MemoritGameFragment extends Fragment {
                     }
                 }
             }
-        } else
-            if(frame ==0)showCountdownDialog();
-            //((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000) % 60);
+        } else if (frame == 0) showCountdownDialog();
+        //((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000) % 60);
     }
+
     void showCountdownDialog() {
         DialogFragment newFragment = GameCountdownFragment.newInstance(EXTRA_GAME_MEMORIT);
         newFragment.show(getFragmentManager(), "dialog");

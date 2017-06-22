@@ -1,27 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-tools:context="be.howest.nmct.targit.views.infogamemode.InfoGameHelpAnimationFragment">
-
-
-<TextView
-    android:id="@+id/game_info_help_tekst"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_alignParentTop="true"
-    android:text="Test"
-    android:textAlignment="center"
-    android:textSize="30sp"
-    android:textColor="@color/colorText" />
+    tools:context="be.howest.nmct.targit.views.infogamemode.InfoGameHelpAnimationFragment">
 
-<pl.droidsonroids.gif.GifImageView
-    android:id="@+id/gifImageView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/smashit_info_anim_1"
-    android:layout_below="@id/game_info_help_tekst"
-    android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/game_info_help_tekst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Test"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="30sp" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/game_info_help_tekst"
+        android:padding="10dp"
+        android:src="@drawable/smashit_info_anim_1" />
 
 </RelativeLayout>

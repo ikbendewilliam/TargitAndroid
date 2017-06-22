@@ -220,10 +220,11 @@ public class SmashitGameFragment extends Fragment {
         } else {
             mPressedOnFrame = frame;
 
-            if(frame == 0)showCountdownDialog();
+            if (frame == 0) showCountdownDialog();
             //((TextView) view.findViewById(R.id.fragment_smashit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
         }
     }
+
     void showCountdownDialog() {
         DialogFragment newFragment = GameCountdownFragment.newInstance(EXTRA_GAME_SMASHIT);
         newFragment.show(getFragmentManager(), "dialog");

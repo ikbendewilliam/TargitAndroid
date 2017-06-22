@@ -105,12 +105,14 @@ public class GameActivity extends AppCompatActivity
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
 
-    // show a fragment
-    // @param newFragment: the fragment to show
+        // show a fragment
+        // @param newFragment: the fragment to show
 
     }
+
     private void showFragment(Fragment newFragment) {
         //Log.i(Constants.TAG, "showFragment: " + newFragment.toString());
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

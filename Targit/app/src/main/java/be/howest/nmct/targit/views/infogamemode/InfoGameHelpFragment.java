@@ -49,28 +49,34 @@ public class InfoGameHelpFragment extends DialogFragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info_game_help, container, false);
 
-        setStyle(STYLE_NO_FRAME,getTheme());
+        setStyle(STYLE_NO_FRAME, getTheme());
 
         //change background colors based on gamemode
         switch (mGameMode) {
             case EXTRA_GAMEMODE_SMASHIT:
-                view.findViewById(R.id.info_game_help_parent_layout).setBackgroundColor(getResources().getColor(R.color.colorSmashit,getActivity().getTheme()));
+                view.findViewById(R.id.info_game_help_topview).setBackgroundColor(getResources().getColor(R.color.colorSmashit, getActivity().getTheme()));
                 break;
             case EXTRA_GAMEMODE_ZENIT:
-                view.findViewById(R.id.info_game_help_parent_layout).setBackgroundColor(getResources().getColor(R.color.colorZenit,getActivity().getTheme()));
+                view.findViewById(R.id.info_game_help_topview).setBackgroundColor(getResources().getColor(R.color.colorZenit, getActivity().getTheme()));
                 break;
             case EXTRA_GAMEMODE_MEMORIT:
-                view.findViewById(R.id.info_game_help_parent_layout).setBackgroundColor(getResources().getColor(R.color.colorMemorit,getActivity().getTheme()));
+                view.findViewById(R.id.info_game_help_topview).setBackgroundColor(getResources().getColor(R.color.colorMemorit, getActivity().getTheme()));
                 break;
         }
-
+        //set activity to full screen
+        view.findViewById(R.id.info_game_help_topview).setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
 
         //pressing done button closes dialog
         view.findViewById(R.id.info_game_help_done).setOnClickListener(new View.OnClickListener() {
@@ -112,7 +118,7 @@ public class InfoGameHelpFragment extends DialogFragment {
         PagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getChildFragmentManager(), mFragmentList);
         mPager.setAdapter(mPagerAdapter);
 
-        if(mFragmentList.size() > 1) {
+        if (mFragmentList.size() > 1) {
             // linken  van tabs met viewpager
             TabLayout tabLayout = (TabLayout) view.findViewById(R.id.info_game_help_dots);
             tabLayout.setupWithViewPager(mPager, true);
@@ -121,11 +127,12 @@ public class InfoGameHelpFragment extends DialogFragment {
         return view;
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
         //make dialog have full width
-        if(getDialog().getWindow() != null)
-            getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, (int)getResources().getDimension(R.dimen.info_game_help_height));
+        if (getDialog().getWindow() != null)
+            getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, (int) getResources().getDimension(R.dimen.info_game_help_height));
     }
 }

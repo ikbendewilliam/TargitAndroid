@@ -1,280 +1,252 @@
-    <android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".views.infogamemode.ZenitInfoFragment"
-        android:orientation="horizontal"
-        android:background="@color/colorBackground">
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="horizontal"
+    tools:context=".views.infogamemode.ZenitInfoFragment">
 
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/info_zenit" />-->
+    <LinearLayout
+        android:id="@+id/zenit_info_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="50%">
 
-        <!--<Button-->
-        <!--android:id="@+id/zenit_info_button_play_short"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="30 sec" />-->
-
-        <!--<Button-->
-        <!--android:id="@+id/zenit_info_button_play_medium"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="60 sec" />-->
-
-        <!--<Button-->
-        <!--android:id="@+id/zenit_info_button_play_long"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="90 sec" />-->
-
-        <LinearLayout
-            android:id="@+id/zenit_info_left"
-            android:layout_width="0dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            app:layout_heightPercent="100%"
-            app:layout_widthPercent="50%">
+            android:layout_weight="1">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:id="@+id/zenit_info_back_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_back_white"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@null"/>
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/zen_it_knop" />
-            </RelativeLayout>
-
-
-
-
-
-            <RelativeLayout
-                android:id="@+id/zenit_info_tekst_layout"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-
-                android:layout_margin="30dp"
-                android:layout_weight="1"
-                android:background="@color/colorZenit"
-                android:padding="20dp">
-
-                <TextView
-                    android:id="@+id/zenit_info_tekst_dot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/info_text_line_marker"
-                    android:textSize="27sp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginEnd="20dp"
-                    android:layout_alignParentTop="true"/>
-
-                <TextView
-                    android:id="@+id/zenit_info_tekst_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/zenit_info_text_1"
-                    android:textSize="27sp"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginEnd="20dp"
-                    android:layout_toEndOf="@id/zenit_info_tekst_dot"/>
-
-                <TextView
-                    android:id="@+id/zenit_info_tekst_dot_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/info_text_line_marker"
-                    android:textSize="27sp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginEnd="20dp"
-                    android:layout_below="@+id/zenit_info_tekst_1"/>
-
-                <TextView
-                    android:id="@+id/zenit_info_tekst_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/zenit_info_text_2"
-                    android:textSize="27sp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_below="@+id/zenit_info_tekst_1"
-                    android:layout_toEndOf="@id/zenit_info_tekst_dot_1"/>
-
-                <TextView
-                    android:id="@+id/zenit_info_tekst_dot_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/info_text_line_marker"
-                    android:textSize="27sp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginEnd="20dp"
-                    android:layout_below="@+id/zenit_info_tekst_2"/>
-
-                <TextView
-                    android:id="@+id/zenit_info_tekst_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/zenit_info_text_3"
-                    android:textSize="27sp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_below="@+id/zenit_info_tekst_2"
-                    android:layout_toEndOf="@id/zenit_info_tekst_dot_2"/>
-
-                <TextView
-                    android:id="@+id/zenit_info_tekst_dot_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/info_text_line_marker"
-                    android:textSize="27sp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginEnd="20dp"
-                    android:layout_below="@+id/zenit_info_tekst_3"/>
-
-                <TextView
-                    android:id="@+id/zenit_info_tekst_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/zenit_info_text_4"
-                    android:textSize="27sp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginEnd="20dp"
-                    android:layout_below="@+id/zenit_info_tekst_3"
-                    android:layout_toEndOf="@id/zenit_info_tekst_dot_3"/>
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:clipChildren="false">
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/zenit_info_help"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@android:color/transparent"
-                        app:backgroundTint="@color/colorZenitsecondary"
-                        android:clipChildren="false"
-                        android:layout_margin="@dimen/fab_margin">
-                    </android.support.design.widget.FloatingActionButton>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="\?"
-                        android:elevation="16dp"
-                        android:textColor="@android:color/white"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:clipChildren="false"
-                        />
-                </FrameLayout>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="#ffffff"
-            android:elevation="2dp"
-            android:layout_toEndOf="@id/zenit_info_left"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            app:layout_heightPercent="90%"/>
-
-        <android.support.percent.PercentRelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_heightPercent="100%"
-            app:layout_widthPercent="50%"
-            android:layout_toEndOf="@id/zenit_info_left">
-
+            <ImageButton
+                android:id="@+id/zenit_info_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:src="@drawable/ic_back_white" />
 
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/titel_zenit_info"
-                app:layout_heightPercent="24%"
-                android:layout_marginTop="-10dp"/>
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/zen_it_knop" />
+        </RelativeLayout>
 
 
-            <Button
-                android:id="@+id/zenit_info_button_play_short"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_widthPercent="53%"
-                app:layout_heightPercent="12%"
-                android:layout_above="@+id/zenit_info_button_play_medium"
-                android:layout_alignStart="@+id/zenit_info_button_play_long"
-                android:layout_marginTop="23.3dp"
-                android:background="@color/colorMakkelijk"
-                android:text="@string/zenit_easy"
-                android:textAllCaps="false"
+        <RelativeLayout
+            android:id="@+id/zenit_info_tekst_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            android:layout_margin="30dp"
+            android:layout_weight="1"
+            android:background="@color/colorZenit"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/zenit_info_tekst_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/info_text_line_marker"
                 android:textColor="@color/colorWhite"
-                android:textSize="30sp"/>
+                android:textSize="27sp" />
 
-            <Button
-                android:id="@+id/zenit_info_button_play_medium"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_widthPercent="53%"
-                app:layout_heightPercent="12%"
-                android:layout_above="@+id/zenit_info_button_play_long"
-                android:layout_alignStart="@+id/zenit_info_button_play_long"
-                android:layout_marginTop="23.3dp"
-                android:background="@color/colorMatig"
-                android:text="@string/zenit_medium"
-                android:textAllCaps="false"
+            <TextView
+                android:id="@+id/zenit_info_tekst_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/zenit_info_tekst_dot"
+                android:text="@string/zenit_info_text_1"
                 android:textColor="@color/colorWhite"
-                android:textSize="30sp"/>
+                android:textSize="27sp" />
 
-            <Button
-                android:id="@+id/zenit_info_button_play_long"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_widthPercent="53%"
-                app:layout_heightPercent="12%"
+            <TextView
+                android:id="@+id/zenit_info_tekst_dot_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/zenit_info_tekst_1"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/info_text_line_marker"
+                android:textColor="@color/colorWhite"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/zenit_info_tekst_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/zenit_info_tekst_1"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/zenit_info_tekst_dot_1"
+                android:text="@string/zenit_info_text_2"
+                android:textColor="@color/colorWhite"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/zenit_info_tekst_dot_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/zenit_info_tekst_2"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/info_text_line_marker"
+                android:textColor="@color/colorWhite"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/zenit_info_tekst_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/zenit_info_tekst_2"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/zenit_info_tekst_dot_2"
+                android:text="@string/zenit_info_text_3"
+                android:textColor="@color/colorWhite"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/zenit_info_tekst_dot_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/zenit_info_tekst_3"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/info_text_line_marker"
+                android:textColor="@color/colorWhite"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/zenit_info_tekst_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/zenit_info_tekst_3"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/zenit_info_tekst_dot_3"
+                android:text="@string/zenit_info_text_4"
+                android:textColor="@color/colorWhite"
+                android:textSize="27sp" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="50dp"
-                android:layout_marginTop="23.3dp"
-                android:adjustViewBounds="true"
-                android:background="@color/colorMoeilijk"
-                android:text="@string/zenit_hard"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="30sp" />
-        </android.support.percent.PercentRelativeLayout>
+                android:layout_alignParentEnd="true"
+                android:clipChildren="false">
 
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/zenit_info_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:clipChildren="false"
+                    android:src="@android:color/transparent"
+                    app:backgroundTint="@color/colorZenitsecondary"></android.support.design.widget.FloatingActionButton>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clipChildren="false"
+                    android:elevation="16dp"
+                    android:text="\?"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white" />
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/zenit_info_left"
+        android:background="#ffffff"
+        android:elevation="2dp"
+        app:layout_heightPercent="90%" />
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_toEndOf="@id/zenit_info_left"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="50%">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-10dp"
+            android:src="@drawable/titel_zenit_info"
+            app:layout_heightPercent="24%" />
+
+
+        <Button
+            android:id="@+id/zenit_info_button_play_short"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_above="@+id/zenit_info_button_play_medium"
+            android:layout_alignStart="@+id/zenit_info_button_play_long"
+            android:layout_marginTop="23.3dp"
+            android:background="@color/colorMakkelijk"
+            android:text="@string/zenit_easy"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            app:layout_heightPercent="12%"
+            app:layout_widthPercent="53%" />
+
+        <Button
+            android:id="@+id/zenit_info_button_play_medium"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_above="@+id/zenit_info_button_play_long"
+            android:layout_alignStart="@+id/zenit_info_button_play_long"
+            android:layout_marginTop="23.3dp"
+            android:background="@color/colorMatig"
+            android:text="@string/zenit_medium"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            app:layout_heightPercent="12%"
+            app:layout_widthPercent="53%" />
+
+        <Button
+            android:id="@+id/zenit_info_button_play_long"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="23.3dp"
+            android:adjustViewBounds="true"
+            android:background="@color/colorMoeilijk"
+            android:text="@string/zenit_hard"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            app:layout_heightPercent="12%"
+            app:layout_widthPercent="53%" />
     </android.support.percent.PercentRelativeLayout>
+
+</android.support.percent.PercentRelativeLayout>

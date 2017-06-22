@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_highscore_top_view"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_highscore_top_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.howest.nmct.targit.views.highscore.HighscoreActivity"
+    android:background="@drawable/pattern_repeat"
     android:orientation="vertical"
-    android:background="@drawable/pattern_repeat">
+    tools:context="be.howest.nmct.targit.views.highscore.HighscoreActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorBackground"
-        android:theme="@style/AppTheme.AppBarOverlay"
         android:elevation="4dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <android.support.design.widget.TabLayout
@@ -23,18 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorBackground"
-        app:tabTextColor="@color/colorWhite"
-        app:tabSelectedTextColor="@color/colorWhite"
-        app:tabIndicatorColor="@color/colorWhite"
         android:elevation="4dp"
-        app:tabMaxWidth="0dp"
         app:tabGravity="fill"
+        app:tabIndicatorColor="@color/colorWhite"
+        app:tabMaxWidth="0dp"
         app:tabMode="fixed"
-        />
-      <android.support.v4.view.ViewPager
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabTextColor="@color/colorWhite" />
+
+    <android.support.v4.view.ViewPager
         android:id="@+id/highscorePager"
-        android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-          </android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"></android.support.v4.view.ViewPager>
 </LinearLayout>

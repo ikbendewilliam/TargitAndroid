@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_settings_top_view"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_settings_top_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.settings.SettingsActivity"
+    android:background="@drawable/pattern_repeat"
     android:orientation="vertical"
-    android:background="@drawable/pattern_repeat">
+    tools:context=".views.settings.SettingsActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -20,6 +20,6 @@
     <FrameLayout
         android:id="@+id/framelayout_in_settingsactivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

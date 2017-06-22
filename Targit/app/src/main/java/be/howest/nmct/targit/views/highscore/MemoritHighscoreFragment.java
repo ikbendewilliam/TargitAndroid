@@ -73,7 +73,7 @@ public class MemoritHighscoreFragment extends Fragment {
         });
 
         //set the fonts
-        Typeface font = Typeface.createFromAsset( getActivity().getAssets(), "font/BRLNSDB.TTF");
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         btnHighscoreEasy.setTypeface(font);
         btnHighscoreMedium.setTypeface(font);
         btnHighscoreHard.setTypeface(font);
@@ -115,9 +115,9 @@ public class MemoritHighscoreFragment extends Fragment {
 
     //change layout params for button to look selected
     private void setSelectButtonLayout(Button btn) {
-        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams)btn.getLayoutParams();
+        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) btn.getLayoutParams();
         params.removeRule(RelativeLayout.RIGHT_OF);
-        params.addRule(RelativeLayout.RIGHT_OF,R.id.fragment_memorit_highscore_view_selected);
+        params.addRule(RelativeLayout.RIGHT_OF, R.id.fragment_memorit_highscore_view_selected);
         PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
         info.widthPercent = 0.13f;
         btn.setLayoutParams(params);
@@ -125,9 +125,9 @@ public class MemoritHighscoreFragment extends Fragment {
 
     //change layout params for button to look unselected
     private void removeSelectButtonLayout(Button btn) {
-        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams)btn.getLayoutParams();
+        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) btn.getLayoutParams();
         params.removeRule(RelativeLayout.RIGHT_OF);
-        params.addRule(RelativeLayout.RIGHT_OF,R.id.fragment_memorit_highscore_view);
+        params.addRule(RelativeLayout.RIGHT_OF, R.id.fragment_memorit_highscore_view);
         PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
         info.widthPercent = 0.12f;
         btn.setLayoutParams(params);

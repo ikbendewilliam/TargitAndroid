@@ -80,11 +80,11 @@ public class MemoritInfoFragment extends Fragment {
 
         //instellen fonts
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
-        Button btnSnel = (Button)view.findViewById(R.id.memorit_info_button_play_hard);
+        Button btnSnel = (Button) view.findViewById(R.id.memorit_info_button_play_hard);
         btnSnel.setTypeface(font);
-        Button btnMatig = (Button)view.findViewById(R.id.memorit_info_button_play_medium);
+        Button btnMatig = (Button) view.findViewById(R.id.memorit_info_button_play_medium);
         btnMatig.setTypeface(font);
-        Button btnTraag = (Button)view.findViewById(R.id.memorit_info_button_play_easy);
+        Button btnTraag = (Button) view.findViewById(R.id.memorit_info_button_play_easy);
         btnTraag.setTypeface(font);
 
         TextView txtDot = (TextView) view.findViewById(R.id.memorit_info_tekst_dot);
@@ -106,7 +106,7 @@ public class MemoritInfoFragment extends Fragment {
         txt3.setTypeface(font);
 
         //set autoscale font size
-        long textSize = Math.round(TEXT_SIZE/getResources().getDisplayMetrics().densityDpi);
+        long textSize = Math.round(TEXT_SIZE / getResources().getDisplayMetrics().densityDpi);
         txtDot.setTextSize(textSize);
         txtDot1.setTextSize(textSize);
         txtDot2.setTextSize(textSize);

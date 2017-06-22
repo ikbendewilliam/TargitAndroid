@@ -89,7 +89,6 @@ public class HighscoreActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Memor-it"));
 
 
-
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.highscorePager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager(), fragments);
@@ -118,8 +117,6 @@ public class HighscoreActivity extends AppCompatActivity {
         });
 
 
-
-
         // Set onclicklistener to go back to mainactivity
 //        findViewById(R.id.highscore_button_to_mainactivity).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -138,7 +135,6 @@ public class HighscoreActivity extends AppCompatActivity {
             String category = intent.getStringExtra(EXTRA_CATEGORY);
             // Show the score
             //((TextView) (findViewById(R.id.highscore_textview_score))).setText("score: " + gameScore + " in " + gameMode + " " + category);
-            // TODO: Let the user define his/her own name
             // Show the highscorelist with a "new player"
             showFragment(be.howest.nmct.targit.views.highscore.HighscoreListFragment.newInstance(gameMode, category, new HighscoreEntry("new Player", gameScore)));
         } else {
@@ -163,7 +159,8 @@ public class HighscoreActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
 
 
     }

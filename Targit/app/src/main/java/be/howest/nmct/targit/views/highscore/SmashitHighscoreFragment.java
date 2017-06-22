@@ -46,35 +46,35 @@ public class SmashitHighscoreFragment extends Fragment {
         showlistFragment(EXTRA_DIFFICULTY_EASY);
 
         //init buttons
-       btnHighscoreEasy = (Button) view.findViewById(R.id.fragment_smashit_highscore_easy);
-       btnHighscoreMedium = (Button) view.findViewById(R.id.fragment_smashit_highscore_medium);
-       btnHighscoreHard = (Button) view.findViewById(R.id.fragment_smashit_highscore_hard);
+        btnHighscoreEasy = (Button) view.findViewById(R.id.fragment_smashit_highscore_easy);
+        btnHighscoreMedium = (Button) view.findViewById(R.id.fragment_smashit_highscore_medium);
+        btnHighscoreHard = (Button) view.findViewById(R.id.fragment_smashit_highscore_hard);
 
         //set listeners on the buttons
         btnHighscoreEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectButton(BUTTON_EASY);
-                mHighscoreListFragment.changeList(EXTRA_GAME_SMASHIT,EXTRA_DIFFICULTY_EASY);
+                mHighscoreListFragment.changeList(EXTRA_GAME_SMASHIT, EXTRA_DIFFICULTY_EASY);
             }
         });
         btnHighscoreMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectButton(BUTTON_MEDIUM);
-                mHighscoreListFragment.changeList(EXTRA_GAME_SMASHIT,EXTRA_DIFFICULTY_MEDIUM);
+                mHighscoreListFragment.changeList(EXTRA_GAME_SMASHIT, EXTRA_DIFFICULTY_MEDIUM);
             }
         });
         btnHighscoreHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectButton(BUTTON_HARD);
-                mHighscoreListFragment.changeList(EXTRA_GAME_SMASHIT,EXTRA_DIFFICULTY_HARD);
+                mHighscoreListFragment.changeList(EXTRA_GAME_SMASHIT, EXTRA_DIFFICULTY_HARD);
             }
         });
 
         //set the fonts
-        Typeface font = Typeface.createFromAsset( getActivity().getAssets(), "font/BRLNSDB.TTF");
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         btnHighscoreEasy.setTypeface(font);
         btnHighscoreMedium.setTypeface(font);
         btnHighscoreHard.setTypeface(font);
@@ -109,9 +109,9 @@ public class SmashitHighscoreFragment extends Fragment {
 
     //change layout params for button to look selected
     private void setSelectButtonLayout(Button btn) {
-        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams)btn.getLayoutParams();
+        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) btn.getLayoutParams();
         params.removeRule(RelativeLayout.RIGHT_OF);
-        params.addRule(RelativeLayout.RIGHT_OF,R.id.fragment_smashit_highscore_view_selected);
+        params.addRule(RelativeLayout.RIGHT_OF, R.id.fragment_smashit_highscore_view_selected);
         PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
         info.widthPercent = 0.13f;
         btn.setLayoutParams(params);
@@ -119,9 +119,9 @@ public class SmashitHighscoreFragment extends Fragment {
 
     //change layout params for button to look unselected
     private void removeSelectButtonLayout(Button btn) {
-        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams)btn.getLayoutParams();
+        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) btn.getLayoutParams();
         params.removeRule(RelativeLayout.RIGHT_OF);
-        params.addRule(RelativeLayout.RIGHT_OF,R.id.fragment_smashit_highscore_view);
+        params.addRule(RelativeLayout.RIGHT_OF, R.id.fragment_smashit_highscore_view);
         PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
         info.widthPercent = 0.12f;
         btn.setLayoutParams(params);

@@ -33,7 +33,7 @@ public class ZenitHighscoreFragment extends Fragment {
     private Button btnHighscoreEasy;
     private Button btnHighscoreMedium;
     private Button btnHighscoreHard;
-    
+
     public ZenitHighscoreFragment() {
         // Required empty public constructor
     }
@@ -56,26 +56,26 @@ public class ZenitHighscoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectButton(BUTTON_EASY);
-                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT,EXTRA_DURATION_SHORT);
+                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT, EXTRA_DURATION_SHORT);
             }
         });
         btnHighscoreMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectButton(BUTTON_MEDIUM);
-                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT,EXTRA_DURATION_MEDIUM);
+                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT, EXTRA_DURATION_MEDIUM);
             }
         });
         btnHighscoreHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectButton(BUTTON_HARD);
-                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT,EXTRA_DURATION_LONG);
+                mHighscoreListFragment.changeList(EXTRA_GAME_ZENIT, EXTRA_DURATION_LONG);
             }
         });
 
         //set the fonts
-        Typeface font = Typeface.createFromAsset( getActivity().getAssets(), "font/BRLNSDB.TTF");
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "font/BRLNSDB.TTF");
         btnHighscoreEasy.setTypeface(font);
         btnHighscoreMedium.setTypeface(font);
         btnHighscoreHard.setTypeface(font);
@@ -110,9 +110,9 @@ public class ZenitHighscoreFragment extends Fragment {
 
     //change layout params for button to look selected
     private void setSelectButtonLayout(Button btn) {
-        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams)btn.getLayoutParams();
+        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) btn.getLayoutParams();
         params.removeRule(RelativeLayout.RIGHT_OF);
-        params.addRule(RelativeLayout.RIGHT_OF,R.id.fragment_zenit_highscore_view_selected);
+        params.addRule(RelativeLayout.RIGHT_OF, R.id.fragment_zenit_highscore_view_selected);
         PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
         info.widthPercent = 0.13f;
         btn.setLayoutParams(params);
@@ -120,9 +120,9 @@ public class ZenitHighscoreFragment extends Fragment {
 
     //change layout params for button to look unselected
     private void removeSelectButtonLayout(Button btn) {
-        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams)btn.getLayoutParams();
+        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) btn.getLayoutParams();
         params.removeRule(RelativeLayout.RIGHT_OF);
-        params.addRule(RelativeLayout.RIGHT_OF,R.id.fragment_zenit_highscore_view);
+        params.addRule(RelativeLayout.RIGHT_OF, R.id.fragment_zenit_highscore_view);
         PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
         info.widthPercent = 0.12f;
         btn.setLayoutParams(params);

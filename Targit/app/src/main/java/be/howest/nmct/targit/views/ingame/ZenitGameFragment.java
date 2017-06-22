@@ -160,10 +160,10 @@ public class ZenitGameFragment extends Fragment {
                 // Time's up
                 stopGame();
             }
-        } else
-            if(frame == 0)showCountdownDialog();
-            //((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
+        } else if (frame == 0) showCountdownDialog();
+        //((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
     }
+
     void showCountdownDialog() {
         DialogFragment newFragment = GameCountdownFragment.newInstance(EXTRA_GAME_ZENIT);
         newFragment.show(getFragmentManager(), "dialog");

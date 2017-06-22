@@ -55,7 +55,7 @@ public class InfoGameHelpAnimationFragment extends Fragment {
         textView.setTypeface(font);
 
         try {
-            mGifImage = new GifDrawable( getResources(), mGifId );
+            mGifImage = new GifDrawable(getResources(), mGifId);
         } catch (IOException e) {
             e.printStackTrace();
         }

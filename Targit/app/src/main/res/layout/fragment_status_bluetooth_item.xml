@@ -10,37 +10,27 @@
         android:id="@+id/arduinobutton_connected"
         android:layout_width="80dp"
         android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/text_margin"
-        app:srcCompat="@drawable/ic_status_connected"
-        android:layout_gravity="center_vertical"/>
+        app:srcCompat="@drawable/ic_status_connected" />
 
     <TextView
         android:id="@+id/arduinobutton_name"
-        android:gravity="start"
-        android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/text_margin"
+        android:layout_weight="1"
+        android:gravity="start"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="20sp"
-        android:layout_gravity="center_vertical"/>
-
-    <!--<TextView-->
-        <!--android:id="@+id/arduinobutton_pressed"-->
-        <!--android:gravity="start"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="@dimen/text_margin"-->
-        <!--android:textAppearance="?attr/textAppearanceListItem" />-->
+        android:textSize="20sp" />
 
     <Switch
         android:id="@+id/arduinobutton_enabled"
-        android:gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
         android:layout_gravity="center_vertical"
-        />
+        android:layout_margin="@dimen/text_margin"
+        android:gravity="end" />
 </LinearLayout>
 
