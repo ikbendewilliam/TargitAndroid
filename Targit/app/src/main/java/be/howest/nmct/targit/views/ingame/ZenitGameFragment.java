@@ -127,21 +127,25 @@ public class ZenitGameFragment extends Fragment {
 
             if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLitButton == null) {
                 // wait 200ms and no button is lit
-                // Get a new random button that is different from the previous one
-                int i = 0;
-                Random random = new Random();
-                do {
-                    mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
-                    if (i++ > 100) {
-                        stopGame();
-                        break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                if (mArduinoButtons.size() == 0) {
+                    stopGame(); // no bt detected
+                } else {
+                    // Get a new random button that is different from the previous one
+                    int i = 0;
+                    Random random = new Random();
+                    do {
+                        mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                        if (i++ > 100) {
+                            stopGame();
+                            break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                        }
                     }
-                }
-                while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mPreviousLitButton == mLitButton);
-                // Get a new random button that is different from the previous one
+                    while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mPreviousLitButton == mLitButton);
+                    // Get a new random button that is different from the previous one
 
-                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
-                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST); // Flash the button to press
+                    mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
+                    mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST); // Flash the button to press
+                }
             } else if (mLitButton != null) {
                 // If a button is lit
                 if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
@@ -160,10 +164,10 @@ public class ZenitGameFragment extends Fragment {
                 // Time's up
                 stopGame();
             }
-        } else
-            if(frame == 0)showCountdownDialog();
-            //((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
+        } else if (frame == 0) showCountdownDialog();
+        //((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
     }
+
     void showCountdownDialog() {
         DialogFragment newFragment = GameCountdownFragment.newInstance(EXTRA_GAME_ZENIT);
         newFragment.show(getFragmentManager(), "dialog");

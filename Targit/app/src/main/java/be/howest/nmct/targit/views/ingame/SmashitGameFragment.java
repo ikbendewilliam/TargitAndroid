@@ -165,21 +165,25 @@ public class SmashitGameFragment extends Fragment {
 
             if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLitButton == null) {
                 // wait 200ms and no button is lit
-                // Get a new random button that is different from the previous one
-                int i = 0;
-                Random random = new Random();
-                do {
-                    mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
-                    if (i++ > 100) {
-                        stopGame();
-                        break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                if (mArduinoButtons.size() == 0) {
+                    stopGame(); // no bt detected
+                } else {
+                    // Get a new random button that is different from the previous one
+                    int i = 0;
+                    Random random = new Random();
+                    do {
+                        mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                        if (i++ > 100) {
+                            stopGame();
+                            break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                        }
                     }
-                }
-                while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mPreviousLitButton == mLitButton);
-                // Get a new random button that is different from the previous one
+                    while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mPreviousLitButton == mLitButton);
+                    // Get a new random button that is different from the previous one
 
-                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
-                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST); // Flash the button to press
+                    mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
+                    mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST); // Flash the button to press
+                }
             } else if (mLitButton != null) {
                 for (ArduinoButton arduinoButton : mArduinoButtons) {
                     // Loop all buttons
@@ -220,10 +224,11 @@ public class SmashitGameFragment extends Fragment {
         } else {
             mPressedOnFrame = frame;
 
-            if(frame == 0)showCountdownDialog();
+            if (frame == 0) showCountdownDialog();
             //((TextView) view.findViewById(R.id.fragment_smashit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
         }
     }
+
     void showCountdownDialog() {
         DialogFragment newFragment = GameCountdownFragment.newInstance(EXTRA_GAME_SMASHIT);
         newFragment.show(getFragmentManager(), "dialog");
