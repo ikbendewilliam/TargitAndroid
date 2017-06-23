@@ -1,5 +1,6 @@
 package be.howest.nmct.targit.views.ingame;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import be.howest.nmct.targit.Constants;
 import be.howest.nmct.targit.models.ArduinoButton;
 
 import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
+import static be.howest.nmct.targit.Constants.COUNTDOWN_TIME;
+import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_ZENIT;
 import static be.howest.nmct.targit.Constants.STEP_TIME;
 
@@ -49,7 +52,7 @@ public class ZenitGameFragment extends Fragment {
     public static ZenitGameFragment newInstance(int duration) {
         ZenitGameFragment fragment = new ZenitGameFragment();
         fragment.mDuration = duration;
-        fragment.mMaxFrame = (duration + 3) * 1000 / STEP_TIME; // Set the number of frames in this game
+        fragment.mMaxFrame = (duration + COUNTDOWN_TIME) * 1000 / STEP_TIME; // Set the number of frames in this game
         return fragment;
     }
 
@@ -109,7 +112,7 @@ public class ZenitGameFragment extends Fragment {
     }
 
     private void gameStep(int frame, View view) {
-        if (frame * STEP_TIME > 3000) // after 3 seconds
+        if (frame * STEP_TIME > COUNTDOWN_TIME * 1000) // after 3 seconds
         {
             String time;
             if (((mMaxFrame - frame) * STEP_TIME / 1000) / 60 < 10)
@@ -124,21 +127,25 @@ public class ZenitGameFragment extends Fragment {
 
             if ((frame - mPressedOnFrame) * STEP_TIME > 200 && mLitButton == null) {
                 // wait 200ms and no button is lit
-                // Get a new random button that is different from the previous one
-                int i = 0;
-                Random random = new Random();
-                do {
-                    mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
-                    if (i++ > 100) {
-                        stopGame();
-                        break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                if (mArduinoButtons.size() == 0) {
+                    stopGame(); // no bt detected
+                } else {
+                    // Get a new random button that is different from the previous one
+                    int i = 0;
+                    Random random = new Random();
+                    do {
+                        mLitButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                        if (i++ > 100) {
+                            stopGame();
+                            break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                        }
                     }
-                }
-                while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mPreviousLitButton == mLitButton);
-                // Get a new random button that is different from the previous one
+                    while (!mLitButton.isEnabled() || !mLitButton.isConnected() || mPreviousLitButton == mLitButton);
+                    // Get a new random button that is different from the previous one
 
-                mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
-                mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST); // Flash the button to press
+                    mBluetoothConnection.sendMessageToAll(Constants.COMMAND_LED_OFF); // Turn all leds off
+                    mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), Constants.COMMAND_LED_FLASH_FAST); // Flash the button to press
+                }
             } else if (mLitButton != null) {
                 // If a button is lit
                 if (mLitButton.isPressed() && mLitButton.isConnected() && mLitButton.isEnabled()) {
@@ -157,8 +164,13 @@ public class ZenitGameFragment extends Fragment {
                 // Time's up
                 stopGame();
             }
-        } else
-            ((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
+        } else if (frame == 0) showCountdownDialog();
+        //((TextView) view.findViewById(R.id.fragment_zenit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000));
+    }
+
+    void showCountdownDialog() {
+        DialogFragment newFragment = GameCountdownFragment.newInstance(EXTRA_GAME_ZENIT);
+        newFragment.show(getFragmentManager(), "dialog");
     }
 
     @Override

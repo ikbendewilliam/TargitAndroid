@@ -19,6 +19,7 @@ import be.howest.nmct.targit.R;
 import static be.howest.nmct.targit.Constants.EXTRA_DURATION_LONG;
 import static be.howest.nmct.targit.Constants.EXTRA_DURATION_MEDIUM;
 import static be.howest.nmct.targit.Constants.EXTRA_DURATION_SHORT;
+import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_MEMORIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_SMASHIT;
 import static be.howest.nmct.targit.Constants.EXTRA_GAMEMODE_ZENIT;
 import static be.howest.nmct.targit.Constants.TEXT_SIZE;
@@ -120,17 +121,13 @@ public class ZenitInfoFragment extends Fragment {
     }
 
     private void showHelpDialog() {
-        // DialogFragment.show() will take care of adding the fragment
-        // in a transaction.  We also want to remove any currently showing
-        // dialog, so make our own transaction and take care of that here.
+        // Create and show the dialog.
         FragmentTransaction ft = getFragmentManager().beginTransaction();
+        //remove the prev fragment
         Fragment prev = getFragmentManager().findFragmentByTag("dialog");
         if (prev != null) {
             ft.remove(prev);
         }
-        ft.addToBackStack(null);
-
-        // Create and show the dialog.
         DialogFragment newFragment = InfoGameHelpFragment.newInstance(EXTRA_GAMEMODE_ZENIT);
         newFragment.show(ft, "dialog");
     }

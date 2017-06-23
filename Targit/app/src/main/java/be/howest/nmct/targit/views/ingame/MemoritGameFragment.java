@@ -1,5 +1,6 @@
 package be.howest.nmct.targit.views.ingame;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import be.howest.nmct.targit.models.ArduinoButton;
 
 import static be.howest.nmct.targit.Constants.COMMAND_LED_OFF;
 import static be.howest.nmct.targit.Constants.COMMAND_LED_ON;
+import static be.howest.nmct.targit.Constants.COUNTDOWN_TIME;
 import static be.howest.nmct.targit.Constants.EXTRA_GAME_MEMORIT;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_FEW;
 import static be.howest.nmct.targit.Constants.EXTRA_LIVES_MANY;
@@ -105,15 +107,12 @@ public class MemoritGameFragment extends Fragment {
     }
 
     private void showLives(View view) {
-        if (mCategory == EXTRA_LIVES_FEW)
-        {
+        if (mCategory == EXTRA_LIVES_FEW) {
             if (mLives >= 1)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setImageResource(R.drawable.ic_hart_memorit);
             else
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart1)).setVisibility(View.INVISIBLE);
-        }
-        else if (mCategory == EXTRA_LIVES_MEDIUM)
-        {
+        } else if (mCategory == EXTRA_LIVES_MEDIUM) {
             if (mLives >= 1)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart2)).setImageResource(R.drawable.ic_hart_memorit);
             else
@@ -126,9 +125,7 @@ public class MemoritGameFragment extends Fragment {
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setImageResource(R.drawable.ic_hart_memorit);
             else
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart3)).setVisibility(View.INVISIBLE);
-        }
-        else if (mCategory == EXTRA_LIVES_MANY)
-        {
+        } else if (mCategory == EXTRA_LIVES_MANY) {
             if (mLives >= 1)
                 ((ImageView) view.findViewById(R.id.fragment_memorit_game_imageview_heart4)).setImageResource(R.drawable.ic_hart_memorit);
             else
@@ -181,46 +178,52 @@ public class MemoritGameFragment extends Fragment {
     }
 
     private void gameStep(int frame, View view) {
-        if (frame * STEP_TIME > 3000) // after 3 seconds
+        if (frame * STEP_TIME > COUNTDOWN_TIME * 1000) // after 3 seconds
         {
             String time;
-            if ((frame * STEP_TIME / 1000 - 3) / 60 < 10)
-                time = "0" + (frame * STEP_TIME / 1000 - 3) / 60;
+            if ((frame * STEP_TIME / 1000 - COUNTDOWN_TIME) / 60 < 10)
+                time = "0" + (frame * STEP_TIME / 1000 - COUNTDOWN_TIME) / 60;
             else
-                time = "" + (frame * STEP_TIME / 1000 - 3) / 60;
-            if ((frame * STEP_TIME / 1000 - 3) % 60 < 10)
-                time += ":0" + (frame * STEP_TIME / 1000 - 3) % 60;
+                time = "" + (frame * STEP_TIME / 1000 - COUNTDOWN_TIME) / 60;
+            if ((frame * STEP_TIME / 1000 - COUNTDOWN_TIME) % 60 < 10)
+                time += ":0" + (frame * STEP_TIME / 1000 - COUNTDOWN_TIME) % 60;
             else
-                time += ":" + (frame * STEP_TIME / 1000 - 3) % 60;
+                time += ":" + (frame * STEP_TIME / 1000 - COUNTDOWN_TIME) % 60;
             ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText(time);
 
             if (mIterator >= mSequence.size() && mUserinput) {
                 // If user has pressed all buttons or hasn't started yet
                 // Get a new random button that is different from the previous one
                 ArduinoButton arduinoButton;
-                int i = 0;
-                Random random = new Random();
-                do {
-                    arduinoButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
-                    if (i++ > 100) {
-                        stopGame();
-                        break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                if (mArduinoButtons.size() == 0) {
+                    stopGame(); // no bt detected
+                } else {
+                    // Get a new random button that is different from the previous one
+                    int i = 0;
+                    Random random = new Random();
+                    do {
+                        arduinoButton = mArduinoButtons.get(random.nextInt(mArduinoButtons.size()));
+                        if (i++ > 100) {
+                            stopGame();
+                            break; // BREAK OUT OF LOOP AFTER 100 TRIES
+                        }
                     }
-                }
-                while (!arduinoButton.isEnabled() || !arduinoButton.isConnected() || arduinoButton == mLitButton);
-                // Get a new random button that is different from the previous one
 
-                mSequence.add(arduinoButton); // Add this to the sequence
-                mIterator = 0; // reset iterator
-                mLitButton = null; // Set the lit button to null (no button is now lit)
-                mLastFrameLit = frame; // set the lastframelit to this frame
-                mUserinput = false; // Start the automated "show"
+                    while (!arduinoButton.isEnabled() || !arduinoButton.isConnected() || arduinoButton == mLitButton);
+                    // Get a new random button that is different from the previous one
+
+                    mSequence.add(arduinoButton); // Add this to the sequence
+                    mIterator = 0; // reset iterator
+                    mLitButton = null; // Set the lit button to null (no button is now lit)
+                    mLastFrameLit = frame; // set the lastframelit to this frame
+                    mUserinput = false; // Start the automated "show"
+                }
             } else if (mLitButton == null && (frame - mLastFrameLit) * STEP_TIME > 1000 && mIterator == 0 && !mUserinput) {
                 // if no button is lit, and a second has passed, the iterator is 0 and the user isn't pressing buttons
                 mLastFrameLit = frame; // set the lastframelit to this frame
                 mLitButton = mSequence.get(mIterator); // set the lit button to the first one
                 //                 max wait time |    ^  | increase rate |      total size   | current | minus 1 (iterator starts at 0, while size is min 1)
-                mWaitTime = (int)(WAIT_TIME_MAX * Math.pow(WAIT_TIME_RATE, mSequence.size() - mIterator) - 1); // Increase the wait time
+                mWaitTime = (int) (WAIT_TIME_MAX * Math.pow(WAIT_TIME_RATE, mSequence.size() - mIterator) - 1); // Increase the wait time
                 if (mWaitTime < WAIT_TIME_MIN)
                     mWaitTime = WAIT_TIME_MIN;
                 mBluetoothConnection.sendMessageToDevice(mLitButton.getDeviceName(), COMMAND_LED_ON); // Turn the led on this device on
@@ -241,7 +244,7 @@ public class MemoritGameFragment extends Fragment {
                 mLitButton = null; // No button is lit > mLitButton = null
                 mIterator++; // increment iterator
                 //                 max wait time |    ^  | increase rate |      total size   | current | minus 1 (iterator starts at 0, while size is min 1)
-                mWaitTime = (int)(WAIT_TIME_MAX * Math.pow(WAIT_TIME_RATE, mSequence.size() - mIterator) - 1); // Increase the wait time
+                mWaitTime = (int) (WAIT_TIME_MAX * Math.pow(WAIT_TIME_RATE, mSequence.size() - mIterator) - 1); // Increase the wait time
                 if (mWaitTime < WAIT_TIME_MIN)
                     mWaitTime = WAIT_TIME_MIN;
                 mBluetoothConnection.sendMessageToAll(COMMAND_LED_OFF); // Turn all leds off
@@ -272,8 +275,13 @@ public class MemoritGameFragment extends Fragment {
                     }
                 }
             }
-        } else
-            ((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000) % 60);
+        } else if (frame == 0) showCountdownDialog();
+        //((TextView) view.findViewById(R.id.fragment_memorit_game_textview_timer)).setText("00:0" + (3 - frame * STEP_TIME / 1000) % 60);
+    }
+
+    void showCountdownDialog() {
+        DialogFragment newFragment = GameCountdownFragment.newInstance(EXTRA_GAME_MEMORIT);
+        newFragment.show(getFragmentManager(), "dialog");
     }
 
     // Lose a life
